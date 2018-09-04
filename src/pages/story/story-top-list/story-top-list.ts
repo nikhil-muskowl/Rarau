@@ -23,15 +23,37 @@ export class StoryTopListPage {
   private latitude;
   private longitude;
   public paramData;
+  public marker;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
-    public LoginProvider: LoginProvider, ) {
+    public LoginProvider: LoginProvider,
+  ) {
+
+    if(this.navParams.get('marker')){
+      this.marker = JSON.parse(this.navParams.get('marker'));
+      this.latitude = this.marker.lat;
+      this.longitude = this.marker.lng;
+    }else{
+      this.latitude = 0;
+      this.longitude = 0;
+    }
+    
 
     this.isLogin();
+    this.paramData = {
+      'user_id': this.user_id,
+      'latitude': this.latitude,
+      'longitude': this.longitude,
+    };
+
+    console.log(this.paramData);
+
+    
     this.getStories();
   }
 
@@ -46,14 +68,9 @@ export class StoryTopListPage {
   getStories() {
     this.loadingProvider.present();
 
-    this.paramData = {
-      'user_id': this.user_id
-    };
-
     this.storyService.apiTopStory(this.paramData).subscribe(
       response => {
         this.responseData = response;
-
         this.data = this.responseData.data;
       },
       err => console.error(err),
@@ -64,6 +81,6 @@ export class StoryTopListPage {
   }
 
   goToList() {
-    this.navCtrl.push(StoryListPage, { user_id: this.user_id });
+    this.navCtrl.push(StoryListPage, this.paramData);
   }
 }

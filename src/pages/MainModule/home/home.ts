@@ -6,9 +6,11 @@ import { ProfilePage } from '../profile/profile';
 import { StoryTopListPage } from '../../story/story-top-list/story-top-list';
 import { LocationTrackerProvider } from '../../../providers/location-tracker/location-tracker';
 import { BaiduProvider } from '../../../providers/baidu/baidu';
-import { ControlAnchor, MapOptions, NavigationControlOptions, NavigationControlType, Point, MapTypeEnum, MarkerOptions } from 'angular2-baidu-map';
+import { ControlAnchor, Marker, MapOptions, NavigationControlOptions, NavigationControlType, Point, MapTypeEnum, MarkerOptions } from 'angular2-baidu-map';
+import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
-
+import { StoryServiceProvider } from '../../../providers/story-service/story-service';
+import { LoginProvider } from '../../../providers/login/login';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -22,14 +24,14 @@ export class HomePage {
   public filterData: any;
   public responseData: any;
   public search = '';
-  public latitude: number = 0;
-  public longitude: number = 0;
+  public latitude;
+  public longitude;
   public data: any;
 
   options: MapOptions;
+  markers: Array<Marker> = [];
   point: Point;
   navOptions: NavigationControlOptions;
-  public markers: Array<{ point: Point; options?: MarkerOptions }>;
 
   private error_srcLoc = 'field is required';
   private error_srcUser = 'field is required';
@@ -38,6 +40,9 @@ export class HomePage {
   private formData: any;
   searchLocation;
   searchUser;
+  public paramData;
+  public user_id;
+  public stories: any;
 
   @ViewChild('map') mapElement: ElementRef;
   constructor(
@@ -48,9 +53,24 @@ export class HomePage {
     public baiduProvider: BaiduProvider,
     public formBuilder: FormBuilder,
     public popoverCtrl: PopoverController,
+    public loadingProvider: LoadingProvider,
+    public storyService: StoryServiceProvider,
+    public LoginProvider: LoginProvider,
   ) {
+    this.user_id = this.LoginProvider.isLogin();
+
+    this.latitude = '39.919981';
+    this.longitude = '116.414977';
+
+    // this.latitude = this.locationTrackerProvider.getLatitude();
+    // this.longitude = this.locationTrackerProvider.getLongitude();
+
+
+    this.getLocation();
+
     this.bindMap();
     this.createForm();
+
     this.images = [
       { categoryFirst: 'assets/icon/Front-Icons/food.png', text: '8', categoryPerson: 'assets/icon/user.png' },
       { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '5', categoryPerson: 'assets/icon/user.png' },
@@ -64,53 +84,24 @@ export class HomePage {
       centerAndZoom: {
         lat: this.latitude,
         lng: this.longitude,
-        zoom: 1
+        zoom: 16
       },
       enableKeyboard: true,
       mapType: MapTypeEnum.BMAP_NORMAL_MAP
     };
 
-    // this.markers = [
-    //   {
-    //     options: {
-    //       // enableDragging: true,
-    //       icon: {
-    //         imageUrl: '/assets/imgs/marker.png',
-    //         size: {
-    //           height: 50,
-    //           width: 50
-    //         },
-    //         imageSize: {
-    //           height: 50,
-    //           width: 50
-    //         }
-    //       }
-    //     },
-    //     point: {
-    //       lat: this.latitude,
-    //       lng: this.longitude
-    //     }
-    //   }
-    // ];
+    this.paramData = {
+      'user_id': this.user_id,
+    };
 
-    this.locationTrackerProvider.getPosition().then((data) => {
-      if (data) {
-        console.log(data.coords);
-        this.latitude = data.coords.latitude;
-        this.longitude = data.coords.longitude;
+    this.storyService.apiTopStory(this.paramData).subscribe(
+      response => {
+        this.responseData = response;
+        this.stories = this.responseData.data;
 
-        this.options = {
-          centerAndZoom: {
-            lat: this.latitude,
-            lng: this.longitude,
-            zoom: 1
-          },
-          enableKeyboard: true,
-          mapType: MapTypeEnum.BMAP_NORMAL_MAP
-        };
+        this.stories.forEach(element => {
 
-        this.markers = [
-          {
+          this.markers.push({
             options: {
               // enableDragging: true,
               icon: {
@@ -126,16 +117,19 @@ export class HomePage {
               }
             },
             point: {
-              lat: this.latitude,
-              lng: this.longitude
+              lat: element.latitude,
+              lng: element.longitude
             }
-          }
-        ];
+          });
+        });
 
+        this.loadingProvider.dismiss();
+      },
+      err => console.error(err),
+      () => {
+        this.loadingProvider.dismiss();
       }
-    }).catch(e => {
-      console.log(e);
-    });
+    );
 
     this.navOptions = {
       anchor: ControlAnchor.BMAP_ANCHOR_TOP_RIGHT,
@@ -163,7 +157,6 @@ export class HomePage {
 
     this.baiduProvider.location(this.filterData).subscribe(
       response => {
-        console.log(response);
         this.responseData = response;
         this.locations = this.responseData.results;
       },
@@ -188,16 +181,28 @@ export class HomePage {
   }
 
   public showWindow({ e, marker, map }: any): void {
-    console.log(e);
+    
+    // console.log(map);
     // map.openInfoWindow(
     //   new window.BMap.InfoWindow('Your Position', {
     //     offset: new window.BMap.Size(0, -30),
     //     title: 'Title'
     //   }),
     //   marker.getPosition()
-    // )
+    // );
 
-    this.presentPopover();
+    var data = {
+      marker: JSON.stringify(marker.getPosition())
+    }
+
+    let popover = this.popoverCtrl.create(StoryTopListPage, data);
+    popover.present({
+      // ev: myEvent
+    });
+
+    // popover.onDidDismiss(data => {
+    //   popover.dismiss();
+    // });
   }
 
   loadMap(map: any) {
@@ -214,6 +219,10 @@ export class HomePage {
     popover.present({
       // ev: myEvent
     });
+
+    // popover.onDidDismiss(data => {
+    //   popover.dismiss();
+    // });
   }
 
   clickmap(e: any) {
@@ -266,4 +275,7 @@ export class HomePage {
   openProfile() {
     this.navCtrl.setRoot(ProfilePage);
   }
+
+
+
 }

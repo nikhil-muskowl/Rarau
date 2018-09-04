@@ -150,6 +150,12 @@ export class StoryServiceProvider {
 
     this.formData = new FormData();
     this.formData.append('user_id', data.user_id);
+    if (data.latitude) {
+      this.formData.append('latitude', data.latitude);
+    }
+    if (data.longitude) {
+      this.formData.append('longitude', data.longitude);
+    }
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/followers_stories',
       this.formData,

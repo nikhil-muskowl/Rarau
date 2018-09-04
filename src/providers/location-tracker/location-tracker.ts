@@ -9,56 +9,34 @@ import 'rxjs/Rx';
 export class LocationTrackerProvider {
 
   public watch: any;
-  latitude;
-  longitude;
-  
-  constructor(public zone: NgZone,
-    public geolocation: Geolocation) {
+  private latitude;
+  private longitude;
+
+  constructor(public zone: NgZone, public geolocation: Geolocation) {
+    this.setLocation();
   }
 
-  getPosition(): Promise<any> {
-    return new Promise((resolve) => {
-      let options = {
-        frequency: 3000,
-        enableHighAccuracy: true
-      };
-
-      this.watch = this.geolocation.watchPosition(options);
-
-      this.watch.subscribe((position) => {
-        resolve(position);
-      });
-
+  public setLocation() {
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      window.localStorage.setItem('latitude', String(data.coords.latitude));
+      window.localStorage.setItem('longitude', String(data.coords.longitude));
     });
   }
 
-
-  public setData(data) {
-    try {
-      window.localStorage.setItem('userId', data.id);
-    } catch (error) {
-
-    }
+  public clearLocation() {
+    window.localStorage.removeItem('latitude');
+    window.localStorage.removeItem('longitude');
   }
 
-  public unSetData() {
-    this.clear();
-    try {
-      window.localStorage.removeItem('lati');
-    } catch (error) {
-    }
+  public getLatitude() {
+    this.latitude = window.localStorage.getItem('latitude');
+    return this.latitude;
   }
 
-  public isLogin() {
-    try {
-      return window.localStorage.getItem('location');
-    } catch (error) {
-      return 0;
-    }
-
+  public getLongitude() {
+    this.longitude = window.localStorage.getItem('longitude');
+    return this.longitude;
   }
 
-  clear() {
-
-  }
 }
