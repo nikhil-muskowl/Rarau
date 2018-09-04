@@ -16,12 +16,12 @@
   <ion-slides class="image-slider" slidesPerView="3">
     <ion-slide *ngFor="let image of images; let i = index;">
       <br>
-      <img class="s-image" src="{{image.categoryFirst}}" />
+      <img class="s-image" src="{{image.categoryFirst}}" width="3" height="3"/>
       <div class="border-line">
         <p class="background-rank">{{image.text}}<sup>th</sup></p>
       </div>
-      <img class="s-image" src="{{image.categoryPerson}}">
-      <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="5" height="5">
+      <img class="s-image" src="{{image.categoryPerson}}" width="3" height="3">
+      <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
     </ion-slide>
   </ion-slides>
 

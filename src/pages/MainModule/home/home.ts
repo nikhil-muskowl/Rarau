@@ -57,17 +57,16 @@ export class HomePage {
     public storyService: StoryServiceProvider,
     public LoginProvider: LoginProvider,
   ) {
+
     this.user_id = this.LoginProvider.isLogin();
 
     this.latitude = '39.919981';
     this.longitude = '116.414977';
 
-    // this.latitude = this.locationTrackerProvider.getLatitude();
-    // this.longitude = this.locationTrackerProvider.getLongitude();
-
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
 
     this.getLocation();
-
     this.bindMap();
     this.createForm();
 
@@ -77,6 +76,20 @@ export class HomePage {
       { categoryFirst: 'assets/icon/Front-Icons/world.png', text: '7', categoryPerson: 'assets/icon/user.png' },
       { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '2', categoryPerson: 'assets/icon/user.png' },
     ]
+  }
+
+  ionViewDidLoad() {
+    this.user_id = this.LoginProvider.isLogin();
+
+    this.latitude = '39.919981';
+    this.longitude = '116.414977';
+
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
+
+    this.getLocation();
+    this.bindMap();
+    this.createForm();
   }
 
   public bindMap() {
@@ -181,7 +194,7 @@ export class HomePage {
   }
 
   public showWindow({ e, marker, map }: any): void {
-    
+
     // console.log(map);
     // map.openInfoWindow(
     //   new window.BMap.InfoWindow('Your Position', {
@@ -203,6 +216,7 @@ export class HomePage {
     // popover.onDidDismiss(data => {
     //   popover.dismiss();
     // });
+
   }
 
   loadMap(map: any) {

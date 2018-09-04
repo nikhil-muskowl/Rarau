@@ -23,12 +23,15 @@ page-home {
     }
     .border-line {
         border-right: 2px solid #000;
+        p{
+            font-size: 10px !important; 
+        }
     }
     .s-image {
-        width: 40px !important;
-        max-width: 40px !important;
-        height: 40px !important;
-        max-height: 40px !important;
+        width: 25px !important;
+        max-width: 25px !important;
+        height: 25px !important;
+        max-height: 25px !important;
     }
     .star {
         width: 15px !important;
@@ -40,14 +43,14 @@ page-home {
     }
     .background-rank {
         background-image: url('../assets/icon/Front-Icons/Vector-Smart-Object1.png');
-        width: 60px;
-        min-height: 45px;
+        width: 40px;
+        min-height: 30px;
         background-size: 100% 100%;
         background-repeat: no-repeat;
         background-position: center center;
         margin-left: auto;
-        padding: 12px;
-        margin-right: auto;
+        padding: 9px;
+        margin-right: auto;        
     }
     ion-item {
         width: 80%;
