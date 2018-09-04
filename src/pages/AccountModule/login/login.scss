@@ -1,0 +1,46 @@
+page-login {
+    h1,h2,h3,p {
+        color: #fff;
+    }
+    .login-back {
+        background-image: url('../assets/imgs/login/login-back.png');
+        width: 100%;
+        min-height: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .login-back h1 {
+        margin-top: 70px;
+    }
+    .login-back ion-item {
+        width: 60%;
+        border-radius: 15px;
+        margin-left: 20%;   
+    }
+    .login-back .submit-btn {
+        border-radius: 15px;
+        background: linear-gradient(to right, #ec3747 , #f45a43);
+        margin-bottom: 5px;
+    }
+    .frgt-link {
+        color: #fff;
+        text-decoration: underline;
+        margin-right: 22vw;
+    }
+    .wechat-btn {
+        border-radius: 8px;
+        background: #00cf0d;
+        padding: 25px 25px;
+        margin-bottom: 10px;
+        margin-top: 10vh;
+        text-transform: unset;
+        font-size: 18px;
+        font-weight: 400;
+    }
+    .login-hr {
+        border-top: 1px solid #fff;
+        width: 80%;
+        text-align: center;
+    }
+}

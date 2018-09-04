@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title class="tool-bar-title">My Profile
+
+        <span style="float:right;">
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+      </ion-title>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid padding>
+    <ion-row>
+      <ion-col col-4>
+        <div text-center>
+          <img src="{{userImage}}" class="circle-pic">
+          <!-- <div class="layer"><span style="color:#fff;">Change</span></div> -->
+        </div>
+      </ion-col>
+      <ion-col col-8>
+        <ion-row class="margin">
+          <h3>{{name}}</h3>
+          <div class="follower-sec">
+            <div class="left">
+              <img src="assets/icon/follower.png" width="25" height="25">
+              <h4 text-center>{{followers}}
+                <p style="font-size: 3.3vw;margin-left: 4vw;margin-top: 0px;"><b>Followers</b></p>
+              </h4>
+            </div>
+            <!-- <div class="divider"></div> -->
+            <div class="right">
+              <img src="assets/icon/positive-flame.png" width="25" height="25">
+              <h4 text-center>{{flames}}
+
+                <p style="font-size: 3.3vw;margin-top: 0px;"><b>Flames</b></p>
+              </h4>
+            </div>
+          </div>
+        </ion-row>
+        <ion-row>
+          <!-- <ion-col text-center (click)="editProfile()">
+            <img src="assets/imgs/Profile/My Profile Icon/edit.png" class="img-responsive">
+            <p style="font-size: 2.5vw;">Edit Profile</p>
+          </ion-col> -->
+          <ion-col text-center>
+            <img src="assets/imgs/Profile/My Profile Icon/pets.png" class="img-responsive">
+            <p style="font-size: 2.5vw;">My Pet</p>
+          </ion-col>
+          <ion-col text-center>
+            <img src="assets/imgs/Profile/My Profile Icon/view.png" class="img-responsive">
+            <p style="font-size: 2.5vw;">View Activity Log</p>
+          </ion-col>
+          <ion-col text-center>
+            <img src="assets/imgs/Profile/My Profile Icon/saved.png" class="img-responsive">
+            <p style="font-size: 2.5vw;">Saved Stories</p>
+          </ion-col>
+          <ion-col text-center (click)="logout()">
+            <img src="assets/imgs/Profile/My Profile Icon/more.png" class="img-responsive">
+            <p style="font-size: 2.5vw;">More</p>
+          </ion-col>
+          <ion-col text-center>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div>
+    <ion-segment [(ngModel)]="user">
+      <ion-segment-button value="Stories">
+        Stories
+      </ion-segment-button>
+      <ion-segment-button value="Ranking">
+        Ranking
+      </ion-segment-button>
+      <ion-segment-button value="Followers">
+        Followers
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="user">
+    <div *ngSwitchCase="'Stories'">
+      <story [userid]="user_id"></story>
+    </div>
+
+    <ion-grid class="segment-grid" *ngSwitchCase="'Ranking'">
+      <ion-row>
+        <ion-col col-4>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/Profile/rebe-adelaida-293711-unsplash.png">
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col col-4>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/Profile/rebe-adelaida-293711-unsplash.png">
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col col-4>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/Profile/rebe-adelaida-293711-unsplash.png">
+          </ion-thumbnail>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/Profile/paul-trienekens-419330-unsplash.png">
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col col-4>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/Profile/paul-trienekens-419330-unsplash.png">
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col col-4>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/Profile/paul-trienekens-419330-unsplash.png">
+          </ion-thumbnail>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    <div *ngSwitchCase="'Followers'">
+      <followers [userid]="user_id"></followers>
+    </div>
+  </div>
+</ion-content>

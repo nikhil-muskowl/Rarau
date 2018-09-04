@@ -1,0 +1,69 @@
+page-show-story {
+    .flame-number {
+        float: right;
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+    a {
+        color: #fff;
+    }
+    h3,
+    p {
+        color: #000 !important;
+        font-weight: 500 !important;
+        margin-top: -8px;
+    }
+    .content-md hr {
+        background-color: #fff;
+    }
+    .item-md {
+        border: 1px solid #cacaca;
+        border-radius: 35px;
+    }
+    .label-md {
+        margin: 0px !important;
+    }
+    .button-md {
+        background-color: #c3c3c3;
+        text-transform: unset !important;
+    }
+    .item-md.item-block .item-inner {
+        margin-top: -10px;
+    }
+    .comment {
+        .background {
+            background: #eaeaea;
+        }
+    }
+    .item-md.item-block .item-inner {
+        margin-top: 1px;
+    }
+    ion-button {
+        padding: 24px 10px;
+        border-bottom-left-radius: 15px;
+        border-top-left-radius: 15px;
+    }
+    .item-md .item-button {
+        height: 48px !important;
+        font-size: 1.4rem;
+    }
+    .item-md [item-left] {
+        margin: -6px 0px -6px -16px;
+        ;
+    }
+    .button-clear-md {
+        color: #000 !important;
+    }
+    .send-btn {
+        background: transparent;
+        font-size: 20px;
+        position: relative;
+    }
+    .back-btn {
+        background: transparent !important;
+    }
+    .circle-pic {
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+}

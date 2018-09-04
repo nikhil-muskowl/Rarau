@@ -1,0 +1,27 @@
+<ion-content padding>
+  <div>
+    <ion-card *ngFor="let record of model; let i = index;">
+      <ion-card-content>
+          <ion-row justify-content-between>
+            <ion-col col-8 text-left>
+              <h2>
+                <b>{{record.user}}</b>
+              </h2>
+            
+            </ion-col>
+            <ion-col col-2>
+              <button #i class="follow" (click)="Approve(record, $event.target)">Approve</button>
+            </ion-col>
+            <ion-col col-2>
+              <button #i class="follow" (click)="Reject(record, $event.target)">Reject</button>
+            </ion-col>
+          </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>  
+</ion-content>

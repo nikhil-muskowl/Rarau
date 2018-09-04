@@ -1,0 +1,52 @@
+page-story-category {
+    ion-slides {
+        margin-top: 10px;
+        height: inherit;
+    }
+    h1 {
+        color: red !important;
+    }
+    ion-chip.chip.chip-md {
+        margin: 4px 4px 4px 4px;
+        border-radius: 10px;
+        background: linear-gradient(to right, #ec3747, #f45a43);
+        background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
+        color: #fff;
+        border: 1px solid transparent;
+    }
+    ion-chip.chip.chip-ios {
+        margin: 4px 4px 4px 4px;
+        border-radius: 10px;
+        background: linear-gradient(to right, #ec3747, #f45a43);
+        background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
+        color: #fff;
+        border: 1px solid transparent;
+    }
+    .button-inner {
+        border-radius: 15px;
+        background: linear-gradient(to bottom, #ec3747, #f45a43);
+        margin-bottom: 5px;
+        color: #fff;
+        padding: 12px;
+        border: 1px solid #ec3747;
+    }
+    .back-btn {
+        background: transparent !important;
+        color: #fff;
+    }
+    ion-header button {
+        color: #fff;
+    }
+    ion-scroll {
+        position: absolute;
+        bottom: 43px;
+        left: 0px;
+    }
+    ion-scroll .scroll-content {
+        background: transparent !important;
+    }
+    .ion-tags-input .iti-input {
+        width: auto !important;
+    }
+   
+}

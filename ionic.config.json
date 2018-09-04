@@ -1,0 +1,7 @@
+{
+  "name": "RaRaU",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

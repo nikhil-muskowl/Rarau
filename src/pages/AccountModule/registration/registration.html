@@ -1,0 +1,131 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-toolbar>
+            <ion-title class="tool-bar-title">
+                <button start class="back-btn" (click)='goBack()'>
+                    <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+                </button>
+                Sign Up
+                <span style="float:right;">
+                    <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+            </ion-title>
+        </ion-toolbar>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="login-back">
+        <div class="row">
+            <div class="col">
+                <div text-center>
+                    <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit">
+                        <img src="assets/imgs/login/wechat.png" width="40" height="40">&nbsp;&nbsp;Login with WeChat</button>
+                </div>
+            </div>
+        </div>
+        <div text-center>
+            <h2>or</h2>
+        </div>
+        <br>
+        <form [formGroup]="registerForm">
+
+            <div text-center>
+                <p ion-text color="danger" *ngIf="submitAttempt && error_warning">{{error_warning}}</p>
+                <p ion-text color="secondary" *ngIf="submitAttempt && text_message">{{text_message}}</p>
+            </div>
+
+            <!-- name -->
+            <ion-item>
+                <ion-input placeholder="Nick Name" formControlName="name" value={{fname}} type="text" [class.invalid]="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <div text-center>
+                <p class="invalid-message" *ngIf="!registerForm.controls.name.valid  && (registerForm.controls.name.dirty || submitAttempt)">{{error_name}}</p>
+            </div>
+
+            <!-- email -->
+            <ion-item>
+                <ion-input placeholder="Email Address" formControlName="email" value={{femail}} type="text" [class.invalid]="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <div text-center>
+                <p class="invalid-message" *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+            </div>
+            <!-- password -->
+            <ion-item>
+                <ion-input placeholder="Password" formControlName="password" value={{fpassword}} type="password" [class.invalid]="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <div text-center>
+                <p class="invalid-message" *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty || submitAttempt)">{{error_password}}</p>
+            </div>
+
+            <!-- confirm password -->
+            <ion-item>
+                <ion-input placeholder="Confirm Password" formControlName="passconf" value={{fconfpass}} type="password" [class.invalid]="!registerForm.controls.passconf.valid && (registerForm.controls.passconf.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <div text-center>
+                <p class="invalid-message" *ngIf="!registerForm.controls.passconf.valid  && (registerForm.controls.passconf.dirty || submitAttempt)">{{error_password}}</p>
+            </div>
+
+            <!-- birthday -->
+            <div text-left class="birth-text">
+                <p>Birthday
+                    <span class="small" (click)="gotobirthday()">(Why this?)</span>
+                </p>
+            </div>
+
+            <!-- <ion-item> -->
+            <div>
+                <ion-row class="date-row">
+                    <ion-col col-4>
+                        <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date"
+                            displayFormat="DD">
+                        </ion-datetime>
+                    </ion-col>
+
+                    <ion-col col-4>
+                        <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date"
+                            displayFormat="MM">
+                        </ion-datetime>
+                    </ion-col>
+
+                    <ion-col col-4>
+                        <ion-datetime placeholder='YYYY &nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date" displayFormat="YYYY">
+                        </ion-datetime>
+                    </ion-col>
+                </ion-row>
+                <!-- </ion-item> -->
+            </div>
+
+            <div text-center>
+                <h3>
+                    <span [ngStyle]="{'color': male_color}" (click)="manClick()"><img src="{{maleimage}}" width="15" height="25">Male</span>
+                    <span style="margin-left:15px;">
+                        <span [ngStyle]="{'color': female_color}" (click)="womanClick()"><img src="{{femaleimage}}" width="15"
+                                height="25">Female</span></span>
+                </h3>
+            </div>
+            <div text-left class="birth-text">
+                <p>Profile Picture
+                    <span (click)="gotoprofile()" class="small">(Why this?)</span>
+                </p>
+            </div>
+            <div text-center>
+                <ion-buttons>
+                    <button ion-button (click)="updateProfile()" class="upload-btn">
+                        <span class="btn-align">{{uploadText}}
+                        </span>
+                        <div text-right></div>
+                    </button>
+                    <img class="upload-icon" src="{{uploadIcon}}" width="20" height="20">
+                </ion-buttons>
+            </div>
+
+        </form>
+        <div padding text-center>
+            <p>By clicking Sign Up, you agree to our
+                <br>
+                <span style="text-decoration:underline;" (click)="gototerms()">Terms, Data Policy & Cookie Policy</span>
+            </p>
+            <button class="submit-btn" ion-button (click)="save()">Sign Up</button>
+        </div>
+    </div>
+
+</ion-content>

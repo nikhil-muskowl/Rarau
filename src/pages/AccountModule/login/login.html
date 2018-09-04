@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-navbar>
+      <ion-toolbar>
+        
+        <ion-title class="tool-bar-title">Login <span style="float:right;"><img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span></ion-title>
+      </ion-toolbar>
+    </ion-navbar>
+  </ion-header>
+<ion-content >
+<div class="login-back" scroll="false">
+    <div class="row">
+            <div class="col">
+                    <div text-center>
+                        <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit"><img src="assets/imgs/login/wechat.png" width="40" height="40">&nbsp;&nbsp;Login with WeChat</button>
+                    </div>
+            </div>
+    </div>
+    <div text-center>
+        <h2>or</h2>
+    </div>   
+            <div text-center>
+                <form [formGroup]="loginForm">
+                    <ion-item>
+                        <ion-input placeholder="Registered Email" formControlName="email" type="text" [class.invalid]="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)"></ion-input>
+                    </ion-item>
+                    <div text-center>
+                    <p class="invalid-message" *ngIf="!loginForm.controls.email.valid  && (loginForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+                    </div>
+                    <br>
+                    <ion-item text-center>
+                        <ion-input placeholder="Password" formControlName="password" type="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
+                    </ion-item>
+                    <div text-center>
+                        <p class="invalid-message" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitAttempt)">{{error_password}}</p>
+                        </div>
+                    <div text-right>
+                            <h5 class="frgt-link" (click)="forgotPass()">Forgot Password?</h5>      
+                        </div>
+                        
+                    <br>
+                    <div text-center>
+                        <button class="submit-btn" ion-button type="submit" (click)="save()">Let's Go</button>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="row">
+                    <div class="col">
+                        <div text-center>
+                            <hr class="login-hr">
+                            <h3>New to RaRaU?</h3>
+                            <h3 (click)="goToRegsiter()" style="text-decoration: underline;">Sign Up</h3>
+                            
+                        </div>
+                    </div>
+            </div>
+            <br>
+            <div class="row">
+                    <div class="col">
+                        <div text-center>
+                            <hr class="login-hr">
+                            <h3>RaRaU</h3>
+                            <p>Get Connected on the Go!</p>
+                        </div>
+                    </div>
+            </div>
+</div>
+
+</ion-content>

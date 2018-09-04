@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-toolbar>
+      <ion-title class="tool-bar-title">
+        <button start class="back-btn" (click)='back()'>
+          <ion-icon class="toolbar-icon" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+        </button>
+        Location
+      </ion-title>
+      <ion-buttons end>
+        <button class="publish-btn" ion-button type="submit" (click)="Next()"> Next </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <img style="min-height:93%;" [src]="sanitizer.bypassSecurityTrustResourceUrl(image)">
+  
+  <ion-searchbar [(ngModel)]="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+
+  <ion-list>
+    <button ion-item *ngFor="let location of locations" (click)="itemSelected(location)">
+      {{ location.name }}
+    </button>
+  </ion-list>
+</ion-content>

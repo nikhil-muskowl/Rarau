@@ -1,0 +1,74 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button>
+      Sign Up with WeChat
+      <span style="float:right;">
+        <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="login-back">
+    <div text-center class="profile-image">
+      <img src="assets/imgs/login-wechat/images-1.png" width="150" height="150">
+    </div>
+    <div text-center>
+      <h1>Hi Jennifer!</h1>
+      <p>To continue at RaRaU, please share with us</p>
+    </div>
+    <div text-center>
+      <form [formGroup]="loginwechatForm">
+        <!-- email -->
+        <ion-item>
+          <ion-input placeholder="Email Address" formControlName="email" type="text" [class.invalid]="!loginwechatForm.controls.email.valid && (loginwechatForm.controls.email.dirty || submitAttempt)"></ion-input>
+        </ion-item>
+        <div text-center>
+          <p class="invalid-message" *ngIf="!loginwechatForm.controls.email.valid  && (loginwechatForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+        </div>
+
+        <div text-left class="birth-text">
+          <p>Birthday
+            <span class="small" (click)="gotobirthday()">(Why this?)</span>
+          </p>
+        </div>
+
+        <div>
+          <ion-row class="date-row">
+            <ion-col col-4>
+              <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date"
+                displayFormat="DD">
+              </ion-datetime>
+            </ion-col>
+
+            <ion-col col-4>
+              <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date"
+                displayFormat="MM">
+              </ion-datetime>
+            </ion-col>
+
+            <ion-col col-4>
+              <ion-datetime placeholder='YYYY &nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date" displayFormat="YYYY">
+              </ion-datetime>
+            </ion-col>
+          </ion-row>
+          <!-- </ion-item> -->
+        </div>
+      </form>
+      <div padding text-center>
+        <p>By clicking Sign Up, you agree to our
+          <br>
+          <span style="text-decoration:underline;" (click)="gototerms()">Terms, Data Policy & Cookie Policy</span>
+        </p>
+        <button class="submit-btn" ion-button (click)="save()">Sign Up</button>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

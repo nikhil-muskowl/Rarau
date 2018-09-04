@@ -1,0 +1,35 @@
+page-profile-photo {
+    .login-back {
+        background-image: url('../assets/imgs/login/login-back.png');
+        width: 100%;
+        min-height: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .login-back .submit-btn {
+        width: 30vw;
+        height: 6vh;
+        font-size: 18px;
+        border-radius: 15px;
+        background: linear-gradient(to right, #ec3747, #f45a43);
+        margin-bottom: 5px;
+    }
+    .border-line {
+        border-right: 1px solid #f19d99;
+    }
+    .back-btn {
+        background: transparent !important;
+    }
+    .image {
+        border-radius: 50%;
+        box-shadow: 0 0 5px gray;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .circle-pic {
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+}

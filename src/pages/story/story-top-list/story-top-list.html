@@ -1,0 +1,24 @@
+<ion-content>
+
+  <ion-grid (click)="goToList()">
+    <div *ngFor="let dval of data">
+      <ion-row *ngFor="let record of dval.stories; let i = index;">
+
+        <ion-col col-4 class="vertical-align" text-center>
+          <img class="circle-pic" src="{{record.user_image_thumb}}" height="50px" width="50px">
+        </ion-col>
+
+        <ion-col col-8>
+          <h2>{{record.user_name}}<span style="float:right; font-size: 1.5rem;">{{record.categories}}</span></h2>
+
+          <span *ngFor="let tag of record.tags; let j = index;">
+            <span *ngIf="record.tags.length-1 > j">{{tag}}, </span>
+            <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
+          </span>
+        </ion-col>
+
+      </ion-row>
+    </div>
+  </ion-grid>
+
+</ion-content>

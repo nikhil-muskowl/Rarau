@@ -1,0 +1,18 @@
+<div padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let record of model; let i = index;" (click)="getFollowerProfile(record)" col-6>
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{record.image}}" width="40px" height="40px" />
+          </ion-avatar>
+          <h2>{{record.name}}</h2>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div>

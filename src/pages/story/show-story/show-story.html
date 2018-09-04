@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-toolbar>
+      <ion-title class="tool-bar-title">
+        <button start class="back-btn" (click)='goBack()'>
+          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+        </button>
+        Story
+        <span style="float:right;">
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+      </ion-title>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="background: #eaeaea;">
+    <ion-row style="margin-bottom: -25px;">
+      <ion-col col-3 text-center>
+        <img class="circle-pic" src="{{user_image_thumb}}" width="70" height="70">
+      </ion-col>
+      <ion-col col-9>
+        <h3>{{user_name}}'s Story</h3>
+        <span *ngFor="let tag of tags; let j = index;">
+          <span *ngIf="tags.length-1 > j">{{tag}},&nbsp;</span>
+          <span *ngIf="tags.length-1 == j">{{tag}}</span>
+        </span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-bottom: -10px;">
+      <ion-col col-4 text-center>
+        <hr>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <hr>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <hr>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div text-center padding>
+    <ion-icon style="font-size:25px;" name="ios-arrow-down-outline"></ion-icon><span class="flame-number">{{totalLikes}}
+      <span><img src="assets/imgs/story/positive-flame.png" width="15" height="15"></span></span>
+    <span class="flame-number">{{totalDislikes}} <span><img src="assets/imgs/story/negative-flame.png" width="15" height="15"></span></span>
+  </div>
+
+  <ion-list no-lines>
+    <form [formGroup]="commentForm">
+
+      <!-- <ion-item>
+            <button ion-button clear item-left>Say Something</button>
+            <ion-input placeholder="Type here" type="text"></ion-input>
+            <button class="send-btn" clear type="button" item-right>
+              <ion-icon name="ios-send"></ion-icon>
+            </button>
+          </ion-item> -->
+
+      <ion-item>
+        <button ion-button clear item-left>Say Something</button>
+        <ion-input placeholder="Type here" formControlName="comment" type="text" [class.valid]="!formErrors.comment" [class.invalid]="formErrors.comment"></ion-input>
+
+      </ion-item>
+      <ion-item *ngIf="formErrors.comment">
+        <p class="invalid-text">{{formErrors.comment}}</p>
+      </ion-item>
+    </form>
+    <!-- <button class="send-btn" clear type="button" item-right (click)="commentStory()">
+      <ion-icon name="ios-send"></ion-icon></button> -->
+    <button ion-button full (click)="commentStory()">Comment
+      <ion-icon name="ios-send"></ion-icon></button>
+  </ion-list>
+
+
+  <ion-list>
+    <ion-item *ngFor="let comment of comments">
+      <ion-row>
+        <ion-col col-2 text-center>
+          <img class="circle-pic" src="{{comment.user_image_thumb}}" width="30" height="30">
+        </ion-col>
+        <ion-col col-10>
+          <div class="background">
+            <h3>{{comment.user_name}}</h3>
+            <p>{{comment.comment}}</p>
+          </div>
+          <span>{{comment.date}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+
+  </ion-list>
+
+  <!-- <ion-grid padding class="comment">
+    <ion-row>
+      <ion-col col-2 text-center>
+        <img src="assets/imgs/login-wechat/images-1.png" width="30" height="30">
+      </ion-col>
+      <ion-col col-10>
+        <div class="background">
+          <h3>Change.foli</h3>
+          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+            at its layout</p>
+        </div>
+        <span>1h</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2 text-center>
+        <img src="assets/imgs/login-wechat/images-1.png" width="30" height="30">
+      </ion-col>
+      <ion-col col-10>
+        <div class="background">
+          <h3>Change.foli</h3>
+          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+            at its layout</p>
+        </div>
+        <span>2h</span>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-bottom: -25px;">
+      <ion-col col-2 text-center>
+        <img src="assets/imgs/login-wechat/images-1.png" width="30" height="30">
+      </ion-col>
+      <ion-col col-10>
+        <div class="background">
+          <h3>Change.foli</h3>
+          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+            at its layout</p>
+        </div>
+        <span>4h</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+</ion-content>

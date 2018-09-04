@@ -1,0 +1,52 @@
+page-registration {
+    .login-back {
+        background-image: url('../assets/imgs/login/login-back.png');
+        min-height: 100%;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .login-back ion-item {
+        width: 60%;
+        border-radius: 15px;
+        margin-left: 20%;   
+        margin-bottom: 10px;
+    }
+   
+    .login-back .submit-btn {
+        width: 30vw;
+        height: 6vh;
+        font-size: 18px;
+        border-radius: 15px;
+        background: linear-gradient(to right, #ec3747 , #f45a43);
+        margin-bottom: 5px;
+    }
+  .date-row {
+    width: 60%;
+    margin-left: 20%;
+  }
+  ion-datetime {
+    background: #fff;
+    border-radius: 15px;
+  }
+  .upload-btn {
+    background: #fff;
+    color: #b3b3b3;
+    width: 60%;
+    border-radius: 15px;
+    padding: 22px 0px;
+  }
+  .upload-btn .button-inner {
+      justify-content: left!important;
+      margin-left: 25px;
+  }
+  .back-btn{
+      background: transparent !important;
+  }
+  .upload-icon {
+    position: relative;
+    top: 10px;
+    right: 45px;
+  }
+}

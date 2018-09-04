@@ -1,0 +1,53 @@
+page-story-list {
+    h1,
+    p {
+        color: #000 !important;
+        font-weight: 500 !important;
+    }
+    .p-date {
+        font-size: 1.5rem;
+        padding: 10px 0px 10px 0px;
+    }
+    .list {
+        .flame-number {
+            float: right;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        p {
+            margin-top: 0px;
+        }
+        .img-grid {
+            padding: 2px;
+        }
+        .vertical-align {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .background-lvl {
+            background-image: url(../assets/imgs/story/box.png);
+            width: 60px;
+            height: 20px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin-left: auto;
+            padding: 0px;
+            margin-right: auto;
+            border-radius: 10px;
+        }
+        .lvl-image {
+            position: relative;
+            top: -15px;
+            left: 0;
+            border-radius: 10px;
+        }
+    }
+    .back-btn {
+        background: transparent !important;
+    }
+    .circle-pic {
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+}
