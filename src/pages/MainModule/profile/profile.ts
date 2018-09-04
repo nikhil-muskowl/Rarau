@@ -28,6 +28,7 @@ export class ProfilePage {
   public name;
   public email;
   public user_id;
+  public id;
   public result;
   public responseData;
   public userImage = 'assets/imgs/forgotPassword/user.png';
@@ -35,7 +36,14 @@ export class ProfilePage {
   public following;
   public followers;
   public flames;
+  public followed;
+
+
+
   private user: string;
+
+  public status;
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -43,8 +51,10 @@ export class ProfilePage {
     public alertProvider: AlertProvider,
     public toast: ToastProvider,
     public loadingProvider: LoadingProvider,
-    public profileProvider: ProfileProvider) {
-
+    public profileProvider: ProfileProvider,
+    
+  ) {
+    
   }
 
   ionViewDidLoad() {
@@ -57,28 +67,22 @@ export class ProfilePage {
   }
 
   isLogin() {
-
     this.user_id = this.LoginProvider.isLogin();
-    console.log('userId', this.user_id);
     if (!this.user_id) {
       this.navCtrl.setRoot(LoginPage);
-    }
-    else {
+    } else {
       this.getProfileData(this.user_id);
     }
   }
 
   getProfileData(user_id) {
-
     console.log('user : ' + this.user_id);
     this.loadingProvider.present();
     this.profileProvider.apigetMyProfile(user_id).subscribe(
       response => {
-
         this.responseData = response;
         this.result = this.responseData.result;
         console.log(response);
-
         this.name = this.result.name;
         this.email = this.result.email;
         this.userImage = this.result.image_thumb;
@@ -94,17 +98,13 @@ export class ProfilePage {
   }
 
   logout() {
-
     this.alertProvider.Alert.confirm('Are you sure you want to logout?', 'Logout').then((res) => {
       console.log('confirmed');
-
       this.LoginProvider.unSetData();
       this.navCtrl.setRoot(LoginPage);
-
     }, err => {
       console.log('user cancelled');
-    })
-
+    });
   }
 
   updatePass() {
@@ -116,7 +116,6 @@ export class ProfilePage {
   }
 
   editProfile() {
-
     this.navCtrl.push(EditProfilePage, {
       id: this.user_id,
       name: this.name,
@@ -127,4 +126,6 @@ export class ProfilePage {
   changeProfilePhoto() {
     this.navCtrl.push(ProfilePhotoPage, { id: this.user_id, image: this.userImage });
   }
+
+
 }

@@ -13,6 +13,8 @@ import { OthersProfilePage } from '../../pages/AccountModule/others-profile/othe
 export class FollowersComponent {
   @Input('userid') user_id;
 
+  public current_user_id;
+
   public pageStart = 0;
   public pageLength = 5;
   public recordsTotal;
@@ -26,38 +28,44 @@ export class FollowersComponent {
   public params;
   public success;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     public LoginProvider: LoginProvider,
     public ToastProvider: ToastProvider,
     public FollowProvider: FollowProvider,
-    public loadingProvider: LoadingProvider, ) {
-    console.log('Hello Followers Component');
-
+    public loadingProvider: LoadingProvider,
+  ) {
   }
 
   ngOnChanges() {
-    // this.isLogin();
-    console.log(this.user_id);  
+    this.isLogin();
+    console.log(this.user_id);
     this.getData();
-
   }
 
   isLogin() {
-    this.user_id = this.LoginProvider.isLogin();
+    if (this.LoginProvider.isLogin()) {
+      this.current_user_id = this.LoginProvider.isLogin();
+    } else {
+      this.current_user_id = 0;
+    }
   }
 
   getData() {
     this.loadingProvider.present();
-    this.filterData = { 'start': this.pageStart, 'length': this.pageLength, 'user_id': this.user_id };
+    this.filterData = {
+      'start': this.pageStart,
+      'length': this.pageLength,
+      'user_id': this.user_id,
+      'current_user_id': this.current_user_id
+    };
 
     console.log('id: ' + this.user_id);
     this.FollowProvider.getFollowersList(this.filterData).subscribe(
       response => {
-
         this.records = response;
         this.recordsTotal = this.records.recordsTotal;
-        console.log(JSON.stringify(response));
         this.data = this.records.data;
         this.binddata();
       },

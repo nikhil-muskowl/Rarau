@@ -131,7 +131,6 @@ export class LoginProvider {
     } catch (error) {
       return 0;
     }
-
   }
 
   clear() {

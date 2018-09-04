@@ -37,14 +37,16 @@ export class OthersProfilePage {
     public alertProvider: AlertProvider,
     public profileProvider: ProfileProvider,
     public LoginProvider: LoginProvider,
-    public FollowProvider: FollowProvider) {
+    public FollowProvider: FollowProvider
+  ) {
 
     this.user = 'Stories';
     this.isLogin();
     console.log('curruserId : ' + this.user_id);
-    this.id = navParams.get('id');
-    this.getProfile(this.id);
 
+    this.id = navParams.get('id');
+    
+    this.getProfile(this.id);
   }
 
   ionViewDidLoad() {
