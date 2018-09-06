@@ -20,7 +20,7 @@ export class StoryScreenPage {
   public data;
   private id;
   private user_name;
-  private user_image_thumb;
+  private user_image;
   private title;
   private description;
   private html;
@@ -75,9 +75,9 @@ export class StoryScreenPage {
         this.title = this.responseData.result[0].title;
         this.description = this.responseData.result[0].description;
         this.user_name = this.responseData.result[0].user_name;
-        this.user_image_thumb = this.responseData.result[0].user_image_thumb;
+        this.user_image = this.responseData.result[0].user_image;
         this.html = this.responseData.result[0].html;
-        this.image = this.responseData.result[0].image_thumb;
+        this.image = this.responseData.result[0].image;
         this.tags = this.responseData.result[0].tags;
         this.totalLikes = this.responseData.result[0].totalLikes;
         this.totalDislikes = this.responseData.result[0].totalDislikes;

@@ -1,11 +1,16 @@
 page-story-screen {
 
     h1,h2,h3{
-        color: #000 !important;
+        color: #fff !important;
     }
     .story-footer{
-        background: #000;
-        color: #fff;
+        position: fixed;
+        bottom: 0;
+        width: 100%;       
+        color: #fff;        
+        p{
+            font-size: 12px;
+        }
     }
 
     .background {
@@ -13,9 +18,9 @@ page-story-screen {
         color: #fff;
         min-height: 100%;
         width: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size:cover !important;
     }
     hr {
         border-top: 2px solid #fff;

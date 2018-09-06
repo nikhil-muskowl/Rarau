@@ -12,16 +12,13 @@
     </ion-toolbar>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
-  <!-- <ion-grid class="background" [style.background]="'url('+image+')'"> -->
-  <ion-grid>
+  <ion-grid class="background" [style.background]="'url('+image+')'">
+    <!-- <ion-grid> -->
     <ion-row style="margin-bottom: -25px;">
-      
       <ion-col col-3 text-center>
-        <img class="circle-pic" src="{{user_image_thumb}}" width="70" height="70">
+        <img class="circle-pic" src="{{user_image}}" width="70" height="70">
       </ion-col>
-
       <ion-col col-9>
         <h3>{{user_name}}'s Story</h3>
         <span *ngFor="let tag of tags; let j = index;">
@@ -43,41 +40,44 @@
       </ion-col>
     </ion-row>
 
-    <div swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)" (swipeup)="swipeUp($event)"
-      (swipedown)="swipeDown($event)">
-      <img style="min-height:85%;" src="{{image}}">
+    <div style="height:400px;" swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)"
+      (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
+      <!-- <img src="{{image}}"> -->
     </div>
+
+    <ion-grid class="story-footer">
+      <ion-row>
+        <ion-col col-9>
+          <form>
+            <ion-item>
+              <button ion-button clear item-left>Emoji</button>
+              <ion-input placeholder="Type here" type="text"></ion-input>
+            </ion-item>
+          </form>
+        </ion-col>
+        <ion-col col-3>
+          <span class="flame-number">
+            {{totalLikes}}
+            <span>
+              <img src="assets/imgs/story/Positive-Flame.png" width="15" height="15">
+            </span>
+          </span>
+          <span class="flame-number">{{totalDislikes}}
+            <span>
+              <img src="assets/imgs/story/Negative-Flame.png" width="15" height="15">
+            </span>
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="comment-back" (click)="goToComments()" text-center>
+        <ion-col>
+          <p>Swipe up to View all Comments</p>
+          <div>
+            <img src="assets/imgs/up-arrow.png" width="15" height="15">
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   </ion-grid>
 </ion-content>
-
-<ion-footer class="story-footer">
-
-  <!-- <img src="assets/icon/download.png" width="50" height="50"> -->
-  <ion-grid>
-    <ion-row>
-      <ion-col col-9>
-        <form>
-          <ion-item>
-            <button ion-button clear item-left>Emoji</button>
-            <ion-input placeholder="Type here" type="text"></ion-input>
-          </ion-item>
-        </form>
-      </ion-col>
-      <ion-col col-3>
-        <span class="flame-number">{{totalLikes}} <span><img src="assets/imgs/story/positive-flame.png" width="15" height="15"></span></span>
-        <span class="flame-number">{{totalDislikes}} <span><img src="assets/imgs/story/negative-flame.png" width="15" height="15"></span></span>
-      </ion-col>
-    </ion-row>
-    <ion-row class="comment-back" (click)="goToComments()" text-center>
-      <ion-col>
-        <p>Swipe up to View all Comments</p>
-        <div>
-          <img src="assets/imgs/up-arrow.png" width="15" height="15">
-        </div>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-
-</ion-footer>

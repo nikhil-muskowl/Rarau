@@ -61,11 +61,11 @@ export class HomePage {
 
     this.user_id = this.LoginProvider.isLogin();
 
-    this.latitude = '39.919981';
-    this.longitude = '116.414977';
+    // this.latitude = '39.919981';
+    // this.longitude = '116.414977';
 
-    // this.latitude = this.locationTrackerProvider.getLatitude();
-    // this.longitude = this.locationTrackerProvider.getLongitude();
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
 
     this.getLocation();
     this.bindMap();

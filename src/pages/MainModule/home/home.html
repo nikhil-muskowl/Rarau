@@ -14,15 +14,27 @@
 
 <ion-content>
   <ion-slides class="image-slider" slidesPerView="3">
-    <ion-slide *ngFor="let image of images; let i = index;">          
-      <div class="border-line">
-        <p class="background-rank">{{image.text}}<sup>th</sup></p>
+    <ion-slide *ngFor="let image of images; let i = index;">
+      <div class="category-rank">
+        <ion-row>
+          <ion-col text-center>
+            <img class="s-image" src="{{image.categoryFirst}}" width="3" height="3" />
+          </ion-col>
+          <ion-col text-center>
+            <span class="background-rank">{{image.text}}<sup>th</sup></span>            
+            <span class="border-line"></span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <img class="s-image" src="{{image.categoryPerson}}" width="3" height="3">
+            <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
+            
+          </ion-col>
+        </ion-row>      
       </div>
-      <div>
-          <img class="s-image" src="{{image.categoryFirst}}" width="3" height="3" />
-      </div>
-      <img class="s-image" src="{{image.categoryPerson}}" width="3" height="3">
-      <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
+
+      
     </ion-slide>
   </ion-slides>
 
@@ -36,7 +48,7 @@
         <button class="btn-color" clear (click)="searchLoc($event)" item-right>
           <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
         </button>
-      </ion-item>            
+      </ion-item>
       <ion-item>
         <ion-input placeholder="Search by User | Serach by Category" formControlName="searchUser" type="text"></ion-input>
         <button class="btn-color" clear (click)="searchUsercat($event)" item-right>

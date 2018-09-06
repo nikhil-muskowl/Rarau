@@ -35,7 +35,7 @@ page-home {
 
     .map {
         width: 100%;
-        height: 48%;
+        height: 60%;
         display: block;
         overflow: hidden;
         margin: 0;
@@ -50,11 +50,17 @@ page-home {
         height: auto !important;
         background: #eaeaea;
     }
-    .border-line {
-        border-right: 2px solid #000;
-        p{
-            font-size: 10px !important; 
-        }
+
+    .category-rank{
+        margin-top: 10px;
+        margin-bottom: 10px;    
+        
+        
+    }
+
+    .border-line {        
+        background-color: #000;                    
+        padding: 1px;               
     }
     .s-image {
         width: 25px !important;
@@ -72,13 +78,13 @@ page-home {
     }
     .background-rank {
         background-image: url('../assets/icon/Front-Icons/Vector-Smart-Object1.png');
-        width: 40px;
-        min-height: 30px;
+        font-size: 10px;
+        color: #fff;        
         background-size: 100% 100%;
         background-repeat: no-repeat;
         background-position: center center;
         margin-left: auto;
-        padding: 9px;
+        padding: 10px;
         margin-right: auto;        
     }
     

@@ -45,7 +45,7 @@ export class OthersProfilePage {
     console.log('curruserId : ' + this.user_id);
 
     this.id = navParams.get('id');
-    
+
     this.getProfile(this.id);
   }
 
@@ -73,7 +73,6 @@ export class OthersProfilePage {
           this.flames = this.result.total_flames;
           this.followed = this.result.followed;
           console.log('followed : ' + this.followed);
-
         }
       },
       err => {
@@ -96,47 +95,62 @@ export class OthersProfilePage {
   }
 
   dofollow() {
-    this.loadingProvider.present();
+    if (this.user_id) {
+      this.loadingProvider.present();
+      this.FollowProvider.ActionFollow(this.id, this.user_id).subscribe(
+        response => {
+          this.responseData = response;
 
-    this.FollowProvider.ActionFollow(this.id, this.user_id).subscribe(
-      response => {
-        this.responseData = response;
+          this.status = this.responseData.status;
+          if (this.status) {
+            // this.alertProvider.title = 'Success';
+            // this.alertProvider.message = 'Follow Request Sent';
+            // this.alertProvider.showAlert();
 
-        this.status = this.responseData.status;
-        if (this.status) {
-          // this.alertProvider.title = 'Success';
-          // this.alertProvider.message = 'Follow Request Sent';
-          // this.alertProvider.showAlert();
-
-          this.followed = true;
+            this.followed = true;
+          }
+        },
+        err => console.error(err),
+        () => {
+          this.loadingProvider.dismiss();
         }
-      },
-      err => console.error(err),
-      () => {
-        this.loadingProvider.dismiss();
-      }
-    );
+      );
+      this.loadingProvider.dismiss();
+    } else {
+      this.alertProvider.title = 'Warning';
+      this.alertProvider.message = 'Please Login First!';
+      this.alertProvider.showAlert();
+    }
   }
 
   doUnFollow() {
-    this.loadingProvider.present();
+    if (this.user_id) {
+      this.loadingProvider.present();
 
-    this.FollowProvider.ActionUnFollow(this.id, this.user_id).subscribe(
-      response => {
-        this.responseData = response;
+      this.FollowProvider.ActionUnFollow(this.id, this.user_id).subscribe(
+        response => {
+          this.responseData = response;
 
-        this.status = this.responseData.status;
-        if (this.status) {
-          // this.alertProvider.title = 'Success';
-          // this.alertProvider.message = 'Follow Request Sent';
-          // this.alertProvider.showAlert();
-          this.followed = false;
+          this.status = this.responseData.status;
+          if (this.status) {
+            // this.alertProvider.title = 'Success';
+            // this.alertProvider.message = 'Follow Request Sent';
+            // this.alertProvider.showAlert();
+            this.followed = false;
+          }
+        },
+        err => console.error(err),
+        () => {
+          this.loadingProvider.dismiss();
         }
-      },
-      err => console.error(err),
-      () => {
-        this.loadingProvider.dismiss();
-      }
-    );
+      );
+      this.loadingProvider.dismiss();
+    } else {
+      this.alertProvider.title = 'Warning';
+      this.alertProvider.message = 'Please Login First!';
+      this.alertProvider.showAlert();
+    }
   }
+
+
 }
