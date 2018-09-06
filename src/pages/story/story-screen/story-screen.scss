@@ -1,6 +1,16 @@
 page-story-screen {
+
+    h1,h2,h3{
+        color: #000 !important;
+    }
+    .story-footer{
+        background: #000;
+        color: #fff;
+    }
+
     .background {
-        background-image: url('../assets/imgs/story/yiOrgHKc_400x400.png');
+        background-color: #000;
+        color: #fff;
         min-height: 100%;
         width: 100%;
         background-position: center;
@@ -12,7 +22,7 @@ page-story-screen {
     }
     .flame-number {
         float: right;
-        color: #000;
+        color: #fff;
         font-size: 1.5rem;
         margin-top: 20px;
         float: left;
@@ -21,9 +31,7 @@ page-story-screen {
         background-color: #000;
         color: #fff;
     }
-    h3 {
-        color: #000 !important;
-    }
+    
     p {
         margin-top: -4px;
     }
@@ -61,6 +69,8 @@ page-story-screen {
     }
     .bottom-sec {
         position: sticky;
+        background-color: #000;
+        color: #fff;
         top: 67vh;
     }
     .back-btn {
@@ -70,4 +80,6 @@ page-story-screen {
         -webkit-border-radius: 50%;
         border-radius: 50%;
     }
+
+    
 }

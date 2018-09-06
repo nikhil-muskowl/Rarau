@@ -11,44 +11,55 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="list" padding>
+<ion-content class="list">
 
-  <ion-grid>
+  <ion-list no-lines>
     <div *ngFor="let dval of data">
+      <ion-item *ngFor="let record of dval.stories; let i = index;" (click)="showStory(record)">
 
-      <div *ngFor="let record of dval.stories; let i = index;" (click)="showStory(record)">
-        <ion-row>
-          <ion-col col-4 class="vertical-align" text-center>
-            <img class="circle-pic" src="{{record.user_image_thumb}}" width="100" height="100">
-            <div class="lvl-image">
-              <p class="background-lvl"><span style="color:#fff;">Lv6</span></p>
-            </div>
-          </ion-col>
-          <ion-col col-8>
-            <h1>{{record.user_name}} <span class="flame-number">94 <img src="assets/imgs/story/negative-flame.png" width="10"
-                  height="10"></span><span class="flame-number">449 <img src="assets/imgs/story/positive-flame.png" width="10"
-                  height="10"></span></h1>
+        <ion-avatar item-start>
+          <img src="{{record.user_image_thumb}}">
+          <div class="lvl-image">
+            <p class="background-lvl"><span style="color:#fff;">Lv6</span></p>
+          </div>
 
-            <span *ngFor="let tag of record.tags; let j = index;">
-              <span *ngIf="record.tags.length-1 > j">{{tag}},&nbsp;</span>
-              <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
+          <div class="fire-div">
+            <span *ngIf="record.totalFlames > 0">
+              <img class="fire-image" src="assets/imgs/story/positive-flame.png">
             </span>
+            <span *ngIf="record?.totalFlames < 0">
+              <img class="fire-image" src="assets/imgs/story/Negative-Flame.png">
+            </span>
+          </div>
 
-            <p class="p-date">{{record.created_date}}</p>
-
-          </ion-col>
-        </ion-row>
+        </ion-avatar>
 
         <ion-row>
-          <ion-col col-4 class="vertical-align" text-center>
-            <img src="assets/imgs/story/positive-flame.png" width="40" height="40">
-          </ion-col>
-          <ion-col col-8 padding>
-            <img class="img-grid" src="{{record.image_thumb}}" width="70" height="70">
-          </ion-col>
-        </ion-row>
-      </div>
-    </div>
-  </ion-grid>
+            <ion-col>
+                <h2>{{record.user_name}}</h2>
+            </ion-col>
+            <ion-col>
+              <ion-note item-end>
+                <span class="flame-number">{{record.totalLikes}} <img src="assets/imgs/story/negative-flame.png" width="10"
+                    height="10"></span>
+                <span class="flame-number">{{record.totalDislikes}} <img src="assets/imgs/story/positive-flame.png" width="10"
+                    height="10"></span>
+              </ion-note>
+            </ion-col>
+          </ion-row>
 
+
+
+       
+
+        <p><span *ngFor="let tag of record.tags; let j = index;">
+            <span *ngIf="record.tags.length-1 > j">{{tag}},&nbsp;</span>
+            <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
+          </span></p>
+        <p class="p-date">{{record.created_date}}</p>
+
+        <img class="img-grid" src="{{record.image_thumb}}" width="70" height="70">
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-content>

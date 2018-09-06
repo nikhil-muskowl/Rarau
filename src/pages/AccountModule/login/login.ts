@@ -78,7 +78,7 @@ export class LoginPage {
             this.loginForm.reset();
             this.submitAttempt = false;
             this.loginProvider.setData(this.responseData.result);
-            this.navCtrl.setRoot(ProfilePage);
+            this.navCtrl.setRoot(ProfilePage);          
           }
           else if (this.responseData.status == false) {
             this.alertProvider.title = 'Failed';

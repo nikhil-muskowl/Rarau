@@ -45,6 +45,7 @@ export class HomePage {
   public stories: any;
 
   @ViewChild('map') mapElement: ElementRef;
+
   constructor(
     private navCtrl: NavController,
     private platform: Platform,
@@ -63,8 +64,8 @@ export class HomePage {
     this.latitude = '39.919981';
     this.longitude = '116.414977';
 
-    this.latitude = this.locationTrackerProvider.getLatitude();
-    this.longitude = this.locationTrackerProvider.getLongitude();
+    // this.latitude = this.locationTrackerProvider.getLatitude();
+    // this.longitude = this.locationTrackerProvider.getLongitude();
 
     this.getLocation();
     this.bindMap();
