@@ -11,6 +11,7 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { LoginProvider } from '../../../providers/login/login';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -44,6 +45,8 @@ export class HomePage {
   public user_id;
   public stories: any;
 
+  public markerHtml;
+
   @ViewChild('map') mapElement: ElementRef;
 
   constructor(
@@ -61,11 +64,11 @@ export class HomePage {
 
     this.user_id = this.LoginProvider.isLogin();
 
-    // this.latitude = '39.919981';
-    // this.longitude = '116.414977';
+    this.latitude = '39.919981';
+    this.longitude = '116.414977';
 
-    this.latitude = this.locationTrackerProvider.getLatitude();
-    this.longitude = this.locationTrackerProvider.getLongitude();
+    // this.latitude = this.locationTrackerProvider.getLatitude();
+    // this.longitude = this.locationTrackerProvider.getLongitude();
 
     this.getLocation();
     this.bindMap();
@@ -115,11 +118,13 @@ export class HomePage {
 
         this.stories.forEach(element => {
 
+          console.log(element);
+
           this.markers.push({
             options: {
-              // enableDragging: true,
-              icon: {
-                imageUrl: '/assets/imgs/marker.png',
+              enableDragging: true,
+              icon: {                
+                imageUrl: element.marker,                
                 size: {
                   height: 50,
                   width: 50
@@ -195,29 +200,39 @@ export class HomePage {
   }
 
   public showWindow({ e, marker, map }: any): void {
-
-    // console.log(map);
-    // map.openInfoWindow(
-    //   new window.BMap.InfoWindow('Your Position', {
-    //     offset: new window.BMap.Size(0, -30),
-    //     title: 'Title'
-    //   }),
-    //   marker.getPosition()
-    // );
-
+    let markerData = JSON.parse(JSON.stringify(marker.getPosition()));
     var data = {
       marker: JSON.stringify(marker.getPosition())
     }
-
     let popover = this.popoverCtrl.create(StoryTopListPage, data);
+    console.log(popover);
     popover.present({
       // ev: myEvent
-    });
+    });    
 
-    // popover.onDidDismiss(data => {
-    //   popover.dismiss();
-    // });
+    // this.paramData = {
+    //   'user_id': this.user_id,
+    //   'latitude': markerData.lat,
+    //   'longitude': markerData.lng,
+    // };
 
+    // this.storyService.getMarkerImage(this.paramData)
+    //   .subscribe(
+    //     response => {
+    //       this.markerHtml = response;
+    //       map.openInfoWindow(
+    //         new window.BMap.InfoWindow(this.markerHtml, {
+    //           offset: new window.BMap.Size(0, 0),
+    //         }),
+    //         marker.getPosition()
+    //       );
+    //     },
+    //     err => console.error(err),
+    //   );
+  }
+
+  loadStories() {
+    console.log(this.paramData);
   }
 
   loadMap(map: any) {

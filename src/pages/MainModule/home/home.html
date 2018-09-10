@@ -21,7 +21,7 @@
             <img class="s-image" src="{{image.categoryFirst}}" width="3" height="3" />
           </ion-col>
           <ion-col text-center>
-            <span class="background-rank">{{image.text}}<sup>th</sup></span>            
+            <span class="background-rank">{{image.text}}<sup>th</sup></span>
             <span class="border-line"></span>
           </ion-col>
         </ion-row>
@@ -29,12 +29,12 @@
           <ion-col>
             <img class="s-image" src="{{image.categoryPerson}}" width="3" height="3">
             <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
-            
+
           </ion-col>
-        </ion-row>      
+        </ion-row>
       </div>
 
-      
+
     </ion-slide>
   </ion-slides>
 
@@ -59,7 +59,7 @@
   </div>
 
   <div class="map">
-    <baidu-map [options]="options" (onMapLoaded)="loadMap($event)" (onMarkerClicked)="clickMarker($event)" (clicked)="clickmap($event)">
+    <baidu-map [options]="options" (onMapLoaded)="loadMap($event)" (clicked)="clickmap($event)">
       <marker *ngFor="let marker of markers" [point]="marker.point" [options]="marker.options" (clicked)="showWindow($event)"></marker>
       <control type="navigation" [options]="navOptions"></control>
     </baidu-map>

@@ -78,6 +78,7 @@ export class StoryTopListPage {
         this.loadingProvider.dismiss();
       }
     );
+    this.loadingProvider.dismiss();
   }
 
   goToList() {

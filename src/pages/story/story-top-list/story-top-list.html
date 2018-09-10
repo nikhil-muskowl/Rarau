@@ -1,19 +1,17 @@
 <ion-content>
   <ion-list (click)="goToList()" no-lines>
-    <div *ngFor="let dval of data">
-      <ion-item *ngFor="let record of dval.stories; let i = index;">
-        <ion-avatar item-start>
-          <img src="{{record.user_image}}">
-        </ion-avatar>
-        <h2>{{record.user_name}}</h2>
-        <p>
-          <span *ngFor="let tag of record.tags; let j = index;">
-            <span *ngIf="record.tags.length-1 > j">{{tag}}, </span>
-            <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
-          </span>
-        </p>
-        <ion-note item-end>{{record.categories}}</ion-note>        
-      </ion-item>
-    </div>
+    <ion-item *ngFor="let record of data; let i = index;">
+      <ion-avatar item-start>
+        <img src="{{record.user_image}}">
+      </ion-avatar>
+      <h2>{{record.user_name}}</h2>
+      <p>
+        <span *ngFor="let tag of record.tags; let j = index;">
+          <span *ngIf="record.tags.length-1 > j">{{tag}}, </span>
+          <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
+        </span>
+      </p>
+      <ion-note item-end>{{record.categories}}</ion-note>        
+    </ion-item>
   </ion-list>
 </ion-content>
