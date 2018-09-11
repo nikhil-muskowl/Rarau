@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
@@ -38,7 +38,9 @@ export class StoryScreenPage {
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
     public LoginProvider: LoginProvider,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController
+  ) {
 
     this.isLogin();
     this.story_id = this.navParams.get('story_id');
@@ -71,7 +73,6 @@ export class StoryScreenPage {
 
         this.data = this.responseData.result;
         this.responseData.result[0].totalDislikes;
-        console.log('story data : ' + JSON.stringify(this.data));
         this.title = this.responseData.result[0].title;
         this.description = this.responseData.result[0].description;
         this.user_name = this.responseData.result[0].user_name;
@@ -112,12 +113,39 @@ export class StoryScreenPage {
 
   swipeUp(event: any): any {
     console.log('Swipe Up', event);
+
     this.rankStory(1);
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<img src="http://social-app.muskowl.com/upload/fire.png" height="400">`,
+      cssClass: 'my-loading-fire',
+      duration: 1000
+    });
+
+    loading.onDidDismiss(() => {
+      console.log('Dismissed loading');
+    });
+
+    loading.present();
   }
 
   swipeDown(event: any): any {
     console.log('Swipe Down', event);
     this.rankStory(0);
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<img src="http://social-app.muskowl.com/upload/water.png" height="400">`,
+      cssClass: 'my-loading-water',
+      duration: 1000
+    });
+
+    loading.onDidDismiss(() => {
+      console.log('Dismissed loading');
+    });
+
+    loading.present();
   }
 
   public rankStory(rank: number) {

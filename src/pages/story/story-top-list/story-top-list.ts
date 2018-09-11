@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { StoryListPage } from '../story-list/story-list';
 import { LoadingProvider } from '../../../providers/loading/loading';
@@ -43,17 +43,18 @@ export class StoryTopListPage {
       this.longitude = 0;
     }
     
-
     this.isLogin();
+
     this.paramData = {
       'user_id': this.user_id,
       'latitude': this.latitude,
       'longitude': this.longitude,
+      'length': '2',
+      'start': '0',
     };
 
     console.log(this.paramData);
 
-    
     this.getStories();
   }
 
@@ -65,20 +66,16 @@ export class StoryTopListPage {
     this.user_id = this.LoginProvider.isLogin();
   }
 
-  getStories() {
-    this.loadingProvider.present();
-
+  getStories() {  
     this.storyService.apiTopStory(this.paramData).subscribe(
       response => {
         this.responseData = response;
         this.data = this.responseData.data;
       },
       err => console.error(err),
-      () => {
-        this.loadingProvider.dismiss();
+      () => {        
       }
-    );
-    this.loadingProvider.dismiss();
+    );   
   }
 
   goToList() {

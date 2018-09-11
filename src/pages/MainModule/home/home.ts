@@ -1,9 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, Platform, PopoverController } from 'ionic-angular';
+import { NavController, Platform, PopoverController, Popover } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SearchResultPage } from '../../SearchModule/search-result/search-result';
 import { ProfilePage } from '../profile/profile';
 import { StoryTopListPage } from '../../story/story-top-list/story-top-list';
+import { StoryListPage } from '../../story/story-list/story-list';
 import { LocationTrackerProvider } from '../../../providers/location-tracker/location-tracker';
 import { BaiduProvider } from '../../../providers/baidu/baidu';
 import { ControlAnchor, Marker, MapOptions, NavigationControlOptions, NavigationControlType, Point, MapTypeEnum, MarkerOptions } from 'angular2-baidu-map';
@@ -20,6 +21,8 @@ import { LoginProvider } from '../../../providers/login/login';
 export class HomePage {
   public title = 'Home';
   public images: Array<any>;
+
+  public popover: Popover;
 
   public locations: any;
   public filterData: any;
@@ -44,7 +47,7 @@ export class HomePage {
   public paramData;
   public user_id;
   public stories: any;
-
+  public showStories: boolean;
   public markerHtml;
 
   @ViewChild('map') mapElement: ElementRef;
@@ -61,9 +64,8 @@ export class HomePage {
     public storyService: StoryServiceProvider,
     public LoginProvider: LoginProvider,
   ) {
-
     this.user_id = this.LoginProvider.isLogin();
-
+    this.showStories = true;
     this.latitude = '39.919981';
     this.longitude = '116.414977';
 
@@ -101,7 +103,7 @@ export class HomePage {
       centerAndZoom: {
         lat: this.latitude,
         lng: this.longitude,
-        zoom: 16
+        zoom: 15
       },
       enableKeyboard: true,
       mapType: MapTypeEnum.BMAP_NORMAL_MAP
@@ -111,27 +113,23 @@ export class HomePage {
       'user_id': this.user_id,
     };
 
-    this.storyService.apiTopStory(this.paramData).subscribe(
+    this.storyService.apiTopStoryMarker(this.paramData).subscribe(
       response => {
         this.responseData = response;
-        this.stories = this.responseData.data;
 
-        this.stories.forEach(element => {
-
-          console.log(element);
-
+        this.responseData.data.forEach(element => {
           this.markers.push({
             options: {
-              enableDragging: true,
-              icon: {                
-                imageUrl: element.marker,                
+              // enableDragging: true,
+              icon: {
+                imageUrl: element.marker,
                 size: {
                   height: 50,
-                  width: 50
+                  width: 100
                 },
                 imageSize: {
                   height: 50,
-                  width: 50
+                  width: 100
                 }
               }
             },
@@ -200,35 +198,45 @@ export class HomePage {
   }
 
   public showWindow({ e, marker, map }: any): void {
+    // var Param = {
+    //   marker: JSON.stringify(marker.getPosition())
+    // }    
+    this.showStories = true;
     let markerData = JSON.parse(JSON.stringify(marker.getPosition()));
-    var data = {
-      marker: JSON.stringify(marker.getPosition())
-    }
-    let popover = this.popoverCtrl.create(StoryTopListPage, data);
-    console.log(popover);
-    popover.present({
-      // ev: myEvent
-    });    
 
-    // this.paramData = {
-    //   'user_id': this.user_id,
-    //   'latitude': markerData.lat,
-    //   'longitude': markerData.lng,
-    // };
+    this.paramData = {
+      'user_id': this.user_id,
+      'latitude': markerData.lat,
+      'longitude': markerData.lng,
+      'length': '3',
+      'start': '0',
+    };
 
-    // this.storyService.getMarkerImage(this.paramData)
-    //   .subscribe(
-    //     response => {
-    //       this.markerHtml = response;
-    //       map.openInfoWindow(
-    //         new window.BMap.InfoWindow(this.markerHtml, {
-    //           offset: new window.BMap.Size(0, 0),
-    //         }),
-    //         marker.getPosition()
-    //       );
-    //     },
-    //     err => console.error(err),
-    //   );
+
+    console.log(this.showStories);
+    this.loadingProvider.show();
+    this.storyService.apiTopStory(this.paramData).subscribe(
+      response => {
+        this.responseData = response;
+        this.stories = this.responseData.data;
+        this.loadingProvider.hide();
+      },
+      err => console.error(err),
+      () => {
+        this.loadingProvider.hide();
+      }
+    );
+    this.loadingProvider.hide();
+
+    // if (this.popover) {
+    //   this.popover.dismiss().catch();
+    //   this.popover = null;
+    // }
+    // this.popover = this.popoverCtrl.create(StoryTopListPage, Param);
+    // this.popover.onDidDismiss(data => {
+    //   this.popover = null;
+    // });
+    // this.popover.present();
   }
 
   loadStories() {
@@ -241,18 +249,6 @@ export class HomePage {
 
   clickMarker(marker: any) {
     console.log('The clicked marker is', marker);
-    this.presentPopover();
-  }
-
-  presentPopover() {
-    let popover = this.popoverCtrl.create(StoryTopListPage);
-    popover.present({
-      // ev: myEvent
-    });
-
-    // popover.onDidDismiss(data => {
-    //   popover.dismiss();
-    // });
   }
 
   clickmap(e: any) {
@@ -306,6 +302,8 @@ export class HomePage {
     this.navCtrl.setRoot(ProfilePage);
   }
 
-
-
+  goToList() {
+    this.showStories = false;
+    this.navCtrl.push(StoryListPage, this.paramData);
+  }
 }

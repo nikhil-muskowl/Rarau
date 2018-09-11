@@ -146,6 +146,25 @@ export class StoryServiceProvider {
     );
   }
 
+  apiTopStoryMarker(data: any) {
+
+    this.formData = new FormData();
+    this.formData.append('user_id', data.user_id);
+    if (data.latitude) {
+      this.formData.append('latitude', data.latitude);
+    }
+    if (data.longitude) {
+      this.formData.append('longitude', data.longitude);
+    }
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/top_stories_marker',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
   apiTopStory(data: any) {
 
     this.formData = new FormData();
@@ -155,6 +174,12 @@ export class StoryServiceProvider {
     }
     if (data.longitude) {
       this.formData.append('longitude', data.longitude);
+    }
+    if (data.length) {
+      this.formData.append('length', data.length);
+    }
+    if (data.start) {
+      this.formData.append('start', data.start);
     }
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/top_stories',
@@ -257,27 +282,5 @@ export class StoryServiceProvider {
     );
   }
 
-  getMarkerImage(data) {
-    let headers;
-    
-    let params = new HttpParams();
-    params = params.append('user_id', data.user_id);    
-    params = params.append('latitude', data.latitude);    
-    params = params.append('longitude', data.longitude);    
-    
-    const options: {
-      headers?: HttpHeaders,
-      observe?: 'body',
-      params?: HttpParams,
-      reportProgress?: boolean,
-      responseType: 'text',
-      withCredentials?: boolean
-    } = {
-      headers: headers,
-      params: params,
-      responseType: 'text'
-    };
-    return this.http.get(ConfigProvider.BASE_URL + 'story_module/api/stories_api/followers_stories_marker', options);
-  }
 
 }

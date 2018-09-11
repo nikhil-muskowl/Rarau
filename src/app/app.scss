@@ -572,3 +572,20 @@ $FONT_COLOR: rgb(248, 6, 6);
 $card-ios-background-color: transparent;
 $card-md-background-color:transparent;
 $card-wp-background-color: transparent;
+
+
+
+ion-loading.my-loading-fire {
+    .loading-wrapper {
+      background: transparent;
+      box-shadow: none;
+      margin-left: 200px;
+    }
+  }
+  ion-loading.my-loading-water {
+    .loading-wrapper {
+      background: transparent;
+      box-shadow: none;
+      margin-right: 200px;
+    }
+  }
