@@ -28,17 +28,7 @@
       </ion-col>
     </ion-row>
     <br>
-    <ion-row>
-      <ion-col col-4 text-center>
-        <hr>
-      </ion-col>
-      <ion-col col-4 text-center>
-        <hr>
-      </ion-col>
-      <ion-col col-4 text-center>
-        <hr>
-      </ion-col>
-    </ion-row>
+    <hr>
 
     <div style="height:400px;" swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)"
       (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
@@ -56,17 +46,14 @@
           </form>
         </ion-col>
         <ion-col col-3>
-          <span class="flame-number">
-            {{totalLikes}}
-            <span>
-              <img src="assets/imgs/story/Positive-Flame.png" width="15" height="15">
+          <div class="fire-div">
+            <span *ngIf="totalFlames > 0">
+              <img class="fire-image" src="assets/imgs/story/Positive-Flame.png">
             </span>
-          </span>
-          <span class="flame-number">{{totalDislikes}}
-            <span>
-              <img src="assets/imgs/story/Negative-Flame.png" width="15" height="15">
+            <span *ngIf="totalFlames < 0">
+              <img class="fire-image" src="assets/imgs/story/Negative-Flame.png">
             </span>
-          </span>
+          </div>
         </ion-col>
       </ion-row>
       <ion-row class="comment-back" (click)="goToComments()" text-center>

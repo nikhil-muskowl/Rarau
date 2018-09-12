@@ -5,11 +5,21 @@ page-story-screen {
     }
     .story-footer{
         position: fixed;
-        bottom: 0;
+        bottom: 40px;
         width: 100%;       
         color: #fff;        
         p{
             font-size: 12px;
+        }
+    }
+
+    .fire-div{
+        text-align: center;
+        .fire-image{
+            margin-left: 30%;
+            width: 40px !important;
+            height: 40px !important;
+            
         }
     }
 

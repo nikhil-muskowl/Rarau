@@ -155,6 +155,11 @@ export class HomePage {
 
   }
 
+  public resetStories(){
+    this.showStories=false;
+    this.stories=[];
+  }
+
   public onInput(ev: any) {
     this.search = ev.target.value;
     this.locations = [];
@@ -239,10 +244,6 @@ export class HomePage {
     // this.popover.present();
   }
 
-  loadStories() {
-    console.log(this.paramData);
-  }
-
   loadMap(map: any) {
     console.log('map instance here', map);
   }
@@ -306,4 +307,5 @@ export class HomePage {
     this.showStories = false;
     this.navCtrl.push(StoryListPage, this.paramData);
   }
+
 }
