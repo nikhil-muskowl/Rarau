@@ -13,6 +13,13 @@ page-story-screen {
         }
     }
 
+
+    .save-story-btn{
+        ion-fab[middle] {            
+            top: 63%;
+        }
+    }
+
     .fire-div{
         text-align: center;
         .fire-image{
