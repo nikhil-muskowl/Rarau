@@ -21,30 +21,26 @@
       </ion-col>
       <ion-col col-9>
         <h3>{{user_name}}'s Story</h3>
-        <span *ngFor="let tag of tags; let j = index;">
-          <span *ngIf="tags.length-1 > j">{{tag}},&nbsp;</span>
-          <span *ngIf="tags.length-1 == j">{{tag}}</span>
-        </span>
+        <p class="ellipsis-2">
+          <span *ngFor="let tag of tags; let j = index;">
+            <span *ngIf="tags.length-1 > j">{{tag}},&nbsp;</span>
+            <span *ngIf="tags.length-1 == j">{{tag}}</span>
+          </span></p>
       </ion-col>
     </ion-row>
 
-    <ion-row style="margin-bottom: -10px;">
-      <ion-col col-4 text-center>
-        <hr>
-      </ion-col>
-      <ion-col col-4 text-center>
-        <hr>
-      </ion-col>
-      <ion-col col-4 text-center>
-        <hr>
-      </ion-col>
-    </ion-row>
   </ion-grid>
 
   <div text-center padding>
-    <ion-icon style="font-size:25px;" name="ios-arrow-down-outline"></ion-icon><span class="flame-number">{{totalLikes}}
-      <span><img src="assets/imgs/story/positive-flame.png" width="15" height="15"></span></span>
-    <span class="flame-number">{{totalDislikes}} <span><img src="assets/imgs/story/negative-flame.png" width="15" height="15"></span></span>
+    <ion-row>
+      <ion-col col-6 offset-3 swipeAll (swipedown)="goToStory($event)">
+        <ion-icon style="font-size:25px;" name="ios-arrow-down-outline"></ion-icon>
+      </ion-col>
+      <ion-col col-3><span class="flame-number">{{totalLikes}}
+          <span><img src="assets/imgs/story/Positive-Flame.png" width="15" height="15"></span></span>
+        <span class="flame-number">{{totalDislikes}} <span><img src="assets/imgs/story/Negative-Flame.png" width="15"
+              height="15"></span></span></ion-col>
+    </ion-row>
   </div>
 
   <ion-list no-lines>
@@ -60,7 +56,8 @@
 
       <ion-item>
         <button ion-button clear item-left>Say Something</button>
-        <ion-input placeholder="Type here" formControlName="comment" type="text" [class.valid]="!formErrors.comment" [class.invalid]="formErrors.comment"></ion-input>
+        <ion-input placeholder="Type here" formControlName="comment" type="text" [class.valid]="!formErrors.comment"
+          [class.invalid]="formErrors.comment"></ion-input>
 
       </ion-item>
       <ion-item *ngIf="formErrors.comment">

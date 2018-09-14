@@ -17,6 +17,7 @@ export class StoryScreenPage {
   public user_id;
   public paramData;
   public responseData;
+  public status;
   public data;
   private id;
   private user_name;
@@ -94,8 +95,8 @@ export class StoryScreenPage {
     );
   }
 
-  goToComments() {
-
+  goToComments(event: any): any {
+    console.log('Swipe cimment', event);
     this.navCtrl.push(ShowStoryPage, { story_id: this.story_id });
   }
 
@@ -199,7 +200,44 @@ export class StoryScreenPage {
       }
     );
 
+  }
 
-    // this.loadingProvider.dismiss();
+  saveStory() {
+    this.loadingProvider.present();
+    console.log('clicked to save story');
+    var data = {
+      'user_id': this.user_id,
+      'story_id': this.story_id,
+    };
+    console.log('this.user_id' + this.user_id);
+
+    this.storyService.saveStory(data).subscribe(
+      response => {
+
+        this.responseData = response;
+        this.status = this.responseData.status;
+        if (!this.status) {
+          this.alertProvider.title = 'Already Saved';
+          if (this.responseData.result) {
+            this.responseData.result.forEach(element => {
+              if (element.id == 'story_id') {
+                this.alertProvider.message = element.text;
+              }
+            });
+          }
+        }
+        else {
+          this.alertProvider.title = 'Saved';
+          this.alertProvider.message = 'Story saved successfully.';
+        }
+        this.loadingProvider.dismiss();
+
+        this.alertProvider.showAlert();
+      },
+      err => {
+        console.error(err);
+        this.loadingProvider.dismiss();
+      }
+    );
   }
 }

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-toolbar>
+      <ion-title class="tool-bar-title">
+        <button start class="back-btn" (click)='goBack()'>
+          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+        </button>
+        Saved Story
+        <span style="float:right;">
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+      </ion-title>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list no-lines>
+        <ion-item *ngFor="let record of model; let i = index;" (click)="gotoStoryDetail(record)">
+          <ion-avatar item-start>
+            <img src="{{record.image_thumb}}">
+          </ion-avatar>
+          <h2>{{record.user_name}}</h2>
+          <p class="ellipsis-2">
+            <span *ngFor="let tag of record.tags; let j = index;">
+              <span *ngIf="record.tags.length-1 > j">{{tag}}, </span>
+              <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
+            </span>
+          </p>
+          <ion-note item-end>{{record.categories}}</ion-note>        
+        </ion-item>
+      </ion-list>
+</ion-content>

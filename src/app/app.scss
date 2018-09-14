@@ -39,7 +39,7 @@ ion-page,
     text-decoration: underline;
 }
 
-p {    
+p {
     font-weight: 300 !important;
 }
 
@@ -91,7 +91,6 @@ ion-header {
         background: $dark-active;
     }
 } //Avatar List
-
 ion-list.avatar-list {
     ion-item {
         background: rgba(0, 0, 0, 0.3) !important;
@@ -140,7 +139,6 @@ ion-list.avatar-list {
         color: color($colors, danger);
     }
 } //Messages Content for message.html and group.html
-
 div.messages {
     p.center {
         margin-top: 1.25em;
@@ -258,13 +256,12 @@ div.messages {
         font-size: 2em !important;
         color: $primary;
     }
-} 
+}
 
 //insta
 .logo-nexti {
     height: 35px;
 }
-
 
 ion-segment.toolbar-filter {
     background: white;
@@ -363,7 +360,6 @@ p {
     font-size: 17px;
     font-weight: 500;
 }
-
 
 ion-navbar.toolbar {
     background: linear-gradient(to right, #ec3747, #f45a43);
@@ -563,29 +559,43 @@ $FONT_COLOR: rgb(248, 6, 6);
         color: #ec3747 !important;
     }
 }
+
 .popover-md .popover-content {
-    width: 100%!important;
-    // top: 143.5px!important;
-    left: 0px!important;
+    width: 100% !important; // top: 143.5px!important;
+    left: 0px !important;
 }
 
 $card-ios-background-color: transparent;
 $card-md-background-color:transparent;
 $card-wp-background-color: transparent;
-
-
-
 ion-loading.my-loading-fire {
     .loading-wrapper {
-      background: transparent;
-      box-shadow: none;
-      margin-left: 200px;
+        background: transparent;
+        box-shadow: none;
+        margin-left: 100px;
     }
-  }
-  ion-loading.my-loading-water {
+}
+
+ion-loading.my-loading-water {
     .loading-wrapper {
-      background: transparent;
-      box-shadow: none;
-      margin-right: 200px;
+        background: transparent;
+        box-shadow: none;
+        margin-right: 100px;
     }
-  }
+}
+
+.ellipsis-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.ellipsis-3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

@@ -45,6 +45,7 @@ import { ShowStoryPage } from '../pages/story/show-story/show-story';
 import { StoryListPage } from '../pages/story/story-list/story-list';
 import { StoryScreenPage } from '../pages/story/story-screen/story-screen';
 import { StoryTopListPage } from '../pages/story/story-top-list/story-top-list';
+import { SavedStoriesPage } from '../pages/story/saved-stories/saved-stories';
 
 //Services
 import { ImageService } from '../pages/util/imageservice';
@@ -64,6 +65,7 @@ import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpModule } from '@angular/http';
 import { NetworkProvider } from '../providers/network/network';
 import { ToastProvider } from '../providers/toast/toast';
 import { LoginProvider } from '../providers/login/login';
@@ -72,7 +74,6 @@ import { AlertProvider } from '../providers/alert/alert';
 import { ConfigProvider } from '../providers/config/config';
 import { LoadingProvider } from '../providers/loading/loading';
 import { PeopleProvider } from '../providers/people/people';
-import { HttpModule } from '@angular/http';
 import { FollowProvider } from '../providers/follow/follow';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
@@ -141,6 +142,7 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     FollowingComponent,
     RankingComponent,
     FollowersComponent,
+    SavedStoriesPage,
   ],
   imports: [
     HttpClientModule,
@@ -210,6 +212,7 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     FollowingComponent,
     RankingComponent,
     FollowersComponent,
+    SavedStoriesPage,
   ],
   providers: [
     StatusBar,

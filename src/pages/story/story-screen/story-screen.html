@@ -35,12 +35,11 @@
       <!-- <img src="{{image}}"> -->
     </div>
 
-    <div class="save-story-btn">
-      <ion-fab left middle>
+    <ion-fab left bottom small>
+      <button (click)="saveStory()" ion-fab clear color="transparent">
         <img src="assets/icon/download.png" height="50" width="50">
-      </ion-fab>
-    </div>
-
+      </button>
+    </ion-fab>
 
     <ion-grid class="story-footer">
       <ion-row>
@@ -54,16 +53,17 @@
         </ion-col>
         <ion-col col-3>
           <div class="fire-div">
-            <span *ngIf="totalFlames > 0">
-              <img class="fire-image" src="assets/imgs/story/Positive-Flame.png">
+            <span *ngIf="totalFlames > 0">{{totalLikes}}
+              <img class="fire-image" height="30" width="30" src="assets/imgs/story/Positive-Flame.png">
             </span>
-            <span *ngIf="totalFlames < 0">
-              <img class="fire-image" src="assets/imgs/story/Negative-Flame.png">
+            <span *ngIf="totalFlames < 0">{{totalDislikes}}
+              <img class="fire-image" height="30" width="30" src="assets/imgs/story/Negative-Flame.png">
             </span>
           </div>
         </ion-col>
       </ion-row>
-      <ion-row class="comment-back" (click)="goToComments()" text-center>
+      <!-- <ion-row class="comment-back" (click)="goToComments()" text-center> -->
+      <ion-row class="comment-back" swipeAll (swipeup)="goToComments($event)" text-center>
         <ion-col>
           <p>Swipe up to View all Comments</p>
           <div>

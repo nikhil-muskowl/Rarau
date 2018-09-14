@@ -72,6 +72,10 @@ export class ShowStoryPage {
     });
   }
 
+  goToStory(event: any): any {
+    this.navCtrl.pop();
+  }
+
   getStories() {
     this.loadingProvider.present();
 

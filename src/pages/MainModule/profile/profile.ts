@@ -5,9 +5,10 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { ToastProvider } from '../../../providers/toast/toast';
 import { LoginPage } from '../../AccountModule/login/login';
 import { UpdatePasswordPage } from '../../AccountModule/update-password/update-password';
-import { EditProfilePage } from '../../MainModule/edit-profile/edit-profile'
-import { FollowersPage } from '../../FollowModule/followers/followers'
-import { ProfilePhotoPage } from '../profile-photo/profile-photo'
+import { EditProfilePage } from '../../MainModule/edit-profile/edit-profile';
+import { FollowersPage } from '../../FollowModule/followers/followers';
+import { ProfilePhotoPage } from '../profile-photo/profile-photo';
+import { SavedStoriesPage } from '../../story/saved-stories/saved-stories';
 
 //provider
 import { LoadingProvider } from '../../../providers/loading/loading';
@@ -37,11 +38,7 @@ export class ProfilePage {
   public followers;
   public flames;
   public followed;
-
-
-
   private user: string;
-
   public status;
 
 
@@ -52,9 +49,9 @@ export class ProfilePage {
     public toast: ToastProvider,
     public loadingProvider: LoadingProvider,
     public profileProvider: ProfileProvider,
-    
+
   ) {
-    
+
   }
 
   ionViewDidLoad() {
@@ -127,5 +124,7 @@ export class ProfilePage {
     this.navCtrl.push(ProfilePhotoPage, { id: this.user_id, image: this.userImage });
   }
 
-
+  savedStories() {
+    this.navCtrl.push(SavedStoriesPage);
+  }
 }

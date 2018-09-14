@@ -34,24 +34,20 @@
       </ion-avatar>
 
       <ion-row>
-          <ion-col>
-              <h2>{{record.user_name}}</h2>
-          </ion-col>
-          <ion-col>
-            <ion-note item-end>
-              <span class="flame-number">{{record.totalLikes}} <img src="assets/imgs/story/Negative-Flame.png" width="10"
-                  height="10"></span>
-              <span class="flame-number">{{record.totalDislikes}} <img src="assets/imgs/story/Positive-Flame.png" width="10"
-                  height="10"></span>
-            </ion-note>
-          </ion-col>
-        </ion-row>
+        <ion-col>
+          <h2>{{record.user_name}}</h2>
+        </ion-col>
+        <ion-col>
+          <ion-note item-end>
+            <span class="flame-number">{{record.totalLikes}} <img src="assets/imgs/story/Negative-Flame.png" width="10"
+                height="10"></span>
+            <span class="flame-number">{{record.totalDislikes}} <img src="assets/imgs/story/Positive-Flame.png" width="10"
+                height="10"></span>
+          </ion-note>
+        </ion-col>
+      </ion-row>
 
-
-
-     
-
-      <p><span *ngFor="let tag of record.tags; let j = index;">
+      <p class="ellipsis-2"><span *ngFor="let tag of record.tags; let j = index;">
           <span *ngIf="record.tags.length-1 > j">{{tag}},&nbsp;</span>
           <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
         </span></p>

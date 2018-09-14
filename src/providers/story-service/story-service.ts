@@ -232,6 +232,19 @@ export class StoryServiceProvider {
     );
   }
 
+  getSavedStories(data) {
+
+    this.formData = new FormData();
+    this.formData.append('save_story_id', data.save_story_id);
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
   getStoryDetail(data) {
 
     this.formData = new FormData();
@@ -267,7 +280,6 @@ export class StoryServiceProvider {
   rankStory(data) {
 
     this.formData = new FormData();
-    var story_id = data.story_id;
 
     this.formData.append('user_id', data.user_id);
     this.formData.append('story_id', data.story_id);
@@ -282,5 +294,33 @@ export class StoryServiceProvider {
     );
   }
 
+  saveStory(data) {
+
+    this.formData = new FormData();
+
+    this.formData.append('user_id', data.user_id);
+    this.formData.append('story_id', data.story_id);
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/set_save_stories',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
+  showSavedStory(data) {
+
+    this.formData = new FormData();
+
+    this.formData.append('save_story_id', data.user_id);
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
 
 }

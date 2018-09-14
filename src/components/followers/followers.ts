@@ -19,10 +19,11 @@ export class FollowersComponent {
   public pageLength = 5;
   public recordsTotal;
   public filterData;
+  public model: any[] = [];
+
 
   public records;
   public data;
-  public model: any[] = [];
   public name;
   public responseData;
   public params;
