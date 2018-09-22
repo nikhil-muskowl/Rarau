@@ -6,11 +6,12 @@ page-location {
     ion-header button {
         color: #fff;
     }
-    .button-inner {
+    .publish-btn{
+    // .button-inner {
         border-radius: 15px;
         background: linear-gradient(to bottom, #ec3747, #f45a43);
         margin-bottom: 5px;
-        color: #fff;
+        color: #fff !important;
         padding: 12px;
         border: 1px solid #ec3747;
     }

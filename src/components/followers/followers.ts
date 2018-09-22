@@ -62,7 +62,8 @@ export class FollowersComponent {
       'current_user_id': this.current_user_id
     };
 
-    console.log('id: ' + this.user_id);
+    console.log('user_id: ' + this.user_id);
+    console.log('current_user_id: ' + this.current_user_id);
     this.FollowProvider.getFollowersList(this.filterData).subscribe(
       response => {
         this.records = response;

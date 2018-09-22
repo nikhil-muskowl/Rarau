@@ -5,11 +5,13 @@ import { LocationTrackerProvider } from '../../../providers/location-tracker/loc
 import { AlertProvider } from '../../../providers/alert/alert';
 import { DomSanitizer } from "@angular/platform-browser";
 import { StoryCategoryPage } from '../story-category/story-category';
+
 @IonicPage()
 @Component({
   selector: 'page-location',
   templateUrl: 'location.html',
 })
+
 export class LocationPage {
 
   public locations: any;
@@ -21,6 +23,7 @@ export class LocationPage {
   public longitude: number = 0;
   public data: any;
   public image;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
@@ -84,6 +87,7 @@ export class LocationPage {
   public itemSelected(location: any) {
     console.log(location);
     if (location) {
+      this.search = location.name;
       this.locName = location.name;
       this.latitude = location.location.lat;
       this.longitude = location.location.lng;

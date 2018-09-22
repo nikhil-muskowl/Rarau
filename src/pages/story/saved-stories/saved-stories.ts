@@ -4,7 +4,7 @@ import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
-import { StoryScreenPage } from '../story-screen/story-screen';
+import { SingleStoryPage } from '../single-story/single-story';
 
 @IonicPage()
 @Component({
@@ -100,6 +100,6 @@ export class SavedStoriesPage {
   }
 
   gotoStoryDetail(data) {
-    this.navCtrl.push(StoryScreenPage, { story_id: data.id });
+    this.navCtrl.push(SingleStoryPage, { story_id: data.id });
   }
 }

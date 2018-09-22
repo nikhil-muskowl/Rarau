@@ -121,7 +121,7 @@ export class SearchResultPage {
     event.stopPropagation();
     this.searchValue = this.searchpageForm.value.searchText;
     this.data='';
-    this.model = [""];
+    this.model = [];
     this.getSearch(this.searchValue);
   }
 }
