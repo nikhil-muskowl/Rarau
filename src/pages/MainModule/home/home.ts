@@ -12,7 +12,8 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { LoginProvider } from '../../../providers/login/login';
-
+import { Modal, ModalController, ModalOptions, IonicPage, ViewController } from 'ionic-angular';
+import { SearchPage } from '../../SearchModule/search/search';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -21,7 +22,6 @@ import { LoginProvider } from '../../../providers/login/login';
 export class HomePage {
   public title = 'Home';
   public images: Array<any>;
-
   public popover: Popover;
 
   public locations: any;
@@ -55,6 +55,8 @@ export class HomePage {
   constructor(
     private navCtrl: NavController,
     private platform: Platform,
+    private view: ViewController,
+    private modal: ModalController,
     public alertProvider: AlertProvider,
     public locationTrackerProvider: LocationTrackerProvider,
     public baiduProvider: BaiduProvider,
@@ -64,8 +66,9 @@ export class HomePage {
     public storyService: StoryServiceProvider,
     public LoginProvider: LoginProvider,
   ) {
+
     this.user_id = this.LoginProvider.isLogin();
-    this.showStories = true;
+    // this.showStories = true;
     this.latitude = '39.919981';
     this.longitude = '116.414977';
 
@@ -82,6 +85,36 @@ export class HomePage {
       { categoryFirst: 'assets/icon/Front-Icons/world.png', text: '7', categoryPerson: 'assets/icon/user.png' },
       { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '2', categoryPerson: 'assets/icon/user.png' },
     ]
+  }
+
+  openModal() {
+
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+
+    const myModalData = {
+      name: 'Paul Halliday',
+      occupation: 'Developer'
+    };
+
+    const myModal: Modal = this.modal.create(SearchPage, { data: myModalData }, myModalOptions);
+
+    myModal.present();
+
+    myModal.onDidDismiss((data) => {
+      console.log("I have dismissed.");
+      console.log(data);
+      if (data.search != undefined)
+        this.navCtrl.push(SearchResultPage, data);
+
+    });
+
+    myModal.onWillDismiss((data) => {
+      console.log("I'm about to dismiss");
+      console.log(data);
+    });
+
   }
 
   ionViewDidLoad() {
@@ -155,9 +188,9 @@ export class HomePage {
 
   }
 
-  public resetStories(){
-    this.showStories=false;
-    this.stories=[];
+  public resetStories() {
+    this.showStories = false;
+    this.stories = [];
   }
 
   public onInput(ev: any) {
@@ -217,7 +250,6 @@ export class HomePage {
       'start': '0',
     };
 
-
     console.log(this.showStories);
     this.loadingProvider.show();
     this.storyService.apiTopStory(this.paramData).subscribe(
@@ -268,10 +300,9 @@ export class HomePage {
   searchLoc(event) {
     event.stopPropagation();
     this.searchLocation = this.searchForm.value.searchLocation;
-    console.log('searchUser: ' + this.searchLocation);
+    console.log('searchLocation: ' + this.searchLocation);
 
     if (this.searchForm.value.searchLocation != '') {
-      console.log('searchLocation: ' + this.searchForm.value.searchLocation);
       this.navCtrl.push(SearchResultPage, { search: this.searchForm.value.searchLocation });
       this.searchForm.reset();
     }

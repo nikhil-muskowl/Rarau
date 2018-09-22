@@ -33,7 +33,6 @@ export class StoryListPage {
     public LoginProvider: LoginProvider
   ) {
 
-
     if (this.navParams.get('latitude')) {
       this.latitude = this.navParams.get('latitude');
     } else {
@@ -82,7 +81,15 @@ export class StoryListPage {
   }
 
   showStory(data) {
-    this.navCtrl.push(StoryScreenPage, { story_id: data.id });
+    if (this.user_id) {
+      // this.navCtrl.push(StoryScreenPage, { story_id: data.id });
+      this.navCtrl.push(StoryScreenPage, this.paramData);
+    }
+    else {
+      this.alertProvider.title = 'Forbidden';
+      this.alertProvider.message = 'Please Login to continue.';
+      this.alertProvider.showAlert();
+    }
   }
 
 }

@@ -4,16 +4,18 @@ import { RankingComponent } from './ranking/ranking';
 import { FollowingComponent } from './following/following';
 import { FollowersComponent } from './followers/followers';
 @NgModule({
-	declarations: [StoryComponent,
-    RankingComponent,
-    FollowingComponent,
-    StoryComponent,
-    FollowersComponent],
-	imports: [],
-	exports: [StoryComponent,
-    RankingComponent,
-    FollowingComponent,
-    StoryComponent,
-    FollowersComponent]
+    declarations: [StoryComponent,
+        RankingComponent,
+        FollowingComponent,
+        StoryComponent,
+        FollowersComponent,
+    ],
+    imports: [],
+    exports: [StoryComponent,
+        RankingComponent,
+        FollowingComponent,
+        StoryComponent,
+        FollowersComponent,
+    ]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

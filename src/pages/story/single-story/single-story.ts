@@ -5,15 +5,13 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { ShowStoryPage } from '../show-story/show-story';
-import { Slides } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-story-screen',
-  templateUrl: 'story-screen.html',
+  selector: 'page-single-story',
+  templateUrl: 'single-story.html',
 })
-export class StoryScreenPage {
-  @ViewChild(Slides) slides: Slides;
+export class SingleStoryPage {
 
   public story_id;
   public user_id;
@@ -34,8 +32,6 @@ export class StoryScreenPage {
   private totalDislikes;
   private totalFlames;
   private created_date;
-  private latitude;
-  private longitude;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -47,25 +43,14 @@ export class StoryScreenPage {
     public loadingCtrl: LoadingController
   ) {
 
-    if (this.navParams.get('latitude')) {
-      this.latitude = this.navParams.get('latitude');
-    } else {
-      this.latitude = 0;
-    }
-    if (this.navParams.get('longitude')) {
-      this.longitude = this.navParams.get('longitude');
-    } else {
-      this.longitude = 0;
-    }
-
-    // this.story_id = this.navParams.get('story_id');
+    this.story_id = this.navParams.get('story_id');
 
     this.isLogin();
     this.getStories();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StoryScreenPage');
+    console.log('ionViewDidLoad SingleStoryPage');
   }
 
   isLogin() {
@@ -79,48 +64,31 @@ export class StoryScreenPage {
   getStories() {
     this.loadingProvider.present();
 
-    // this.paramData = {
-    //   'story_id': this.story_id,
-    //   'language_id': 1,
-    // };
-
     this.paramData = {
-      'user_id': this.user_id,
-      'latitude': this.latitude,
-      'longitude': this.longitude,
+      'story_id': this.story_id,
+      'language_id': 1,
     };
 
-    // this.storyService.getStoryDetail(this.paramData).subscribe(
-    //   response => {
 
-    //     this.responseData = response;
-
-    //     this.data = this.responseData.result;
-    //     this.responseData.result[0].totalDislikes;
-    //     this.title = this.responseData.result[0].title;
-    //     this.description = this.responseData.result[0].description;
-    //     this.user_name = this.responseData.result[0].user_name;
-    //     this.user_image = this.responseData.result[0].user_image;
-    //     this.html = this.responseData.result[0].html;
-    //     this.image = this.responseData.result[0].image;
-    //     this.tags = this.responseData.result[0].tags;
-    //     this.totalLikes = this.responseData.result[0].totalLikes;
-    //     this.totalDislikes = this.responseData.result[0].totalDislikes;
-    //     this.totalFlames = this.responseData.result[0].totalFlames;
-    //     this.created_date = this.responseData.result[0].created_date;
-    //     this.comments = this.responseData.result[0].comments;
-    //     this.loadingProvider.dismiss();
-    //   },
-    //   err => console.error(err),
-    //   () => {
-    //     this.loadingProvider.dismiss();
-    //   }
-    // );
-
-    this.storyService.apiTopStory(this.paramData).subscribe(
+    this.storyService.getStoryDetail(this.paramData).subscribe(
       response => {
+
         this.responseData = response;
-        this.data = this.responseData.data;
+
+        this.data = this.responseData.result;
+        this.responseData.result[0].totalDislikes;
+        this.title = this.responseData.result[0].title;
+        this.description = this.responseData.result[0].description;
+        this.user_name = this.responseData.result[0].user_name;
+        this.user_image = this.responseData.result[0].user_image;
+        this.html = this.responseData.result[0].html;
+        this.image = this.responseData.result[0].image;
+        this.tags = this.responseData.result[0].tags;
+        this.totalLikes = this.responseData.result[0].totalLikes;
+        this.totalDislikes = this.responseData.result[0].totalDislikes;
+        this.totalFlames = this.responseData.result[0].totalFlames;
+        this.created_date = this.responseData.result[0].created_date;
+        this.comments = this.responseData.result[0].comments;
         this.loadingProvider.dismiss();
       },
       err => console.error(err),
@@ -128,19 +96,14 @@ export class StoryScreenPage {
         this.loadingProvider.dismiss();
       }
     );
+
+
   }
 
-  slideChanged() {
-    let currentIndex = this.slides.getActiveIndex();
-    if (currentIndex == this.data.length) {
-      this.slides.stopAutoplay();
-    }
-  }
 
-  goToComments(event: any, slide): any {
+  goToComments(event: any): any {
     console.log('Swipe comment', event);
-    console.log('slide data ', JSON.stringify(slide));
-    this.navCtrl.push(ShowStoryPage, { story_id: slide.id });
+    this.navCtrl.push(ShowStoryPage, { story_id: this.story_id });
   }
 
   swipeAll(event: any): any {

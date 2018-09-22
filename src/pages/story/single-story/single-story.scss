@@ -1,4 +1,4 @@
-page-story-screen {
+page-single-story {
     h1,
     h2,
     h3 {
@@ -6,7 +6,7 @@ page-story-screen {
     }
     .story-footer {
         position: fixed;
-        bottom: -5px;
+        bottom: 50px;
         width: 100%;
         color: #fff;
         .grid{

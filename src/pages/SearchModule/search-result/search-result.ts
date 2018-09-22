@@ -39,8 +39,8 @@ export class SearchResultPage {
     public LoginProvider: LoginProvider,
     public formBuilder: FormBuilder, ) {
 
-    this.searchTxt = this.navParams.get('search');
-    console.log('Search: ' + this.searchTxt);
+    this.searchTxt = this.navParams.data.search;
+    console.log('Search: ' + JSON.stringify(this.searchTxt));
     this.getSearch(this.searchTxt);
     this.crearForm();
   }
@@ -91,7 +91,7 @@ export class SearchResultPage {
       this.model.push({
         id: this.data[index].id,
         name: this.data[index].name,
-        image: this.data[index].image_thumb,
+        image_thumb: this.data[index].image_thumb,
         status: this.data[index].status,
       });
     }
@@ -121,6 +121,7 @@ export class SearchResultPage {
     event.stopPropagation();
     this.searchValue = this.searchpageForm.value.searchText;
     this.data='';
+    this.model = [""];
     this.getSearch(this.searchValue);
   }
 }

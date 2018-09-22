@@ -19,7 +19,9 @@
 
       <ion-item>
         <ion-input placeholder="Search" formControlName="searchText" type="text"></ion-input>
-        <button class="btn-color" clear (click)="search($event)" item-right><ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon></button>
+        <button class="btn-color" clear (click)="search($event)" item-right>
+          <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
+        </button>
       </ion-item>
     </form>
   </div>
@@ -43,7 +45,7 @@
       <ion-list *ngFor="let record of model; let i = index;">
         <ion-item (click)="getProfile(record)">
           <ion-avatar item-start>
-            <img src="assets/icon/user.png" width="40px" height="40px" />
+            <img src="{{record.image_thumb}}" width="40px" height="40px" />
           </ion-avatar>
           <h2><b>{{record.name}}</b></h2>
         </ion-item>
@@ -58,7 +60,7 @@
       <ion-list *ngFor="let record of model; let i = index;">
         <ion-item (click)="getProfile(record)">
           <ion-avatar item-start>
-            <img src="assets/icon/user.png" width="40px" height="40px" />
+            <img src="{{record.image_thumb}}" width="40px" height="40px" />
           </ion-avatar>
           <h2><b>{{record.name}}</b></h2>
         </ion-item>
@@ -73,7 +75,7 @@
       <ion-list *ngFor="let record of model; let i = index;">
         <ion-item (click)="getProfile(record)">
           <ion-avatar item-start>
-            <img src="assets/icon/user.png" width="40px" height="40px" />
+            <img src="{{record.image_thumb}}" width="40px" height="40px" />
           </ion-avatar>
           <h2><b>{{record.name}}</b></h2>
         </ion-item>

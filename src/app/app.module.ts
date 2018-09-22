@@ -46,7 +46,7 @@ import { StoryListPage } from '../pages/story/story-list/story-list';
 import { StoryScreenPage } from '../pages/story/story-screen/story-screen';
 import { StoryTopListPage } from '../pages/story/story-top-list/story-top-list';
 import { SavedStoriesPage } from '../pages/story/saved-stories/saved-stories';
-
+import { SingleStoryPage } from '../pages/story/single-story/single-story';
 //Services
 import { ImageService } from '../pages/util/imageservice';
 import { UnsplashItUtil } from '../pages/util/unsplashItutil';
@@ -55,6 +55,7 @@ import { TabsService } from '../pages/util/tabservice';
 
 //Search Module
 import { SearchResultPage } from '../pages/SearchModule/search-result/search-result';
+import { SearchPage } from '../pages/SearchModule/search/search';
 
 //MyPet
 import { MyPetPage } from '../pages/MyPet/my-pet/my-pet';
@@ -143,6 +144,8 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     RankingComponent,
     FollowersComponent,
     SavedStoriesPage,
+    SearchPage,
+    SingleStoryPage,
   ],
   imports: [
     HttpClientModule,
@@ -213,6 +216,8 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     RankingComponent,
     FollowersComponent,
     SavedStoriesPage,
+    SearchPage,
+    SingleStoryPage,
   ],
   providers: [
     StatusBar,

@@ -16,6 +16,7 @@ export class LocationPage {
   public fileterData: any;
   public responseData: any;
   public search = '';
+  public locName = '';
   public latitude: number = 0;
   public longitude: number = 0;
   public data: any;
@@ -48,7 +49,7 @@ export class LocationPage {
     }
     else {
       console.log('next category');
-      this.navCtrl.push(StoryCategoryPage, { image: this.image, latitude: this.latitude, longitude: this.longitude });
+      this.navCtrl.push(StoryCategoryPage, { image: this.image, locName: this.locName, latitude: this.latitude, longitude: this.longitude });
     }
   }
 
@@ -63,6 +64,7 @@ export class LocationPage {
   }
 
   public getLocation() {
+
     this.fileterData = {
       query: this.search,
       location: `${this.latitude},${this.longitude}`
@@ -80,8 +82,9 @@ export class LocationPage {
   }
 
   public itemSelected(location: any) {
-    console.log(location.location);
+    console.log(location);
     if (location) {
+      this.locName = location.name;
       this.latitude = location.location.lat;
       this.longitude = location.location.lng;
     }

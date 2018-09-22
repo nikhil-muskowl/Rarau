@@ -195,6 +195,7 @@ export class StoryServiceProvider {
     var tags = data.tags;
     var images = data.images;
     var user_id = data.user_id;
+    var locName = data.locName;
     var catId = data.catId;
     var latitude = data.latitude;
     var longitude = data.longitude;
@@ -202,7 +203,7 @@ export class StoryServiceProvider {
     console.log('images : ' + JSON.stringify(images));
     this.formData = new FormData();
     this.formData.append('language_id', '1');
-    this.formData.append('title', 'story');
+    this.formData.append('title', locName);
     this.formData.append('description', '');
     this.formData.append('tags', JSON.stringify(tags));
     this.formData.append('latitude', latitude);

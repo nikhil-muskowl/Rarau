@@ -35,6 +35,7 @@ export class StoryCategoryPage {
   private error_tags = 'field is required';
   private latitude;
   private longitude;
+  private locName;
   public paramData;
 
   constructor(public navCtrl: NavController,
@@ -49,6 +50,7 @@ export class StoryCategoryPage {
 
     this.isLogin();
     this.image = this.navParams.get('image');
+    this.locName = this.navParams.get('locName');
     this.latitude = this.navParams.get('latitude');
     this.longitude = this.navParams.get('longitude');
 
@@ -126,11 +128,13 @@ export class StoryCategoryPage {
       if (this.tags.length != 0) {
         this.loadingProvider.present();
         this.images.push({ image: this.image });
+        
         this.paramData = {
           'tags': this.tags,
           'images': this.images,
           'user_id': this.user_id,
           'catId': this.catId,
+          'locName': this.locName,
           'latitude': this.latitude,
           'longitude': this.longitude
         };
