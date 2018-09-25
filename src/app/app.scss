@@ -56,7 +56,9 @@ p {
     text-align: center;
 } //Set header buttons and title to white
 ion-header {
-    button,
+    button {
+        color: #fff !important;
+    }
     ion-title p {
         color: $dark !important;
     }
@@ -582,6 +584,13 @@ ion-loading.my-loading-water {
         box-shadow: none;
         margin-right: 100px;
     }
+}
+
+.ellipsis-1 {
+    overflow: hidden;
+    text-overflow: ellipsis; // display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .ellipsis-2 {

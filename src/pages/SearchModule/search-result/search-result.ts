@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { ProfilePage } from '../../MainModule/profile/profile';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { SearchResProvider } from '../../../providers/search-res/search-res';
@@ -13,6 +14,7 @@ import { LoginProvider } from '../../../providers/login/login';
   selector: 'page-search-result',
   templateUrl: 'search-result.html',
 })
+
 export class SearchResultPage {
 
   public searchTxt;
@@ -69,8 +71,14 @@ export class SearchResultPage {
         this.recordsTotal = this.responseData.recordsTotal;
         this.data = this.responseData.data;
 
-        console.log('search result' + JSON.stringify(this.data));
-        this.binddata();
+        if (this.data.length > 0) {
+          this.binddata();
+        }
+        else {
+          this.alertProvider.title = 'No Result';
+          this.alertProvider.message = 'No search result found.!!!';
+          this.alertProvider.showAlert();
+        }
       },
       err => {
         console.error(err);
@@ -106,9 +114,14 @@ export class SearchResultPage {
     infiniteScroll.complete();
   }
 
-
   getProfile(data: any) {
-    this.navCtrl.push(OthersProfilePage, { id: data.id, user_id: this.user_id });
+    if (data.id == this.user_id) {
+      console.log('id Matched');
+      this.navCtrl.push(ProfilePage);
+    }
+    else {
+      this.navCtrl.push(OthersProfilePage, { id: data.id, user_id: this.user_id });
+    }
   }
 
   crearForm() {
@@ -120,7 +133,7 @@ export class SearchResultPage {
   search(event) {
     event.stopPropagation();
     this.searchValue = this.searchpageForm.value.searchText;
-    this.data='';
+    this.data = '';
     this.model = [];
     this.getSearch(this.searchValue);
   }

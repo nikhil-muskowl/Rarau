@@ -21,22 +21,25 @@ export class StoryCategoryPage {
   private message;
   private responseData;
   private categories;
-  private catId;
+  private catId = [];
   public image;
   public images = [];
   public model = [];
+  public catModal = [];
   public name;
   public email;
   public contact;
   public user_id;
   private formData: any;
   private tags = [];
-  private hashTags = [];
   private error_tags = 'field is required';
   private latitude;
   private longitude;
   private locName;
   public paramData;
+
+  public btnGo = 1;
+  public btnname = 'Publish';
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -81,28 +84,36 @@ export class StoryCategoryPage {
     );
   }
 
-  selectCat(data: any, pos) {
-    this.model = [];
-    for (let index = 0; index < this.categories.length; index++) {
-      console.log('selected data :' + JSON.stringify(data.id));
-      this.catId = data.id;
-      if (index == pos) {
-        this.model.push({
-          id: this.categories[index].id,
-          title: this.categories[index].title,
-          isImage: 1,
-        });
+  selectCat(index) {
+    console.log(this.model[index].title);
+    if (this.model[index].isImage) {
+      if (this.model[index].title == 'Hotel') {
+        this.btnname = 'Publish';
+        this.btnGo = 1;
       }
-      else {
-        this.model.push({
-          id: this.categories[index].id,
-          title: this.categories[index].title,
-          isImage: 0,
-        });
+      this.model[index].isImage = false;
+    } else {
+      if (this.model[index].title == 'Hotel') {
+        this.btnname = 'Next';
+        this.btnGo = 2;
       }
+      this.model[index].isImage = true;
     }
+
+    this.bindArray();
+
+    console.log(JSON.stringify(this.model));
   }
 
+  bindArray() {
+    this.catModal = [];
+    for (let index = 0; index < this.model.length; index++) {
+      if (this.model[index].isImage) {
+        this.catModal.push(this.model[index].id);
+      }
+    }
+    console.log('selected items : ' + JSON.stringify(this.catModal));
+  }
 
   bindList() {
     for (let index = 0; index < this.categories.length; index++) {
@@ -124,55 +135,66 @@ export class StoryCategoryPage {
   }
 
   saveStory() {
-    if (this.catId != undefined) {
-      if (this.tags.length != 0) {
-        this.loadingProvider.present();
-        this.images.push({ image: this.image });
-        
-        this.paramData = {
-          'tags': this.tags,
-          'images': this.images,
-          'user_id': this.user_id,
-          'catId': this.catId,
-          'locName': this.locName,
-          'latitude': this.latitude,
-          'longitude': this.longitude
-        };
-
-        this.storyService.postStory(this.paramData).subscribe(
-          response => {
-            this.responseData = response;
-            this.status = this.responseData.status;
-            this.message = this.responseData.message;
-
-            if (this.responseData.status) {
-              this.alertProvider.title = 'Success';
-              this.alertProvider.message = this.message;
-              this.alertProvider.showAlert();
-
-              this.tabService.show();
-              this.navCtrl.setRoot(HomePage);
-            }
-          },
-          err => console.error(err),
-          () => {
-            this.loadingProvider.dismiss();
-          }
-        );
-      }
-      else {
-
-        this.alertProvider.title = 'Error!';
-        this.alertProvider.message = 'Write someting field can\'t be blank';
-        this.alertProvider.showAlert();
-      }
+    if (this.btnGo == 1) {
+      console.log('Click on Publish');
     }
     else {
-
-      this.alertProvider.title = 'Error!';
-      this.alertProvider.message = 'Please Choose Category';
-      this.alertProvider.showAlert();
+      console.log('Click on Next');
     }
+    // if (this.btnGo == 1) {
+    //   if (this.catId != undefined) {
+    //     if (this.tags.length != 0) {
+    //       this.loadingProvider.present();
+    //       this.images.push({ image: this.image });
+
+    //       this.paramData = {
+    //         'tags': this.tags,
+    //         'images': this.images,
+    //         'user_id': this.user_id,
+    //         'catId': this.catId,
+    //         'locName': this.locName,
+    //         'latitude': this.latitude,
+    //         'longitude': this.longitude
+    //       };
+
+    //       this.storyService.postStory(this.paramData).subscribe(
+    //         response => {
+    //           this.responseData = response;
+    //           this.status = this.responseData.status;
+    //           this.message = this.responseData.message;
+
+    //           if (this.responseData.status) {
+    //             this.alertProvider.title = 'Success';
+    //             this.alertProvider.message = this.message;
+    //             this.alertProvider.showAlert();
+
+    //             this.tabService.show();
+    //             this.navCtrl.setRoot(HomePage);
+    //           }
+    //         },
+    //         err => console.error(err),
+    //         () => {
+    //           this.loadingProvider.dismiss();
+    //         }
+    //       );
+    //     }
+    //     else {
+
+    //       this.alertProvider.title = 'Error!';
+    //       this.alertProvider.message = 'Write someting field can\'t be blank';
+    //       this.alertProvider.showAlert();
+    //     }
+    //   }
+    //   else {
+
+    //     this.alertProvider.title = 'Error!';
+    //     this.alertProvider.message = 'Please Choose Category';
+    //     this.alertProvider.showAlert();
+    //   }
+    // }
+    // else {
+
+    // }
   }
 
   back() {
