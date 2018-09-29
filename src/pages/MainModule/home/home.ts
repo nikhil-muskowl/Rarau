@@ -50,6 +50,13 @@ export class HomePage {
   public showStories: boolean;
   public markerHtml;
 
+  public searchCat;
+  public searchLoc;
+  public searchUse;
+  public serLatitude;
+  public serLongitude;
+
+
   @ViewChild('map') mapElement: ElementRef;
 
   constructor(
@@ -77,7 +84,6 @@ export class HomePage {
 
     this.getLocation();
     this.bindMap();
-    this.createForm();
 
     this.images = [
       { categoryFirst: 'assets/icon/Front-Icons/food.png', text: '8', categoryPerson: 'assets/icon/user.png' },
@@ -88,6 +94,11 @@ export class HomePage {
   }
 
   openModal() {
+    this.searchCat='';
+    this.searchLoc='';
+    this.searchUse='';
+    this.serLatitude='';
+    this.serLongitude='';
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
@@ -105,8 +116,32 @@ export class HomePage {
     myModal.onDidDismiss((data) => {
       console.log("I have dismissed.");
       console.log(data);
-      if (data.search != undefined)
-        this.navCtrl.push(SearchResultPage, data);
+      if (data.searchCat) {
+        console.log('data.searchCat : ' + data.searchCat);
+        this.searchCat = data.searchCat;
+      }
+      if (data.searchLoc) {
+        console.log('data.searchLoc : ' + data.searchLoc);
+        this.searchLoc = data.searchLoc;
+
+      }
+      if (data.searchUse) {
+        console.log('data.searchUse : ' + data.searchUse);
+        this.searchUse = data.searchUse;
+
+      }
+      if (data.latitude) {
+        console.log('data.latitude : ' + data.latitude);
+        this.serLatitude = data.latitude;
+      }
+      if (data.longitude) {
+        console.log('data.longitude : ' + data.longitude);
+        this.serLongitude = data.longitude;
+      }
+
+      this.bindMap();
+      // if (data.search != undefined)
+      //   this.navCtrl.push(SearchResultPage, data);
 
     });
 
@@ -123,12 +158,11 @@ export class HomePage {
     this.latitude = '39.919981';
     this.longitude = '116.414977';
 
-    this.latitude = this.locationTrackerProvider.getLatitude();
-    this.longitude = this.locationTrackerProvider.getLongitude();
+    // this.latitude = this.locationTrackerProvider.getLatitude();
+    // this.longitude = this.locationTrackerProvider.getLongitude();
 
     this.getLocation();
     this.bindMap();
-    this.createForm();
   }
 
   public bindMap() {
@@ -144,6 +178,11 @@ export class HomePage {
 
     this.paramData = {
       'user_id': this.user_id,
+      'searchCat': this.searchCat,
+      'searchLoc': this.searchLoc,
+      'searchUse': this.searchUse,
+      'latitude': this.serLatitude,
+      'longitude': this.serLongitude
     };
 
     this.storyService.apiTopStoryMarker(this.paramData).subscribe(
@@ -281,53 +320,13 @@ export class HomePage {
   }
 
   clickMarker(marker: any) {
-    console.log('The clicked marker is', marker);
+    console.log(`The clicked marker is: ${marker}`);
   }
 
   clickmap(e: any) {
     // this.latitude = e.point.lat;
     // this.longitude = e.point.lng;
     console.log(`Map clicked with coordinate: ${e.point.lng}, ${e.point.lat}`);
-  }
-
-  createForm() {
-    this.searchForm = this.formBuilder.group({
-      searchLocation: ['', Validators.required],
-      searchUser: ['', Validators.required],
-    });
-  }
-
-  searchLoc(event) {
-    event.stopPropagation();
-    this.searchLocation = this.searchForm.value.searchLocation;
-    console.log('searchLocation: ' + this.searchLocation);
-
-    if (this.searchForm.value.searchLocation != '') {
-      this.navCtrl.push(SearchResultPage, { search: this.searchForm.value.searchLocation });
-      this.searchForm.reset();
-    }
-    else {
-      this.alertProvider.title = 'Error';
-      this.alertProvider.message = 'Please Enter value to search.';
-      this.alertProvider.showAlert();
-    }
-  }
-
-  searchUsercat(event) {
-    event.stopPropagation();
-    this.searchUser = this.searchForm.value.searchUser;
-    console.log('searchUser: ' + this.searchUser);
-
-    if (this.searchForm.value.searchUser != '') {
-      this.navCtrl.push(SearchResultPage, { search: this.searchForm.value.searchUser });
-      this.searchForm.reset();
-
-    }
-    else {
-      this.alertProvider.title = 'Error';
-      this.alertProvider.message = 'Please Enter value to search.';
-      this.alertProvider.showAlert();
-    }
   }
 
   openProfile() {

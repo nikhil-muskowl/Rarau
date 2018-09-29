@@ -41,7 +41,7 @@
           </div>
         </ion-row>
         <ion-row>
-          <ion-col col-5 text-center>
+          <ion-col col-5 text-center *ngIf="id!=user_id">
             <div *ngIf="!followed" class="follow" (click)="dofollow()">
               <img src="assets/imgs/follow.png" width="25" height="25">
               <span text-center class="p-follow">Follow</span>

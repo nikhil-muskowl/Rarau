@@ -19,7 +19,7 @@ export class StoryServiceProvider {
     public ConfigProvider: ConfigProvider,
   ) {
 
-    this.headers.set('Access-Control-Allow-Origin ', '*');
+    this.headers.set('Access-Control-Allow-Origin', '*');
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
     this.feeds = [];
   }
@@ -147,14 +147,24 @@ export class StoryServiceProvider {
   }
 
   apiTopStoryMarker(data: any) {
-
     this.formData = new FormData();
-    this.formData.append('user_id', data.user_id);
-    if (data.latitude) {
-      this.formData.append('latitude', data.latitude);
+   
+    if (data.searchUse) {
+      this.formData.append('user_name', data.searchUse);
+    }
+
+     if (data.latitude) {
+      this.formData.append('latitude', data.latitude);      
     }
     if (data.longitude) {
       this.formData.append('longitude', data.longitude);
+      
+    }
+    
+    this.formData.append('user_id', data.user_id);
+
+    if (data.searchCat) {
+      this.formData.append('story_types', JSON.stringify(data.searchCat));
     }
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/top_stories_marker',
@@ -168,11 +178,12 @@ export class StoryServiceProvider {
   apiTopStory(data: any) {
 
     this.formData = new FormData();
+
     this.formData.append('user_id', data.user_id);
     if (data.latitude) {
       this.formData.append('latitude', data.latitude);
     }
-    if (data.longitude) {
+    if (data.latitude) {
       this.formData.append('longitude', data.longitude);
     }
     if (data.length) {
@@ -181,6 +192,8 @@ export class StoryServiceProvider {
     if (data.start) {
       this.formData.append('start', data.start);
     }
+
+
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/top_stories',
       this.formData,
@@ -210,7 +223,7 @@ export class StoryServiceProvider {
     this.formData.append('longitude', longitude);
     this.formData.append('images', JSON.stringify(images));
     this.formData.append('user_id', user_id);
-    this.formData.append('story_type_id', catId);
+    this.formData.append('types', JSON.stringify(catId));
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/api_save',
       this.formData,
@@ -324,4 +337,20 @@ export class StoryServiceProvider {
     );
   }
 
+  getRankedStory(data) {
+    this.formData = new FormData();
+
+    this.formData.append('story_type_id', data.story_type_id);
+    this.formData.append('length', data.length);
+    this.formData.append('start', data.start);
+    this.formData.append('order[0][column]', '3');
+    this.formData.append('order[0][dir]', 'desc');
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
 }

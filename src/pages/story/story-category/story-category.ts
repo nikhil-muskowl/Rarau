@@ -21,7 +21,6 @@ export class StoryCategoryPage {
   private message;
   private responseData;
   private categories;
-  private catId = [];
   public image;
   public images = [];
   public model = [];
@@ -136,65 +135,57 @@ export class StoryCategoryPage {
 
   saveStory() {
     if (this.btnGo == 1) {
-      console.log('Click on Publish');
+      if (this.catModal.length > 0) {
+        if (this.tags.length > 0) {
+          this.loadingProvider.present();
+          this.images.push({ image: this.image });
+
+          this.paramData = {
+            'tags': this.tags,
+            'images': this.images,
+            'user_id': this.user_id,
+            'catId': this.catModal,
+            'locName': this.locName,
+            'latitude': this.latitude,
+            'longitude': this.longitude
+          };
+
+          this.storyService.postStory(this.paramData).subscribe(
+            response => {
+              this.responseData = response;
+              this.status = this.responseData.status;
+              this.message = this.responseData.message;
+
+              if (this.responseData.status) {
+                this.alertProvider.title = 'Success';
+                this.alertProvider.message = this.message;
+                this.alertProvider.showAlert();
+
+                this.tabService.show();
+                this.navCtrl.setRoot(HomePage);
+              }
+            },
+            err => console.error(err),
+            () => {
+              this.loadingProvider.dismiss();
+            }
+          );
+        }
+        else {
+          this.alertProvider.title = 'Error!';
+          this.alertProvider.message = 'Write someting field can\'t be blank';
+          this.alertProvider.showAlert();
+        }
+      }
+      else {
+        this.alertProvider.title = 'Error!';
+        this.alertProvider.message = 'Please Choose Category';
+        this.alertProvider.showAlert();
+      }
     }
     else {
       console.log('Click on Next');
     }
-    // if (this.btnGo == 1) {
-    //   if (this.catId != undefined) {
-    //     if (this.tags.length != 0) {
-    //       this.loadingProvider.present();
-    //       this.images.push({ image: this.image });
-
-    //       this.paramData = {
-    //         'tags': this.tags,
-    //         'images': this.images,
-    //         'user_id': this.user_id,
-    //         'catId': this.catId,
-    //         'locName': this.locName,
-    //         'latitude': this.latitude,
-    //         'longitude': this.longitude
-    //       };
-
-    //       this.storyService.postStory(this.paramData).subscribe(
-    //         response => {
-    //           this.responseData = response;
-    //           this.status = this.responseData.status;
-    //           this.message = this.responseData.message;
-
-    //           if (this.responseData.status) {
-    //             this.alertProvider.title = 'Success';
-    //             this.alertProvider.message = this.message;
-    //             this.alertProvider.showAlert();
-
-    //             this.tabService.show();
-    //             this.navCtrl.setRoot(HomePage);
-    //           }
-    //         },
-    //         err => console.error(err),
-    //         () => {
-    //           this.loadingProvider.dismiss();
-    //         }
-    //       );
-    //     }
-    //     else {
-
-    //       this.alertProvider.title = 'Error!';
-    //       this.alertProvider.message = 'Write someting field can\'t be blank';
-    //       this.alertProvider.showAlert();
-    //     }
-    //   }
-    //   else {
-
-    //     this.alertProvider.title = 'Error!';
-    //     this.alertProvider.message = 'Please Choose Category';
-    //     this.alertProvider.showAlert();
-    //   }
-    // }
-    // else {
-
-    // }
   }
 
   back() {

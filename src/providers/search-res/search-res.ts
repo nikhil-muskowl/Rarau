@@ -23,9 +23,14 @@ export class SearchResProvider {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/users_api';
 
-    this.formData.append('search[value]', data.search);
-    this.formData.append('start', data.start);
-    this.formData.append('length', data.length);
+    if (data.search) {
+      this.formData.append('search[value]', data.search);
+      this.formData.append('start', data.start);
+      this.formData.append('length', data.length);
+    } else {
+      this.formData.append('length', '0');
+    }
+
 
     return this.http.post(this.URL,
       this.formData,
@@ -33,5 +38,6 @@ export class SearchResProvider {
         headers: this.headers,
       }
     );
+
   }
 }

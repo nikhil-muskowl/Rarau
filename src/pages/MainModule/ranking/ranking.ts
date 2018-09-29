@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { LoadingProvider } from '../../../providers/loading/loading';
+import { AlertProvider } from '../../../providers/alert/alert';
+import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
+import { SingleStoryPage } from '../../story/single-story/single-story';
+import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 
 @IonicPage()
 @Component({
@@ -8,12 +12,86 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'ranking.html',
 })
 export class RankingPage {
-  public title='Ranking';
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public title = 'Ranking';
+  private responseData: any;
+  private id;
+  private items;
+  private types;
+  private story_type_id = 0;
+  private filterData: any;
+
+  public length = 5;
+  public start = 0;
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingProvider: LoadingProvider,
+    public storiesProvider: StoryServiceProvider,
+    public alertProvider: AlertProvider) {
+
+    this.getTypes();
+
+
+
+    console.log(this.story_type_id);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RankingPage');
   }
 
+  public typeChanged(event) {
+    this.story_type_id = event.id;
+    this.getList();
+  }
+
+  public getList() {
+    this.loadingProvider.present();
+    this.filterData = {
+      story_type_id: this.story_type_id,
+      length: this.length,
+      start: this.start
+    };
+    this.storiesProvider.getRankedStory(this.filterData).subscribe(
+      response => {
+        this.responseData = response;
+        this.items = this.responseData.data;
+        this.loadingProvider.dismiss();
+      },
+      err => {
+        console.error(err);
+        this.loadingProvider.dismiss();
+      }
+    );
+    return event;
+  }
+
+  public goToProfile(user_id) {
+
+    this.navCtrl.push(OthersProfilePage, { id: user_id });
+  }
+
+  public getTypes() {
+    this.loadingProvider.present();
+    this.storiesProvider.getCategory().subscribe(
+      response => {
+        this.responseData = response;
+        this.types = this.responseData.data;
+        this.story_type_id = this.types[0].id;
+
+        this.getList();
+        this.loadingProvider.dismiss();
+        console.log(JSON.stringify(this.types[0].id));
+      },
+      err => {
+        console.error(err);
+        this.loadingProvider.dismiss();
+      }
+    );
+    return event;
+  }
+
+  public itemTapped(data: any) {
+    this.navCtrl.push(SingleStoryPage, { story_id: data.id });
+  }
 }

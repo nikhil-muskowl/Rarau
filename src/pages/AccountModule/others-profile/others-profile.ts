@@ -45,6 +45,7 @@ export class OthersProfilePage {
     console.log('curruserId : ' + this.user_id);
 
     this.id = navParams.get('id');
+    console.log('userId : ' + this.id);
 
     this.getProfile(this.id);
   }

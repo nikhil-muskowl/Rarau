@@ -1,3 +1,14 @@
 page-ranking {
-
+    p,
+    h3 {
+        color: #000;
+    }
+    .segment-md-primary .segment-button {
+        color: #000;
+    }
+    .segment-md .segment-button.segment-activated {
+        border-color: #000;
+        color: #000;
+        opacity: 1;
+    }
 }

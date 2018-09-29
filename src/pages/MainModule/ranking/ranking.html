@@ -1,10 +1,55 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-toolbar>
+      <ion-title class="tool-bar-title">Ranking
+        <span style="float:right;">
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+      </ion-title>
+    </ion-toolbar>
   </ion-navbar>
 </ion-header>
+
 <ion-content padding>
-  <h1>{{title}}</h1>
+  <div class="types-filter">
+    <ion-slides slidesPerView="4">
+      <ion-slide *ngFor="let type of types" (click)="typeChanged(type)">
+        <ion-segment [(ngModel)]="story_type_id" color="primary">
+          <ion-segment-button value="{{type.id}}">
+            {{type.title}}
+          </ion-segment-button>
+        </ion-segment>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-row>
+        <ion-col col-4>
+          <img (click)="itemTapped(item)" style="border-radius: 15px;" src="{{item.image_thumb}}">
+        </ion-col>
+        <ion-col col-8>
+          <h3>{{item.title}}</h3>
+          <p> <span *ngFor="let cat of item.categories; let j = index;">
+              <span *ngIf="item.categories.length-1 > j">{{cat}}, </span>
+              <span *ngIf="item.categories.length-1 == j">{{cat}}</span>
+            </span></p>
+          <div class="ellipsis-2"><span *ngFor="let tag of item.tags; let j = index;">
+              <span *ngIf="item.tags.length-1 > j">{{tag}}, </span>
+              <span *ngIf="item.tags.length-1 == j">{{tag}}</span>
+            </span></div>
+          <p>By <u (click)="goToProfile(item.user_id)">{{item.user_name}}</u> from {{item.title}}</p>
+          <div class="fire-div">
+            <span>{{item.totalLikes}}
+              <img class="fire-image" height="20" width="20" src="assets/imgs/story/Positive-Flame.png">
+            </span>
+            <span>{{item.totalDislikes}}
+              <img class="fire-image" height="20" width="20" src="assets/imgs/story/Negative-Flame.png">
+            </span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
