@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-toolbar>
+
+      <ion-title class="tool-bar-title">
+        <button start class="back-btn" (click)='goBack()'>
+          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+        </button>Upload Receipt
+        <span style="float:right;">
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+      </ion-title>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="login-back" scroll="false">
+    <div class="row">
+      <div class="col">
+        <div text-center>
+          <h1>
+            <b>Upload
+              <br>
+              <span style="text-decoration: underline;">Receipt</span>
+            </b>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div text-center>
+      <img class="circle-pic" src="{{receiptImage}}" width="150" height="150">
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col border-line">
+        <div text-right>
+          <img style="margin-right: 15px" src="assets/icon/UploadPicture.png" width="100" height="100" (click)="openGallery()">
+        </div>
+      </div>
+      <!-- <div class="divider"></div> -->
+      <div class="col">
+        <div text-left>
+          <img style="margin-left: 15px" src="assets/icon/Camera.png" width="100" height="100" (click)="openCamera()">
+        </div>
+      </div>
+    </div>
+    <br>
+    <div text-center>
+      <ion-checkbox [(ngModel)]="receipt_private" (ionChange)="updateReceipt()">Check to show Receipt Publically.</ion-checkbox>
+    </div>>
+    <br>
+    <div padding text-center>
+      <button class="submit-btn" ion-button (click)="save()">Submit</button>
+    </div>
+  </div>
+</ion-content>

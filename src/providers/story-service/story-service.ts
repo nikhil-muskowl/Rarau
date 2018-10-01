@@ -148,19 +148,19 @@ export class StoryServiceProvider {
 
   apiTopStoryMarker(data: any) {
     this.formData = new FormData();
-   
+
     if (data.searchUse) {
       this.formData.append('user_name', data.searchUse);
     }
 
-     if (data.latitude) {
-      this.formData.append('latitude', data.latitude);      
+    if (data.latitude) {
+      this.formData.append('latitude', data.latitude);
     }
     if (data.longitude) {
       this.formData.append('longitude', data.longitude);
-      
+
     }
-    
+
     this.formData.append('user_id', data.user_id);
 
     if (data.searchCat) {
@@ -193,8 +193,6 @@ export class StoryServiceProvider {
       this.formData.append('start', data.start);
     }
 
-
-
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/top_stories',
       this.formData,
       {
@@ -212,12 +210,16 @@ export class StoryServiceProvider {
     var catId = data.catId;
     var latitude = data.latitude;
     var longitude = data.longitude;
+    var receipt_private = data.receipt_private;
+    var receipt = data.receipt;
 
     console.log('images : ' + JSON.stringify(images));
     this.formData = new FormData();
     this.formData.append('language_id', '1');
     this.formData.append('title', locName);
     this.formData.append('description', '');
+    this.formData.append('receipt_private', receipt_private);
+    this.formData.append('receipt', receipt);
     this.formData.append('tags', JSON.stringify(tags));
     this.formData.append('latitude', latitude);
     this.formData.append('longitude', longitude);

@@ -5,6 +5,7 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { ShowStoryPage } from '../show-story/show-story';
+import { ReceiptShowPage } from '../receipt-show/receipt-show';
 
 @IonicPage()
 @Component({
@@ -26,6 +27,8 @@ export class SingleStoryPage {
   private description;
   private html;
   private image;
+  private receipt_private;
+  private receipt;
   private tags;
   private comments;
   private totalLikes;
@@ -44,7 +47,7 @@ export class SingleStoryPage {
   ) {
 
     this.story_id = this.navParams.get('story_id');
-
+    console.log('story_id : ' + this.story_id);
     this.isLogin();
     this.getStories();
   }
@@ -84,6 +87,9 @@ export class SingleStoryPage {
         this.html = this.responseData.result[0].html;
         this.image = this.responseData.result[0].image;
         this.tags = this.responseData.result[0].tags;
+        this.receipt_private = this.responseData.result[0].receipt_private;
+        console.log('receipt_private : ' + this.receipt_private);
+        this.receipt = this.responseData.result[0].receipt;
         this.totalLikes = this.responseData.result[0].totalLikes;
         this.totalDislikes = this.responseData.result[0].totalDislikes;
         this.totalFlames = this.responseData.result[0].totalFlames;
@@ -96,10 +102,12 @@ export class SingleStoryPage {
         this.loadingProvider.dismiss();
       }
     );
-
-
   }
 
+  showReceipt() {
+
+    this.navCtrl.push(ReceiptShowPage, { receipt: this.receipt });
+  }
 
   goToComments(event: any): any {
     console.log('Swipe comment', event);

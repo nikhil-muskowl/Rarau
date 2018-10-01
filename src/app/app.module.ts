@@ -47,6 +47,8 @@ import { StoryScreenPage } from '../pages/story/story-screen/story-screen';
 import { StoryTopListPage } from '../pages/story/story-top-list/story-top-list';
 import { SavedStoriesPage } from '../pages/story/saved-stories/saved-stories';
 import { SingleStoryPage } from '../pages/story/single-story/single-story';
+import { UploadReceiptPage } from '../pages/story/upload-receipt/upload-receipt';
+import { ReceiptShowPage } from '../pages/story/receipt-show/receipt-show';
 //Services
 import { ImageService } from '../pages/util/imageservice';
 import { UnsplashItUtil } from '../pages/util/unsplashItutil';
@@ -146,6 +148,8 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     SavedStoriesPage,
     SearchPage,
     SingleStoryPage,
+    UploadReceiptPage,
+    ReceiptShowPage,
   ],
   imports: [
     HttpClientModule,
@@ -218,6 +222,8 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     SavedStoriesPage,
     SearchPage,
     SingleStoryPage,
+    UploadReceiptPage,
+    ReceiptShowPage,
   ],
   providers: [
     StatusBar,

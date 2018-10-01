@@ -94,11 +94,11 @@ export class HomePage {
   }
 
   openModal() {
-    this.searchCat='';
-    this.searchLoc='';
-    this.searchUse='';
-    this.serLatitude='';
-    this.serLongitude='';
+    this.searchCat = '';
+    this.searchLoc = '';
+    this.searchUse = '';
+    this.serLatitude = '';
+    this.serLongitude = '';
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false

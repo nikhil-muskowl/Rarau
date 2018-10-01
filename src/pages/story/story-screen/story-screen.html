@@ -42,6 +42,12 @@
           </button>
         </ion-fab>
 
+        <ion-fab right bottom small *ngIf="slide.receipt_private == 0 || slide.receipt_private == null">
+          <button (click)="showReceipt(slide.receipt)" ion-fab clear color="transparent">
+            <img src="assets/icon/invoice-icon.png" height="50" width="50">
+          </button>
+        </ion-fab>
+
         <div class="story-footer">
           <ion-grid>
             <ion-row>

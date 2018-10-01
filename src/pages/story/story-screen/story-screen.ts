@@ -5,6 +5,7 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { ShowStoryPage } from '../show-story/show-story';
+import { ReceiptShowPage } from '../receipt-show/receipt-show';
 import { Slides } from 'ionic-angular';
 
 @IonicPage()
@@ -70,6 +71,10 @@ export class StoryScreenPage {
 
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
+  }
+
+  showReceipt(receipt) {
+    this.navCtrl.push(ReceiptShowPage, { receipt: receipt });
   }
 
   goBack() {
