@@ -24,66 +24,19 @@
         </button>
       </ion-item>
     </form>
+
+    <ion-list *ngFor="let record of model; let i = index;">
+      <ion-item (click)="getProfile(record)">
+        <ion-avatar item-start>
+          <img src="{{record.image_thumb}}" width="40px" height="40px" />
+        </ion-avatar>
+        <h2><b>{{record.name}}</b></h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 
-  <div>
-    <ion-segment [(ngModel)]="SearchPage">
-      <ion-segment-button value="User">
-        User
-      </ion-segment-button>
-      <ion-segment-button value="Category">
-        Category
-      </ion-segment-button>
-      <ion-segment-button value="Location">
-        Location
-      </ion-segment-button>
-    </ion-segment>
-  </div>
-
-  <div [ngSwitch]="SearchPage">
-    <div *ngSwitchCase="'User'">
-      <ion-list *ngFor="let record of model; let i = index;">
-        <ion-item (click)="getProfile(record)">
-          <ion-avatar item-start>
-            <img src="{{record.image_thumb}}" width="40px" height="40px" />
-          </ion-avatar>
-          <h2><b>{{record.name}}</b></h2>
-        </ion-item>
-      </ion-list>
-
-      <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
-
-    <div *ngSwitchCase="'Category'">
-      <ion-list *ngFor="let record of model; let i = index;">
-        <ion-item (click)="getProfile(record)">
-          <ion-avatar item-start>
-            <img src="{{record.image_thumb}}" width="40px" height="40px" />
-          </ion-avatar>
-          <h2><b>{{record.name}}</b></h2>
-        </ion-item>
-      </ion-list>
-
-      <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
-
-    <div *ngSwitchCase="'Location'">
-      <ion-list *ngFor="let record of model; let i = index;">
-        <ion-item (click)="getProfile(record)">
-          <ion-avatar item-start>
-            <img src="{{record.image_thumb}}" width="40px" height="40px" />
-          </ion-avatar>
-          <h2><b>{{record.name}}</b></h2>
-        </ion-item>
-      </ion-list>
-
-      <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
-  </div>
 </ion-content>

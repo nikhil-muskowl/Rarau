@@ -49,7 +49,7 @@ export class SearchPage {
     public baiduProvider: BaiduProvider,
     public searchProvider: SearchResProvider, ) {
 
-    // this.createForm();
+    this.createForm();
     this.getCategory();
   }
 
@@ -73,7 +73,7 @@ export class SearchPage {
 
   createForm() {
     this.searchForm = this.formBuilder.group({
-      searchCat: ['', Validators.required],
+      searchUser: ['', Validators.required],
     });
   }
 
@@ -83,9 +83,9 @@ export class SearchPage {
 
   closeModal() {
     const data = {
-      search: this.searchUser
+      // search: this.searchUser
     };
-    this.view.dismiss(data);
+    this.view.dismiss();
   }
 
   public onCatChange(selectedValue) {
@@ -94,7 +94,6 @@ export class SearchPage {
   }
 
   searchUsercat() {
-    event.stopPropagation();
     console.log('searchUsercat : ' + this.searchCat);
 
     if (this.searchCat != '') {
@@ -132,7 +131,25 @@ export class SearchPage {
     }
   }
 
-  searchUsers() {
+  searchUsers(event) {
+    event.stopPropagation();
+    this.searchUser = this.searchForm.value.searchUser;
+    console.log('searchUser: ' + this.searchUser);
+
+    if (this.searchForm.value.searchUser != '') {
+      const data = {
+        searchUsers: this.searchUser,
+      };
+      this.view.dismiss(data);
+    }
+    else {
+      this.alertProvider.title = 'Error';
+      this.alertProvider.message = 'Please Enter value to search.';
+      this.alertProvider.showAlert();
+    }
+  }
+
+  searchUserStory() {
     event.stopPropagation();
     console.log('searchUse : ' + this.searchUse);
 

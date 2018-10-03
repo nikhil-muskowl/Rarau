@@ -28,6 +28,7 @@ export class SearchResProvider {
       this.formData.append('start', data.start);
       this.formData.append('length', data.length);
     } else {
+      this.formData.append('start', '0');
       this.formData.append('length', '0');
     }
 

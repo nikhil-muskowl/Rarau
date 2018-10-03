@@ -41,8 +41,8 @@ export class SearchResultPage {
     public LoginProvider: LoginProvider,
     public formBuilder: FormBuilder, ) {
 
-    this.searchTxt = this.navParams.data.search;
-    console.log('Search: ' + JSON.stringify(this.searchTxt));
+    this.searchTxt = this.navParams.data.searchUsers;
+    console.log('searchTxt: ' + JSON.stringify(this.navParams.data));
     this.getSearch(this.searchTxt);
     this.crearForm();
   }
@@ -52,7 +52,6 @@ export class SearchResultPage {
 
   ionViewWillEnter() {
     this.isLogin();
-    this.SearchPage = 'User';
   }
 
   isLogin() {
@@ -62,8 +61,7 @@ export class SearchResultPage {
   getSearch(search) {
 
     this.loadingProvider.present();
-
-    this.filterData = { 'start': this.pageStart, 'length': this.pageLength, 'search': search };
+    this.filterData = { "search": search, "start": this.pageStart, "length": this.pageLength };
 
     this.searchRes.apiSearchRes(this.filterData).subscribe(
       response => {

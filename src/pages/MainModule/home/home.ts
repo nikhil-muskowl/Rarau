@@ -116,32 +116,33 @@ export class HomePage {
     myModal.onDidDismiss((data) => {
       console.log("I have dismissed.");
       console.log(data);
-      if (data.searchCat) {
-        console.log('data.searchCat : ' + data.searchCat);
-        this.searchCat = data.searchCat;
-      }
-      if (data.searchLoc) {
-        console.log('data.searchLoc : ' + data.searchLoc);
-        this.searchLoc = data.searchLoc;
+      if (data) {
+        if (data.searchCat) {
+          console.log('data.searchCat : ' + data.searchCat);
+          this.searchCat = data.searchCat;
+        }
+        if (data.searchLoc) {
+          console.log('data.searchLoc : ' + data.searchLoc);
+          this.searchLoc = data.searchLoc;
+        }
+        if (data.searchUse) {
+          console.log('data.searchStoryUse : ' + data.searchUse);
+          this.searchUse = data.searchUse;
+        }
+        if (data.latitude) {
+          console.log('data.latitude : ' + data.latitude);
+          this.serLatitude = data.latitude;
+        }
+        if (data.longitude) {
+          console.log('data.longitude : ' + data.longitude);
+          this.serLongitude = data.longitude;
+        }
 
+        this.bindMap();
+        if (data.searchUsers != undefined) {
+          this.navCtrl.push(SearchResultPage, data);
+        }
       }
-      if (data.searchUse) {
-        console.log('data.searchUse : ' + data.searchUse);
-        this.searchUse = data.searchUse;
-
-      }
-      if (data.latitude) {
-        console.log('data.latitude : ' + data.latitude);
-        this.serLatitude = data.latitude;
-      }
-      if (data.longitude) {
-        console.log('data.longitude : ' + data.longitude);
-        this.serLongitude = data.longitude;
-      }
-
-      this.bindMap();
-      // if (data.search != undefined)
-      //   this.navCtrl.push(SearchResultPage, data);
 
     });
 
