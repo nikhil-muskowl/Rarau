@@ -41,7 +41,7 @@ export class SearchResultPage {
     public LoginProvider: LoginProvider,
     public formBuilder: FormBuilder, ) {
 
-    this.searchTxt = this.navParams.data.searchUsers;
+    this.searchTxt = this.navParams.data.searchUse;
     console.log('searchTxt: ' + JSON.stringify(this.navParams.data));
     this.getSearch(this.searchTxt);
     this.crearForm();

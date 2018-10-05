@@ -7,6 +7,7 @@ import { ConfigProvider } from '../config/config';
 import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { Jsonp } from '@angular/http';
 
 @Injectable()
 export class LoginProvider {
@@ -109,6 +110,7 @@ export class LoginProvider {
   }
 
   public setData(data) {
+    console.log('setData when login : '+JSON.stringify(data));
     this.user_id = data.id;
     try {
       window.localStorage.setItem('userId', data.id);

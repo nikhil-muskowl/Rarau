@@ -37,6 +37,8 @@ export class StoryScreenPage {
   private created_date;
   private latitude;
   private longitude;
+  public searchCat;
+  public searchUse;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -48,6 +50,8 @@ export class StoryScreenPage {
     public loadingCtrl: LoadingController
   ) {
 
+    this.searchUse = this.navParams.get('searchUse');
+    this.searchCat = this.navParams.get('searchCat');
     if (this.navParams.get('latitude')) {
       this.latitude = this.navParams.get('latitude');
     } else {
@@ -93,6 +97,8 @@ export class StoryScreenPage {
       'user_id': this.user_id,
       'latitude': this.latitude,
       'longitude': this.longitude,
+      'searchCat': this.searchCat,
+      'searchUse': this.searchUse,
     };
 
     // this.storyService.getStoryDetail(this.paramData).subscribe(

@@ -149,16 +149,15 @@ export class StoryServiceProvider {
   apiTopStoryMarker(data: any) {
     this.formData = new FormData();
 
-    if (data.searchUse) {
+    if (data.searchUse != undefined) {
       this.formData.append('user_name', data.searchUse);
     }
 
-    if (data.latitude) {
+    if (data.latitude != undefined) {
       this.formData.append('latitude', data.latitude);
     }
-    if (data.longitude) {
+    if (data.longitude != undefined) {
       this.formData.append('longitude', data.longitude);
-
     }
 
     this.formData.append('user_id', data.user_id);
@@ -183,6 +182,9 @@ export class StoryServiceProvider {
     if (data.latitude) {
       this.formData.append('latitude', data.latitude);
     }
+    if (data.searchUse != undefined) {
+      this.formData.append('user_name', data.searchUse);
+    }
     if (data.latitude) {
       this.formData.append('longitude', data.longitude);
     }
@@ -191,6 +193,9 @@ export class StoryServiceProvider {
     }
     if (data.start) {
       this.formData.append('start', data.start);
+    }
+    if (data.searchCat) {
+      this.formData.append('story_types', JSON.stringify(data.searchCat));
     }
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/top_stories',

@@ -23,7 +23,7 @@ export class HomePage {
   public title = 'Home';
   public images: Array<any>;
   public popover: Popover;
-
+  public latLong;
   public locations: any;
   public filterData: any;
   public responseData: any;
@@ -44,6 +44,7 @@ export class HomePage {
   private formData: any;
   searchLocation;
   searchUser;
+  public paramStryData;
   public paramData;
   public user_id;
   public stories: any;
@@ -51,7 +52,6 @@ export class HomePage {
   public markerHtml;
 
   public searchCat;
-  public searchLoc;
   public searchUse;
   public serLatitude;
   public serLongitude;
@@ -79,6 +79,7 @@ export class HomePage {
     this.latitude = '39.919981';
     this.longitude = '116.414977';
 
+
     // this.latitude = this.locationTrackerProvider.getLatitude();
     // this.longitude = this.locationTrackerProvider.getLongitude();
 
@@ -94,19 +95,14 @@ export class HomePage {
   }
 
   openModal() {
-    this.searchCat = '';
-    this.searchLoc = '';
-    this.searchUse = '';
-    this.serLatitude = '';
-    this.serLongitude = '';
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
     };
 
     const myModalData = {
-      name: 'Paul Halliday',
-      occupation: 'Developer'
+      name: 'Nikhil Suwalka',
+      occupation: 'Android Developer'
     };
 
     const myModal: Modal = this.modal.create(SearchPage, { data: myModalData }, myModalOptions);
@@ -115,32 +111,24 @@ export class HomePage {
 
     myModal.onDidDismiss((data) => {
       console.log("I have dismissed.");
-      console.log(data);
-      if (data) {
-        if (data.searchCat) {
-          console.log('data.searchCat : ' + data.searchCat);
-          this.searchCat = data.searchCat;
-        }
-        if (data.searchLoc) {
-          console.log('data.searchLoc : ' + data.searchLoc);
-          this.searchLoc = data.searchLoc;
-        }
-        if (data.searchUse) {
-          console.log('data.searchStoryUse : ' + data.searchUse);
-          this.searchUse = data.searchUse;
-        }
-        if (data.latitude) {
-          console.log('data.latitude : ' + data.latitude);
-          this.serLatitude = data.latitude;
-        }
-        if (data.longitude) {
-          console.log('data.longitude : ' + data.longitude);
-          this.serLongitude = data.longitude;
-        }
+      console.log('data from model : ' + JSON.stringify(data));
 
-        this.bindMap();
-        if (data.searchUsers != undefined) {
+      if (data) {
+        console.log('data.searchStoryUse : ' + data.searchUse);
+        console.log('data.searchLoc : ' + data.searchLoc);
+        console.log('data.searchCat : ' + data.searchCat);
+        console.log('data.latitude : ' + data.latitude);
+        console.log('data.longitude : ' + data.longitude);
+
+        this.serLatitude = data.latitude;
+        this.serLongitude = data.longitude;
+        this.searchUse = data.searchUse;
+        this.searchCat = data.searchCat;
+        if (data.searchCat == undefined && data.latitude == undefined && data.longitude == undefined && data.searchUse != undefined) {
           this.navCtrl.push(SearchResultPage, data);
+        }
+        else {
+          this.bindMap();
         }
       }
 
@@ -167,58 +155,87 @@ export class HomePage {
   }
 
   public bindMap() {
-    this.options = {
-      centerAndZoom: {
+    this.markers = [];
+
+    if (this.serLatitude != undefined && this.serLongitude != undefined) {
+      this.latLong = {
+        lat: this.serLatitude,
+        lng: this.serLongitude,
+        zoom: 17
+      }
+    }
+    else {
+      this.latLong = {
         lat: this.latitude,
         lng: this.longitude,
         zoom: 15
-      },
+      }
+    }
+
+    this.options = {
+      centerAndZoom: this.latLong,
       enableKeyboard: true,
       mapType: MapTypeEnum.BMAP_NORMAL_MAP
     };
 
-    this.paramData = {
+
+    this.paramStryData = {
       'user_id': this.user_id,
       'searchCat': this.searchCat,
-      'searchLoc': this.searchLoc,
       'searchUse': this.searchUse,
       'latitude': this.serLatitude,
       'longitude': this.serLongitude
     };
-
-    this.storyService.apiTopStoryMarker(this.paramData).subscribe(
+    console.log('bind map this.user_id : ' + JSON.stringify(this.paramStryData));
+    this.storyService.apiTopStoryMarker(this.paramStryData).subscribe(
       response => {
         this.responseData = response;
 
-        this.responseData.data.forEach(element => {
-          this.markers.push({
-            options: {
-              // enableDragging: true,
-              icon: {
-                imageUrl: element.marker,
-                size: {
-                  height: 50,
-                  width: 100
-                },
-                imageSize: {
-                  height: 50,
-                  width: 100
+        if (this.responseData.data.length > 0) {
+          this.responseData.data.forEach(element => {
+            this.markers.push({
+              options: {
+                // enableDragging: true,
+                icon: {
+                  imageUrl: element.marker,
+                  size: {
+                    height: 50,
+                    width: 100
+                  },
+                  imageSize: {
+                    height: 50,
+                    width: 100
+                  }
                 }
+              },
+              point: {
+                lat: element.latitude,
+                lng: element.longitude
               }
-            },
-            point: {
-              lat: element.latitude,
-              lng: element.longitude
-            }
+            });
+            this.options = {
+              centerAndZoom: {
+                lat: element.latitude,
+                lng: element.longitude,
+                zoom: 15
+              },
+              enableKeyboard: true,
+              mapType: MapTypeEnum.BMAP_NORMAL_MAP
+            };
           });
-        });
-
+        }
+        else {
+          this.alertProvider.title = 'Sorry...';
+          this.alertProvider.message = 'No data found at this Location';
+          this.alertProvider.showAlert();
+        }
         this.loadingProvider.dismiss();
       },
       err => console.error(err),
       () => {
         this.loadingProvider.dismiss();
       }
+
     );
 
     this.navOptions = {
@@ -231,16 +248,6 @@ export class HomePage {
   public resetStories() {
     this.showStories = false;
     this.stories = [];
-  }
-
-  public onInput(ev: any) {
-    this.search = ev.target.value;
-    this.locations = [];
-    this.getLocation();
-  }
-
-  public onCancel(ev: any) {
-    this.search = '';
   }
 
   public getLocation() {
@@ -260,20 +267,6 @@ export class HomePage {
     console.log(this.locations);
   }
 
-  public itemSelected(location: any) {
-    console.log(location.location);
-    if (location) {
-      this.latitude = location.location.lat;
-      this.longitude = location.location.lng;
-    }
-
-    console.log(this.latitude);
-    console.log(this.longitude);
-
-    this.bindMap();
-
-    this.locations = [];
-  }
 
   public showWindow({ e, marker, map }: any): void {
     // var Param = {
@@ -286,6 +279,8 @@ export class HomePage {
       'user_id': this.user_id,
       'latitude': markerData.lat,
       'longitude': markerData.lng,
+      'searchCat': this.searchCat,
+      'searchUse': this.searchUse,
       'length': '3',
       'start': '0',
     };

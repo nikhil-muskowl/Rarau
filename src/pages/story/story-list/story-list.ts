@@ -20,6 +20,8 @@ export class StoryListPage {
   private responseData;
   private latitude;
   private longitude;
+  public searchCat;
+  public searchUse;
 
   title = 'Kuala Lumpur, Malaysia';
   date = '30 May,18 03:00AM';
@@ -33,6 +35,8 @@ export class StoryListPage {
     public LoginProvider: LoginProvider
   ) {
 
+    this.searchUse = this.navParams.get('searchUse');
+    this.searchCat = this.navParams.get('searchCat');
     if (this.navParams.get('latitude')) {
       this.latitude = this.navParams.get('latitude');
     } else {
@@ -66,7 +70,10 @@ export class StoryListPage {
       'user_id': this.user_id,
       'latitude': this.latitude,
       'longitude': this.longitude,
+      'searchCat': this.searchCat,
+      'searchUse': this.searchUse,
     };
+    console.log('Story list page : ' + JSON.stringify(this.paramData));
 
     this.storyService.apiTopStory(this.paramData).subscribe(
       response => {

@@ -19,7 +19,6 @@ export class SearchPage {
   searchForm: FormGroup;
   private formData: any;
   searchUser;
-  public catId: any;
   public categories: any;
   public categoriesData: any;
   public locations: any;
@@ -28,12 +27,12 @@ export class SearchPage {
   public responseData: any;
   public searchData: any;
   public searchResponse: any;
-  public searchLoc = '';
-  public searchUse = '';
-  public searchCat = '';
-  public locName = '';
-  public latitude: number = 0;
-  public longitude: number = 0;
+  public searchLoc;
+  public searchUse;
+  public searchCat;
+  public locName;
+  public latitude;
+  public longitude;
   public paramData;
   public user_id;
 
@@ -49,7 +48,7 @@ export class SearchPage {
     public baiduProvider: BaiduProvider,
     public searchProvider: SearchResProvider, ) {
 
-    this.createForm();
+    // this.createForm();
     this.getCategory();
   }
 
@@ -88,17 +87,56 @@ export class SearchPage {
     this.view.dismiss();
   }
 
-  public onCatChange(selectedValue) {
-    this.catId = selectedValue;
-    console.log(this.catId);
+  globalSearch() {
+    console.log('searchUsercat : ' + this.searchCat);
+    console.log('searchUse : ' + this.searchUse);
+    console.log('searchLoc : ' + this.searchLoc);
+    console.log('latitude : ' + this.latitude);
+    console.log('longitude : ' + this.longitude);
+
+    if (this.searchCat != undefined || this.searchUse != undefined || this.searchLoc != undefined) {
+      const data = {
+        searchCat: this.searchCat,
+        searchUse: this.searchUse,
+        searchLoc: this.searchLoc,
+        latitude: this.latitude,
+        longitude: this.longitude
+      };
+      this.view.dismiss(data);
+
+    }
+    else {
+      this.alertProvider.title = 'Error';
+      this.alertProvider.message = 'Please Enter value to search.';
+      this.alertProvider.showAlert();
+    }
+
   }
 
   searchUsercat() {
     console.log('searchUsercat : ' + this.searchCat);
 
-    if (this.searchCat != '') {
+    if (this.searchCat != undefined) {
       const data = {
         searchCat: this.searchCat
+      };
+      this.view.dismiss(data);
+
+    }
+    else {
+      this.alertProvider.title = 'Error';
+      this.alertProvider.message = 'Please Enter value to search.';
+      this.alertProvider.showAlert();
+    }
+  }
+
+  searchUserStory() {
+    console.log('searchUse : ' + this.searchUse);
+
+    if (this.searchUse != undefined) {
+
+      const data = {
+        searchUse: this.searchUse,
       };
       this.view.dismiss(data);
 
@@ -114,10 +152,9 @@ export class SearchPage {
     event.stopPropagation();
     console.log('searchLoc : ' + this.searchLoc);
 
-    if (this.searchLoc != '') {
+    if (this.searchLoc != undefined) {
 
       const data = {
-        searchLoc: this.searchLoc,
         latitude: this.latitude,
         longitude: this.longitude
       };
@@ -141,25 +178,6 @@ export class SearchPage {
         searchUsers: this.searchUser,
       };
       this.view.dismiss(data);
-    }
-    else {
-      this.alertProvider.title = 'Error';
-      this.alertProvider.message = 'Please Enter value to search.';
-      this.alertProvider.showAlert();
-    }
-  }
-
-  searchUserStory() {
-    event.stopPropagation();
-    console.log('searchUse : ' + this.searchUse);
-
-    if (this.searchUse != '') {
-
-      const data = {
-        searchUse: this.searchUse,
-      };
-      this.view.dismiss(data);
-
     }
     else {
       this.alertProvider.title = 'Error';
