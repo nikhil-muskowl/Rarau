@@ -36,7 +36,6 @@ import { CameraOpenPage } from '../pages/AccountModule/camera-open/camera-open';
 import { FollowRequestsPage } from '../pages/FollowModule/follow-requests/follow-requests';
 import { FollowersPage } from '../pages/FollowModule/followers/followers';
 //Story module
-import { ManagePhotoPage } from '../pages/story/manage-photo/manage-photo';
 import { ShowPhotoPage } from '../pages/story/show-photo/show-photo';
 import { LocationPage } from '../pages/story/location/location';
 import { StoryCategoryPage } from '../pages/story/story-category/story-category';
@@ -126,7 +125,6 @@ export function createTranslateLoader(http: HttpClient) {
     PeoplePage,
     OthersProfilePage,
     FollowRequestsPage,
-    ManagePhotoPage,
     CDVPhotoLibraryPipe,
     ShowPhotoPage,
     EditProfilePage,
@@ -188,7 +186,6 @@ export function createTranslateLoader(http: HttpClient) {
         { component: PeoplePage, name: 'PeoplePage', segment: 'PeoplePage' },
         { component: OthersProfilePage, name: 'OthersProfilePage', segment: 'OthersProfilePage' },
         { component: FollowRequestsPage, name: 'FollowRequestsPage', segment: 'FollowRequestsPage' },
-        { component: ManagePhotoPage, name: 'ManagePhotoPage', segment: 'ManagePhotoPage' },
         { component: ShowPhotoPage, name: 'ShowPhotoPage', segment: 'ShowPhotoPage' },
       ]
     })
@@ -210,7 +207,6 @@ export function createTranslateLoader(http: HttpClient) {
     PeoplePage,
     OthersProfilePage,
     FollowRequestsPage,
-    ManagePhotoPage,
     ShowPhotoPage,
     EditProfilePage,
     LocationPage,

@@ -75,6 +75,7 @@
     "saved_story": "Saved Story",
     "filter": "Filter",
     "cancel": "CANCEL",
+    "ok": "OK",
     "done": "DONE",
     "story": "Story",
     "warning": "Warning!",
@@ -93,5 +94,9 @@
     "write_something": "Write Something Here",
     "forbidden": "Forbidden",
     "login_to_continue": "Please Login to continue.",
+    "sure_logout": "Are you sure you want to logout?",
+    "logout": "Logout",
+    "confirm": "Confirm",
+    "want_to_continue": "Do you want continue?",
     "home": "Home"
 }

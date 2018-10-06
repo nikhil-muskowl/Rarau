@@ -35,7 +35,7 @@
   </ion-scroll>
 
   <ion-item>
-    <ion-tags-input [placeholder]="{{write_something}}" [(ngModel)]="tags" [color]="'danger'" (onChange)="onChange($event)"
+    <ion-tags-input [placeholder]="write_something" [(ngModel)]="tags" [color]="'danger'" (onChange)="onChange($event)"
       [verifyMethod]="verifyTag" [separatorStr]="' '" [canEnterAdd]="true" [canBackspaceRemove]="true"></ion-tags-input>
   </ion-item>
 

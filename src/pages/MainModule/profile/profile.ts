@@ -54,6 +54,8 @@ export class ProfilePage {
   public view_log;
   public saved_stories;
   public more;
+  public sure_logout;
+  public logout_txt;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -106,6 +108,12 @@ export class ProfilePage {
     this.translate.get('more').subscribe((text: string) => {
       this.more = text;
     });
+    this.translate.get('sure_logout').subscribe((text: string) => {
+      this.sure_logout = text;
+    });
+    this.translate.get('logout').subscribe((text: string) => {
+      this.logout_txt = text;
+    });
 
   }
   ionViewDidLoad() {
@@ -149,7 +157,7 @@ export class ProfilePage {
   }
 
   logout() {
-    this.alertProvider.Alert.confirm('Are you sure you want to logout?', 'Logout').then((res) => {
+    this.alertProvider.Alert.confirm(this.sure_logout, this.logout_txt).then((res) => {
       console.log('confirmed');
       this.LoginProvider.unSetData();
       this.navCtrl.setRoot(LoginPage);
