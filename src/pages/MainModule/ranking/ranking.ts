@@ -5,6 +5,8 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
 import { SingleStoryPage } from '../../story/single-story/single-story';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -23,17 +25,46 @@ export class RankingPage {
   public length = 5;
   public start = 0;
 
+  public ranking;
+  public rarau;
+  public by;
+  public from;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingProvider: LoadingProvider,
     public storiesProvider: StoryServiceProvider,
-    public alertProvider: AlertProvider) {
+    public alertProvider: AlertProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
+      this.translate.setDefaultLang(this.languageProvider.getLanguage());
+      this.translate.use(this.languageProvider.getLanguage());
+      this.translate.get('ranking').subscribe((text: string) => {
+        this.ranking = text;
+      });
+
+    this.setText();
     this.getTypes();
 
-
-
     console.log(this.story_type_id);
+  }
+
+  setText() {
+    
+
+    this.translate.get('ranking').subscribe((text: string) => {
+      this.ranking = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('from').subscribe((text: string) => {
+      this.from = text;
+    });
+    this.translate.get('by').subscribe((text: string) => {
+      this.by = text;
+    });
   }
 
   ionViewDidLoad() {

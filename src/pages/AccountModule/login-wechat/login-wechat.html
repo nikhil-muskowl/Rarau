@@ -5,14 +5,12 @@
       <button start class="back-btn" (click)='goBack()'>
         <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
       </button>
-      Sign Up with WeChat
+      {{sign_up_wechat}}
       <span style="float:right;">
-        <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+        <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
     </ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content>
   <div class="login-back">
@@ -34,7 +32,7 @@
         </div>
 
         <div text-left class="birth-text">
-          <p>Birthday
+          <p>{{birthday}}
             <span class="small" (click)="gotobirthday()">(Why this?)</span>
           </p>
         </div>
@@ -42,19 +40,20 @@
         <div>
           <ion-row class="date-row">
             <ion-col col-4>
-              <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date"
-                displayFormat="DD">
+              <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
+                formControlName="date" displayFormat="DD">
               </ion-datetime>
             </ion-col>
 
             <ion-col col-4>
-              <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date"
-                displayFormat="MM">
+              <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
+                formControlName="date" displayFormat="MM">
               </ion-datetime>
             </ion-col>
 
             <ion-col col-4>
-              <ion-datetime placeholder='YYYY &nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date" displayFormat="YYYY">
+              <ion-datetime placeholder='YYYY &nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
+                formControlName="date" displayFormat="YYYY">
               </ion-datetime>
             </ion-col>
           </ion-row>
@@ -62,11 +61,11 @@
         </div>
       </form>
       <div padding text-center>
-        <p>By clicking Sign Up, you agree to our
+        <p>{{by_clicking_sign_up}}
           <br>
-          <span style="text-decoration:underline;" (click)="gototerms()">Terms, Data Policy & Cookie Policy</span>
+          <span style="text-decoration:underline;" (click)="gototerms()">{{terms_policy}}</span>
         </p>
-        <button class="submit-btn" ion-button (click)="save()">Sign Up</button>
+        <button class="submit-btn" ion-button (click)="save()">{{sign_up}}</button>
       </div>
 
     </div>

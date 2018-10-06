@@ -2,7 +2,7 @@
     <ion-navbar>
       <ion-toolbar>
         
-        <ion-title class="tool-bar-title">Login <span style="float:right;"><img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span></ion-title>
+        <ion-title class="tool-bar-title">{{login}} <span style="float:right;"><img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span></ion-title>
       </ion-toolbar>
     </ion-navbar>
   </ion-header>
@@ -11,12 +11,12 @@
     <div class="row">
             <div class="col">
                     <div text-center>
-                        <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit"><img src="assets/imgs/login/wechat.png" width="40" height="40">&nbsp;&nbsp;Login with WeChat</button>
+                        <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit"><img src="assets/imgs/login/wechat.png" width="40" height="40">&nbsp;&nbsp;{{login_wechat}}</button>
                     </div>
             </div>
     </div>
     <div text-center>
-        <h2>or</h2>
+        <h2>{{or}}</h2>
     </div>   
             <div text-center>
                 <form [formGroup]="loginForm">
@@ -34,12 +34,12 @@
                         <p class="invalid-message" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitAttempt)">{{error_password}}</p>
                         </div>
                     <div text-right>
-                            <h5 class="frgt-link" (click)="forgotPass()">Forgot Password?</h5>      
+                            <h5 class="frgt-link" (click)="forgotPass()">{{forgot_pass}}</h5>      
                         </div>
                         
                     <br>
                     <div text-center>
-                        <button class="submit-btn" ion-button type="submit" (click)="save()">Let's Go</button>
+                        <button class="submit-btn" ion-button type="submit" (click)="save()">{{let_go}}</button>
                     </div>
                     
                 </form>
@@ -48,8 +48,8 @@
                     <div class="col">
                         <div text-center>
                             <hr class="login-hr">
-                            <h3>New to RaRaU?</h3>
-                            <h3 (click)="goToRegsiter()" style="text-decoration: underline;">Sign Up</h3>
+                            <h3>{{new_to_rarau}}</h3>
+                            <h3 (click)="goToRegsiter()" style="text-decoration: underline;">{{sign_up}}</h3>
                             
                         </div>
                     </div>
@@ -59,8 +59,8 @@
                     <div class="col">
                         <div text-center>
                             <hr class="login-hr">
-                            <h3>RaRaU</h3>
-                            <p>Get Connected on the Go!</p>
+                            <h3>{{rarau}}</h3>
+                            <p>{{connect_and_go}}</p>
                         </div>
                     </div>
             </div>

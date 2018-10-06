@@ -14,6 +14,9 @@ import { StoryServiceProvider } from '../../../providers/story-service/story-ser
 import { LoginProvider } from '../../../providers/login/login';
 import { Modal, ModalController, ModalOptions, IonicPage, ViewController } from 'ionic-angular';
 import { SearchPage } from '../../SearchModule/search/search';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -56,6 +59,8 @@ export class HomePage {
   public serLatitude;
   public serLongitude;
 
+  public rarau;
+  public click_to_search;
 
   @ViewChild('map') mapElement: ElementRef;
 
@@ -72,7 +77,11 @@ export class HomePage {
     public loadingProvider: LoadingProvider,
     public storyService: StoryServiceProvider,
     public LoginProvider: LoginProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider,
   ) {
+
+    this.setText();
 
     this.user_id = this.LoginProvider.isLogin();
     // this.showStories = true;
@@ -92,6 +101,18 @@ export class HomePage {
       { categoryFirst: 'assets/icon/Front-Icons/world.png', text: '7', categoryPerson: 'assets/icon/user.png' },
       { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '2', categoryPerson: 'assets/icon/user.png' },
     ]
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    
+    this.translate.get('click_to_search').subscribe((text: string) => {
+      this.click_to_search = text;
+    });
   }
 
   openModal() {

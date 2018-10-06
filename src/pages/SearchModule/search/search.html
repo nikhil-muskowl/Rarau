@@ -15,7 +15,7 @@
 
     <!-- Story Search User -->
     <ion-item>
-      <ion-searchbar placeholder="Story Search by User" [(ngModel)]="searchUse" [showCancelButton]="shouldShowCancel"
+      <ion-searchbar placeholder="{{story_srch_user}}" [(ngModel)]="searchUse" [showCancelButton]="shouldShowCancel"
         (ionInput)="onUserInput($event)" (ionCancel)="onUserCancel($event)">
       </ion-searchbar>
       <!-- <button class="btn-color" clear (click)="searchUserStory()" item-right>

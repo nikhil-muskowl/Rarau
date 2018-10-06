@@ -15,12 +15,12 @@ import { PhotoLibrary } from '@ionic-native/photo-library';
 import { MyApp } from './app.component';
 import { MainTabsPage } from '../pages/MainModule/main-tabs/main-tabs';
 import { HomePage } from '../pages/MainModule/home/home';
-import { PlacesPage } from '../pages/MainModule/places/places';
 import { RankingPage } from '../pages/MainModule/ranking/ranking';
 import { ProfilePage } from '../pages/MainModule/profile/profile';
 import { OthersProfilePage } from '../pages/AccountModule/others-profile/others-profile';
 import { EditProfilePage } from '../pages/MainModule/edit-profile/edit-profile';
 import { ProfilePhotoPage } from '../pages/MainModule/profile-photo/profile-photo';
+import { SettingsPage } from '../pages/MainModule/settings/settings';
 
 //Account module
 import { LoginPage } from '../pages/AccountModule/login/login';
@@ -86,6 +86,9 @@ import { LocationTrackerProvider } from '../providers/location-tracker/location-
 import { BaiduProvider } from '../providers/baidu/baidu';
 import { BaiduMapModule } from 'angular2-baidu-map'
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 //PopOvers
 import { BirthdayPage } from '../pages/Popover/birthday/birthday';
 import { TermsPage } from '../pages/Popover/terms/terms';
@@ -104,7 +107,11 @@ import { FollowingComponent } from '../components/following/following';
 import { RankingComponent } from '../components/ranking/ranking';
 import { FollowersComponent } from '../components/followers/followers';
 import { FormServiceProvider } from '../providers/form-service/form-service';
+import { LanguageProvider } from '../providers/language/language';
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/language/', '.json');
+}
 @NgModule({
   declarations: [
     MyApp,
@@ -114,7 +121,6 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     RegistrationPage,
     ForgotPasswordPage,
     UpdatePasswordPage,
-    PlacesPage,
     RankingPage,
     ProfilePage,
     PeoplePage,
@@ -150,6 +156,7 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     SingleStoryPage,
     UploadReceiptPage,
     ReceiptShowPage,
+    SettingsPage,
   ],
   imports: [
     HttpClientModule,
@@ -159,13 +166,19 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
       name: '__mydb',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     BrowserModule,
     HttpModule,
     IonTagsInputModule,
     IonicModule.forRoot(MyApp, {}, {
       links: [
         { component: HomePage, name: 'Home', segment: 'home' },
-        { component: PlacesPage, name: 'Place', segment: 'places' },
         { component: RankingPage, name: 'Ranking', segment: 'ranking' },
         { component: ProfilePage, name: 'Profile', segment: 'profile' },
         { component: UpdatePasswordPage, name: 'UpdatePasswordPage', segment: 'UpdatePasswordPage' },
@@ -180,6 +193,9 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
       ]
     })
   ],
+  exports:[
+    TranslateModule
+  ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -189,7 +205,6 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     RegistrationPage,
     ForgotPasswordPage,
     UpdatePasswordPage,
-    PlacesPage,
     RankingPage,
     ProfilePage,
     PeoplePage,
@@ -224,6 +239,7 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     SingleStoryPage,
     UploadReceiptPage,
     ReceiptShowPage,
+    SettingsPage,
   ],
   providers: [
     StatusBar,
@@ -265,6 +281,7 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
     ProfileProvider,
     SearchResProvider,
     FormServiceProvider,
+    LanguageProvider,
   ]
 })
 

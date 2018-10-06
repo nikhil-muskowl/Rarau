@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-toolbar>
-      <ion-title class="tool-bar-title">My Profile
-        <span style="float:right;">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+      <ion-title class="tool-bar-title">{{my_profile}}
+        <span style="float:right;"> <img src="assets/icon/settings.png" width="30px" height="30px" (click)="goSetting()">
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
       </ion-title>
     </ion-toolbar>
   </ion-navbar>
@@ -25,15 +25,15 @@
             <div class="left">
               <img src="assets/icon/follower.png" width="25" height="25">
               <h4 text-center>{{followers}}
-                <p style="font-size: 3.3vw;margin-left: 4vw;margin-top: 0px;"><b>Followers</b></p>
+                <p style="font-size: 3.3vw;margin-left: 4vw;margin-top: 0px;"><b>{{followers_txt}}</b></p>
               </h4>
             </div>
             <!-- <div class="divider"></div> -->
-            
+
             <div class="right">
               <img src="assets/icon/positive-flame.png" width="25" height="25">
               <h4 text-center>{{flames}}
-                <p style="font-size: 3.3vw;margin-top: 0px;"><b>Flames</b></p>
+                <p style="font-size: 3.3vw;margin-top: 0px;"><b>{{flames_txt}}</b></p>
               </h4>
             </div>
 
@@ -46,19 +46,19 @@
           </ion-col> -->
           <ion-col text-center>
             <img src="assets/imgs/Profile/My Profile Icon/pets.png" class="img-responsive">
-            <p style="font-size: 2.5vw;">My Pet</p>
+            <p style="font-size: 2.5vw;">{{my_pet}}</p>
           </ion-col>
           <ion-col text-center>
             <img src="assets/imgs/Profile/My Profile Icon/view.png" class="img-responsive">
-            <p style="font-size: 2.5vw;">View Activity Log</p>
+            <p style="font-size: 2.5vw;">{{view_log}}</p>
           </ion-col>
           <ion-col text-center (click)="savedStories()">
             <img src="assets/imgs/Profile/My Profile Icon/saved.png" class="img-responsive">
-            <p style="font-size: 2.5vw;">Saved Stories</p>
+            <p style="font-size: 2.5vw;">{{saved_stories}}</p>
           </ion-col>
           <ion-col text-center (click)="logout()">
             <img src="assets/imgs/Profile/My Profile Icon/more.png" class="img-responsive">
-            <p style="font-size: 2.5vw;">More</p>
+            <p style="font-size: 2.5vw;">{{more}}</p>
           </ion-col>
           <ion-col text-center>
           </ion-col>
@@ -70,13 +70,13 @@
   <div>
     <ion-segment [(ngModel)]="user">
       <ion-segment-button value="Stories">
-        Stories
+        {{stories}}
       </ion-segment-button>
       <ion-segment-button value="Ranking">
-        Ranking
+        {{ranking}}
       </ion-segment-button>
       <ion-segment-button value="Followers">
-        Followers
+        {{followers_txt}}
       </ion-segment-button>
     </ion-segment>
   </div>

@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { PeoplePage } from '../../AccountModule/people/people';
-import { PlacesPage } from '../places/places';
 import { RankingPage } from '../ranking/ranking';
 import { ProfilePage } from '../profile/profile';
 import { MyPetPage } from '../../MyPet/my-pet/my-pet';

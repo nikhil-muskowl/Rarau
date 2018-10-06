@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-toolbar>
       <ion-title text-center>
-        <span><img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+        <span><img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
         <span style="float: right"><img class="round-circle" src="assets/icon/user.png" width="45" height="45" (click)="openProfile()"></span>
       </ion-title>
     </ion-toolbar>
@@ -36,7 +36,7 @@
 
   <div>
     <ion-list>
-      <h4 (click)="openModal()">Click here to search.
+      <h4 (click)="openModal()">{{click_to_search}}
       </h4>
     </ion-list>
   </div>

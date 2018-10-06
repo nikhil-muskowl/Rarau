@@ -36,6 +36,8 @@ export class SearchPage {
   public paramData;
   public user_id;
 
+  public story_srch_user = 'and band';
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,

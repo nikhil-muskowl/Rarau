@@ -5,6 +5,9 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { ProfileProvider } from '../../../providers/profile/profile';
 import { LoginProvider } from '../../../providers/login/login';
 import { FollowProvider } from '../../../providers/follow/follow';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
+
 
 @IonicPage()
 @Component({
@@ -31,15 +34,26 @@ export class OthersProfilePage {
   public flames;
   public followed;
 
+  public followers_txt;
+  public flames_txt;
+  public following_txt;
+  public follow_txt;
+  public push;
+  public view_activity_log;
+  public stories;
+  public ranking;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingProvider: LoadingProvider,
     public alertProvider: AlertProvider,
     public profileProvider: ProfileProvider,
     public LoginProvider: LoginProvider,
-    public FollowProvider: FollowProvider
-  ) {
+    public FollowProvider: FollowProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     this.user = 'Stories';
     this.isLogin();
     console.log('curruserId : ' + this.user_id);
@@ -48,6 +62,36 @@ export class OthersProfilePage {
     console.log('userId : ' + this.id);
 
     this.getProfile(this.id);
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('followers').subscribe((text: string) => {
+      this.followers_txt = text;
+    });
+    this.translate.get('flames').subscribe((text: string) => {
+      this.flames_txt = text;
+    });
+    this.translate.get('following').subscribe((text: string) => {
+      this.following_txt = text;
+    });
+    this.translate.get('follow').subscribe((text: string) => {
+      this.follow_txt = text;
+    });
+    this.translate.get('push').subscribe((text: string) => {
+      this.push = text;
+    });
+    this.translate.get('view_activity_log').subscribe((text: string) => {
+      this.view_activity_log = text;
+    });
+    this.translate.get('stories').subscribe((text: string) => {
+      this.stories = text;
+    });
+    this.translate.get('ranking').subscribe((text: string) => {
+      this.ranking = text;
+    });
   }
 
   ionViewDidLoad() {

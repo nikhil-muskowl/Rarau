@@ -5,7 +5,8 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { ToastProvider } from '../../../providers/toast/toast';
 import { LoginPage } from '../../AccountModule/login/login';
 import { UpdatePasswordPage } from '../../AccountModule/update-password/update-password';
-import { EditProfilePage } from '../../MainModule/edit-profile/edit-profile';
+import { EditProfilePage } from '../edit-profile/edit-profile';
+import { SettingsPage } from '../settings/settings';
 import { FollowersPage } from '../../FollowModule/followers/followers';
 import { ProfilePhotoPage } from '../profile-photo/profile-photo';
 import { SavedStoriesPage } from '../../story/saved-stories/saved-stories';
@@ -16,6 +17,8 @@ import { ProfileProvider } from '../../../providers/profile/profile';
 
 //component
 import { StoryComponent } from '../../../components/story/story';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -25,7 +28,7 @@ import { StoryComponent } from '../../../components/story/story';
 
 export class ProfilePage {
 
-  public title = 'Profile';
+  public title;
   public name;
   public email;
   public user_id;
@@ -41,6 +44,16 @@ export class ProfilePage {
   private user: string;
   public status;
 
+  public my_profile;
+  public rarau;
+  public followers_txt;
+  public flames_txt;
+  public stories;
+  public ranking;
+  public my_pet;
+  public view_log;
+  public saved_stories;
+  public more;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -49,11 +62,52 @@ export class ProfilePage {
     public toast: ToastProvider,
     public loadingProvider: LoadingProvider,
     public profileProvider: ProfileProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
-  ) {
-
+    this.setText();
   }
 
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    console.log("getLanguage() : " + this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('profile').subscribe((text: string) => {
+      this.title = text;
+    });
+    this.translate.get('my_profile').subscribe((text: string) => {
+      this.my_profile = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('followers').subscribe((text: string) => {
+      this.followers_txt = text;
+    });
+    this.translate.get('flames').subscribe((text: string) => {
+      this.flames_txt = text;
+    });
+    this.translate.get('stories').subscribe((text: string) => {
+      this.stories = text;
+    });
+    this.translate.get('ranking').subscribe((text: string) => {
+      this.ranking = text;
+    });
+    this.translate.get('my_pet').subscribe((text: string) => {
+      this.my_pet = text;
+    });
+    this.translate.get('view_log').subscribe((text: string) => {
+      this.view_log = text;
+    });
+    this.translate.get('saved_stories').subscribe((text: string) => {
+      this.saved_stories = text;
+    });
+    this.translate.get('more').subscribe((text: string) => {
+      this.more = text;
+    });
+
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
@@ -126,5 +180,9 @@ export class ProfilePage {
 
   savedStories() {
     this.navCtrl.push(SavedStoriesPage);
+  }
+
+  goSetting() {
+    this.navCtrl.push(SettingsPage);
   }
 }

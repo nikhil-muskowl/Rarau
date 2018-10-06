@@ -11,6 +11,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 //provider
 import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -31,6 +33,11 @@ export class UpdateProfilePage {
   public gender;
   public flashMode = "off";
 
+  public profile_picture;
+  public upload_profile_pic;
+  public upload;
+  public rarau;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
@@ -40,7 +47,11 @@ export class UpdateProfilePage {
     public alertProvider: AlertProvider,
     public camera: Camera,
     private loginProvider: LoginProvider,
-    public loadingProvider: LoadingProvider, ) {
+    public loadingProvider: LoadingProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
+
+    this.setText();
 
     let backAction = platform.registerBackButtonAction(() => {
       this.navCtrl.push(RegistrationPage, {
@@ -63,6 +74,25 @@ export class UpdateProfilePage {
     else {
       this.displayImage = "assets/icon/user.png";
     }
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('profile_picture').subscribe((text: string) => {
+      this.profile_picture = text;
+    });
+    this.translate.get('upload').subscribe((text: string) => {
+      this.upload = text;
+    });
+    this.translate.get('upload_profile_pic').subscribe((text: string) => {
+      this.upload_profile_pic = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+
   }
 
   ionViewDidLoad() {

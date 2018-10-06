@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TermsPage } from "../../Popover/terms/terms";
 import { BirthdayPage } from "../../Popover/birthday/birthday";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
+
 
 @IonicPage()
 @Component({
@@ -15,12 +18,47 @@ export class LoginWechatPage {
   loginwechatForm: FormGroup;
   private error_email = 'field is required';
 
+  private raru;
+  private sign_up_wechat;
+  private birthday;
+  private why_this;
+  private by_clicking_sign_up;
+  private terms_policy;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public formBuilder: FormBuilder, ) {
+    public formBuilder: FormBuilder,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     this.date = new Date().toISOString().split('T')[0];
     this.createForm();
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('raru').subscribe((text: string) => {
+      this.raru = text;
+    });
+    this.translate.get('sign_up_wechat').subscribe((text: string) => {
+      this.sign_up_wechat = text;
+    });
+    this.translate.get('birthday').subscribe((text: string) => {
+      this.birthday = text;
+    });
+    this.translate.get('why_this').subscribe((text: string) => {
+      this.why_this = text;
+    });
+    this.translate.get('by_clicking_sign_up').subscribe((text: string) => {
+      this.by_clicking_sign_up = text;
+    });
+    this.translate.get('terms_policy').subscribe((text: string) => {
+      this.terms_policy = text;
+    });
+
   }
 
   ionViewDidLoad() {

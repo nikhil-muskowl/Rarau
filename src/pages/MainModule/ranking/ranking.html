@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-toolbar>
-      <ion-title class="tool-bar-title">Ranking
+      <ion-title class="tool-bar-title">{{ranking}}
         <span style="float:right;">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
       </ion-title>
     </ion-toolbar>
   </ion-navbar>
@@ -38,7 +38,7 @@
               <span *ngIf="item.tags.length-1 > j">{{tag}}, </span>
               <span *ngIf="item.tags.length-1 == j">{{tag}}</span>
             </span></div>
-          <p>By <u (click)="goToProfile(item.user_id)">{{item.user_name}}</u> from {{item.title}}</p>
+          <p>{{by}} <u (click)="goToProfile(item.user_id)">{{item.user_name}}</u> {{from}} {{item.title}}</p>
           <div class="fire-div">
             <span>{{item.totalLikes}}
               <img class="fire-image" height="20" width="20" src="assets/imgs/story/Positive-Flame.png">

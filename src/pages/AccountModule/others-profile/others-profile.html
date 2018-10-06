@@ -27,7 +27,7 @@
             <div class="left">
               <img src="assets/icon/follower.png" width="25" height="25">
               <h4 text-center>{{followers}}
-                <p style="font-size: 3.3vw;margin-left: 4vw;margin-top: 0px;"><b>Followers</b></p>
+                <p style="font-size: 3.3vw;margin-left: 4vw;margin-top: 0px;"><b>{{followers_txt}}</b></p>
               </h4>
             </div>
             <!-- <div class="divider"></div> -->
@@ -35,7 +35,7 @@
               <img src="assets/icon/positive-flame.png" width="25" height="25">
               <h4 text-center>{{flames}}
 
-                <p style="font-size: 3.3vw;margin-top: 0px;"><b>Flames</b></p>
+                <p style="font-size: 3.3vw;margin-top: 0px;"><b>{{flames_txt}}</b></p>
               </h4>
             </div>
           </div>
@@ -44,23 +44,23 @@
           <ion-col col-5 text-center *ngIf="id!=user_id">
             <div *ngIf="!followed" class="follow" (click)="dofollow()">
               <img src="assets/imgs/follow.png" width="25" height="25">
-              <span text-center class="p-follow">Follow</span>
+              <span text-center class="p-follow">{{follow_txt}}</span>
             </div>
 
             <div *ngIf="followed" class="follow" (click)="doUnFollow()">
               <img src="assets/imgs/following.png" width="25" height="25">
-              <span text-center class="p-follow">Following</span>
+              <span text-center class="p-follow">{{following_txt}}</span>
             </div>
 
             <!-- <img src="assets/imgs/Other-Profile/Follow.png" class="img-responsive" (click)="doFollow()"> -->
           </ion-col>
           <ion-col col-3 text-center>
             <img src="assets/imgs/Other-Profile/Push.png" class="img-responsive custom-size">
-            <p style="font-size: 2.5vw;">Push</p>
+            <p style="font-size: 2.5vw;">{{push}}</p>
           </ion-col>
           <ion-col col-3 text-center>
             <img src="assets/imgs/Profile/My Profile Icon/view.png" class="img-responsive custom-size">
-            <p style="font-size: 2.5vw;">View Activity Log</p>
+            <p style="font-size: 2.5vw;">{{view_activity_log}}</p>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -70,13 +70,13 @@
   <div>
     <ion-segment [(ngModel)]="user">
       <ion-segment-button value="Stories">
-        Stories
+        {{stories}}
       </ion-segment-button>
       <ion-segment-button value="Ranking">
-        Ranking
+        {{ranking}}
       </ion-segment-button>
       <ion-segment-button value="Followers">
-        Followers
+        {{followers_txt}}
       </ion-segment-button>
     </ion-segment>
   </div>
