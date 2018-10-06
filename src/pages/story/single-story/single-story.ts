@@ -6,6 +6,8 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { ShowStoryPage } from '../show-story/show-story';
 import { ReceiptShowPage } from '../receipt-show/receipt-show';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -36,6 +38,14 @@ export class SingleStoryPage {
   private totalFlames;
   private created_date;
 
+  private story;
+  private rarau;
+  private emoji;
+  private swipe_comment;
+  private already_saved;
+  private saved;
+  private story_saved;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
@@ -43,13 +53,44 @@ export class SingleStoryPage {
     public loadingProvider: LoadingProvider,
     public LoginProvider: LoginProvider,
     public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider,
   ) {
 
+    this.setText();
     this.story_id = this.navParams.get('story_id');
     console.log('story_id : ' + this.story_id);
     this.isLogin();
     this.getStories();
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('story').subscribe((text: string) => {
+      this.story = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('emoji').subscribe((text: string) => {
+      this.emoji = text;
+    });
+    this.translate.get('swipe_comment').subscribe((text: string) => {
+      this.swipe_comment = text;
+    });
+    this.translate.get('already_saved').subscribe((text: string) => {
+      this.already_saved = text;
+    });
+    this.translate.get('saved').subscribe((text: string) => {
+      this.saved = text;
+    });
+    this.translate.get('story_saved').subscribe((text: string) => {
+      this.story_saved = text;
+    });
+
   }
 
   ionViewDidLoad() {
@@ -231,7 +272,7 @@ export class SingleStoryPage {
         this.responseData = response;
         this.status = this.responseData.status;
         if (!this.status) {
-          this.alertProvider.title = 'Already Saved';
+          this.alertProvider.title = this.already_saved;
           if (this.responseData.result) {
             this.responseData.result.forEach(element => {
               if (element.id == 'story_id') {
@@ -241,8 +282,8 @@ export class SingleStoryPage {
           }
         }
         else {
-          this.alertProvider.title = 'Saved';
-          this.alertProvider.message = 'Story saved successfully.';
+          this.alertProvider.title = this.saved;
+          this.alertProvider.message = this.story_saved;
         }
         this.loadingProvider.dismiss();
 

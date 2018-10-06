@@ -7,6 +7,8 @@ import { CameraOpenPage } from '../../AccountModule/camera-open/camera-open';
 import { StoryCategoryPage } from '../story-category/story-category';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 //provider
 import { LoginProvider } from '../../../providers/login/login';
@@ -37,6 +39,9 @@ export class UploadReceiptPage {
 
   public flashMode = "off";
 
+  public error;
+  public select_img_first;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
@@ -46,7 +51,9 @@ export class UploadReceiptPage {
     public alertProvider: AlertProvider,
     public camera: Camera,
     private loginProvider: LoginProvider,
-    public loadingProvider: LoadingProvider, ) {
+    public loadingProvider: LoadingProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
     if (this.srcPhoto != undefined) {
       this.receiptImage = this.srcPhoto;
@@ -61,6 +68,18 @@ export class UploadReceiptPage {
     this.locName = this.navParams.get('locName');
     this.latitude = this.navParams.get('latitude');
     this.longitude = this.navParams.get('longitude');
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('error').subscribe((text: string) => {
+      this.error = text;
+    });
+    this.translate.get('select_img_first').subscribe((text: string) => {
+      this.select_img_first = text;
+    });
   }
 
   ionViewDidLoad() {
@@ -100,8 +119,8 @@ export class UploadReceiptPage {
     //code to save
     console.log('select : ' + this.imgSend);
     if (this.imgSend == undefined) {
-      this.alertProvider.title = 'Error';
-      this.alertProvider.message = 'Please Select Image First.';
+      this.alertProvider.title = this.error;
+      this.alertProvider.message = this.select_img_first;
       this.alertProvider.showAlert();
     }
     else {

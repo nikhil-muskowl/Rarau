@@ -5,12 +5,12 @@
         <button start class="back-btn" (click)='back()'>
           <ion-icon class="toolbar-icon" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         </button>
-        Filter
+        {{filter_txt}}
       </ion-title>
       <ion-buttons end>
 
         <button class="nxt-color" *ngIf="!story" ion-button large (click)="next()">
-          Next
+          {{next_txt}}
         </button>
       </ion-buttons>
     </ion-toolbar>
@@ -25,7 +25,8 @@
 <ion-content style="background-color: #FAFAFA;">
 
   <div id="imageFilter3">
-    <img [src]="src" class="full-image" [class]="filter.class" (press)="press($event)" (touchend)="end()" id="imageFilter" #imageFilter>
+    <img [src]="src" class="full-image" [class]="filter.class" (press)="press($event)" (touchend)="end()" id="imageFilter"
+      #imageFilter>
   </div>
 
   <canvas id="imageFilter2" hidden="true"></canvas>
@@ -100,10 +101,10 @@
 
   <ion-segment class="toolbar-filter" mode="md">
     <ion-segment-button value="filter" class="segment-text" (click)="cancel()">
-      CANCEL
+      {{cancel_txt}}
     </ion-segment-button>
     <ion-segment-button value="edit" class="segment-text" (click)="done()">
-      DONE
+      {{done_txt}}
     </ion-segment-button>
   </ion-segment>
 </ion-footer>

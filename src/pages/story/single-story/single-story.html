@@ -5,9 +5,9 @@
         <button start class="back-btn" (click)='goBack()'>
           <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
         </button>
-        Story
+        {{story}}
         <span style="float:right;">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
       </ion-title>
     </ion-toolbar>
   </ion-navbar>
@@ -52,7 +52,7 @@
         <ion-col col-9>
           <form>
             <ion-item>
-              <button ion-button clear item-left>Emoji</button>
+              <button ion-button clear item-left>{{emoji}}</button>
               <ion-input placeholder="Type here" type="text"></ion-input>
             </ion-item>
           </form>
@@ -70,7 +70,7 @@
       </ion-row>
       <ion-row class="comment-back" swipeAll (swipeup)="goToComments($event)" text-center>
         <ion-col col-12>
-          <p>Swipe up to View all Comments</p>
+          <p>{{swipe_comment}}</p>
           <div>
             <img class="comment-img" src="assets/imgs/up-arrow.png">
           </div>

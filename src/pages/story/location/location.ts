@@ -5,6 +5,8 @@ import { LocationTrackerProvider } from '../../../providers/location-tracker/loc
 import { AlertProvider } from '../../../providers/alert/alert';
 import { DomSanitizer } from "@angular/platform-browser";
 import { StoryCategoryPage } from '../story-category/story-category';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -24,18 +26,43 @@ export class LocationPage {
   public data: any;
   public image;
 
+  public error;
+  public location_txt;
+  public enter_value_serach;
+  public next;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
     public locationTrackerProvider: LocationTrackerProvider,
     public baiduProvider: BaiduProvider,
-    public sanitizer: DomSanitizer, ) {
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
     this.image = this.navParams.get('image');
     console.log('image on location page : ' + this.image);
 
     this.latitude;
     this.longitude;
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('error').subscribe((text: string) => {
+      this.error = text;
+    });
+    this.translate.get('enter_value_serach').subscribe((text: string) => {
+      this.enter_value_serach = text;
+    });
+    this.translate.get('location').subscribe((text: string) => {
+      this.location_txt = text;
+    });
+    this.translate.get('next').subscribe((text: string) => {
+      this.next = text;
+    });
   }
 
   ionViewDidLoad() {
@@ -46,8 +73,8 @@ export class LocationPage {
 
     if (this.latitude == 0 && this.longitude == 0) {
 
-      this.alertProvider.title = 'Error';
-      this.alertProvider.message = 'Please Enter value to search.';
+      this.alertProvider.title = this.error;
+      this.alertProvider.message = this.enter_value_serach;
       this.alertProvider.showAlert();
     }
     else {

@@ -37,7 +37,7 @@
 
     <!-- Story Search location -->
     <ion-item>
-      <ion-searchbar placeholder="Story Search by location" [(ngModel)]="searchLoc" [showCancelButton]="shouldShowCancel"
+      <ion-searchbar placeholder="{{story_srch_loc}}" [(ngModel)]="searchLoc" [showCancelButton]="shouldShowCancel"
         (ionInput)="onLocInput($event)" (ionCancel)="onLocCancel($event)">
       </ion-searchbar>
       <!-- <button class="btn-color" clear (click)="searchLocation()" item-right>

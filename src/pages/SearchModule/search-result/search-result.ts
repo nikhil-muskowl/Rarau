@@ -8,6 +8,8 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { SearchResProvider } from '../../../providers/search-res/search-res';
 import { LoginProvider } from '../../../providers/login/login';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -16,6 +18,11 @@ import { LoginProvider } from '../../../providers/login/login';
 })
 
 export class SearchResultPage {
+
+  public rarau;
+  public search_result;
+  public no_result;
+  public no_result_found;
 
   public searchTxt;
   public responseData;
@@ -30,7 +37,7 @@ export class SearchResultPage {
 
   searchpageForm: FormGroup;
   private formData: any;
-  private error_srcLoc = 'field is required';
+  private error_srcLoc;
   public user_id;
 
   constructor(public navCtrl: NavController,
@@ -39,12 +46,36 @@ export class SearchResultPage {
     public loadingProvider: LoadingProvider,
     public searchRes: SearchResProvider,
     public LoginProvider: LoginProvider,
-    public formBuilder: FormBuilder, ) {
+    public formBuilder: FormBuilder,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     this.searchTxt = this.navParams.data.searchUse;
     console.log('searchTxt: ' + JSON.stringify(this.navParams.data));
     this.getSearch(this.searchTxt);
     this.crearForm();
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('search_result').subscribe((text: string) => {
+      this.search_result = text;
+    });
+    this.translate.get('no_result').subscribe((text: string) => {
+      this.no_result = text;
+    });
+    this.translate.get('no_result_found').subscribe((text: string) => {
+      this.no_result_found = text;
+    });
+    this.translate.get('error_srcLoc').subscribe((text: string) => {
+      this.error_srcLoc = text;
+    });
   }
 
   ionViewDidLoad() {
@@ -73,8 +104,8 @@ export class SearchResultPage {
           this.binddata();
         }
         else {
-          this.alertProvider.title = 'No Result';
-          this.alertProvider.message = 'No search result found.!!!';
+          this.alertProvider.title = this.no_result;
+          this.alertProvider.message = this.no_result_found;
           this.alertProvider.showAlert();
         }
       },

@@ -8,6 +8,8 @@ import { LoginProvider } from '../../../providers/login/login';
 import { BaiduProvider } from '../../../providers/baidu/baidu';
 import { SearchResProvider } from '../../../providers/search-res/search-res';
 import { LocationTrackerProvider } from '../../../providers/location-tracker/location-tracker';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -36,7 +38,8 @@ export class SearchPage {
   public paramData;
   public user_id;
 
-  public story_srch_user = 'and band';
+  public story_srch_user;
+  public story_srch_loc;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -48,10 +51,25 @@ export class SearchPage {
     public formBuilder: FormBuilder,
     public locationTrackerProvider: LocationTrackerProvider,
     public baiduProvider: BaiduProvider,
-    public searchProvider: SearchResProvider, ) {
+    public searchProvider: SearchResProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     // this.createForm();
     this.getCategory();
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('story_srch_user').subscribe((text: string) => {
+      this.story_srch_user = text;
+    });
+    this.translate.get('story_srch_loc').subscribe((text: string) => {
+      this.story_srch_loc = text;
+    });
   }
 
   getCategory() {

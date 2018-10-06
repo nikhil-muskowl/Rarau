@@ -9,6 +9,8 @@ import { ConfigProvider } from '../../../providers/config/config';
 import { LoginProvider } from '../../../providers/login/login';
 import { TabsService } from "../../util/tabservice";
 import { UploadReceiptPage } from "../upload-receipt/upload-receipt";
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -33,7 +35,6 @@ export class StoryCategoryPage {
   public user_id;
   private formData: any;
   private tags = [];
-  private error_tags = 'field is required';
   private latitude;
   private longitude;
   private locName;
@@ -42,7 +43,14 @@ export class StoryCategoryPage {
   public paramData;
 
   public btnGo = 1;
-  public btnname = 'Publish';
+
+  public btnname;
+  public category;
+  public success;
+  public error;
+  public field_not_blank;
+  public choose_category;
+  public write_something;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,9 +60,12 @@ export class StoryCategoryPage {
     public loadingProvider: LoadingProvider,
     public cofigPro: ConfigProvider,
     private tabService: TabsService,
-    public LoginProvider: LoginProvider, ) {
+    public LoginProvider: LoginProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider,
+  ) {
 
-
+    this.setText();
 
     this.isLogin();
     this.sel_cat_id = this.navParams.get('sel_cat_id');
@@ -74,6 +85,34 @@ export class StoryCategoryPage {
     console.log('image : ' + this.image);
     this.setCategory();
     this.bindtags();
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('publish').subscribe((text: string) => {
+      this.category = text;
+    });
+    this.translate.get('forgot_pass').subscribe((text: string) => {
+      this.btnname = text;
+    });
+    this.translate.get('success').subscribe((text: string) => {
+      this.success = text;
+    });
+    this.translate.get('error').subscribe((text: string) => {
+      this.error = text;
+    });
+    this.translate.get('field_not_blank').subscribe((text: string) => {
+      this.field_not_blank = text;
+    });
+    this.translate.get('choose_category').subscribe((text: string) => {
+      this.choose_category = text;
+    });
+    this.translate.get('write_something').subscribe((text: string) => {
+      this.write_something = text;
+    });
+
   }
 
   ionViewDidLoad() {
@@ -202,7 +241,7 @@ export class StoryCategoryPage {
               this.message = this.responseData.message;
 
               if (this.responseData.status) {
-                this.alertProvider.title = 'Success';
+                this.alertProvider.title = this.success;
                 this.alertProvider.message = this.message;
                 this.alertProvider.showAlert();
 
@@ -217,14 +256,14 @@ export class StoryCategoryPage {
           );
         }
         else {
-          this.alertProvider.title = 'Error!';
-          this.alertProvider.message = 'Write someting field can\'t be blank';
+          this.alertProvider.title = this.error;
+          this.alertProvider.message = this.field_not_blank;
           this.alertProvider.showAlert();
         }
       }
       else {
-        this.alertProvider.title = 'Error!';
-        this.alertProvider.message = 'Please Choose Category';
+        this.alertProvider.title = this.error;
+        this.alertProvider.message = this.choose_category;
         this.alertProvider.showAlert();
       }
     }

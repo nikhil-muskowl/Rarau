@@ -5,6 +5,8 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { SingleStoryPage } from '../single-story/single-story';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -25,15 +27,33 @@ export class SavedStoriesPage {
   public filterData;
   public model: any[] = [];
 
+  public saved_story;
+  public rarau;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
-    public LoginProvider: LoginProvider, ) {
+    public LoginProvider: LoginProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
     this.isLogin();
     this.getSavedStories();
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('saved_story').subscribe((text: string) => {
+      this.saved_story = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+
   }
 
   isLogin() {

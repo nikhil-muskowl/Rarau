@@ -6,6 +6,8 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { FormServiceProvider } from '../../../providers/form-service/form-service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -13,7 +15,6 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: 'show-story.html',
 })
 export class ShowStoryPage {
-  title = 'Story';
 
   public story_id;
   public user_id;
@@ -42,6 +43,13 @@ export class ShowStoryPage {
   private messageTitle;
   private message;
 
+  private title;
+  private warning;
+  private success;
+  private rarau;
+  private apo_story;
+  private say_something;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
@@ -49,12 +57,44 @@ export class ShowStoryPage {
     public loadingProvider: LoadingProvider,
     private formBuilder: FormBuilder,
     private formServiceProvider: FormServiceProvider,
-    public LoginProvider: LoginProvider, ) {
+    public LoginProvider: LoginProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
+
+    this.setText();
 
     this.createForm();
     this.isLogin();
     this.story_id = this.navParams.get('story_id');
     this.getStories();
+
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('story').subscribe((text: string) => {
+      this.title = text;
+    });
+    this.translate.get('warning').subscribe((text: string) => {
+      this.warning = text;
+    });
+    this.translate.get('success').subscribe((text: string) => {
+      this.success = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('apo_story').subscribe((text: string) => {
+      this.apo_story = text;
+    });
+    this.translate.get('say_something').subscribe((text: string) => {
+      this.say_something = text;
+    });
+    this.translate.get('comment').subscribe((text: string) => {
+      this.comment = text;
+    });
 
   }
 
@@ -148,7 +188,7 @@ export class ShowStoryPage {
           this.message = this.responseData.message;
 
           if (!this.status) {
-            this.messageTitle = 'Warning!';
+            this.messageTitle = this.warning;
             if (this.responseData.result) {
               this.responseData.result.forEach(element => {
                 if (element.id == 'comment') {
@@ -157,7 +197,7 @@ export class ShowStoryPage {
               });
             }
           } else {
-            this.messageTitle = 'Sucess!';
+            this.messageTitle = this.success;
             this.getStories();
           }
 

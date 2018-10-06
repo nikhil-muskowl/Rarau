@@ -6,6 +6,8 @@ import { LocationPage } from '../../story/location/location'
 import { FilterService } from "../../util/filterservice";
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { TabsService } from "../../util/tabservice";
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -48,6 +50,11 @@ export class ShowPhotoPage {
   actualView = "default";
   title;
 
+  filter_txt;
+  next_txt;
+  cancel_txt;
+  done_txt;
+
   @ViewChild(Content)
   content: Content;
 
@@ -65,6 +72,8 @@ export class ShowPhotoPage {
     public loadingProvider: LoadingProvider,
     private tabService: TabsService,
     // public storyService: StoryService,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider,
   ) {
 
     this.tabService.hide();
@@ -77,6 +86,24 @@ export class ShowPhotoPage {
       this.story = story;
     this.filterService.init()
     this.filter = this.filters[0]
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('filter').subscribe((text: string) => {
+      this.filter_txt = text;
+    });
+    this.translate.get('next').subscribe((text: string) => {
+      this.next_txt = text;
+    });
+    this.translate.get('cancel').subscribe((text: string) => {
+      this.cancel_txt = text;
+    });
+    this.translate.get('done').subscribe((text: string) => {
+      this.done_txt = text;
+    });
   }
 
   ionViewWillEnter() {
