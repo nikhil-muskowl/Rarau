@@ -67,7 +67,7 @@ export class ProfilePage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-    this.setText();
+
   }
 
   setText() {
@@ -116,11 +116,13 @@ export class ProfilePage {
     });
 
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
 
   ionViewWillEnter() {
+    this.setText();
     this.isLogin();
     this.user = 'Stories';
   }

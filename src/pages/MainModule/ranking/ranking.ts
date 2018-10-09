@@ -13,8 +13,9 @@ import { LanguageProvider } from '../../../providers/language/language';
   selector: 'page-ranking',
   templateUrl: 'ranking.html',
 })
+
 export class RankingPage {
-  public title = 'Ranking';
+  public title;
   private responseData: any;
   private id;
   private items;
@@ -25,7 +26,6 @@ export class RankingPage {
   public length = 5;
   public start = 0;
 
-  public ranking;
   public rarau;
   public by;
   public from;
@@ -38,11 +38,6 @@ export class RankingPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-      this.translate.setDefaultLang(this.languageProvider.getLanguage());
-      this.translate.use(this.languageProvider.getLanguage());
-      this.translate.get('ranking').subscribe((text: string) => {
-        this.ranking = text;
-      });
 
     this.setText();
     this.getTypes();
@@ -51,10 +46,11 @@ export class RankingPage {
   }
 
   setText() {
-    
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
 
     this.translate.get('ranking').subscribe((text: string) => {
-      this.ranking = text;
+      this.title = text;
     });
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;

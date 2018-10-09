@@ -149,20 +149,18 @@ export class StoryServiceProvider {
   apiTopStoryMarker(data: any) {
     this.formData = new FormData();
 
+    this.formData.append('user_id', data.user_id);
+
     if (data.searchUse != undefined) {
       this.formData.append('user_name', data.searchUse);
     }
-
     if (data.latitude != undefined) {
       this.formData.append('latitude', data.latitude);
     }
     if (data.longitude != undefined) {
       this.formData.append('longitude', data.longitude);
     }
-
-    this.formData.append('user_id', data.user_id);
-
-    if (data.searchCat) {
+    if (data.searchCat != undefined) {
       this.formData.append('story_types', JSON.stringify(data.searchCat));
     }
 

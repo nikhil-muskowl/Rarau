@@ -21,8 +21,8 @@ export class AlertProvider {
     // private toast: Toast,
     public alertCtrl: AlertController,
     public translate: TranslateService,
-    public languageProvider: LanguageProvider,
-  ) {
+    public languageProvider: LanguageProvider, ) {
+
     this.setText()
 
   }

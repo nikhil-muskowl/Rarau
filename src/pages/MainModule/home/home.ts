@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, Platform, PopoverController, Popover } from 'ionic-angular';
+import { NavController, Platform, PopoverController, Popover, Modal, ModalController, ModalOptions, IonicPage, ViewController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SearchResultPage } from '../../SearchModule/search-result/search-result';
 import { ProfilePage } from '../profile/profile';
@@ -12,7 +12,6 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { LoginProvider } from '../../../providers/login/login';
-import { Modal, ModalController, ModalOptions, IonicPage, ViewController } from 'ionic-angular';
 import { SearchPage } from '../../SearchModule/search/search';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
@@ -109,7 +108,7 @@ export class HomePage {
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;
     });
-    
+
     this.translate.get('click_to_search').subscribe((text: string) => {
       this.click_to_search = text;
     });
@@ -152,17 +151,16 @@ export class HomePage {
           this.bindMap();
         }
       }
-
     });
 
     myModal.onWillDismiss((data) => {
       console.log("I'm about to dismiss");
       console.log(data);
     });
-
   }
 
   ionViewDidLoad() {
+    this.setText();
     this.user_id = this.LoginProvider.isLogin();
 
     this.latitude = '39.919981';
@@ -199,15 +197,26 @@ export class HomePage {
       mapType: MapTypeEnum.BMAP_NORMAL_MAP
     };
 
+    if (this.serLatitude != undefined && this.serLongitude != undefined) {
+      this.paramStryData = {
+        'user_id': this.user_id,
+        'searchCat': this.searchCat,
+        'searchUse': this.searchUse,
+        'latitude': this.serLatitude,
+        'longitude': this.serLongitude
+      };
+    }
+    else {
+      this.paramStryData = {
+        'user_id': this.user_id,
+        'searchCat': this.searchCat,
+        'searchUse': this.searchUse,
+        'latitude': this.latitude,
+        'longitude': this.longitude
+      };
+    }
 
-    this.paramStryData = {
-      'user_id': this.user_id,
-      'searchCat': this.searchCat,
-      'searchUse': this.searchUse,
-      'latitude': this.serLatitude,
-      'longitude': this.serLongitude
-    };
-    console.log('bind map this.user_id : ' + JSON.stringify(this.paramStryData));
+    console.log('bind map paramStryData : ' + JSON.stringify(this.paramStryData));
     this.storyService.apiTopStoryMarker(this.paramStryData).subscribe(
       response => {
         this.responseData = response;
@@ -256,7 +265,6 @@ export class HomePage {
       () => {
         this.loadingProvider.dismiss();
       }
-
     );
 
     this.navOptions = {
