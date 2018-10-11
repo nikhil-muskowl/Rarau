@@ -98,5 +98,7 @@
     "logout": "Logout",
     "confirm": "Confirm",
     "want_to_continue": "Do you want continue?",
+    "tutorial": "Tutorial",
+    "skip": "Skip",
     "home": "Home"
 }

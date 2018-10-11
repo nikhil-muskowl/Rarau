@@ -83,7 +83,7 @@ export class HomePage {
     this.setText();
 
     this.user_id = this.LoginProvider.isLogin();
-    // this.showStories = true;
+    this.showStories = true;
     this.latitude = '39.919981';
     this.longitude = '116.414977';
 

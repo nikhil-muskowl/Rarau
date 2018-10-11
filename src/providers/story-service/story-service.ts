@@ -164,6 +164,9 @@ export class StoryServiceProvider {
       this.formData.append('story_types', JSON.stringify(data.searchCat));
     }
 
+
+    console.log(this.formData);
+
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/top_stories_marker',
       this.formData,
       {

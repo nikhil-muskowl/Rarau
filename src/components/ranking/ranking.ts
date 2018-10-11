@@ -7,6 +7,7 @@ import { SingleStoryPage } from '../../pages/story/single-story/single-story';
 import { StoryServiceProvider } from '../../providers/story-service/story-service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../providers/language/language';
+import { LoginProvider } from '../../providers/login/login';
 
 @Component({
   selector: 'ranking',
@@ -20,6 +21,7 @@ export class RankingComponent {
   private types;
   private story_type_id = 0;
   private filterData: any;
+  private user_id;
 
   public length = 5;
   public start = 0;
@@ -34,11 +36,12 @@ export class RankingComponent {
     public storiesProvider: StoryServiceProvider,
     public alertProvider: AlertProvider,
     public translate: TranslateService,
+    public LoginProvider: LoginProvider,
     public languageProvider: LanguageProvider, ) {
 
     this.setText();
     this.getTypes();
-
+    this.user_id = this.LoginProvider.isLogin();
     console.log(this.story_type_id);
   }
 

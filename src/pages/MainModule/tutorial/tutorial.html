@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-slides *ngIf="tutImages && tutImages.length" (ionSlideDidChange)="slideChanged()" pager>
+    <ion-slide *ngFor="let tutorial of tutImages" class="background" [style.background]="'url('+tutorial.image+')'">
+      <ion-grid>
+        <div class="story-footer">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="text-left" col-3>
+                <button full ionButton (click)="tuteSkip()">{{skip}}</button>
+              </ion-col>
+              <ion-col col-3>
+
+              </ion-col>
+              <ion-col class="text-right" col-3 offset-3>
+                <button full ionButton (click)="tuteSeen()">{{next}}</button>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+        </div>
+      </ion-grid>
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>

@@ -21,6 +21,7 @@ import { OthersProfilePage } from '../pages/AccountModule/others-profile/others-
 import { EditProfilePage } from '../pages/MainModule/edit-profile/edit-profile';
 import { ProfilePhotoPage } from '../pages/MainModule/profile-photo/profile-photo';
 import { SettingsPage } from '../pages/MainModule/settings/settings';
+import { TutorialPage } from '../pages/MainModule/tutorial/tutorial';
 
 //Account module
 import { LoginPage } from '../pages/AccountModule/login/login';
@@ -155,6 +156,7 @@ export function createTranslateLoader(http: HttpClient) {
     UploadReceiptPage,
     ReceiptShowPage,
     SettingsPage,
+    TutorialPage,
   ],
   imports: [
     HttpClientModule,
@@ -190,7 +192,7 @@ export function createTranslateLoader(http: HttpClient) {
       ]
     })
   ],
-  exports:[
+  exports: [
     TranslateModule
   ],
   bootstrap: [IonicApp],
@@ -236,6 +238,7 @@ export function createTranslateLoader(http: HttpClient) {
     UploadReceiptPage,
     ReceiptShowPage,
     SettingsPage,
+    TutorialPage,
   ],
   providers: [
     StatusBar,

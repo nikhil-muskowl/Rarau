@@ -9,10 +9,12 @@ import { HomePage } from '../pages/MainModule/home/home';
 import { RankingPage } from '../pages/MainModule/ranking/ranking';
 import { ProfilePage } from '../pages/MainModule/profile/profile';
 import { GalleryPage } from '../pages/story/gallery/gallery';
+import { TutorialPage } from '../pages/MainModule/tutorial/tutorial';
 
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
 import { AlertController } from 'ionic-angular';
 import { LanguageProvider } from '../providers/language/language';
+import { ConfigProvider } from '../providers/config/config';
 
 export interface PageInterface {
   title: string;
@@ -30,16 +32,16 @@ export interface PageInterface {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = MainTabsPage;
+  rootPage: any;
   private alert: Alert;
   private language;
 
-  pages: PageInterface[] = [
-    { title: 'Home', name: 'TabsPage', component: MainTabsPage, tabComponent: HomePage, index: 0, icon: 'home' },
-    { title: 'Upload', name: 'TabsPage', component: MainTabsPage, tabComponent: GalleryPage, index: 0, icon: 'home' },
-    { title: 'Ranking', name: 'TabsPage', component: MainTabsPage, tabComponent: RankingPage, index: 0, icon: 'home' },
-    { title: 'Profile', name: 'TabsPage', component: MainTabsPage, tabComponent: ProfilePage, index: 0, icon: 'home' }
-  ];
+  // pages: PageInterface[] = [
+  //   { title: 'Home', name: 'TabsPage', component: MainTabsPage, tabComponent: HomePage, index: 0, icon: 'home' },
+  //   { title: 'Upload', name: 'TabsPage', component: MainTabsPage, tabComponent: GalleryPage, index: 0, icon: 'home' },
+  //   { title: 'Ranking', name: 'TabsPage', component: MainTabsPage, tabComponent: RankingPage, index: 0, icon: 'home' },
+  //   { title: 'Profile', name: 'TabsPage', component: MainTabsPage, tabComponent: ProfilePage, index: 0, icon: 'home' }
+  // ];
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
@@ -49,8 +51,15 @@ export class MyApp {
     private alertCtrl: AlertController,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
-    public locationTracker: LocationTrackerProvider, ) {
+    public locationTracker: LocationTrackerProvider,
+    public configProvider: ConfigProvider) {
 
+    if (this.configProvider.isSeen()) {
+      this.rootPage = MainTabsPage;
+    }
+    else {
+      this.rootPage = TutorialPage;
+    }
     this.initializeApp();
 
     this.locationTracker.setLocation();
