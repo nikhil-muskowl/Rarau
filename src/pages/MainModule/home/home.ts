@@ -24,6 +24,7 @@ export class HomePage {
   public images: Array<any>;
   public popover: Popover;
   public latLong;
+  public zoomlatLong;
   public locations: any;
   public filterData: any;
   public responseData: any;
@@ -55,6 +56,8 @@ export class HomePage {
 
   public rarau;
   public click_to_search;
+  public sorry;
+  public no_location;
 
   @ViewChild('map') mapElement: ElementRef;
   constructor(
@@ -97,13 +100,18 @@ export class HomePage {
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
-    
+
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;
     });
-
     this.translate.get('click_to_search').subscribe((text: string) => {
       this.click_to_search = text;
+    });
+    this.translate.get('sorry').subscribe((text: string) => {
+      this.sorry = text;
+    });
+    this.translate.get('no_location').subscribe((text: string) => {
+      this.no_location = text;
     });
   }
 
@@ -215,6 +223,7 @@ export class HomePage {
         this.responseData = response;
 
         if (this.responseData.data.length > 0) {
+          console.log('responseData.data : ' + JSON.stringify(this.responseData.data));
           this.responseData.data.forEach(element => {
             this.markers.push({
               options: {
@@ -236,20 +245,32 @@ export class HomePage {
                 lng: element.longitude
               }
             });
-            this.options = {
-              centerAndZoom: {
+
+            if (this.serLatitude != undefined && this.serLongitude != undefined) {
+              this.zoomlatLong = {
+                lat: this.serLatitude,
+                lng: this.serLongitude,
+                zoom: 17
+              }
+            }
+            else {
+              this.zoomlatLong = {
                 lat: element.latitude,
                 lng: element.longitude,
                 zoom: 15
-              },
+              }
+            }
+
+            this.options = {
+              centerAndZoom: this.zoomlatLong,
               enableKeyboard: true,
               mapType: MapTypeEnum.BMAP_NORMAL_MAP
             };
           });
         }
         else {
-          this.alertProvider.title = 'Sorry...';
-          this.alertProvider.message = 'No data found at this Location';
+          this.alertProvider.title = this.sorry;
+          this.alertProvider.message = this.no_location;
           this.alertProvider.showAlert();
         }
         this.loadingProvider.dismiss();

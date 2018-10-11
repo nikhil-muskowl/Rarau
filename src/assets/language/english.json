@@ -100,5 +100,7 @@
     "want_to_continue": "Do you want continue?",
     "tutorial": "Tutorial",
     "skip": "Skip",
+    "sorry": "Sorry...",
+    "no_location": "No data found at this Location",
     "home": "Home"
 }
