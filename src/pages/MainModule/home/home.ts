@@ -2,8 +2,6 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, Platform, PopoverController, Popover, Modal, ModalController, ModalOptions, IonicPage, ViewController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SearchResultPage } from '../../SearchModule/search-result/search-result';
-import { ProfilePage } from '../profile/profile';
-import { StoryTopListPage } from '../../story/story-top-list/story-top-list';
 import { StoryListPage } from '../../story/story-list/story-list';
 import { LocationTrackerProvider } from '../../../providers/location-tracker/location-tracker';
 import { BaiduProvider } from '../../../providers/baidu/baidu';
@@ -39,9 +37,6 @@ export class HomePage {
   point: Point;
   navOptions: NavigationControlOptions;
 
-  private error_srcLoc = 'field is required';
-  private error_srcUser = 'field is required';
-
   searchForm: FormGroup;
   private formData: any;
   searchLocation;
@@ -62,7 +57,6 @@ export class HomePage {
   public click_to_search;
 
   @ViewChild('map') mapElement: ElementRef;
-
   constructor(
     private navCtrl: NavController,
     private platform: Platform,
@@ -77,8 +71,7 @@ export class HomePage {
     public storyService: StoryServiceProvider,
     public LoginProvider: LoginProvider,
     public translate: TranslateService,
-    public languageProvider: LanguageProvider,
-  ) {
+    public languageProvider: LanguageProvider, ) {
 
     this.setText();
 
@@ -86,7 +79,6 @@ export class HomePage {
     this.showStories = true;
     this.latitude = '39.919981';
     this.longitude = '116.414977';
-
 
     // this.latitude = this.locationTrackerProvider.getLatitude();
     // this.longitude = this.locationTrackerProvider.getLongitude();
@@ -105,6 +97,7 @@ export class HomePage {
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
+    
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;
     });
@@ -296,7 +289,6 @@ export class HomePage {
     console.log(this.locations);
   }
 
-
   public showWindow({ e, marker, map }: any): void {
     // var Param = {
     //   marker: JSON.stringify(marker.getPosition())
@@ -354,13 +346,8 @@ export class HomePage {
     console.log(`Map clicked with coordinate: ${e.point.lng}, ${e.point.lat}`);
   }
 
-  openProfile() {
-    this.navCtrl.setRoot(ProfilePage);
-  }
-
   goToList() {
     this.showStories = false;
     this.navCtrl.push(StoryListPage, this.paramData);
   }
-
 }

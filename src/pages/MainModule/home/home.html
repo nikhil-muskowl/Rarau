@@ -3,7 +3,7 @@
     <ion-toolbar>
       <ion-title text-center>
         <span><img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
-        <span style="float: right"><img class="round-circle" src="assets/icon/user.png" width="45" height="45" (click)="openProfile()"></span>
+        <span style="float: right"><img src="assets/icon/search_home.png" width="50" height="50" (click)="openModal()"></span>
       </ion-title>
     </ion-toolbar>
   </ion-navbar>
@@ -17,29 +17,16 @@
           <ion-col text-center>
             <img class="s-image" src="{{image.categoryFirst}}" width="3" height="3" />
           </ion-col>
-          <ion-col text-center>
-            <span class="background-rank">{{image.text}}<sup>th</sup></span>
-            <span class="border-line"></span>
-          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <img class="s-image" src="{{image.categoryPerson}}" width="3" height="3">
+            <img class="p-image" src="{{image.categoryPerson}}" width="3" height="3">
             <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
-
           </ion-col>
         </ion-row>
       </div>
-
     </ion-slide>
   </ion-slides>
-
-  <div>
-    <ion-list>
-      <h4 (click)="openModal()">{{click_to_search}}
-      </h4>
-    </ion-list>
-  </div>
 
   <div class="map">
     <baidu-map [options]="options" (onMapLoaded)="loadMap($event)" (clicked)="clickmap($event)">
@@ -64,6 +51,4 @@
       </ion-item>
     </ion-list>
   </div>
-
-
 </ion-content>

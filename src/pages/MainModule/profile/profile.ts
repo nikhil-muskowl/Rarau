@@ -67,7 +67,7 @@ export class ProfilePage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-
+    this.setText();
   }
 
   setText() {
@@ -114,7 +114,6 @@ export class ProfilePage {
     this.translate.get('logout').subscribe((text: string) => {
       this.logout_txt = text;
     });
-
   }
 
   ionViewDidLoad() {

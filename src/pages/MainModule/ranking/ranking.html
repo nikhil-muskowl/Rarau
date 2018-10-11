@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="types-filter">
+  <div>
     <ion-slides slidesPerView="4">
       <ion-slide *ngFor="let type of types" (click)="typeChanged(type)">
         <ion-segment [(ngModel)]="story_type_id" color="primary">

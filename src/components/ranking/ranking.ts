@@ -105,6 +105,7 @@ export class RankingComponent {
 
         this.getList();
         this.loadingProvider.dismiss();
+        console.log('Story types : ' + JSON.stringify(this.types));
         console.log(JSON.stringify(this.types[0].id));
       },
       err => {
