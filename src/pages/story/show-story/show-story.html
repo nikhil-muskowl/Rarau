@@ -44,7 +44,7 @@
   </div>
 
   <ion-list no-lines>
-    <form [formGroup]="commentForm">
+    <form *ngIf="isComment" [formGroup]="commentForm">
 
       <!-- <ion-item>
             <button ion-button clear item-left>Say Something</button>
@@ -66,7 +66,7 @@
     </form>
     <!-- <button class="send-btn" clear type="button" item-right (click)="commentStory()">
       <ion-icon name="ios-send"></ion-icon></button> -->
-    <button ion-button full (click)="commentStory()">{{comment}}
+    <button ion-button full (click)="commentStory()">{{comment_txt}}
       <ion-icon name="ios-send"></ion-icon></button>
   </ion-list>
 
@@ -82,6 +82,7 @@
             <p>{{comment.comment}}</p>
           </div>
           <span>{{comment.date}}</span>
+          <span style="float :right" (click)="reportComment(comment.id)"><u>{{report_comment}}</u></span>
         </ion-col>
       </ion-row>
     </ion-item>

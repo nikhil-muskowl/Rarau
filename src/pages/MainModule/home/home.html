@@ -2,8 +2,9 @@
   <ion-navbar>
     <ion-toolbar>
       <ion-title text-center>
-        <span><img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
-        <span style="float: right"><img src="assets/icon/search_home.png" width="50" height="50" (click)="openModal()"></span>
+        <span style="margin-left: 50px;"><img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
+        <span style="float: right"><img src="assets/icon/search_home.png" width="40" height="40" (click)="openModal()"></span>
+        <span style="float: right; margin-right: 5px;"><img src="assets/icon/tut_home.png" width="40" height="40" (click)="openTutorial()"></span>
       </ion-title>
     </ion-toolbar>
   </ion-navbar>
@@ -34,7 +35,14 @@
       <control type="navigation" [options]="navOptions"></control>
     </baidu-map>
   </div>
+
   <div *ngIf="showStories" class="top-stories">
+    <ion-buttons end class="back-white">
+      <button>
+        <ion-icon text-right name="close-circle" (click)="closeList()"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-list (click)="goToList()" no-lines>
       <ion-item *ngFor="let record of stories; let i = index;">
         <ion-avatar item-start>
@@ -50,5 +58,17 @@
         <ion-note item-end>{{record.categories}}</ion-note>
       </ion-item>
     </ion-list>
+
+  </div>
+
+  <div>
+    <ion-slides *ngIf="Advdata" autoplay="3000" loop="true" speed="500" (ionSlideDidChange)="slideChanged()">
+      <ion-slide *ngFor="let slide of Advdata">
+        <div>
+          <img class="adv-img" src="{{slide.image_thumb}}" height="100" width="100">
+          <p>{{slide.title}}</p>
+        </div>
+      </ion-slide>
+    </ion-slides>
   </div>
 </ion-content>

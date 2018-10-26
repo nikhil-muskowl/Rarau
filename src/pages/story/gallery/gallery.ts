@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
-import { PhotoLibrary } from '@ionic-native/photo-library';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { CameraPreview } from "@ionic-native/camera-preview";
 import { ShowPhotoPage } from "../show-photo/show-photo";
@@ -27,7 +26,6 @@ export class GalleryPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private photoLibrary: PhotoLibrary,
     public cameraPreview: CameraPreview,
     public camera: Camera,
     public platform: Platform,

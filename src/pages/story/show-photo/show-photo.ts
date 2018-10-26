@@ -76,6 +76,7 @@ export class ShowPhotoPage {
     public languageProvider: LanguageProvider,
   ) {
 
+    this.setText();
     this.tabService.hide();
 
     this.src = this.navParams.get('photo');

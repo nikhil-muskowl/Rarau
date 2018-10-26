@@ -65,9 +65,13 @@
       </form>
     </div> -->
 
-    <button class="btn-color" clear (click)="globalSearch()" item-right>
+    <!-- <button class="btn-color" clear (click)="globalSearch()" item-right>
       <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
-    </button>
+    </button> -->
+
+    <button ion-button full class="search-btn" clear (click)="globalSearch()" item-right>
+        {{search_text}}<span> <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon></span>
+      </button>
   </div>
 
 </ion-content>

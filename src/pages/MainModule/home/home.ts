@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, Platform, PopoverController, Popover, Modal, ModalController, ModalOptions, IonicPage, ViewController } from 'ionic-angular';
+import { NavController, Platform, Modal, ModalController, ModalOptions, IonicPage, ViewController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SearchResultPage } from '../../SearchModule/search-result/search-result';
 import { StoryListPage } from '../../story/story-list/story-list';
@@ -13,6 +13,8 @@ import { LoginProvider } from '../../../providers/login/login';
 import { SearchPage } from '../../SearchModule/search/search';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { Slides } from 'ionic-angular';
+import { TutorialPage } from '../tutorial/tutorial';
 
 @Component({
   selector: 'page-home',
@@ -20,9 +22,11 @@ import { LanguageProvider } from '../../../providers/language/language';
 })
 
 export class HomePage {
+  @ViewChild(Slides) slides: Slides;
+  @ViewChild('map') mapElement: ElementRef;
+
   public title = 'Home';
   public images: Array<any>;
-  public popover: Popover;
   public latLong;
   public zoomlatLong;
   public locations: any;
@@ -32,6 +36,9 @@ export class HomePage {
   public latitude;
   public longitude;
   public data: any;
+
+  public Advdata: any;
+  public Advres;
 
   options: MapOptions;
   markers: Array<Marker> = [];
@@ -45,8 +52,9 @@ export class HomePage {
   public paramStryData;
   public paramData;
   public user_id;
+  public language_id;
   public stories: any;
-  public showStories: boolean;
+  public showStories: boolean = false;
   public markerHtml;
 
   public searchCat;
@@ -59,7 +67,6 @@ export class HomePage {
   public sorry;
   public no_location;
 
-  @ViewChild('map') mapElement: ElementRef;
   constructor(
     private navCtrl: NavController,
     private platform: Platform,
@@ -69,25 +76,11 @@ export class HomePage {
     public locationTrackerProvider: LocationTrackerProvider,
     public baiduProvider: BaiduProvider,
     public formBuilder: FormBuilder,
-    public popoverCtrl: PopoverController,
     public loadingProvider: LoadingProvider,
     public storyService: StoryServiceProvider,
     public LoginProvider: LoginProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
-
-    this.setText();
-
-    this.user_id = this.LoginProvider.isLogin();
-    this.showStories = true;
-    this.latitude = '39.919981';
-    this.longitude = '116.414977';
-
-    // this.latitude = this.locationTrackerProvider.getLatitude();
-    // this.longitude = this.locationTrackerProvider.getLongitude();
-
-    this.getLocation();
-    this.bindMap();
 
     this.images = [
       { categoryFirst: 'assets/icon/Front-Icons/food.png', text: '8', categoryPerson: 'assets/icon/user.png' },
@@ -95,6 +88,19 @@ export class HomePage {
       { categoryFirst: 'assets/icon/Front-Icons/world.png', text: '7', categoryPerson: 'assets/icon/user.png' },
       { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '2', categoryPerson: 'assets/icon/user.png' },
     ]
+  }
+
+  ngOnInit() {
+    // Let's navigate from TabsPage to Page1
+    this.user_id = this.LoginProvider.isLogin();
+    this.language_id = this.languageProvider.getLanguageId();
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
+    this.showStories = false;
+    this.setText();
+    this.bindMap();
+    this.getLocation();
+    this.getAdvertisement();
   }
 
   setText() {
@@ -160,18 +166,35 @@ export class HomePage {
     });
   }
 
-  ionViewDidLoad() {
-    this.setText();
-    this.user_id = this.LoginProvider.isLogin();
+  getAdvertisement() {
 
-    this.latitude = '39.919981';
-    this.longitude = '116.414977';
+    let param;
+    param = {
+      'language_id': this.language_id
+    };
 
-    // this.latitude = this.locationTrackerProvider.getLatitude();
-    // this.longitude = this.locationTrackerProvider.getLongitude();
+    this.storyService.apiGetAdvertisment(param)
+      .subscribe(response => {
 
-    this.getLocation();
-    this.bindMap();
+        this.Advres = response;
+        this.Advdata = this.Advres.data;
+
+        console.log('Advdata  : ' + JSON.stringify(this.Advres));
+
+        this.loadingProvider.dismiss();
+      },
+        err => console.error(err),
+        () => {
+          this.loadingProvider.dismiss();
+        }
+      );
+  }
+
+  slideChanged() {
+    let currentIndex = this.slides.getActiveIndex();
+    if (currentIndex == this.Advdata.length) {
+      this.slides.stopAutoplay();
+    }
   }
 
   public bindMap() {
@@ -229,14 +252,14 @@ export class HomePage {
               options: {
                 // enableDragging: true,
                 icon: {
-                  imageUrl: element.marker,
+                  imageUrl: element.marker_thumb,
                   size: {
                     height: 50,
-                    width: 100
+                    width: 50
                   },
                   imageSize: {
                     height: 50,
-                    width: 100
+                    width: 50
                   }
                 }
               },
@@ -293,6 +316,15 @@ export class HomePage {
     this.stories = [];
   }
 
+  closeList() {
+    this.showStories = false;
+    console.log("Click on close icon");
+  }
+
+  openTutorial() {
+    this.navCtrl.setRoot(TutorialPage);
+  }
+
   public getLocation() {
 
     this.filterData = {
@@ -327,7 +359,6 @@ export class HomePage {
       'start': '0',
     };
 
-    console.log(this.showStories);
     this.loadingProvider.show();
     this.storyService.apiTopStory(this.paramData).subscribe(
       response => {
@@ -341,16 +372,6 @@ export class HomePage {
       }
     );
     this.loadingProvider.hide();
-
-    // if (this.popover) {
-    //   this.popover.dismiss().catch();
-    //   this.popover = null;
-    // }
-    // this.popover = this.popoverCtrl.create(StoryTopListPage, Param);
-    // this.popover.onDidDismiss(data => {
-    //   this.popover = null;
-    // });
-    // this.popover.present();
   }
 
   loadMap(map: any) {

@@ -68,6 +68,8 @@ export class MyApp {
     this.language = this.languageProvider.getLanguage();
     console.log(this.language);
     this.translate.setDefaultLang(this.language);
+    console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
+    console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
     this.translate.use(this.language);
   }
 

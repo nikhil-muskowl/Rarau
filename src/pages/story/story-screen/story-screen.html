@@ -36,11 +36,11 @@
           (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
         </div>
 
-        <ion-fab left bottom small>
+        <!-- <ion-fab left bottom small>
           <button (click)="saveStory()" ion-fab clear color="transparent">
             <img src="assets/icon/download.png" height="50" width="50">
           </button>
-        </ion-fab>
+        </ion-fab> -->
 
         <ion-fab right bottom small *ngIf="slide.receipt_private == 0 || slide.receipt_private == null">
           <button (click)="showReceipt(slide.receipt)" ion-fab clear color="transparent">
@@ -51,14 +51,20 @@
         <div class="story-footer">
           <ion-grid>
             <ion-row>
-              <ion-col col-9>
-                <form>
+              <!-- <ion-col col-9> -->
+              <!-- <form>
                   <ion-item>
                     <button ion-button clear item-left>{{emoji}}</button>
                     <ion-input placeholder="Type here" type="text"></ion-input>
                   </ion-item>
-                </form>
-              </ion-col>
+                </form> -->
+              <button (click)="saveStory()" ion-fab clear color="transparent">
+                <img src="assets/icon/download.png" height="50" width="50">
+              </button>
+              <button (click)="reportStory(slide.id)" ion-fab clear color="transparent">
+                <img src="assets/icon/download.png" height="50" width="50">
+              </button>
+              <!-- </ion-col> -->
               <ion-col col-3>
                 <div class="fire-div">
                   <span *ngIf="slide.totalFlames > 0">{{slide.totalLikes}}

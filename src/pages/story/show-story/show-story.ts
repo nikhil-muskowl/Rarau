@@ -8,6 +8,7 @@ import { FormServiceProvider } from '../../../providers/form-service/form-servic
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { ReportPage } from '../../Popover/report/report';
 
 @IonicPage()
 @Component({
@@ -22,6 +23,7 @@ export class ShowStoryPage {
   public responseData;
   public data;
   private id;
+  private language_id;
   private user_name;
   private user_image_thumb;
   private description;
@@ -33,7 +35,7 @@ export class ShowStoryPage {
   private totalDislikes;
   private totalFlames;
   private created_date;
-  private comment;
+  private comment_txt;
   private commentForm: FormGroup;
   public formErrors = {
     comment: '',
@@ -47,8 +49,10 @@ export class ShowStoryPage {
   private warning;
   private success;
   private rarau;
+  private report_comment;
   private apo_story;
   private say_something;
+  private isComment: boolean = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,13 +65,24 @@ export class ShowStoryPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+
+  }
+
+  ngOnInit() {
+    this.language_id = this.languageProvider.getLanguageId();
+    this.user_id = this.LoginProvider.isLogin();
     this.setText();
 
     this.createForm();
-    this.isLogin();
     this.story_id = this.navParams.get('story_id');
     this.getStories();
 
+    if (this.user_id != undefined) {
+      this.isComment = true;
+    }
+    else {
+      this.isComment = false;
+    }
   }
 
   setText() {
@@ -93,14 +108,17 @@ export class ShowStoryPage {
       this.say_something = text;
     });
     this.translate.get('comment').subscribe((text: string) => {
-      this.comment = text;
+      this.comment_txt = text;
+    });
+    this.translate.get('report_comment').subscribe((text: string) => {
+      this.report_comment = text;
     });
 
   }
 
   public createForm() {
     this.commentForm = this.formBuilder.group({
-      comment: [this.comment, Validators.compose([
+      comment: ['', Validators.compose([
         Validators.minLength(1),
         Validators.maxLength(25),
         Validators.required
@@ -116,12 +134,23 @@ export class ShowStoryPage {
     this.navCtrl.pop();
   }
 
+  reportComment(id) {
+    console.log("comment id : " + id);
+    let params = {
+      'story_comment_id': id,
+      'story_id': this.story_id,
+      'type': 3
+    };
+
+    this.navCtrl.push(ReportPage, params);
+  }
+
   getStories() {
     this.loadingProvider.present();
 
     this.paramData = {
       'story_id': this.story_id,
-      'language_id': 1,
+      'language_id': this.language_id,
     };
 
     this.storyService.getStoryDetail(this.paramData).subscribe(
@@ -156,10 +185,6 @@ export class ShowStoryPage {
     console.log('ionViewDidLoad ShowStoryPage');
   }
 
-  isLogin() {
-    this.user_id = this.LoginProvider.isLogin();
-  }
-
   goBack() {
     this.navCtrl.pop();
   }
@@ -176,7 +201,8 @@ export class ShowStoryPage {
       var data = {
         'story_id': this.story_id,
         'user_id': this.user_id,
-        'comment': this.commentForm.value.comment
+        'comment': this.commentForm.value.comment,
+        'language_id': this.language_id,
       }
 
       this.storyService.setComment(data).subscribe(

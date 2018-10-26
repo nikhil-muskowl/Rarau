@@ -9,6 +9,7 @@ import { ReceiptShowPage } from '../receipt-show/receipt-show';
 import { Slides } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { ReportPage } from '../../Popover/report/report';
 
 @IonicPage()
 @Component({
@@ -82,6 +83,15 @@ export class StoryScreenPage {
     this.getStories();
   }
 
+  reportStory(id) {
+    console.log('Report user');
+    let params = {
+      'story_id': id,
+      'type': 2
+    };
+
+    this.navCtrl.push(ReportPage, params);
+  }
 
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
@@ -192,7 +202,9 @@ export class StoryScreenPage {
   goToComments(event: any, slide): any {
     console.log('Swipe comment', event);
     console.log('slide data ', JSON.stringify(slide));
+
     this.navCtrl.push(ShowStoryPage, { story_id: slide.id });
+
   }
 
   swipeAll(event: any): any {

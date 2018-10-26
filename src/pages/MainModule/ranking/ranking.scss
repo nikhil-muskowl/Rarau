@@ -11,4 +11,25 @@ page-ranking {
         color: #000;
         opacity: 1;
     }
+    .input-wrapper {
+        color: #000;
+        font-size: 15px;
+    }
+    .btn-type {
+        font-size: 6vw;
+        color: #fff;
+    }
+    .round_img{
+        
+        ion-icon {
+            display: inline-block;
+            font-size: 2em;
+        }
+    }
+    .img-badge {
+        background: transparent;
+        position: absolute;
+        top: 0px;
+        left: 0px;        
+    }
 }

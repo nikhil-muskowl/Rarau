@@ -59,6 +59,8 @@ export class RegistrationPage {
   private female;
   private by_clicking_sign_up;
   private terms_policy;
+  private view_edit;
+  private upload_img;
   private success;
   private error;
   private upload_image;
@@ -75,6 +77,7 @@ export class RegistrationPage {
     public languageProvider: LanguageProvider, ) {
 
     this.setText();
+
     let backAction = platform.registerBackButtonAction(() => {
       this.tabService.show();
       this.navCtrl.setRoot(LoginPage);
@@ -120,11 +123,11 @@ export class RegistrationPage {
 
     if (this.imagePath != undefined) {
       this.uploadIcon = 'assets/imgs/login/right-arrow.png';
-      this.uploadText = 'View & Edit';
+      this.uploadText = this.view_edit;
     }
     else {
       this.uploadIcon = 'assets/imgs/login/upload-icon.png';
-      this.uploadText = 'Upload here';
+      this.uploadText = this.upload_img;
     }
 
   }
@@ -135,6 +138,12 @@ export class RegistrationPage {
 
     this.translate.get('sign_up').subscribe((text: string) => {
       this.sign_up = text;
+    });
+    this.translate.get('view_edit').subscribe((text: string) => {
+      this.view_edit = text;
+    });
+    this.translate.get('upload_img').subscribe((text: string) => {
+      this.upload_img = text;
     });
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;

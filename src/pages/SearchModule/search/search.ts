@@ -35,11 +35,14 @@ export class SearchPage {
   public locName;
   public latitude;
   public longitude;
+  public searcLatitude;
+  public searcLongitude;
   public paramData;
   public user_id;
 
   public story_srch_user;
   public story_srch_loc;
+  public search_text;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,11 +56,21 @@ export class SearchPage {
     public baiduProvider: BaiduProvider,
     public searchProvider: SearchResProvider,
     public translate: TranslateService,
+    public locationTracker: LocationTrackerProvider,
     public languageProvider: LanguageProvider, ) {
 
     this.setText();
     // this.createForm();
     this.getCategory();
+
+    this.locationTracker.setLocation();
+    this.latitude = this.locationTracker.getLatitude();
+    this.longitude = this.locationTracker.getLongitude();
+    // this.latitude = '39.919981';
+    // this.longitude = '116.414977';
+
+    console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
+    console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
   }
 
   setText() {
@@ -69,6 +82,9 @@ export class SearchPage {
     });
     this.translate.get('story_srch_loc').subscribe((text: string) => {
       this.story_srch_loc = text;
+    });
+    this.translate.get('search').subscribe((text: string) => {
+      this.search_text = text;
     });
   }
 
@@ -111,26 +127,24 @@ export class SearchPage {
     console.log('searchUsercat : ' + this.searchCat);
     console.log('searchUse : ' + this.searchUse);
     console.log('searchLoc : ' + this.searchLoc);
-    console.log('latitude : ' + this.latitude);
-    console.log('longitude : ' + this.longitude);
+    console.log('latitude : ' + this.searcLatitude);
+    console.log('longitude : ' + this.searcLongitude);
 
     if (this.searchCat != undefined || this.searchUse != undefined || this.searchLoc != undefined) {
       const data = {
         searchCat: this.searchCat,
         searchUse: this.searchUse,
         searchLoc: this.searchLoc,
-        latitude: this.latitude,
-        longitude: this.longitude
+        latitude: this.searcLatitude,
+        longitude: this.searcLongitude
       };
       this.view.dismiss(data);
-
     }
     else {
       this.alertProvider.title = 'Error';
       this.alertProvider.message = 'Please Enter value to search.';
       this.alertProvider.showAlert();
     }
-
   }
 
   searchUsercat() {
@@ -248,8 +262,10 @@ export class SearchPage {
     if (location) {
       this.searchLoc = location.name;
       this.locName = location.name;
-      this.latitude = location.location.lat;
-      this.longitude = location.location.lng;
+      this.searcLatitude = location.location.lat;
+      this.searcLongitude = location.location.lng;
+      // this.latitude = location.location.lat;
+      // this.longitude = location.location.lng;
     }
 
     console.log(this.latitude);

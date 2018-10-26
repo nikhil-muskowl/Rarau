@@ -40,6 +40,7 @@ export class LocationPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     this.image = this.navParams.get('image');
     console.log('image on location page : ' + this.image);
 

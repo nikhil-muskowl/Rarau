@@ -93,11 +93,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BirthdayPage } from '../pages/Popover/birthday/birthday';
 import { TermsPage } from '../pages/Popover/terms/terms';
 import { WhyProfilePage } from '../pages/Popover/why-profile/why-profile';
+import { ReportPage } from '../pages/Popover/report/report';
 
 //Pipes 
 import { CDVPhotoLibraryPipe } from '../pipes/cdvphotolibrary.pipe';
 import { StoryServiceProvider } from '../providers/story-service/story-service';
-import { ImageProvider } from '../providers/image/image';
 import { ProfileProvider } from '../providers/profile/profile';
 import { SearchResProvider } from '../providers/search-res/search-res';
 
@@ -157,6 +157,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReceiptShowPage,
     SettingsPage,
     TutorialPage,
+    ReportPage,
   ],
   imports: [
     HttpClientModule,
@@ -239,6 +240,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReceiptShowPage,
     SettingsPage,
     TutorialPage,
+    ReportPage,
   ],
   providers: [
     StatusBar,
@@ -273,7 +275,6 @@ export function createTranslateLoader(http: HttpClient) {
     FilterService,
     TabsService,
     StoryServiceProvider,
-    ImageProvider,
     FileTransfer,
     FileTransferObject,
     File,

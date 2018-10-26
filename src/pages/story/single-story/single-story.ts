@@ -8,6 +8,7 @@ import { ShowStoryPage } from '../show-story/show-story';
 import { ReceiptShowPage } from '../receipt-show/receipt-show';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { ReportPage } from '../../Popover/report/report';
 
 @IonicPage()
 @Component({
@@ -23,6 +24,7 @@ export class SingleStoryPage {
   public status;
   public data;
   private id;
+  private language_id;
   private user_name;
   private user_image;
   private title;
@@ -59,6 +61,7 @@ export class SingleStoryPage {
   ) {
 
     this.setText();
+    this.language_id = this.languageProvider.getLanguageId();
     this.story_id = this.navParams.get('story_id');
     console.log('story_id : ' + this.story_id);
     this.isLogin();
@@ -110,9 +113,8 @@ export class SingleStoryPage {
 
     this.paramData = {
       'story_id': this.story_id,
-      'language_id': 1,
+      'language_id': this.language_id,
     };
-
 
     this.storyService.getStoryDetail(this.paramData).subscribe(
       response => {
@@ -121,6 +123,7 @@ export class SingleStoryPage {
 
         this.data = this.responseData.result;
         this.responseData.result[0].totalDislikes;
+        this.id = this.responseData.result[0].id;
         this.title = this.responseData.result[0].title;
         this.description = this.responseData.result[0].description;
         this.user_name = this.responseData.result[0].user_name;
@@ -145,8 +148,17 @@ export class SingleStoryPage {
     );
   }
 
-  showReceipt() {
+  reportStory() {
+    console.log('Report user');
+    let params = {
+      'story_id': this.id,
+      'type': 2
+    };
 
+    this.navCtrl.push(ReportPage, params);
+  }
+
+  showReceipt() {
     this.navCtrl.push(ReceiptShowPage, { receipt: this.receipt });
   }
 

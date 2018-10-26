@@ -39,6 +39,8 @@ export class LoginPage {
   private let_go;
   private new_to_rarau;
   private connect_and_go;
+  private login_wechat;
+  private sign_up;
   private or;
   private email_password_incorrect;
 
@@ -71,6 +73,12 @@ export class LoginPage {
 
     this.translate.get('login').subscribe((text: string) => {
       this.login = text;
+    });
+    this.translate.get('sign_up').subscribe((text: string) => {
+      this.sign_up = text;
+    });
+    this.translate.get('login_wechat').subscribe((text: string) => {
+      this.login_wechat = text;
     });
 
     this.translate.get('rarau').subscribe((text: string) => {

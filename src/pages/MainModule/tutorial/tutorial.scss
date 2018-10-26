@@ -22,4 +22,11 @@ page-tutorial {
     .text-right {
         text-align: right;
     }
+    .btn-back {
+        color: #fff !important;
+        background: linear-gradient(to right, #ec3747, #f45a43) !important;
+        background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43)) !important;
+        width: 100%;
+        padding: 5px 5px;
+    }
 }

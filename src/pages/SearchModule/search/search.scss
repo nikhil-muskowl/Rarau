@@ -66,6 +66,11 @@ page-search {
         background: transparent;
         position: relative;
     }
+    .search-btn {
+        color: #fff !important;
+        background: linear-gradient(to right, #ec3747, #f45a43);
+        background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
+    }
     .i-serach {
         background: #ee3f46;
         color: #fff;

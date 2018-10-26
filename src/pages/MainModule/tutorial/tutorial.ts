@@ -60,11 +60,19 @@ export class TutorialPage {
   }
 
   tuteSeen() {
-    this.configProvider.setisSeen(true);
-    this.navCtrl.setRoot(MainTabsPage);
+    console.log('click on next btn');
+    let currentIndex = this.slides.getActiveIndex();
+    if (currentIndex == this.tutImages.length - 1 || currentIndex == this.tutImages.length) {
+      this.configProvider.setisSeen(true);
+      this.navCtrl.setRoot(MainTabsPage);
+    }
+    else {
+      this.slides.slideNext();
+    }
   }
 
   tuteSkip() {
+    console.log('click on skip btn');
     this.configProvider.setisSeen(true);
     this.navCtrl.setRoot(MainTabsPage);
   }

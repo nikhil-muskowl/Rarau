@@ -41,6 +41,7 @@ export class StoryCategoryPage {
   private receipt_private;
   private receiptImage;
   public paramData;
+  public language_id;
 
   public btnGo = 1;
 
@@ -66,7 +67,7 @@ export class StoryCategoryPage {
   ) {
 
     this.setText();
-
+    this.language_id = this.languageProvider.getLanguageId();
     this.isLogin();
     this.sel_cat_id = this.navParams.get('sel_cat_id');
     this.image = this.navParams.get('image');
@@ -147,7 +148,6 @@ export class StoryCategoryPage {
       }
     } else {
       this.model[index].isImage = true;
-
     }
 
     this.bindArray();
@@ -196,11 +196,7 @@ export class StoryCategoryPage {
           isImage: 0,
         });
       }
-
-
     }
-
-
   }
 
   isLogin() {
@@ -231,7 +227,8 @@ export class StoryCategoryPage {
             'latitude': this.latitude,
             'longitude': this.longitude,
             'receipt_private': this.receipt_private,
-            'receipt': this.receiptImage
+            'receipt': this.receiptImage,
+            'language_id': this.language_id,
           };
 
           this.storyService.postStory(this.paramData).subscribe(

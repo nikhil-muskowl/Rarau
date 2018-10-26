@@ -6,7 +6,6 @@ import 'rxjs/Rx';
 import { ConfigProvider } from '../config/config';
 import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { NativeStorage } from '@ionic-native/native-storage';
 import { Jsonp } from '@angular/http';
 
 @Injectable()
@@ -24,7 +23,6 @@ export class LoginProvider {
 
   constructor(public http: HttpClient,
     public storage: Storage,
-    public nativeStorage: NativeStorage,
     public platform: Platform,
     public ConfigProvider: ConfigProvider) {
 

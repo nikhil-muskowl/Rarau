@@ -7,7 +7,7 @@ import { LoginProvider } from '../../../providers/login/login';
 import { FollowProvider } from '../../../providers/follow/follow';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
-
+import { ReportPage } from '../../Popover/report/report';
 
 @IonicPage()
 @Component({
@@ -24,6 +24,7 @@ export class OthersProfilePage {
   public email;
   public contact;
   public status;
+  public report_user;
 
   public responseData;
   public result;
@@ -70,6 +71,9 @@ export class OthersProfilePage {
 
     this.translate.get('followers').subscribe((text: string) => {
       this.followers_txt = text;
+    });
+    this.translate.get('report_user').subscribe((text: string) => {
+      this.report_user = text;
     });
     this.translate.get('flames').subscribe((text: string) => {
       this.flames_txt = text;
@@ -137,6 +141,16 @@ export class OthersProfilePage {
 
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
+  }
+
+  reportStory() {
+    console.log('Report user');
+    let params = {
+      'user_id': this.id,
+      'type': 1
+    };
+
+    this.navCtrl.push(ReportPage, params);
   }
 
   dofollow() {

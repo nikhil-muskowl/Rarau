@@ -18,8 +18,9 @@ export class LoginWechatPage {
   loginwechatForm: FormGroup;
   private error_email = 'field is required';
 
-  private raru;
+  private rarau;
   private sign_up_wechat;
+  private sign_up;
   private birthday;
   private why_this;
   private by_clicking_sign_up;
@@ -40,8 +41,11 @@ export class LoginWechatPage {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
 
-    this.translate.get('raru').subscribe((text: string) => {
-      this.raru = text;
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('sign_up').subscribe((text: string) => {
+      this.sign_up = text;
     });
     this.translate.get('sign_up_wechat').subscribe((text: string) => {
       this.sign_up_wechat = text;
