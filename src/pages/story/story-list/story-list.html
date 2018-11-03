@@ -19,7 +19,7 @@
       <ion-avatar item-start>
         <img src="{{record.user_image_thumb}}">
         <div class="lvl-image">
-          <p class="background-lvl"><span style="color:#fff;">Lv6</span></p>
+          <p class="background-lvl"><span style="color:#fff;">{{lvl_txt}} {{record.user_level}}</span></p>
         </div>
 
         <div class="fire-div">
@@ -47,20 +47,14 @@
         </ion-col>
       </ion-row>
 
-      <!-- <ion-row>
-        <ion-col>
-          <div class="ellipsis-2">
-            <span *ngFor="let tag of record.tags; let j = index;">
-              <span *ngIf="record.tags.length-1 > j">{{tag}},&nbsp;</span>
-              <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
-            </span>
-          </div>
+      <ion-row>
+        <ion-col col-12>
+          <span *ngFor="let tag of record.tags; let j = index;">
+            <span *ngIf="record.tags.length-1 > j">{{tag}},&nbsp;</span>
+            <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
+          </span>
         </ion-col>
-      </ion-row> -->
-
-      <div class="ellipsis-2">
-        <ion-badge *ngFor="let tag of record.tags; let j = index;">{{tag}}</ion-badge>
-      </div>
+      </ion-row>
 
       <p class="p-date">{{record.created_date}}</p>
 

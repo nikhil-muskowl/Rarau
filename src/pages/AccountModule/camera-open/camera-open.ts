@@ -56,10 +56,6 @@ export class CameraOpenPage {
     this.gender = this.navParams.get('gender');
   }
 
-  ionViewDidLoad() {
-
-  }
-
   ionViewDidLeave() {
     this.stopCamera();
   }

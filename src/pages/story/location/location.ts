@@ -44,8 +44,12 @@ export class LocationPage {
     this.image = this.navParams.get('image');
     console.log('image on location page : ' + this.image);
 
-    this.latitude;
-    this.longitude;
+    //uncommnet below for HK testing 
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
+
+    // this.latitude = 39.919981;
+    // this.longitude = 116.414977;
   }
 
   setText() {

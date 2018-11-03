@@ -159,7 +159,7 @@ export class OthersProfilePage {
       this.FollowProvider.ActionFollow(this.id, this.user_id).subscribe(
         response => {
           this.responseData = response;
-
+          console.log('follow response : ' + JSON.stringify(this.responseData));
           this.status = this.responseData.status;
           if (this.status) {
             // this.alertProvider.title = 'Success';
@@ -189,6 +189,7 @@ export class OthersProfilePage {
       this.FollowProvider.ActionUnFollow(this.id, this.user_id).subscribe(
         response => {
           this.responseData = response;
+          console.log('unfollow response : ' + JSON.stringify(this.responseData));
 
           this.status = this.responseData.status;
           if (this.status) {

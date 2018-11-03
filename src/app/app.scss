@@ -260,9 +260,9 @@ div.messages {
     }
 }
 
-//insta
-.logo-nexti {
-    height: 35px;
+.logo {
+    color: #fff;
+    font-size: 2rem;
 }
 
 ion-segment.toolbar-filter {
@@ -366,6 +366,7 @@ p {
 ion-navbar.toolbar {
     background: linear-gradient(to right, #ec3747, #f45a43);
     background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
+    height: 71px;
 }
 
 .toolbar-icon {

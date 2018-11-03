@@ -1,0 +1,16 @@
+page-my-pet-details {
+    .img-resp {
+        width: 100%;
+        height: 320px;
+    }
+    .h2-grad {
+        text-align: center;
+        
+        background: -webkit-linear-gradient(left, #ec3747, #f45a43);
+        background: -o-linear-gradient(right, #ec3747, #f45a43);
+        background: -moz-linear-gradient(right, #ec3747, #f45a43);
+        background: linear-gradient(to right, #ec3747, #f45a43); 
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+    }
+}

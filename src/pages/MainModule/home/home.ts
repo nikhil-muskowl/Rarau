@@ -57,6 +57,9 @@ export class HomePage {
   public showStories: boolean = false;
   public markerHtml;
 
+  public categories;
+  public categoriesData;
+
   public searchCat;
   public searchUse;
   public serLatitude;
@@ -82,25 +85,50 @@ export class HomePage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-    this.images = [
-      { categoryFirst: 'assets/icon/Front-Icons/food.png', text: '8', categoryPerson: 'assets/icon/user.png' },
-      { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '5', categoryPerson: 'assets/icon/user.png' },
-      { categoryFirst: 'assets/icon/Front-Icons/world.png', text: '7', categoryPerson: 'assets/icon/user.png' },
-      { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '2', categoryPerson: 'assets/icon/user.png' },
-    ]
+    // this.images = [
+    //   { categoryFirst: 'assets/icon/Front-Icons/food.png', text: '8', categoryPerson: 'assets/icon/user.png' },
+    //   { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '5', categoryPerson: 'assets/icon/user.png' },
+    //   { categoryFirst: 'assets/icon/Front-Icons/world.png', text: '7', categoryPerson: 'assets/icon/user.png' },
+    //   { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '2', categoryPerson: 'assets/icon/user.png' },
+    // ]
   }
 
   ngOnInit() {
     // Let's navigate from TabsPage to Page1
     this.user_id = this.LoginProvider.isLogin();
     this.language_id = this.languageProvider.getLanguageId();
+
+    //uncommnet below for HK testing 
     this.latitude = this.locationTrackerProvider.getLatitude();
     this.longitude = this.locationTrackerProvider.getLongitude();
+
+    // this.latitude = 39.919981;
+    // this.longitude = 116.414977;
     this.showStories = false;
+
     this.setText();
     this.bindMap();
+    this.setCategory();
     this.getLocation();
     this.getAdvertisement();
+  }
+
+  setCategory() {
+
+    this.loadingProvider.present();
+
+    this.storyService.getCategory().subscribe(
+      response => {
+        this.categoriesData = response;
+        console.log('Category : ' + JSON.stringify(response));
+
+        this.categories = this.categoriesData.data;
+      },
+      err => console.error(err),
+      () => {
+        this.loadingProvider.dismiss();
+      }
+    );
   }
 
   setText() {
@@ -147,8 +175,8 @@ export class HomePage {
         console.log('data.latitude : ' + data.latitude);
         console.log('data.longitude : ' + data.longitude);
 
-        this.serLatitude = data.latitude;
-        this.serLongitude = data.longitude;
+        this.serLatitude = data.searcLatitude;
+        this.serLongitude = data.searcLongitude;
         this.searchUse = data.searchUse;
         this.searchCat = data.searchCat;
         if (data.searchCat == undefined && data.latitude == undefined && data.longitude == undefined && data.searchUse != undefined) {
@@ -228,6 +256,15 @@ export class HomePage {
         'searchUse': this.searchUse,
         'latitude': this.serLatitude,
         'longitude': this.serLongitude
+      };
+    }
+    else if (this.searchCat != undefined) {
+      this.paramStryData = {
+        'user_id': this.user_id,
+        'searchCat': this.searchCat,
+        'searchUse': this.searchUse,
+        // 'latitude': this.latitude,
+        // 'longitude': this.longitude
       };
     }
     else {

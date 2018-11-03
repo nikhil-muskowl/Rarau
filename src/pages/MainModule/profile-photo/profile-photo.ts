@@ -48,11 +48,15 @@ export class ProfilePhotoPage {
     public languageProvider: LanguageProvider, ) {
 
     this.setText();
+    this.isLogin();
+
     let backAction = platform.registerBackButtonAction(() => {
       this.navCtrl.pop();
+      this.tabService.show();
     }, 2);
 
     this.image = this.navParams.get('image');
+    console.log('image : ' + this.image);
     this.displayImage = this.image;
   }
 
@@ -85,17 +89,14 @@ export class ProfilePhotoPage {
       this.image_uploaded = text;
     });
   }
+
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
     console.log('ionViewDidLoad ProfilePhotoPage' + this.user_id);
-
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePhotoPage');
-  }
-  ionViewDidLeave() {
-    this.tabService.show();
   }
 
   ionViewWillEnter() {
@@ -104,11 +105,13 @@ export class ProfilePhotoPage {
 
   goBack() {
     this.navCtrl.setRoot(ProfilePage);
+    this.tabService.hide();
   }
 
   save() {
     //code to save
-    console.log('select' + this.imgSend);
+    this.imgSend = this.displayImage;
+    console.log('select : ' + this.imgSend);
     if (this.imgSend == undefined) {
       this.alertProvider.title = this.error;
       this.alertProvider.message = this.select_img_first;
@@ -128,8 +131,9 @@ export class ProfilePhotoPage {
             this.alertProvider.title = this.success;
             this.alertProvider.message = this.image_uploaded;
             this.alertProvider.showAlert();
-
+            this.tabService.show();
             this.navCtrl.setRoot(ProfilePage);
+
           }
         },
         err => {

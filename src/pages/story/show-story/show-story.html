@@ -1,21 +1,32 @@
 <ion-header>
   <ion-navbar hideBackButton>
-    <ion-toolbar>
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='goBack()'>
-          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-        </button>
-        {{title}}
-        <span style="float:right;">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
-      </ion-title>
-    </ion-toolbar>
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button>
+      {{title}}
+      <!-- <span style="float:right;">
+        <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span> -->
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-grid style="background: #eaeaea;">
-    <ion-row style="margin-bottom: -25px;">
+    <div class="story-top">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="{{user_image_thumb}}">
+        </ion-avatar>
+        <h3>{{user_name}}{{apo_story}}</h3>
+        <p class="ellipsis-2">
+          <span *ngFor="let tag of tags; let j = index;">
+            <span *ngIf="tags.length-1 > j">{{tag}},&nbsp;</span>
+            <span *ngIf="tags.length-1 == j">{{tag}}</span>
+          </span></p>
+      </ion-item>
+    </div>
+    <!-- <ion-row style="margin-bottom: -25px;">
       <ion-col col-3 text-center>
         <img class="circle-pic" src="{{user_image_thumb}}" width="70" height="70">
       </ion-col>
@@ -27,7 +38,7 @@
             <span *ngIf="tags.length-1 == j">{{tag}}</span>
           </span></p>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
   </ion-grid>
 
@@ -71,7 +82,7 @@
   </ion-list>
 
   <ion-list>
-    <ion-item *ngFor="let comment of comments">
+    <ion-item *ngFor="let comment of commData">
       <ion-row>
         <ion-col col-2 text-center>
           <img class="circle-pic" src="{{comment.user_image_thumb}}" width="30" height="30">

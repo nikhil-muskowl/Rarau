@@ -1,15 +1,18 @@
 <ion-header>
   <ion-navbar hideBackButton>
-    <ion-toolbar>
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='goBack()'>
-          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-        </button>
-        {{saved_story}}
-        <span style="float:right;">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
-      </ion-title>
-    </ion-toolbar>
+
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button>
+      {{saved_story}}
+    </ion-title>
+
+    <ion-buttons end>
+      <span class="logo">
+        <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}
+      </span>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

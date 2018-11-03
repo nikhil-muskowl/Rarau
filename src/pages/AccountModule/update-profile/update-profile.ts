@@ -95,15 +95,12 @@ export class UpdateProfilePage {
 
   }
 
-  ionViewDidLoad() {
-
-  }
-
   ionViewWillEnter() {
     this.tabService.hide();
   }
 
   goBack() {
+    console.log('click');
     this.navCtrl.push(RegistrationPage, {
       imagePath: this.result, image: this.srcPhoto, data: this.data,
       date: this.date, gender: this.gender

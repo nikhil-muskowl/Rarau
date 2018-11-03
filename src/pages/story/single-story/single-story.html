@@ -1,76 +1,85 @@
 <ion-header>
   <ion-navbar hideBackButton>
-    <ion-toolbar>
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='goBack()'>
-          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-        </button>
-        {{story}}
-        <span style="float:right;">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
-      </ion-title>
-    </ion-toolbar>
+
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button>
+      {{story}}
+    </ion-title>
+
+    <ion-buttons end>
+      <span class="logo">
+        <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}
+      </span>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-
 <ion-content>
   <ion-grid class="background" [style.background]="'url('+image+')'">
-    <ion-row style="margin-bottom: -25px;">
-      <ion-col col-3 text-center>
-        <img class="circle-pic" src="{{user_image}}" width="70" height="70">
-      </ion-col>
-      <ion-col col-9>
-        <h3>{{user_name}}'s Story</h3>
-        <span *ngFor="let tag of tags; let j = index;">
-          <span *ngIf="tags.length-1 > j">{{tag}}, </span>
-          <span *ngIf="tags.length-1 == j">{{tag}}</span>
-        </span>
-      </ion-col>
-    </ion-row>
-    <br>
-    <hr>
+    <div class="story-top">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="{{user_image}}">
+        </ion-avatar>
+        <h2>{{user_name}}'s Story</h2>
+        <p>
+          <span *ngFor="let tag of tags; let j = index;">
+            <span *ngIf="tags.length-1 > j">{{tag}}, </span>
+            <span *ngIf="tags.length-1 == j">{{tag}}</span>
+          </span>
+        </p>
+      </ion-item>
+
+      <!-- <ion-row>
+        <ion-col col-3 text-center>
+          <img class="circle-pic" src="{{user_image}}" width="70" height="70">
+        </ion-col>
+        <ion-col col-9>
+          <div class="story-top-detail">
+            <h3>{{user_name}}'s Story</h3>
+            <span *ngFor="let tag of tags; let j = index;">
+              <span *ngIf="tags.length-1 > j">{{tag}}, </span>
+              <span *ngIf="tags.length-1 == j">{{tag}}</span>
+            </span>
+          </div>
+        </ion-col>
+      </ion-row> -->
+    </div>
+
 
     <div style="height:400px;" swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)"
       (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
     </div>
 
-    <!-- <ion-fab left bottom small>
-      <button (click)="saveStory()" ion-fab clear color="transparent">
-        <img src="assets/icon/download.png" height="50" width="50">
-      </button>
-    </ion-fab> -->
-
-    <ion-fab right bottom small *ngIf="receipt_private == 0 || receipt_private == null">
-      <button (click)="showReceipt()" ion-fab clear color="transparent">
-        <img src="assets/icon/invoice-icon.png" height="50" width="50">
-      </button>
-    </ion-fab>
-
     <ion-grid class="story-footer">
       <ion-row>
-        <!-- <ion-col col-9> -->
-          <!-- <form>
-            <ion-item>
-              <button ion-button clear item-left>{{emoji}}</button>
-              <ion-input placeholder="Type here" type="text"></ion-input>
-            </ion-item>
-          </form> -->
-
-          <button (click)="saveStory()" ion-fab clear color="transparent">
-            <img src="assets/icon/download.png" height="50" width="50">
+        <ion-col col-9>
+          <button (click)="saveStory()" clear style="background: transparent">
+            <img src="assets/icon/download_color.png" height="40" width="40">
           </button>
-          <button (click)="reportStory()" ion-fab clear color="transparent">
-            <img src="assets/icon/download.png" height="50" width="50">
+          <button (click)="reportStory()" clear style="background: transparent">
+            <img src="assets/icon/report_color.png" height="40" width="40">
           </button>
-        <!-- </ion-col> -->
+          <button *ngIf="receipt_private == 0 || receipt_private == null" (click)="showReceipt()" clear style="background: transparent">
+            <img src="assets/icon/invoice-icon_color.png" height="40" width="40">
+          </button>
+        </ion-col>
         <ion-col col-3>
           <div class="fire-div">
-            <span *ngIf="totalFlames > 0">{{totalLikes}}
-              <img class="fire-image" height="30" width="30" src="assets/imgs/story/Positive-Flame.png">
+            <span *ngIf="totalFlames > 0">
+              <span class="like-head">{{totalLikes}}</span>
+              <span class="fire-image-area">
+                <img class="fire-image" height="30" width="30" src="assets/imgs/story/pos-flam.png">
+              </span>
+
             </span>
-            <span *ngIf="totalFlames < 0">{{totalDislikes}}
-              <img class="fire-image" height="30" width="30" src="assets/imgs/story/Negative-Flame.png">
+            <span *ngIf="totalFlames < 0">
+              <span class="like-head">{{totalDislikes}}</span>
+              <span class="fire-image-area">
+                <img class="fire-image" height="30" width="30" src="assets/imgs/story/neg-flame.png">
+              </span>
             </span>
           </div>
         </ion-col>
@@ -84,6 +93,5 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </ion-grid>
 </ion-content>

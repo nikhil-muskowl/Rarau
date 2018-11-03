@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
@@ -9,6 +10,7 @@ import { SingleStoryPage } from '../../story/single-story/single-story';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { ThrowStmt } from '@angular/compiler';
 
 @IonicPage()
 @Component({
@@ -17,21 +19,23 @@ import { LanguageProvider } from '../../../providers/language/language';
 })
 
 export class RankingPage {
+  @ViewChild(Content) content: Content;
+
   public title;
   public fileterData: any;
   private responseData: any;
   private id;
   private items;
-  public isSearch:boolean=false;
+  public isSearch: boolean = false;
   private types;
   private story_type_id = 0;
   private filterData: any;
   public search = '';
   public locName = '';
-  public latitude: number = 0;
-  public longitude: number = 0;
   public data: any;
-  public locations: any;
+  public cntryresponseData;
+  public countries;
+  public location: any;
 
   public length = 5;
   public start = 0;
@@ -51,19 +55,24 @@ export class RankingPage {
     public locationTrackerProvider: LocationTrackerProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
-      this.isSearch =false;
 
+    this.isSearch = false;
+  }
+
+  ngOnInit() {
+    this.content.resize();
     this.setText();
     this.getTypes();
-
+    this.getCountry();
+    this.location = undefined;
     console.log(this.story_type_id);
   }
 
-  openSearch(){
+  openSearch() {
     this.isSearch = !this.isSearch;
     console.log("this.isSearch : " + this.isSearch);
   }
-  
+
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -88,48 +97,28 @@ export class RankingPage {
     });
   }
 
-  public onInput(ev: any) {
-    this.search = ev.target.value;
-    this.locations = [];
-    this.getLocation();
+  getCountry() {
+
+    this.storiesProvider.apiGetAllLocations().subscribe(
+      response => {
+        this.cntryresponseData = response;
+        this.countries = this.cntryresponseData.data;
+        console.log('Countries data : ' + this.countries);
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  oncountryChange(selectedValue) {
+    console.info("country name:", selectedValue);
+    this.location = selectedValue;
+    this.getTypes();
   }
 
   public onCancel(ev: any) {
     this.search = '';
-  }
-
-  public getLocation() {
-
-    this.fileterData = {
-      query: this.search,
-      location: `${this.latitude},${this.longitude}`
-    };
-
-    this.baiduProvider.location(this.fileterData).subscribe(
-      response => {
-        console.log(response);
-        this.responseData = response;
-        this.locations = this.responseData.results;
-      },
-      err => { console.error(err); }
-    );
-    console.log(this.locations);
-  }
-
-  public itemSelected(location: any) {
-    console.log(location);
-    if (location) {
-      this.search = location.name;
-      this.locName = location.name;
-      this.latitude = location.location.lat;
-      this.longitude = location.location.lng;
-
-      this.getList();
-    }
-
-    console.log(this.latitude);
-    console.log(this.longitude);
-    this.locations = [];
   }
 
   ionViewDidLoad() {
@@ -147,9 +136,7 @@ export class RankingPage {
       story_type_id: this.story_type_id,
       length: this.length,
       start: this.start,
-      latitude: this.latitude,
-      longitude: this.longitude,
-      distance: 10,
+      location: this.location,
     };
     this.storiesProvider.getRankedStory(this.filterData).subscribe(
       response => {

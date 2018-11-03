@@ -8,6 +8,7 @@ import { TabsService } from "../../util/tabservice";
 import { TermsPage } from "../../Popover/terms/terms";
 import { BirthdayPage } from "../../Popover/birthday/birthday";
 import { WhyProfilePage } from "../../Popover/why-profile/why-profile";
+import { ProfilePage } from '../../MainModule/profile/profile';
 
 //provider
 import { LoginProvider } from '../../../providers/login/login';
@@ -222,7 +223,9 @@ export class RegistrationPage {
                 this.id = this.result.id;
                 this.registerForm.reset();
                 this.submitAttempt = false;
-                this.navCtrl.setRoot(LoginPage);
+                this.tabService.show();
+                this.loginProvider.setData(this.responseData.result);
+                this.navCtrl.setRoot(ProfilePage);
               }
 
               if (this.responseData.text_message != '') {

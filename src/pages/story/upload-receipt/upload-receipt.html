@@ -1,26 +1,27 @@
 <ion-header>
   <ion-navbar hideBackButton>
     <ion-toolbar>
-
       <ion-title class="tool-bar-title">
         <button start class="back-btn" (click)='goBack()'>
           <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-        </button>Upload Receipt
+        </button>{{upload}} {{receipt}}
         <span style="float:right;">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
       </ion-title>
     </ion-toolbar>
   </ion-navbar>
 </ion-header>
+
+
 <ion-content>
   <div class="login-back" scroll="false">
     <div class="row">
       <div class="col">
         <div text-center>
           <h1>
-            <b>Upload
+            <b>{{upload}}
               <br>
-              <span style="text-decoration: underline;">Receipt</span>
+              <span style="text-decoration: underline;">{{receipt}}</span>
             </b>
           </h1>
         </div>
@@ -48,11 +49,12 @@
     </div>
     <br>
     <div text-center>
-      <ion-checkbox [(ngModel)]="receipt_private" (ionChange)="updateReceipt()">Check to show Receipt Publically.</ion-checkbox>
-    </div>>
+      <ion-label>{{show_rec_public}}</ion-label>
+      <ion-checkbox [(ngModel)]="receipt_private" (ionChange)="updateReceipt()"></ion-checkbox>
+    </div>
     <br>
     <div padding text-center>
-      <button class="submit-btn" ion-button (click)="save()">Submit</button>
+      <button class="submit-btn" ion-button (click)="save()">{{submit}}</button>
     </div>
   </div>
 </ion-content>

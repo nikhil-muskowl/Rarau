@@ -73,6 +73,7 @@ export class RankingComponent {
     this.loadingProvider.present();
     this.filterData = {
       story_type_id: this.story_type_id,
+      user_id: this.user_id,
       length: this.length,
       start: this.start
     };

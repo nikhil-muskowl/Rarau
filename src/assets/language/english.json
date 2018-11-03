@@ -54,6 +54,8 @@
     "more": "More",
     "error": "Error",
     "select_img_first": "Please Select Image First.",
+    "show_rec_public": "Check to show Receipt Publically.",
+    "show_tutorial": "Check to show Tutorial Again.",
     "image_uploaded": "Image Uploaded.",
     "upload_image": "Please Upload Image.",
     "upload_img": "Upload Image",
@@ -71,7 +73,7 @@
     "no_result": "No Result",
     "search": "Search",
     "no_result_found": "No search result found.!!!",
-    "enter_value_serach": "Please Enter value to search.",
+    "enter_value_serach": "Please search your location.",
     "location": "Location",
     "next": "Next",
     "receipt": "Receipt",
@@ -111,5 +113,10 @@
     "error_description": "field is required",
     "error_title": "field is required",
     "submit": "Submit",
+    "mypet": "MyPet",
+    "mypet_detail": "MyPet Details",
+    "pet_list": "Pet List",
+    "activity_log": "ActivityLogs",
+    "lvl": "Lvl",
     "home": "Home"
 }

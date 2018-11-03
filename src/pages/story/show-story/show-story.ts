@@ -22,6 +22,8 @@ export class ShowStoryPage {
   public paramData;
   public responseData;
   public data;
+  public commResponseData;
+  public commData;
   private id;
   private language_id;
   private user_name;
@@ -76,6 +78,7 @@ export class ShowStoryPage {
     this.createForm();
     this.story_id = this.navParams.get('story_id');
     this.getStories();
+    this.getComments();
 
     if (this.user_id != undefined) {
       this.isComment = true;
@@ -83,6 +86,7 @@ export class ShowStoryPage {
     else {
       this.isComment = false;
     }
+
   }
 
   setText() {
@@ -171,7 +175,28 @@ export class ShowStoryPage {
         this.totalDislikes = this.responseData.result[0].totalDislikes;
         this.totalFlames = this.responseData.result[0].totalFlames;
         this.created_date = this.responseData.result[0].created_date;
-        this.comments = this.responseData.result[0].comments;
+        this.loadingProvider.dismiss();
+      },
+      err => console.error(err),
+      () => {
+        this.loadingProvider.dismiss();
+      }
+    );
+  }
+
+  getComments() {
+    this.loadingProvider.present();
+    this.commData = [];
+    this.paramData = {
+      'story_id': this.story_id,
+      'language_id': this.language_id,
+    };
+
+    this.storyService.apiGetComments(this.paramData).subscribe(
+      response => {
+        this.commResponseData = response;
+        this.commData = this.commResponseData.data;
+        console.log('comment commResponseData : ' + JSON.stringify(this.commResponseData));
         this.loadingProvider.dismiss();
       },
       err => console.error(err),
@@ -193,6 +218,7 @@ export class ShowStoryPage {
     this.loadingProvider.present();
 
     this.formServiceProvider.markFormGroupTouched(this.commentForm);
+
     if (this.commentForm.valid) {
       this.loadingProvider.present();
 
@@ -225,6 +251,7 @@ export class ShowStoryPage {
           } else {
             this.messageTitle = this.success;
             this.getStories();
+            this.getComments();
           }
 
           this.loadingProvider.dismiss();

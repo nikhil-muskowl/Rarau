@@ -1,11 +1,12 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{settings}}</ion-title>
+  <ion-navbar hideBackButton>
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button>{{settings}}
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <ion-list>
@@ -14,6 +15,9 @@
       <ion-select [(ngModel)]="language">
         <ion-option *ngFor="let language of languages" value="{{language.code}}" (ionSelect)="onChange(language)">{{language.name}}</ion-option>
       </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label *ngIf="user_id" (click)="logout()">{{logout_txt}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
