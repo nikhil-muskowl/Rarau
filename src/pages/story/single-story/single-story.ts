@@ -240,9 +240,14 @@ export class SingleStoryPage {
         if (this.responseData.status) {
           if (rank == 1) {
             this.totalLikes++;
+            this.totalFlames++;
+
           } else {
             this.totalDislikes++;
+            this.totalFlames--;
           }
+          console.log("this.totalLikes : " + this.totalLikes);
+          console.log("this.totalDislikes : " + this.totalDislikes);
 
         } else {
           this.responseData.result.forEach(element => {
@@ -257,7 +262,7 @@ export class SingleStoryPage {
 
               // toast.present();
             }
-          
+
           });
         }
         // this.loadingProvider.dismiss();
