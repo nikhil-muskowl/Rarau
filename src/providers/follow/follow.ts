@@ -32,7 +32,7 @@ export class FollowProvider {
 
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/followers_api';
     this.formData.append('user_id', data.user_id);
-    this.formData.append('current_user_id', data.current_user_id);
+    // this.formData.append('current_user_id', data.current_user_id);
     this.formData.append('start', data.start);
     this.formData.append('length', data.length);
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { AlertProvider } from '../../providers/alert/alert';
@@ -14,6 +14,7 @@ import { LoginProvider } from '../../providers/login/login';
   templateUrl: 'ranking.html'
 })
 export class RankingComponent {
+  @Input('userid') othr_user_id;
 
   private responseData: any;
   private id;
@@ -60,10 +61,6 @@ export class RankingComponent {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RankingPage');
-  }
-
   public typeChanged(event) {
     this.story_type_id = event.id;
     this.getList();
@@ -71,9 +68,17 @@ export class RankingComponent {
 
   public getList() {
     this.loadingProvider.present();
+    let id;
+    if (this.othr_user_id != undefined) {
+      id = this.othr_user_id;
+    }
+    else {
+      id = this.user_id;
+    }
+    console.log('whose profile : ' + id);
     this.filterData = {
       story_type_id: this.story_type_id,
-      user_id: this.user_id,
+      user_id: id,
       length: this.length,
       start: this.start
     };
