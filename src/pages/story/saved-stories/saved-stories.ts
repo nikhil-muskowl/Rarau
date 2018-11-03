@@ -39,6 +39,7 @@ export class SavedStoriesPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     this.isLogin();
     this.getSavedStories();
   }

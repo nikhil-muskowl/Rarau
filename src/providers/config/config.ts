@@ -8,10 +8,9 @@ export class ConfigProvider {
 
   static BASE_URL: string = 'http://social-app.muskowl.com/';
   // static BASE_URL: string = 'http://172.16.8.87/codeigniter/social_app/';
-  static BASE_URL_LOCAL: string = 'http://172.16.8.87/codeigniter/social_app/';
 
   constructor() {
-    
+
   }
 
   public setisSeen(data) {

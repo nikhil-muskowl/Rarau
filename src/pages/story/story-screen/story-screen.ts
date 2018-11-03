@@ -33,7 +33,6 @@ export class StoryScreenPage {
   private html;
   private image;
   private tags;
-  private comments;
   private totalLikes;
   private totalDislikes;
   private totalFlames;
@@ -170,7 +169,6 @@ export class StoryScreenPage {
     //     this.totalDislikes = this.responseData.result[0].totalDislikes;
     //     this.totalFlames = this.responseData.result[0].totalFlames;
     //     this.created_date = this.responseData.result[0].created_date;
-    //     this.comments = this.responseData.result[0].comments;
     //     this.loadingProvider.dismiss();
     //   },
     //   err => console.error(err),
@@ -289,13 +287,13 @@ export class StoryScreenPage {
 
             if (element.id == 'story_id') {
 
-              let toast = this.toastCtrl.create({
-                message: element.text,
-                duration: 3000,
-                position: 'bottom'
-              });
+              // let toast = this.toastCtrl.create({
+              //   message: element.text,
+              //   duration: 3000,
+              //   position: 'bottom'
+              // });
 
-              toast.present();
+              // toast.present();
             }
           });
         }

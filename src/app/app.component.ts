@@ -54,23 +54,32 @@ export class MyApp {
     public locationTracker: LocationTrackerProvider,
     public configProvider: ConfigProvider) {
 
-    if (this.configProvider.isSeen()) {
-      this.rootPage = MainTabsPage;
-    }
-    else {
-      this.rootPage = TutorialPage;
-    }
-    this.initializeApp();
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
 
-    this.locationTracker.setLocation();
-    this.backEvent();
+      this.splashScreen.hide();
+      console.log('tutorial value : ' + this.configProvider.isSeen());
+      let chk = this.configProvider.isSeen();
+      if (chk) {
+        this.rootPage = MainTabsPage;
+      }
+      else {
+        this.rootPage = TutorialPage;
+      }
+      this.initializeApp();
 
-    this.language = this.languageProvider.getLanguage();
-    console.log(this.language);
-    this.translate.setDefaultLang(this.language);
-    console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
-    console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
-    this.translate.use(this.language);
+      this.locationTracker.setLocation();
+      this.backEvent();
+
+      this.language = this.languageProvider.getLanguage();
+      console.log(this.language);
+      this.translate.setDefaultLang(this.language);
+      console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
+      console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
+      this.translate.use(this.language);
+    });
+
   }
 
   initializeApp() {
@@ -80,8 +89,10 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+
   }
 
+  //for menus
   openPage(page: PageInterface) {
     let params = {};
 

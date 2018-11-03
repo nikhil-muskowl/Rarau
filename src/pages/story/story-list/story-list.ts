@@ -5,6 +5,7 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { StoryScreenPage } from '../story-screen/story-screen';
+import { SingleStoryPage } from '../single-story/single-story';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 
@@ -27,6 +28,7 @@ export class StoryListPage {
   title;
   private forbidden;
   private login_to_continue;
+  private lvl_txt;
 
   constructor(
     public navCtrl: NavController,
@@ -39,6 +41,7 @@ export class StoryListPage {
     public languageProvider: LanguageProvider,
   ) {
 
+    this.setText();
     this.searchUse = this.navParams.get('searchUse');
     this.searchCat = this.navParams.get('searchCat');
     if (this.navParams.get('latitude')) {
@@ -60,14 +63,14 @@ export class StoryListPage {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
 
-    this.translate.get('story').subscribe((text: string) => {
-      this.title = text;
-    });
     this.translate.get('forbidden').subscribe((text: string) => {
       this.forbidden = text;
     });
     this.translate.get('login_to_continue').subscribe((text: string) => {
       this.login_to_continue = text;
+    });
+    this.translate.get('lvl').subscribe((text: string) => {
+      this.lvl_txt = text;
     });
 
   }
@@ -99,6 +102,7 @@ export class StoryListPage {
       response => {
         this.responseData = response;
         this.data = this.responseData.data;
+        this.title = this.data[0].title;
       },
       err => console.error(err),
       () => {
@@ -109,8 +113,10 @@ export class StoryListPage {
 
   showStory(data) {
     if (this.user_id) {
-      // this.navCtrl.push(StoryScreenPage, { story_id: data.id });
-      this.navCtrl.push(StoryScreenPage, this.paramData);
+
+      // this.navCtrl.push(StoryScreenPage, this.paramData);
+      this.navCtrl.push(SingleStoryPage, { story_id: data.id });
+
     }
     else {
 

@@ -64,13 +64,14 @@ export class SearchPage {
     this.getCategory();
 
     this.locationTracker.setLocation();
-    this.latitude = this.locationTracker.getLatitude();
-    this.longitude = this.locationTracker.getLongitude();
-    // this.latitude = '39.919981';
-    // this.longitude = '116.414977';
+    //uncommnet below for HK testing 
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
 
-    console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
-    console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
+    // this.latitude = 39.919981;
+    // this.longitude = 116.414977;
+    // console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
+    // console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
   }
 
   setText() {

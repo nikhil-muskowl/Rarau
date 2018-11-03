@@ -95,10 +95,6 @@ export class UpdateProfilePage {
 
   }
 
-  ionViewDidLoad() {
-
-  }
-
   ionViewWillEnter() {
     this.tabService.hide();
   }

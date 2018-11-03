@@ -5,9 +5,9 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { ToastProvider } from '../../../providers/toast/toast';
 import { LoginPage } from '../../AccountModule/login/login';
 import { UpdatePasswordPage } from '../../AccountModule/update-password/update-password';
+import { ActivityLogsPage } from '../../MainModule/activity-logs/activity-logs';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { SettingsPage } from '../settings/settings';
-import { FollowersPage } from '../../FollowModule/followers/followers';
 import { ProfilePhotoPage } from '../profile-photo/profile-photo';
 import { SavedStoriesPage } from '../../story/saved-stories/saved-stories';
 
@@ -54,8 +54,6 @@ export class ProfilePage {
   public view_log;
   public saved_stories;
   public more;
-  public sure_logout;
-  public logout_txt;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -66,8 +64,6 @@ export class ProfilePage {
     public profileProvider: ProfileProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
-
-    this.setText();
   }
 
   setText() {
@@ -108,12 +104,7 @@ export class ProfilePage {
     this.translate.get('more').subscribe((text: string) => {
       this.more = text;
     });
-    this.translate.get('sure_logout').subscribe((text: string) => {
-      this.sure_logout = text;
-    });
-    this.translate.get('logout').subscribe((text: string) => {
-      this.logout_txt = text;
-    });
+
   }
 
   ionViewDidLoad() {
@@ -157,22 +148,12 @@ export class ProfilePage {
     );
   }
 
-  logout() {
-    this.alertProvider.Alert.confirm(this.sure_logout, this.logout_txt).then((res) => {
-      console.log('confirmed');
-      this.LoginProvider.unSetData();
-      this.navCtrl.setRoot(LoginPage);
-    }, err => {
-      console.log('user cancelled');
-    });
+  viewActivity() {
+    this.navCtrl.push(ActivityLogsPage);
   }
 
   updatePass() {
     this.navCtrl.push(UpdatePasswordPage);
-  }
-
-  showFollowers() {
-    this.navCtrl.push(FollowersPage);
   }
 
   editProfile() {

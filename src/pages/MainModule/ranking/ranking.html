@@ -1,36 +1,24 @@
 <ion-header>
+
   <ion-navbar>
     <ion-title>{{title}}</ion-title>
     <ion-buttons end class="btn-type">
       <button style="background: transparent">
         <img src="assets/icon/search_home.png" (click)="openSearch()" width="30px" height="30px" name="search">
       </button>
-      <span style="float: right"><img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span>
     </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
 <ion-content padding>
-  <!-- <div *ngIf="isSearch">
-    <ion-searchbar [(ngModel)]="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
-    </ion-searchbar>
-
-    <div *ngIf="locations?.length > 0" style="height: 100px;overflow: scroll;">
-      <ion-list>
-        <button ion-item *ngFor="let location of locations" (click)="itemSelected(location)">
-          {{ location.name }}
-        </button>
-      </ion-list>
-    </div>
-  </div> -->
 
   <div *ngIf="isSearch">
-      <ion-select [(ngModel)]="country">
-          <ion-option >China</ion-option>
-          <ion-option >India</ion-option>
-          <ion-option >USA</ion-option>
-        </ion-select>
+    <ion-select [(ngModel)]="country" (ionChange)="oncountryChange(country)" interface="popover">
+      <ion-option *ngFor="let ctry of countries" value="{{ctry.location}}">{{ctry.location}}</ion-option>
+    </ion-select>
   </div>
+
   <div>
     <ion-slides slidesPerView="4">
       <ion-slide *ngFor="let type of types" (click)="typeChanged(type)">

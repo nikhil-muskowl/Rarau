@@ -1,52 +1,62 @@
 <ion-header>
   <ion-navbar hideBackButton>
-    <ion-toolbar>
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='goBack()'>
-          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-        </button>
-        {{name}}
-      </ion-title>
-    </ion-toolbar>
+
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button>
+      {{name}}
+    </ion-title>
+    <!-- <span class="logo">
+            <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}
+          </span> -->
+
+    <ion-buttons end>
+      <button class="back-btn">
+        <img src="assets/icon/report_color.png" width="30px" height="30px" (click)="reportStory()">
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-row style="padding: 2px 2px 2px 2px;">
-    <ion-col col-8></ion-col>
-    <ion-col col-4 text-right (click)="reportStory()">{{report_user}}</ion-col>
-  </ion-row>
   <ion-grid>
     <ion-row>
-      <ion-col col-4>
+      <ion-col col-5>
         <div text-center>
-          <img class="circle-pic img-responsive" src="{{userImage}}">
+          <img src="{{userImage}}" class="circle-pic">
+          <!-- <div class="layer"><span style="color:#fff;">Change</span></div> -->
         </div>
+        <h3>{{name}}</h3>
       </ion-col>
-      <ion-col col-8>
-        <ion-row class="margin">
-          <ion-row style="max-width:100%; width:100%">
-            <ion-col col-8>
-              <h3>{{name}}</h3>
-            </ion-col>
-          </ion-row>
-          <div class="follower-sec">
-            <div class="left">
-              <img src="assets/icon/follower.png" width="25" height="25">
-              <h4 text-center>{{followers}}
-                <p style="font-size: 3.3vw;margin-left: 4vw;margin-top: 0px;"><b>{{followers_txt}}</b></p>
-              </h4>
+
+      <ion-col col-7>
+        <ion-row>
+          <ion-col col-6>
+            <div class="fl-button">
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src="assets/icon/total_follower.png">
+                </ion-avatar>
+                <h2 text-center>{{followers}}</h2>
+                <p>{{followers_txt}}</p>
+              </ion-item>
             </div>
-            <!-- <div class="divider"></div> -->
-            <div class="right">
-              <img src="assets/icon/positive-flame.png" width="25" height="25">
-              <h4 text-center>{{flames}}
-                <p style="font-size: 3.3vw;margin-top: 0px;"><b>{{flames_txt}}</b></p>
-              </h4>
+          </ion-col>
+          <ion-col col-6>
+            <div class="fl-button">
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src="assets/icon/flame.png">
+                </ion-avatar>
+                <h2 text-center>{{flames}}</h2>
+                <p>{{flames_txt}}</p>
+              </ion-item>
             </div>
-          </div>
+          </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col col-5 text-center *ngIf="id!=user_id">
             <div *ngIf="!followed" class="follow" (click)="dofollow()">
@@ -61,14 +71,10 @@
             </div>
             <!-- <img src="assets/imgs/Other-Profile/Follow.png" class="img-responsive" (click)="doFollow()"> -->
           </ion-col>
-          <ion-col col-3 text-center>
-            <img src="assets/imgs/Other-Profile/Push.png" class="img-responsive custom-size">
-            <p style="font-size: 2.5vw;">{{push}}</p>
-          </ion-col>
-          <ion-col col-3 text-center>
+          <!-- <ion-col col-3 text-center>
             <img src="assets/imgs/Profile/My Profile Icon/view.png" class="img-responsive custom-size">
             <p style="font-size: 2.5vw;">{{view_activity_log}}</p>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
       </ion-col>
     </ion-row>

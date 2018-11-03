@@ -22,6 +22,7 @@ import { EditProfilePage } from '../pages/MainModule/edit-profile/edit-profile';
 import { ProfilePhotoPage } from '../pages/MainModule/profile-photo/profile-photo';
 import { SettingsPage } from '../pages/MainModule/settings/settings';
 import { TutorialPage } from '../pages/MainModule/tutorial/tutorial';
+import { ActivityLogsPage } from '../pages/MainModule/activity-logs/activity-logs';
 
 //Account module
 import { LoginPage } from '../pages/AccountModule/login/login';
@@ -33,9 +34,6 @@ import { LoginWechatPage } from '../pages/AccountModule/login-wechat/login-wecha
 import { UpdateProfilePage } from '../pages/AccountModule/update-profile/update-profile';
 import { CameraOpenPage } from '../pages/AccountModule/camera-open/camera-open';
 
-// FollowModule
-import { FollowRequestsPage } from '../pages/FollowModule/follow-requests/follow-requests';
-import { FollowersPage } from '../pages/FollowModule/followers/followers';
 //Story module
 import { ShowPhotoPage } from '../pages/story/show-photo/show-photo';
 import { LocationPage } from '../pages/story/location/location';
@@ -61,6 +59,7 @@ import { SearchPage } from '../pages/SearchModule/search/search';
 
 //MyPet
 import { MyPetPage } from '../pages/MyPet/my-pet/my-pet';
+import { MyPetDetailsPage } from '../pages/MyPet/my-pet-details/my-pet-details';
 //providers
 import { Toast } from '@ionic-native/toast';
 import { Network } from '@ionic-native/network';
@@ -88,6 +87,9 @@ import { BaiduMapModule } from 'angular2-baidu-map'
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FormServiceProvider } from '../providers/form-service/form-service';
+import { LanguageProvider } from '../providers/language/language';
+import { MyPetProvider } from '../providers/my-pet/my-pet';
 
 //PopOvers
 import { BirthdayPage } from '../pages/Popover/birthday/birthday';
@@ -96,7 +98,6 @@ import { WhyProfilePage } from '../pages/Popover/why-profile/why-profile';
 import { ReportPage } from '../pages/Popover/report/report';
 
 //Pipes 
-import { CDVPhotoLibraryPipe } from '../pipes/cdvphotolibrary.pipe';
 import { StoryServiceProvider } from '../providers/story-service/story-service';
 import { ProfileProvider } from '../providers/profile/profile';
 import { SearchResProvider } from '../providers/search-res/search-res';
@@ -106,8 +107,7 @@ import { StoryComponent } from '../components/story/story';
 import { FollowingComponent } from '../components/following/following';
 import { RankingComponent } from '../components/ranking/ranking';
 import { FollowersComponent } from '../components/followers/followers';
-import { FormServiceProvider } from '../providers/form-service/form-service';
-import { LanguageProvider } from '../providers/language/language';
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/language/', '.json');
@@ -125,8 +125,6 @@ export function createTranslateLoader(http: HttpClient) {
     ProfilePage,
     PeoplePage,
     OthersProfilePage,
-    FollowRequestsPage,
-    CDVPhotoLibraryPipe,
     ShowPhotoPage,
     EditProfilePage,
     LocationPage,
@@ -144,12 +142,12 @@ export function createTranslateLoader(http: HttpClient) {
     StoryListPage,
     StoryTopListPage,
     StoryScreenPage,
-    FollowersPage,
     ProfilePhotoPage,
     StoryComponent,
     FollowingComponent,
     RankingComponent,
     FollowersComponent,
+    ProgressBarComponent,
     SavedStoriesPage,
     SearchPage,
     SingleStoryPage,
@@ -158,6 +156,8 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPage,
     TutorialPage,
     ReportPage,
+    MyPetDetailsPage,
+    ActivityLogsPage,
   ],
   imports: [
     HttpClientModule,
@@ -188,7 +188,6 @@ export function createTranslateLoader(http: HttpClient) {
         { component: RegistrationPage, name: 'RegistrationPage', segment: 'RegistrationPage' },
         { component: PeoplePage, name: 'PeoplePage', segment: 'PeoplePage' },
         { component: OthersProfilePage, name: 'OthersProfilePage', segment: 'OthersProfilePage' },
-        { component: FollowRequestsPage, name: 'FollowRequestsPage', segment: 'FollowRequestsPage' },
         { component: ShowPhotoPage, name: 'ShowPhotoPage', segment: 'ShowPhotoPage' },
       ]
     })
@@ -209,7 +208,6 @@ export function createTranslateLoader(http: HttpClient) {
     ProfilePage,
     PeoplePage,
     OthersProfilePage,
-    FollowRequestsPage,
     ShowPhotoPage,
     EditProfilePage,
     LocationPage,
@@ -227,12 +225,12 @@ export function createTranslateLoader(http: HttpClient) {
     StoryListPage,
     StoryTopListPage,
     StoryScreenPage,
-    FollowersPage,
     ProfilePhotoPage,
     StoryComponent,
     FollowingComponent,
     RankingComponent,
     FollowersComponent,
+    ProgressBarComponent,
     SavedStoriesPage,
     SearchPage,
     SingleStoryPage,
@@ -241,6 +239,8 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPage,
     TutorialPage,
     ReportPage,
+    MyPetDetailsPage,
+    ActivityLogsPage,
   ],
   providers: [
     StatusBar,
@@ -282,6 +282,7 @@ export function createTranslateLoader(http: HttpClient) {
     SearchResProvider,
     FormServiceProvider,
     LanguageProvider,
+    MyPetProvider,
   ]
 })
 

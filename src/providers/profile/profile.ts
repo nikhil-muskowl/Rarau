@@ -73,4 +73,17 @@ export class ProfileProvider {
       }
     );
   }
+
+  apiGetActivities(data) {
+    this.formData = new FormData();
+
+    this.formData.append('user_id', data.user_id);
+    this.URL = ConfigProvider.BASE_URL + 'user_activities_module/api/user_activities_api';
+
+    return this.http.post(this.URL, this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
 }

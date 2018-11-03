@@ -52,7 +52,6 @@ export class StoryServiceProvider {
       this.formData.append('story_types', JSON.stringify(data.searchCat));
     }
 
-
     console.log(this.formData);
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/top_stories_marker',
@@ -143,6 +142,19 @@ export class StoryServiceProvider {
     );
   }
 
+  apiGetComments(data) {
+
+    this.formData = new FormData();
+    this.formData.append('story_id', data.story_id);
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/story_comments_api',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
   getSavedStories(data) {
 
     this.formData = new FormData();
@@ -188,12 +200,13 @@ export class StoryServiceProvider {
   setComment(data: any) {
     this.formData = new FormData();
 
+    console.log('param comment : ' + JSON.stringify(data));
     this.formData.append('user_id', data.user_id);
     this.formData.append('story_id', data.story_id);
     this.formData.append('comment', data.comment);
     this.formData.append('language_id', data.language_id);
 
-    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/set_comment',
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/story_comments_api/save',
       this.formData,
       {
         headers: this.headers,
@@ -250,14 +263,17 @@ export class StoryServiceProvider {
   getRankedStory(data) {
     this.formData = new FormData();
 
+    if (data.user_id != undefined)
+      this.formData.append('user_id', data.user_id);
+
     this.formData.append('story_type_id', data.story_type_id);
     this.formData.append('length', data.length);
     this.formData.append('start', data.start);
     this.formData.append('order[0][column]', '2');
     this.formData.append('order[0][dir]', 'desc');
-    this.formData.append('latitude', data.latitude);
-    this.formData.append('longitude', data.longitude);
-    this.formData.append('distance', data.distance);
+
+    if (data.location != undefined)
+      this.formData.append('location', data.location);
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api',
       this.formData,
@@ -313,6 +329,15 @@ export class StoryServiceProvider {
 
     return this.http.post(ConfigProvider.BASE_URL + 'user_module/api/user_complains_api/save',
       this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
+  apiGetAllLocations() {
+
+    return this.http.get(ConfigProvider.BASE_URL + 'story_module/api/stories_api/allLocations',
       {
         headers: this.headers,
       }

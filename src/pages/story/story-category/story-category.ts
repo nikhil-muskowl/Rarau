@@ -46,7 +46,9 @@ export class StoryCategoryPage {
   public btnGo = 1;
 
   public btnname;
+  public publish;
   public category;
+  public category_txt;
   public success;
   public error;
   public field_not_blank;
@@ -93,7 +95,7 @@ export class StoryCategoryPage {
     this.translate.use(this.languageProvider.getLanguage());
 
     this.translate.get('publish').subscribe((text: string) => {
-      this.category = text;
+      this.publish = text;
     });
     this.translate.get('forgot_pass').subscribe((text: string) => {
       this.btnname = text;
@@ -114,6 +116,9 @@ export class StoryCategoryPage {
       this.write_something = text;
     });
 
+    this.translate.get('category').subscribe((text: string) => {
+      this.category_txt = text;
+    });
   }
 
   ionViewDidLoad() {

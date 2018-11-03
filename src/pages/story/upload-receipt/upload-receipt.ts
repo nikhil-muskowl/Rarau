@@ -39,8 +39,12 @@ export class UploadReceiptPage {
 
   public flashMode = "off";
 
+  public rarau;
   public error;
   public select_img_first;
+  public show_rec_public;
+  public upload;
+  public submit;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -55,6 +59,7 @@ export class UploadReceiptPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     if (this.srcPhoto != undefined) {
       this.receiptImage = this.srcPhoto;
       this.imgSend = this.srcPhoto;
@@ -74,16 +79,24 @@ export class UploadReceiptPage {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
 
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
     this.translate.get('error').subscribe((text: string) => {
       this.error = text;
     });
     this.translate.get('select_img_first').subscribe((text: string) => {
       this.select_img_first = text;
     });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UploadReceiptPage');
+    this.translate.get('show_rec_public').subscribe((text: string) => {
+      this.show_rec_public = text;
+    });
+    this.translate.get('submit').subscribe((text: string) => {
+      this.submit = text;
+    });
+    this.translate.get('upload').subscribe((text: string) => {
+      this.upload = text;
+    });
   }
 
   ionViewWillEnter() {
@@ -91,13 +104,14 @@ export class UploadReceiptPage {
   }
 
   updateReceipt() {
-    console.log('Receipt privacy is : ' + this.receipt_private);
     if (this.receipt_private) {
       this.recipt_show = 1;
     }
     else {
       this.recipt_show = 0;
     }
+    console.log('Receipt privacy is : ' + this.receipt_private);
+
   }
 
   goBack() {
