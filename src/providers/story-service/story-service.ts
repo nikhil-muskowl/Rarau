@@ -44,13 +44,17 @@ export class StoryServiceProvider {
     }
     if (data.latitude != undefined) {
       this.formData.append('latitude', data.latitude);
+
     }
     if (data.longitude != undefined) {
       this.formData.append('longitude', data.longitude);
     }
     if (data.searchCat != undefined) {
       this.formData.append('story_types', JSON.stringify(data.searchCat));
+
     }
+    this.formData.append('distance', '10');
+
 
     console.log(this.formData);
 
