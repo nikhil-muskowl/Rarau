@@ -61,7 +61,7 @@ export class MyApp {
       this.splashScreen.hide();
       console.log('tutorial value : ' + this.configProvider.isSeen());
       let chk = this.configProvider.isSeen();
-      if (chk) {
+      if (chk == '1') {
         this.rootPage = MainTabsPage;
       }
       else {

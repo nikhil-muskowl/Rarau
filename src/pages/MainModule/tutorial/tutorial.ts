@@ -22,6 +22,7 @@ export class TutorialPage {
   public next_txt;
   public show_tutorial;
   public tutorial_will;
+  public chk;
   public tutImages = [];
 
   constructor(public navCtrl: NavController,
@@ -30,8 +31,15 @@ export class TutorialPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+    this.tutorial_will = true;
     this.setText();
-
+    this.chk = this.configProvider.isSeen();
+    if (this.chk == '1') {
+      this.tutorial_will = false;
+    }
+    else {
+      this.tutorial_will = true;
+    }
     this.tutImages = [
       { image: 'assets/imgs/Profile/img1.png' },
       { image: 'assets/imgs/Profile/img2.png' },
@@ -78,7 +86,6 @@ export class TutorialPage {
 
   tuteSkip() {
     console.log('click on skip btn');
-    this.configProvider.setisSeen(true);
     this.navCtrl.setRoot(MainTabsPage);
   }
 
@@ -86,13 +93,13 @@ export class TutorialPage {
     console.log('Check value : ' + this.tutorial_will);
     if (this.tutorial_will) {
       //cheecked means user want to see tutorial on every startup
-      this.configProvider.setisSeen(false);
+      this.configProvider.setisSeen(0);
       console.log('Tutorial will be showen : ' + this.tutorial_will);
 
     }
     else {
       //means user dont't want to see tutorial on every startup
-      this.configProvider.setisSeen(true);
+      this.configProvider.setisSeen(1);
       console.log('Tutorial will not be showen : ' + this.tutorial_will);
 
     }
