@@ -3,7 +3,8 @@
         <ion-title class="tool-bar-title">
             <button start class="back-btn" (click)='goBack()'>
                 <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-            </button>{{upload_profile_pic}}
+            </button>
+            {{upload_profile_pic}}
         </ion-title>
         <ion-buttons end>
             <span class="logo">
@@ -15,36 +16,29 @@
 
 <ion-content>
     <div class="login-back" scroll="false">
-        <div text-center>
-            <h1>
-                <b>{{upload}}
-                    <br>
-                    <span style="text-decoration: underline;">{{profile_picture}}</span>
-                </b>
-            </h1>
+        <div text-center id="profile-img">
+            <h1>{{upload}}<br><span style="text-decoration: underline;">{{profile_picture}}</span></h1>
         </div>
-        <br>
-        <br>
-        <div text-center>
+
+        <div text-center id="display-img">
             <img class="circle-pic" src="{{displayImage}}" width="150" height="150">
         </div>
-        <br>
-        <br>
+
         <div class="row">
             <div class="col border-line">
                 <div text-right>
-                    <img style="margin-right: 15px" src="assets/icon/UploadPicture.png" width="100" height="100"
+                    <img style="margin-right: 15px" src="assets/icon/UploadPicture.png" width="85" height="85"
                         (click)="openGallery()">
                 </div>
             </div>
             <!-- <div class="divider"></div> -->
             <div class="col">
                 <div text-left>
-                    <img style="margin-left: 15px" src="assets/icon/Camera.png" width="100" height="100" (click)="openCamera()">
+                    <img style="margin-left: 15px" src="assets/icon/Camera.png" width="85" height="85" (click)="openCamera()">
                 </div>
             </div>
         </div>
-        <br>
+     
         <div padding text-center>
             <button class="submit-btn" ion-button (click)="save()">{{upload}}</button>
         </div>

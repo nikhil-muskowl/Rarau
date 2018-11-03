@@ -43,4 +43,120 @@ page-login {
         width: 80%;
         text-align: center;
     }
+    
+
+    /* ------ Added on 3_11_2018 ------ */
+
+    ion-header, ion-navbar {
+        height: 68px;
+    }
+
+    ion-navbar.toolbar {
+        height: 68px;
+    }
+
+    #txt-login {
+        display: inline-block;
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    .fixed-content, .scroll-content {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .wechat-btn {
+        margin-top: 8vh;
+    }
+
+    .login-back #img-wechat {
+        margin-left: -15px;
+    }
+
+    .login-back #txt-wechat {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .login-back #txt-or {
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+    .login-back ion-item {
+        width: 72%;
+        border-radius: 10px;
+        margin-left: 14%;
+    }
+
+    .item-md {
+        padding-left: 0px;
+    }
+
+    .item-block .item-inner {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .invalid-message {
+        padding-top: 0px;
+        margin-top: 5px;
+        margin-bottom: 0px;
+        margin-left: -140px;
+    }
+
+    .frgt-link {
+        margin-right: 14vw;
+        margin-top: 8px;
+        margin-bottom: 0px;
+        font-weight: initial;
+        text-underline-position: under;
+    }
+
+    .login-back .submit-btn {
+        border: 1px solid;
+        border-color: white;
+        border-radius: 12px;
+        height: 3.8rem;
+        width:90px;
+    }
+
+    .submit-btn .button-inner {
+        font-size: 1.8rem;
+        font-weight: 400;
+        text-transform: none;
+    }
+
+    .login-hr {
+        width: 75%;
+    }
+
+    #new-to {
+        margin-top: 25px;
+        margin-bottom: 0px;
+        font-weight: initial;
+        font-size: 2.0rem;
+    }
+
+    #sign-up {
+        margin-top: 0px;
+        margin-bottom: 15px;
+        font-weight: initial;
+        font-size: 2.0rem;
+    }
+
+    #txt-rarau {
+        margin-top: 8px;
+        margin-bottom: 0px;
+        font-weight: 400;
+        font-size: 2.0rem;
+    }
+
+    #txt-go {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        font-weight: 400;
+        font-size: 1.5rem;
+    }
 }

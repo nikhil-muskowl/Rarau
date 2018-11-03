@@ -8,7 +8,8 @@ page-update-profile {
         width: 100%;
     }
     h1 {
-        margin-top: 2rem;
+        // margin-top: 2rem;
+        margin-top: 0rem;
         font-size: 2.6rem;
         color: #fff !important;
     }
@@ -46,4 +47,58 @@ page-update-profile {
         -webkit-border-radius: 50%;
         border-radius: 50%;
     }
+
+    /* Added on 3_11_2018 By Rajesh */
+    ion-content {
+        top: 70px !important;
+    }
+
+    .fixed-content {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .scroll-content{
+        margin-top: 0px !important;
+    }
+
+    h1 {
+        padding-top: 30px !important;
+        margin-bottom: 0rem;
+        font-weight: normal;
+        font-size: 2.3rem;
+    }
+
+    h1 span {
+        text-underline-position: under;
+    }
+
+    .login-back #display-img {
+        padding-top: 30px;
+        padding-bottom: 25px;
+    }
+
+    .login-back .row {
+        padding-bottom: 10px;
+    }
+
+    .login-back .row .col {
+        height: 82px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .login-back .submit-btn {
+        border: 1px solid;
+        border-color: white;
+        height: 7vh;
+        border-radius: 13px;
+    }
+
+    .submit-btn {
+        text-transform: none;
+        font-size: 20px !important;
+        font-weight: normal;
+    }
+
 }

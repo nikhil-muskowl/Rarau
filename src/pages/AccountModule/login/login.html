@@ -1,22 +1,24 @@
 <ion-header>
     <ion-navbar>
       <ion-toolbar>
-        
-        <ion-title class="tool-bar-title">{{login}} <span style="float:right;"><img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span></ion-title>
+        <ion-title class="tool-bar-title">
+            <span id="txt-login">{{login}} </span>
+            <span style="float:right;"><img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span></ion-title>
       </ion-toolbar>
     </ion-navbar>
   </ion-header>
 <ion-content >
 <div class="login-back" scroll="false">
     <div class="row">
-            <div class="col">
-                    <div text-center>
-                        <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit"><img src="assets/imgs/login/wechat.png" width="40" height="40">&nbsp;&nbsp;{{login_wechat}}</button>
-                    </div>
+        <div class="col">
+            <div text-center>
+                <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit">
+                    <img src="assets/imgs/login/wechat.png" id="img-wechat" width="40" height="40"><span id="txt-wechat">{{login_wechat}}</span></button>
             </div>
+        </div>
     </div>
     <div text-center>
-        <h2>{{or}}</h2>
+        <h2 id="txt-or">{{or}}</h2>
     </div>   
             <div text-center>
                 <form [formGroup]="loginForm">
@@ -45,24 +47,23 @@
                 </form>
             </div>
             <div class="row">
-                    <div class="col">
-                        <div text-center>
-                            <hr class="login-hr">
-                            <h3>{{new_to_rarau}}</h3>
-                            <h3 (click)="goToRegsiter()" style="text-decoration: underline;">{{sign_up}}</h3>
-                            
-                        </div>
+                <div class="col">
+                    <div text-center>
+                        <hr class="login-hr">
+                        <h3 id="new-to">{{new_to_rarau}}</h3>
+                        <h3 id="sign-up" (click)="goToRegsiter()" style="text-decoration: underline;">{{sign_up}}</h3>
                     </div>
+                </div>
             </div>
-            <br>
+
             <div class="row">
-                    <div class="col">
-                        <div text-center>
-                            <hr class="login-hr">
-                            <h3>{{rarau}}</h3>
-                            <p>{{connect_and_go}}</p>
-                        </div>
+                <div class="col">
+                    <div text-center>
+                        <hr class="login-hr">
+                        <h3 id="txt-rarau">{{rarau}}</h3>
+                        <p id="txt-go">{{connect_and_go}}</p>
                     </div>
+                </div>
             </div>
 </div>
 
