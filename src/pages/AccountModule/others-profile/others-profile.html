@@ -100,7 +100,7 @@
     </div>
 
     <ion-grid class="segment-grid" *ngSwitchCase="'Ranking'">
-      <ranking></ranking>
+      <ranking [userid]="id"></ranking>
     </ion-grid>
 
     <div *ngSwitchCase="'Followers'">
