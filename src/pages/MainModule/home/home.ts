@@ -301,8 +301,8 @@ export class HomePage {
                 }
               },
               point: {
-                lat: element.latitude,
-                lng: element.longitude
+                lat: this.latitude,
+                lng: this.longitude
               }
             });
 
@@ -315,8 +315,8 @@ export class HomePage {
             }
             else {
               this.zoomlatLong = {
-                lat: element.latitude,
-                lng: element.longitude,
+                lat: this.latitude,
+                lng: this.longitude,
                 zoom: 15
               }
             }

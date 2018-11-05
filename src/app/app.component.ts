@@ -55,6 +55,13 @@ export class MyApp {
     public configProvider: ConfigProvider) {
 
     this.platform.ready().then(() => {
+
+      this.locationTracker.setLocation();
+      this.backEvent();
+
+      this.language = this.languageProvider.getLanguage();
+      console.log(this.language);
+      this.translate.setDefaultLang(this.language);
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
@@ -69,12 +76,7 @@ export class MyApp {
       }
       this.initializeApp();
 
-      this.locationTracker.setLocation();
-      this.backEvent();
 
-      this.language = this.languageProvider.getLanguage();
-      console.log(this.language);
-      this.translate.setDefaultLang(this.language);
       console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
       console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
       this.translate.use(this.language);

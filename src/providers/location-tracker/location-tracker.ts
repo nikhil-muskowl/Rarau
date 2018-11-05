@@ -19,6 +19,7 @@ export class LocationTrackerProvider {
   public setLocation() {
     let watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
+      console.log('location data' + JSON.stringify(data));
       window.localStorage.setItem('latitude', String(data.coords.latitude));
       window.localStorage.setItem('longitude', String(data.coords.longitude));
     });
