@@ -12,12 +12,15 @@
   </div>
 
   <ion-list>
-    <ion-item *ngFor="let item of items">
+    <ion-item *ngFor="let item of items; let i = index;">
       <ion-row>
+        <ion-col col-1>
+          <h1 class="rank-h1">{{i+1}}</h1>
+        </ion-col>
         <ion-col col-4>
           <img (click)="itemTapped(item)" style="border-radius: 15px;" src="{{item.image_thumb}}">
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-7>
           <h3>{{item.title}}</h3>
           <p> <span *ngFor="let cat of item.categories; let j = index;">
               <span *ngIf="item.categories.length-1 > j">{{cat}}, </span>

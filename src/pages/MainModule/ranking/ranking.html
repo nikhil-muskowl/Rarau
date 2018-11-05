@@ -32,13 +32,16 @@
   </div>
 
   <ion-list>
-    <ion-item *ngFor="let item of items">
+    <ion-item *ngFor="let item of items; let i = index;">
       <ion-row>
+        <ion-col col-1>
+          <h1 class="rank-h1">{{i+1}}</h1>
+        </ion-col>
         <ion-col col-4 class="round_img">
           <img style="border-radius: 15px;" (click)="itemTapped(item)" src="{{item.image_thumb}}">
-          <img *ngIf="item.rank_image" class="img-badge" width="30px" height="30px" src="{{item.rank_image}}">
+          <!-- <img *ngIf="item.rank_image" class="img-badge" width="30px" height="30px" src="{{item.rank_image}}"> -->
         </ion-col>
-        <ion-col col-8>
+        <ion-col col-7>
           <h3>{{item.title}}</h3>
           <p> <span *ngFor="let cat of item.categories; let j = index;">
               <span *ngIf="item.categories.length-1 > j">{{cat}}, </span>
