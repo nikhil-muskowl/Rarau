@@ -54,6 +54,7 @@ export class RegistrationPage {
   private sign_up;
   private rarau;
   private login_wechat;
+  private sign_up_wechat;
   private why_this;
   private birthday;
   private male;
@@ -151,6 +152,9 @@ export class RegistrationPage {
     });
     this.translate.get('login_wechat').subscribe((text: string) => {
       this.login_wechat = text;
+    });
+    this.translate.get('sign_up_wechat').subscribe((text: string) => {
+      this.sign_up_wechat = text;
     });
     this.translate.get('why_this').subscribe((text: string) => {
       this.why_this = text;

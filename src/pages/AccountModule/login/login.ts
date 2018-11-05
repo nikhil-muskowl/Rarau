@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Modal, ModalController, ModalOptions } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrationPage } from '../registration/registration';
 import { ProfilePage } from '../../MainModule/profile/profile';
@@ -12,6 +12,8 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+
+import { AlertModalPage } from '../alert-modal/alert-modal';
 
 @IonicPage()
 @Component({
@@ -42,6 +44,8 @@ export class LoginPage {
   private login_wechat;
   private sign_up;
   private or;
+  private welcome;
+  private logged_in;
   private email_password_incorrect;
 
   constructor(public navCtrl: NavController,
@@ -52,6 +56,7 @@ export class LoginPage {
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
+    private modal: ModalController,
   ) {
 
     this.setText();
@@ -114,6 +119,12 @@ export class LoginPage {
     this.translate.get('email_password_incorrect').subscribe((text: string) => {
       this.email_password_incorrect = text;
     });
+    this.translate.get('welcome').subscribe((text: string) => {
+      this.welcome = text;
+    });
+    this.translate.get('logged_in').subscribe((text: string) => {
+      this.logged_in = text;
+    });
 
   }
 
@@ -140,14 +151,19 @@ export class LoginPage {
           console.log(response);
 
           if (this.responseData.status == true && this.responseData.message != '') {
-            this.success_msg = this.responseData.message;
-            this.alertProvider.title = this.success;
-            this.alertProvider.message = this.success_msg;
-            this.alertProvider.showAlert();
-            this.loginForm.reset();
-            this.submitAttempt = false;
+            /* this.success_msg = this.responseData.message;
+             this.alertProvider.title = this.success;
+             this.alertProvider.message = this.success_msg;
+             this.alertProvider.showAlert();
+             this.loginForm.reset();
+             this.submitAttempt = false;*/
             this.loginProvider.setData(this.responseData.result);
-            this.navCtrl.setRoot(ProfilePage);
+
+            //open modal
+            this.openModal();
+
+
+            // this.navCtrl.setRoot(ProfilePage);//on modal dismiss
           }
           else if (this.responseData.status == false) {
             this.alertProvider.title = this.failed;
@@ -162,6 +178,33 @@ export class LoginPage {
         }
       );
     }
+  }
+
+  openModal() {
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+
+    const myModalData = {
+      welcome: this.welcome,
+      image: 'assets/imgs/story/pos-flam.png',
+      logged: this.logged_in,
+      from: 1
+    };
+
+    const myModal: Modal = this.modal.create(AlertModalPage, { data: myModalData }, myModalOptions);
+
+    myModal.present();
+
+    myModal.onDidDismiss(() => {
+      this.loginForm.reset();
+      this.submitAttempt = false;
+      this.navCtrl.setRoot(ProfilePage);
+    });
+
+    myModal.onWillDismiss(() => {
+      this.navCtrl.setRoot(ProfilePage);
+    });
   }
 
   forgotPass() {

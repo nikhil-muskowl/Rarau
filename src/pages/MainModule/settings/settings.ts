@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Modal, ModalController, ModalOptions  } from 'ionic-angular';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
@@ -7,6 +7,8 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { LoginPage } from '../../AccountModule/login/login';
 import { LoginProvider } from '../../../providers/login/login';
 import { ProfilePage } from "../profile/profile";
+
+import { AlertModalPage } from '../../AccountModule/alert-modal/alert-modal';
 
 @IonicPage()
 @Component({
@@ -23,6 +25,8 @@ export class SettingsPage {
   private language_txt;
   public sure_logout;
   public logout_txt;
+  private bye_bye;
+  private logged_out;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,7 +34,9 @@ export class SettingsPage {
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
-    public languageProvider: LanguageProvider, ) {
+    public languageProvider: LanguageProvider, 
+    private modal: ModalController,
+    ) {
 
     this.setText();
     this.user_id = this.LoginProvider.isLogin();
@@ -53,6 +59,12 @@ export class SettingsPage {
     });
     this.translate.get('logout').subscribe((text: string) => {
       this.logout_txt = text;
+    });
+    this.translate.get('logged_out').subscribe((text: string) => {
+      this.logged_out = text;
+    });
+    this.translate.get('bye_bye').subscribe((text: string) => {
+      this.bye_bye = text;
     });
   }
 
@@ -78,12 +90,40 @@ export class SettingsPage {
   }
 
   logout() {
-    this.alertProvider.Alert.confirm(this.sure_logout, this.logout_txt).then((res) => {
+    this.openModal();
+   // this.LoginProvider.unSetData();
+   // this.navCtrl.setRoot(LoginPage);
+  /*  this.alertProvider.Alert.confirm(this.sure_logout, this.logout_txt).then((res) => {
       console.log('confirmed');
       this.LoginProvider.unSetData();
       this.navCtrl.setRoot(LoginPage);
     }, err => {
       console.log('user cancelled');
+    }); */
+  }
+
+  openModal() {
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+
+    const myModalData = {
+      welcome: this.bye_bye,
+      image: 'assets/imgs/story/neg-flame.png',
+      logged: this.logged_out,
+      from: 0
+    };
+
+    const myModal: Modal = this.modal.create(AlertModalPage, { data: myModalData }, myModalOptions);
+
+    myModal.present();
+
+    myModal.onDidDismiss(() => {
+      
+    });
+
+    myModal.onWillDismiss(() => {
+      
     });
   }
 

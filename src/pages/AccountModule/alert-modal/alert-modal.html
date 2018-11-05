@@ -1,0 +1,22 @@
+<ion-content class="main-view">
+
+  <div class="overlay" (click)="closeModal()"></div>
+
+  <div class="modal_content">
+    <div class="div-outer">
+      <div class="mdl-img">
+        <img class="flm-img" src="{{image}}" />
+      </div>
+      <div class="mdl-txt">
+        <h4 class="wlc-txt">{{welcome_txt}}</h4>
+        <P class="lgn-txt">{{logged_txt}}</P>
+      </div>
+      <div class="mdl-btn">
+        <button class="submit-btn" ion-button="" type="submit" (click)="openPage()">
+          {{keep_going}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

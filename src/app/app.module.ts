@@ -33,6 +33,7 @@ import { PeoplePage } from '../pages/AccountModule/people/people';
 import { LoginWechatPage } from '../pages/AccountModule/login-wechat/login-wechat';
 import { UpdateProfilePage } from '../pages/AccountModule/update-profile/update-profile';
 import { CameraOpenPage } from '../pages/AccountModule/camera-open/camera-open';
+import { AlertModalPage } from '../pages/AccountModule/alert-modal/alert-modal';
 
 //Story module
 import { ShowPhotoPage } from '../pages/story/show-photo/show-photo';
@@ -133,6 +134,7 @@ export function createTranslateLoader(http: HttpClient) {
     GalleryPage,
     UpdateProfilePage,
     CameraOpenPage,
+    AlertModalPage,
     BirthdayPage,
     TermsPage,
     WhyProfilePage,
@@ -216,6 +218,7 @@ export function createTranslateLoader(http: HttpClient) {
     GalleryPage,
     UpdateProfilePage,
     CameraOpenPage,
+    AlertModalPage,
     BirthdayPage,
     TermsPage,
     WhyProfilePage,
