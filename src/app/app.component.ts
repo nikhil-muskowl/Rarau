@@ -67,13 +67,14 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-      this.splashScreen.hide();
 
       this.splashScreen.hide();
-      console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
 
-      // set to landscape
-      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      // Commented these lines for desktop, uncomment for real device(Mobile)
+      // console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
+
+      // // set to landscape
+      // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       
       console.log('tutorial value : ' + this.configProvider.isSeen());
       let chk = this.configProvider.isSeen();

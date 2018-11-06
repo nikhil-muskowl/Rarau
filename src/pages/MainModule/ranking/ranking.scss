@@ -34,14 +34,14 @@ page-ranking {
     }
 
     .rank-h1{
-        font-size: 30px !important;
+        font-size: 23px !important;
         margin-top: 3px !important;
         color: #ec3747 !important;
         font-weight: bolder !important;
         border: 2px solid #ec3747;
         border-radius: 22px;
-        width: 38px !important;
-        height: 38px !important;
+        width: 30px !important;
+        height: 30px !important;
         text-align: center;
         transform: rotate(-30deg);
         margin-left: 3px;
@@ -70,9 +70,29 @@ page-ranking {
         display:inline-block;
     }
 
-    .rank-img {
-        height: 75px;
-        width: 85px;
+    .rank-img-1 {
+        height: 50px;
+        width: 60px;
+        position: absolute;
+        transform: rotate(-30deg);
+        //margin-left: -20px;
+        margin-left: -6px;
+        margin-top: 2px;    
+    }
+
+    .rank-img-2 {
+        height: 45px;
+        width: 55px;
+        position: absolute;
+        transform: rotate(-30deg);
+        //margin-left: -20px;
+        margin-left: -6px;
+        margin-top: 2px;    
+    }
+
+    .rank-img-3 {
+        height: 40px;
+        width: 50px;
         position: absolute;
         transform: rotate(-30deg);
         //margin-left: -20px;
