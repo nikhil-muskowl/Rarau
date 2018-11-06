@@ -131,4 +131,84 @@ page-registration {
         margin-left: 20vw;
     }
 
+    .date-row {
+        // width: 69%;
+        width: 247px;
+        // margin-left: 16%;
+        margin-left: 56px;
+    }
+
+    .datetime-md {
+        padding: 9px 8px 8px 16px;
+    }
+
+    ion-datetime {
+        border-radius: 10px;
+    }
+
+    .male-female-h3 {
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        margin-left: -28px;
+    }
+
+    .male-female-h3 span {
+        font-size: 17px;
+        font-weight: initial;
+        margin-left: 30px;
+    }
+
+    .img-male {
+        height: 18px;
+        width: 8px;
+    }
+
+    .img-female {
+        height: 18px;
+        width: 8px;
+    }
+
+    .birth-text {
+        margin-left: 20vw;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .profile-pic-txt {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 13px;
+    }
+
+    .upload-btn {
+        width: 66% !important;
+        border-radius: 10px !important;
+        padding: 18px 0px !important;
+        margin-left: 22px !important;
+    }
+
+    .btn-align {
+        font-size: 13px;
+    }
+
+    .click-txt {
+        font-size: 12px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+
+    .tp-spn {
+        text-decoration:underline;
+    }
+
+    .login-back .submit-btn {
+        width: 32vw;
+        height: 5vh;
+        font-size: 16px;
+        text-transform: none !important;
+        font-weight: initial;
+    }
+
 }

@@ -76,7 +76,7 @@
             </div>
 
             <!-- <ion-item> -->
-            <div>
+            <div class="dob-div">
                 <ion-row class="date-row">
                     <ion-col col-4>
                         <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
@@ -100,17 +100,22 @@
             </div>
 
             <div text-center>
-                <h3>
-                    <span [ngStyle]="{'color': male_color}" (click)="manClick()"><img src="{{maleimage}}" width="15"
-                            height="25">{{male}}</span>
+                <h3 class="male-female-h3">
+                    <span [ngStyle]="{'color': male_color}" (click)="manClick()">
+                        <img class="img-male" src="{{maleimage}}">
+                        {{male}}
+                    </span>
                     <span style="margin-left:15px;">
-                        <span [ngStyle]="{'color': female_color}" (click)="womanClick()"><img src="{{femaleimage}}"
-                                width="15" height="25">{{female}}</span></span>
+                        <span [ngStyle]="{'color': female_color}" (click)="womanClick()">
+                            <img class="img-female" src="{{femaleimage}}">
+                            {{female}}
+                        </span>
+                    </span>
                 </h3>
             </div>
             <div text-left class="birth-text">
-                <p>{{profile_picture}}
-                    <span (click)="gotoprofile()" class="small">{{why_this}}</span>
+                <p class="profile-pic-txt">{{profile_picture}}
+                    <span (click)="gotoprofile()" class="spn-small">{{why_this}}</span>
                 </p>
             </div>
             <div text-center>
@@ -123,12 +128,11 @@
                     <img class="upload-icon" src="{{uploadIcon}}" width="20" height="20">
                 </ion-buttons>
             </div>
-
         </form>
-        <div padding text-center>
-            <p>{{by_clicking_sign_up}}
-                <br>
-                <span style="text-decoration:underline;" (click)="gototerms()">{{terms_policy}}</span>
+
+        <div text-center>
+            <p class="click-txt">{{by_clicking_sign_up}}
+                <span class="tp-spn" (click)="gototerms()">{{terms_policy}}</span>
             </p>
             <button class="submit-btn" ion-button (click)="save()">{{sign_up}}</button>
         </div>
