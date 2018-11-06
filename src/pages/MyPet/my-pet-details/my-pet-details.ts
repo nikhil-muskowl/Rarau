@@ -28,6 +28,7 @@ export class MyPetDetailsPage {
   public petImageThumb;
   public petStatus;
   public level;
+  public level_txt;
   public levels: any = [];
   public total_points;
   public points;
@@ -63,6 +64,9 @@ export class MyPetDetailsPage {
     this.translate.get('mypet_detail').subscribe((text: string) => {
       this.title = text;
     });
+    this.translate.get('level').subscribe((text: string) => {
+      this.level_txt = text;
+    });
   }
 
   getDetails() {
@@ -74,7 +78,6 @@ export class MyPetDetailsPage {
       console.log('petDetailsResponse  : ' + JSON.stringify(this.petResponse));
 
       if (this.petStatus) {
-
         this.petResult = this.petResponse.result;
         this.total_points = this.petResponse.total_points;
         this.points = this.petResponse.points;
@@ -82,10 +85,10 @@ export class MyPetDetailsPage {
         this.petTitle = this.petResult.pet_name;
         this.petImage = this.petResult.pet_image;
         this.petImageThumb = this.petResult.pet_image_thumb;
-        this.levels = this.petResult.levels;
-
-        console.log('petTitle : ' + JSON.stringify(this.petTitle));
-        console.log('levels : ' + JSON.stringify(this.levels));
+        this.levels =this.petResponse.result.level;
+       // console.log(this.levels);
+       // console.log('petTitle : ' + JSON.stringify(this.petTitle));
+       // console.log('levels : ' + JSON.stringify(this.levels));
       }
       this.loadingProvider.dismiss();
     },

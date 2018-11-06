@@ -34,14 +34,49 @@ page-ranking {
     }
 
     .rank-h1{
-        font-size: 18px !important;
-        margin-top: 33px !important;
+        font-size: 30px !important;
+        margin-top: 3px !important;
         color: #ec3747 !important;
-        font-weight: bold !important;
-        border: 1px solid;
-        border-radius: 12px;
-        width: 20px;
-        height: 20px;
+        font-weight: bolder !important;
+        border: 2px solid #ec3747;
+        border-radius: 22px;
+        width: 38px !important;
+        height: 38px !important;
         text-align: center;
+        transform: rotate(-30deg);
+        margin-left: 3px;
+        position: absolute;
+    }
+
+    /* for ranking font size */
+
+    .rank-h3 {
+        font-size: 1.8rem !important;
+    }
+
+    .rank-p1 {
+        font-size: 1.6rem !important;
+    }
+
+    .rank-spn {
+        font-size: 1.4rem !important;
+    }
+
+    .rank-p2 {
+        font-size: 1.2rem !important;
+    }
+
+    .rank-spn {
+        display:inline-block;
+    }
+
+    .rank-img {
+        height: 75px;
+        width: 85px;
+        position: absolute;
+        transform: rotate(-30deg);
+        //margin-left: -20px;
+        margin-left: -6px;
+        margin-top: 2px;    
     }
 }

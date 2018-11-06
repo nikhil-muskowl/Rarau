@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content padding>
-
+  <div class="h2-grad lvl-div">
+    <span class="lvl-title">{{level_txt}} </span>
+    <span class="lvl-value">{{levels}}</span>
+  </div>
   <img class="img-resp" src="{{petImage}}">
   <h2 class="h2-grad">{{petTitle}}</h2>
   <progress-bar [progress]="progress"></progress-bar>
