@@ -72,15 +72,63 @@ page-registration {
 
     .wechat-btn {
         margin-top: 27px;
+        padding: 18px 24px;
+        margin-bottom: 0px;
     }
 
     .login-back #img-wechat {
-        margin-left: -15px;
+        margin-left: 6px;
+        height: 30px;
+        width: 30px;
     }
 
     .login-back #txt-wechat {
-        margin-left: 20px;
-        margin-right: 20px;
+        font-size: 15px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    /* Added on 6_11_2018 */
+
+    .txt-or{
+        margin-top: 0rem !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 16px;
+        font-weight: lighter;
+    }
+
+    .login-back ion-item {
+        width: 66% !important;
+        border-radius: 10px !important;
+        margin-left: 17% !important;
+        margin-bottom: 5px !important;
+    }
+
+    .text-input-md {
+        margin: 0px 0px !important;
+        font-size: 13px;
+    }
+
+    .item-input ion-input, .item-input ion-textarea {
+        font-size: 13px;
+    }
+
+    .item-block {
+        min-height: 3.4rem !important;
+    }
+
+    .birth-p {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 12px;
+    }
+
+    .spn-small {
+        font-size: 10px;
+    }
+
+    .birth-text {
+        margin-left: 20vw;
     }
 
 }

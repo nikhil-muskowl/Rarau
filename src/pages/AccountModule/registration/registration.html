@@ -25,9 +25,8 @@
             </div>
         </div>
         <div text-center>
-            <h2>or</h2>
+            <h2 class="txt-or">or</h2>
         </div>
-        <br>
         <form [formGroup]="registerForm">
 
             <div text-center>
@@ -71,8 +70,8 @@
 
             <!-- birthday -->
             <div text-left class="birth-text">
-                <p>{{birthday}}
-                    <span class="small" (click)="gotobirthday()">{{why_this}}</span>
+                <p class="birth-p">{{birthday}}
+                    <span class="spn-small" (click)="gotobirthday()">{{why_this}}</span>
                 </p>
             </div>
 
