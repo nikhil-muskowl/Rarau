@@ -69,11 +69,10 @@ export class MyApp {
 
       this.splashScreen.hide();
 
-      this.splashScreen.hide();
-      console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
+      // console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
 
-      // set to landscape
-      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      // // set to landscape
+      // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       
       console.log('tutorial value : ' + this.configProvider.isSeen());
       let chk = this.configProvider.isSeen();

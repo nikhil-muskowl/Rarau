@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Modal, ModalController, ModalOptions  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Modal, ModalController, ModalOptions } from 'ionic-angular';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
@@ -34,9 +34,9 @@ export class SettingsPage {
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
-    public languageProvider: LanguageProvider, 
+    public languageProvider: LanguageProvider,
     private modal: ModalController,
-    ) {
+  ) {
 
     this.setText();
     this.user_id = this.LoginProvider.isLogin();
@@ -91,15 +91,15 @@ export class SettingsPage {
 
   logout() {
     this.openModal();
-   // this.LoginProvider.unSetData();
-   // this.navCtrl.setRoot(LoginPage);
-  /*  this.alertProvider.Alert.confirm(this.sure_logout, this.logout_txt).then((res) => {
-      console.log('confirmed');
-      this.LoginProvider.unSetData();
-      this.navCtrl.setRoot(LoginPage);
-    }, err => {
-      console.log('user cancelled');
-    }); */
+    // this.LoginProvider.unSetData();
+    // this.navCtrl.setRoot(LoginPage);
+    /*  this.alertProvider.Alert.confirm(this.sure_logout, this.logout_txt).then((res) => {
+        console.log('confirmed');
+        this.LoginProvider.unSetData();
+        this.navCtrl.setRoot(LoginPage);
+      }, err => {
+        console.log('user cancelled');
+      }); */
   }
 
   openModal() {
@@ -119,11 +119,12 @@ export class SettingsPage {
     myModal.present();
 
     myModal.onDidDismiss(() => {
-      
+      this.LoginProvider.unSetData();
+      this.navCtrl.setRoot(LoginPage);
     });
 
     myModal.onWillDismiss(() => {
-      
+
     });
   }
 
