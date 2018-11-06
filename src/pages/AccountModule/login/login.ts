@@ -59,6 +59,7 @@ export class LoginPage {
     public languageProvider: LanguageProvider,
     private modal: ModalController,
   ) {
+    this.tabService.show();
 
     this.setText();
 
@@ -71,7 +72,6 @@ export class LoginPage {
       this.navCtrl.setRoot(ProfilePage);
     }
 
-    this.tabService.show();
   }
 
   setText() {
