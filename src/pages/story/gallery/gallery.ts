@@ -33,7 +33,6 @@ export class GalleryPage {
     private tabService: TabsService,
     private imagePicker: ImagePicker, ) {
 
-
     let backAction = platform.registerBackButtonAction(() => {
       console.log("second");
       this.stopCamera();
@@ -80,6 +79,8 @@ export class GalleryPage {
       if (imageData != '') {
 
         this.galBas = 'data:image/jpeg;base64,' + imageData;
+        this.stopCamera();
+        this.cameraPreview.hide();
         this.navCtrl.push(ShowPhotoPage, { photo: this.galBas });
       }
       else {
@@ -124,7 +125,6 @@ export class GalleryPage {
       this.srcPhoto = "data:image/jpeg;base64," + imageData;
 
       this.cameraPreview.stopCamera().then(() => {
-
         this.navCtrl.push(ShowPhotoPage, { photo: this.srcPhoto });
       });
 
@@ -162,13 +162,12 @@ export class GalleryPage {
     }).catch(() => {
       console.log("camera error")
     })
-
   }
 
   stopCamera() {
     try {
       this.cameraPreview.stopCamera().catch(e => {
-
+        console.log("camera stop")
       });
     } catch (e) {
     }
