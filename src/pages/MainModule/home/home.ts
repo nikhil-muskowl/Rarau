@@ -301,8 +301,8 @@ export class HomePage {
                 }
               },
               point: {
-                lat: this.latitude,
-                lng: this.longitude
+                lat: element.latitude,
+                lng: element.longitude
               }
             });
 
@@ -315,8 +315,8 @@ export class HomePage {
             }
             else {
               this.zoomlatLong = {
-                lat: this.latitude,
-                lng: this.longitude,
+                lat: element.latitude,
+                lng: element.longitude,
                 zoom: 15
               }
             }
@@ -385,17 +385,17 @@ export class HomePage {
     // }    
     this.showStories = true;
     let markerData = JSON.parse(JSON.stringify(marker.getPosition()));
-
+    console.log('Marker position latitude' + JSON.stringify(markerData));
     this.paramData = {
       'user_id': this.user_id,
-      'latitude': markerData.lat,
-      'longitude': markerData.lng,
+      'latitude': parseFloat(markerData.lat),
+      'longitude': parseFloat(markerData.lng),
       'searchCat': this.searchCat,
       'searchUse': this.searchUse,
       'length': '3',
       'start': '0',
     };
-
+    console.log('markerData.lat ' + parseFloat(markerData.lat) + " markerData.lng " + parseFloat(markerData.lng));
     this.loadingProvider.show();
     this.storyService.apiTopStory(this.paramData).subscribe(
       response => {

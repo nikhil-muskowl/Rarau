@@ -57,14 +57,13 @@ export class AlertModalPage {
   openPage() {
     // this.navCtrl.setRoot(ProfilePage);
 
-    if (this.from == 0) {
-      this.view.dismiss();
-      this.LoginProvider.unSetData();
-      this.navCtrl.setRoot(LoginPage);
-    }
-    else {
-      this.view.dismiss();
-    }
+    // if (this.from == 0) {
+    //   this.view.dismiss();
+
+    // }
+    // else {
+    this.view.dismiss();
+    // }
   }
 
   closeModal() {

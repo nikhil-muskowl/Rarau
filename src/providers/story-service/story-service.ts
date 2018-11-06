@@ -25,7 +25,7 @@ export class StoryServiceProvider {
   }
 
   getCategory() {
-
+    this.formData = new FormData();
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/story_types_api',
       this.formData,
       {

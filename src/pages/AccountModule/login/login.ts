@@ -131,6 +131,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+    this.tabService.show();
     console.log('ionViewDidLoad LoginPage');
   }
 
