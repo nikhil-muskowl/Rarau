@@ -66,7 +66,7 @@ export class RegistrationPage {
   private success;
   private error;
   private upload_image;
-  private profile_picture;
+  private profile_picture_txt;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -197,7 +197,7 @@ export class RegistrationPage {
       this.upload_image = text;
     });
     this.translate.get('profile_picture').subscribe((text: string) => {
-      this.profile_picture = text;
+      this.profile_picture_txt = text;
     });
 
   }
