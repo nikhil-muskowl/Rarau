@@ -90,7 +90,7 @@ export class SearchPage {
   }
 
   getCategory() {
-
+    this.categories = [];
     this.loadingProvider.present();
 
     this.storyService.getCategory().subscribe(

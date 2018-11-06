@@ -249,6 +249,7 @@ export class StoryCategoryPage {
 
                 this.tabService.show();
                 this.navCtrl.setRoot(HomePage);
+                this.loadingProvider.dismiss();
               }
             },
             err => console.error(err),
