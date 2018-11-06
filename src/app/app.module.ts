@@ -62,6 +62,7 @@ import { SearchPage } from '../pages/SearchModule/search/search';
 import { MyPetPage } from '../pages/MyPet/my-pet/my-pet';
 import { MyPetDetailsPage } from '../pages/MyPet/my-pet-details/my-pet-details';
 //providers
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Toast } from '@ionic-native/toast';
 import { Network } from '@ionic-native/network';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
@@ -286,6 +287,7 @@ export function createTranslateLoader(http: HttpClient) {
     FormServiceProvider,
     LanguageProvider,
     MyPetProvider,
+    ScreenOrientation,
   ]
 })
 

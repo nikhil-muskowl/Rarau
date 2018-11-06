@@ -10,6 +10,7 @@ import { RankingPage } from '../pages/MainModule/ranking/ranking';
 import { ProfilePage } from '../pages/MainModule/profile/profile';
 import { GalleryPage } from '../pages/story/gallery/gallery';
 import { TutorialPage } from '../pages/MainModule/tutorial/tutorial';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
 import { AlertController } from 'ionic-angular';
@@ -50,6 +51,7 @@ export class MyApp {
     public menu: MenuController,
     private alertCtrl: AlertController,
     public translate: TranslateService,
+    public screenOrientation: ScreenOrientation,
     public languageProvider: LanguageProvider,
     public locationTracker: LocationTrackerProvider,
     public configProvider: ConfigProvider) {
@@ -66,6 +68,13 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
 
       this.splashScreen.hide();
+
+      this.splashScreen.hide();
+      console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
+
+      // set to landscape
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      
       console.log('tutorial value : ' + this.configProvider.isSeen());
       let chk = this.configProvider.isSeen();
       if (chk == '1') {

@@ -70,7 +70,9 @@ export class StoryServiceProvider {
 
     this.formData = new FormData();
 
-    this.formData.append('user_id', data.user_id);
+    if (data.user_id)
+      this.formData.append('user_id', data.user_id);
+
     if (data.latitude) {
       this.formData.append('latitude', data.latitude);
     }

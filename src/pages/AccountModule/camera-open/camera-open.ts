@@ -58,6 +58,7 @@ export class CameraOpenPage {
 
   ionViewDidLeave() {
     this.stopCamera();
+    this.cameraPreview.hide();
   }
 
   ionViewWillEnter() {

@@ -12,7 +12,7 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
-
+import { TabsService } from "../../util/tabservice";
 import { AlertModalPage } from '../alert-modal/alert-modal';
 
 @IonicPage()
@@ -54,6 +54,7 @@ export class LoginPage {
     private loginProvider: LoginProvider,
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
+    private tabService: TabsService,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
     private modal: ModalController,
@@ -70,6 +71,7 @@ export class LoginPage {
       this.navCtrl.setRoot(ProfilePage);
     }
 
+    this.tabService.show();
   }
 
   setText() {
