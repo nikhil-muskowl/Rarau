@@ -64,6 +64,7 @@ export class SearchPage {
     this.getCategory();
 
     this.locationTracker.setLocation();
+    
     //uncommnet below for HK testing 
     // this.latitude = this.locationTrackerProvider.getLatitude();
     // this.longitude = this.locationTrackerProvider.getLongitude();
