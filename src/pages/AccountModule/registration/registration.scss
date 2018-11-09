@@ -102,6 +102,7 @@ page-registration {
         border-radius: 10px !important;
         margin-left: 17% !important;
         margin-bottom: 5px !important;
+        margin-top: 10px !important;
     }
 
     .text-input-md {
@@ -225,6 +226,14 @@ page-registration {
         margin-bottom: 5px;
         margin-left: -135px;
         font-size: 14px !important;
+    }
+
+    .item-md.item-block .item-inner {
+        border-bottom: 2px solid #dedede;
+    }
+
+    .toolbar-title-md {
+        margin-left: 0px !important;
     }
 
 }
