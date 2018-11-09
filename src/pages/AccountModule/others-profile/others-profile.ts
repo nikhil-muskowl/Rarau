@@ -43,6 +43,7 @@ export class OthersProfilePage {
   public view_activity_log;
   public stories;
   public ranking;
+  private rarau;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -95,6 +96,9 @@ export class OthersProfilePage {
     });
     this.translate.get('ranking').subscribe((text: string) => {
       this.ranking = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
     });
   }
 

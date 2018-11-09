@@ -133,6 +133,7 @@ ion-header ion-title .toolbar-title {
 /* for header logo */
  .hdr-logo {
     float:right;
+    margin-right: 5px;
 }
 
 .logo-img{
@@ -143,4 +144,20 @@ ion-header ion-title .toolbar-title {
     display:inline-block;
     vertical-align: middle;
     margin-top: -19px;
+}
+
+.toolbar-title-md {
+    margin-left: 8px;
+}
+
+.logo-txt{
+    font-size: 18px !important;
+}
+
+#hdr-txt {
+    font-size: 18px !important;
+}
+
+.back-button-md {
+    margin: 0 0px !important;
 }

@@ -58,7 +58,8 @@ page-login {
     #txt-login {
         display: inline-block;
         padding-top: 10px;
-        padding-left: 10px;
+        padding-left: 0px;
+        font-size: 18px !important;
     }
 
     .fixed-content, .scroll-content {
@@ -224,4 +225,12 @@ page-login {
     #pass_word {
         margin-top: 15px;
     }
+
+    .item-md.item-block .item-inner {
+        border-bottom: 2px solid #dedede;
+    }
+
+    // .input-has-focus .item-input-has-focus {
+    //     border-bottom-color: #00cf0d;
+    // }
 }
