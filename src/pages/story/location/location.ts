@@ -45,11 +45,14 @@ export class LocationPage {
     console.log('image on location page : ' + this.image);
 
     //uncommnet below for HK testing 
-    this.latitude = this.locationTrackerProvider.getLatitude();
-    this.longitude = this.locationTrackerProvider.getLongitude();
+    // this.latitude = this.locationTrackerProvider.getLatitude();
+    // this.longitude = this.locationTrackerProvider.getLongitude();
 
-    // this.latitude = 39.919981;
-    // this.longitude = 116.414977;
+    //uncommnet below for India testing 
+    this.latitude = 39.919981;
+    this.longitude = 116.414977;
+    // console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
+    // console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
   }
 
   setText() {
