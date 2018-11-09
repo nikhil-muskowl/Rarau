@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
-import { PhotoLibrary } from '@ionic-native/photo-library';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { CameraPreview } from "@ionic-native/camera-preview";
 import { ShowPhotoPage } from "../show-photo/show-photo";
@@ -27,14 +26,12 @@ export class GalleryPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private photoLibrary: PhotoLibrary,
     public cameraPreview: CameraPreview,
     public camera: Camera,
     public platform: Platform,
     public LoginProvider: LoginProvider,
     private tabService: TabsService,
     private imagePicker: ImagePicker, ) {
-
 
     let backAction = platform.registerBackButtonAction(() => {
       console.log("second");
@@ -82,6 +79,8 @@ export class GalleryPage {
       if (imageData != '') {
 
         this.galBas = 'data:image/jpeg;base64,' + imageData;
+        this.stopCamera();
+        this.cameraPreview.hide();
         this.navCtrl.push(ShowPhotoPage, { photo: this.galBas });
       }
       else {
@@ -126,7 +125,6 @@ export class GalleryPage {
       this.srcPhoto = "data:image/jpeg;base64," + imageData;
 
       this.cameraPreview.stopCamera().then(() => {
-
         this.navCtrl.push(ShowPhotoPage, { photo: this.srcPhoto });
       });
 
@@ -164,13 +162,12 @@ export class GalleryPage {
     }).catch(() => {
       console.log("camera error")
     })
-
   }
 
   stopCamera() {
     try {
       this.cameraPreview.stopCamera().catch(e => {
-
+        console.log("camera stop")
       });
     } catch (e) {
     }

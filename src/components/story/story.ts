@@ -4,7 +4,7 @@ import { AlertProvider } from '../../providers/alert/alert';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { StoryServiceProvider } from '../../providers/story-service/story-service';
 import { LoginProvider } from '../../providers/login/login';
-import { StoryScreenPage } from '../../pages/story/story-screen/story-screen';
+import { SingleStoryPage } from '../../pages/story/single-story/single-story';
 
 @Component({
   selector: 'story',
@@ -87,6 +87,6 @@ export class StoryComponent {
   }
 
   gotoStoryDetail(data) {
-    this.navCtrl.push(StoryScreenPage, { story_id: data.id });
+    this.navCtrl.push(SingleStoryPage, { story_id: data.id });
   }
 }

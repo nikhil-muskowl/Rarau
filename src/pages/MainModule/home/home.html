@@ -1,60 +1,43 @@
 <ion-header>
   <ion-navbar>
-    <!-- <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button> -->
-    <ion-toolbar>
-      <ion-title text-center>
-        <span><img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
-        <span style="float: right"><img class="round-circle" src="assets/icon/user.png" width="45" height="45" (click)="openProfile()"></span>
-      </ion-title>
-    </ion-toolbar>
+    <ion-title>
+      <div class="hdr-lg-home">
+        <span class="lg-img-home"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
+        <span class="lg-txt-home"> {{rarau}}</span>
+      </div>
+    </ion-title>
+
+    <ion-buttons end>
+      <button class="btn-transparent" (click)="openModal()">
+        <img src="assets/icon/search_home.png" width="40" height="40">
+      </button>
+      <button class="btn-transparent" (click)="openTutorial()">
+        <img src="assets/icon/tut_home.png" width="40" height="40">
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-slides class="image-slider" slidesPerView="3">
-    <ion-slide *ngFor="let image of images; let i = index;">
-      <div class="category-rank">
-        <ion-row>
-          <ion-col text-center>
-            <img class="s-image" src="{{image.categoryFirst}}" width="3" height="3" />
-          </ion-col>
-          <ion-col text-center>
-            <span class="background-rank">{{image.text}}<sup>th</sup></span>
-            <span class="border-line"></span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <img class="s-image" src="{{image.categoryPerson}}" width="3" height="3">
-            <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
-
-          </ion-col>
-        </ion-row>
-      </div>
-
-    </ion-slide>
-  </ion-slides>
-
-  <div class="search-bar">
-    <form [formGroup]="searchForm">
-      <ion-item>
-        <ion-label color="dark">
-          <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-        </ion-label>
-        <ion-input placeholder="Search" formControlName="searchLocation" type="text" (click)="resetStories()"></ion-input>
-        <button class="btn-color" clear (click)="searchLoc($event)" item-right>
-          <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
-        </button>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Search by User | Serach by Category" formControlName="searchUser" type="text" (click)="resetStories()"></ion-input>
-        <button class="btn-color" clear (click)="searchUsercat($event)" item-right>
-          <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
-        </button>
-      </ion-item>
-    </form>
+  <div>
+    <ion-slides class="image-slider" slidesPerView="3">
+      <ion-slide *ngFor="let image of categories; let i = index;">
+        <div class="category-rank">
+          <ion-row>
+            <ion-col text-center>
+              <img class="s-image" src="{{image.image}}" width="3" height="3" />
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <img class="p-image" src="{{image.user_image}}" width="3" height="3">
+              <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-slide>
+    </ion-slides>
   </div>
 
   <div class="map">
@@ -63,7 +46,14 @@
       <control type="navigation" [options]="navOptions"></control>
     </baidu-map>
   </div>
+
   <div *ngIf="showStories" class="top-stories">
+    <ion-buttons end class="back-white">
+      <button>
+        <ion-icon text-right name="close-circle" (click)="closeList()"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-list (click)="goToList()" no-lines>
       <ion-item *ngFor="let record of stories; let i = index;">
         <ion-avatar item-start>
@@ -79,7 +69,17 @@
         <ion-note item-end>{{record.categories}}</ion-note>
       </ion-item>
     </ion-list>
+
   </div>
 
-
+  <div>
+    <ion-slides *ngIf="Advdata" autoplay="3000" loop="true" speed="500" (ionSlideDidChange)="slideChanged()">
+      <ion-slide *ngFor="let slide of Advdata">
+        <div>
+          <img class="adv-img" src="{{slide.image_thumb}}" height="100" width="100">
+          <p>{{slide.title}}</p>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
 </ion-content>

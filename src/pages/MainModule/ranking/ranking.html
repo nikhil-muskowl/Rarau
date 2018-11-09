@@ -1,10 +1,80 @@
 <ion-header>
+
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-title><span id="hdr-txt">{{title}}</span></ion-title>
+    <ion-buttons end class="btn-type">
+      <button style="background: transparent">
+        <img src="assets/icon/search_home.png" (click)="openSearch()" width="30px" height="30px" name="search">
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
 </ion-header>
-<ion-content padding>
-  <h1>{{title}}</h1>
+
+<ion-content>
+
+  <div *ngIf="isSearch">
+    <ion-select [(ngModel)]="country" (ionChange)="oncountryChange(country)" interface="popover">
+      <ion-option *ngFor="let ctry of countries" value="{{ctry.location}}">{{ctry.location}}</ion-option>
+    </ion-select>
+  </div>
+
+  <div>
+    <ion-slides slidesPerView="4">
+      <ion-slide *ngFor="let type of types" (click)="typeChanged(type)">
+        <ion-segment [(ngModel)]="story_type_id" color="primary">
+          <ion-segment-button value="{{type.id}}">
+            {{type.title}}
+          </ion-segment-button>
+        </ion-segment>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items; let i = index;">
+      <ion-row>
+        <ion-col col-5 class="round_img">
+            <div *ngIf="(i+1 == 1 && i+1 !== 2 && i+1 !== 3)"> 
+                <img class="rank-img-1" src="../assets/imgs/ranking/gold.png">  
+              </div> 
+              <div *ngIf="(i+1 == 2 && i+1 !== 1 && i+1 !== 3)">
+                <img class="rank-img-2" src="../assets/imgs/ranking/silver.png">  
+              </div> 
+              <div *ngIf="(i+1 == 3 && i+1 !== 1 && i+1 !== 2)">
+                <img class="rank-img-3" src="../assets/imgs/ranking/bronz.png">  
+              </div>
+              <div *ngIf="(i+1 >= 4)">
+                <h1 class="rank-h1">{{i+1}}</h1>
+              </div>
+          <img style="border-radius: 15px;" (click)="itemTapped(item)" src="{{item.image_thumb}}">
+          <!-- <img *ngIf="item.rank_image" class="img-badge" width="30px" height="30px" src="{{item.rank_image}}"> -->
+        </ion-col>
+        <ion-col col-7>
+          <h3 class="rank-h3 ellipsis-1">{{item.title}}</h3>
+          <p class="rank-p1 ellipsis-1"> 
+            <span *ngFor="let cat of item.categories; let j = index;">
+              <span *ngIf="item.categories.length-1 > j">{{cat}}, </span>
+              <span *ngIf="item.categories.length-1 == j">{{cat}}</span>
+            </span>
+          </p>
+          <div class="ellipsis-2">
+            <span class="rank-spn" *ngFor="let tag of item.tags; let j = index;">
+              <span *ngIf="item.tags.length-1 > j">{{tag}}, </span>
+              <span *ngIf="item.tags.length-1 == j">{{tag}}</span>
+            </span></div>
+          <p class="rank-p2 ellipsis-1">{{by}} <u (click)="goToProfile(item.user_id)">{{item.user_name}}</u> {{from}} {{item.title}}</p>
+          <div class="fire-div">
+            <span>{{item.totalLikes}}
+              <img class="fire-image" height="20" width="20" src="assets/imgs/story/Positive-Flame.png">
+            </span>
+            <span>{{item.totalDislikes}}
+              <img class="fire-image" height="20" width="20" src="assets/imgs/story/Negative-Flame.png">
+            </span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

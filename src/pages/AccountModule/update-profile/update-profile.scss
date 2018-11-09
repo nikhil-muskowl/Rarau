@@ -1,4 +1,18 @@
 page-update-profile {
+    ion-header {
+        left: 0;
+        top: 0;
+        position: initial;
+        z-index: 10;
+        display: block;
+        width: 100%;
+    }
+    h1 {
+        // margin-top: 2rem;
+        margin-top: 0rem;
+        font-size: 2.6rem;
+        color: #fff !important;
+    }
     .login-back {
         background-image: url('../assets/imgs/login/login-back.png');
         width: 100%;
@@ -6,32 +20,89 @@ page-update-profile {
         background-size: 100% 100%;
         background-repeat: no-repeat;
         background-position: center center;
+        color: #fff;
     }
     .login-back .submit-btn {
         width: 30vw;
         height: 6vh;
         font-size: 18px;
         border-radius: 15px;
-        background: linear-gradient(to right, #ec3747 , #f45a43);
+        background: linear-gradient(to right, #ec3747, #f45a43);
         margin-bottom: 5px;
     }
     .border-line {
         border-right: 1px solid #f19d99;
     }
-    .back-btn{
+    .back-btn {
         background: transparent !important;
     }
-
     .image {
-       border-radius: 50%;
-       box-shadow: 0 0 5px gray;
-       display: inline-block;
-       margin-left: auto;
-       margin-right: auto;
-   }
-   
-   .circle-pic{
-       -webkit-border-radius: 50%;
-       border-radius: 50%;
-   }
+        border-radius: 50%;
+        box-shadow: 0 0 5px gray;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .circle-pic {
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+
+    /* Added on 3_11_2018 By Rajesh */
+    ion-content {
+        top: 70px !important;
+    }
+    
+    .fixed-content {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .scroll-content{
+        margin-top: 0px !important;
+    }
+
+    h1 {
+        padding-top: 30px !important;
+        margin-bottom: 0rem;
+        font-weight: normal;
+        font-size: 2.3rem;
+    }
+
+    h1 span {
+        text-underline-position: under;
+    }
+
+    .login-back #display-img {
+        padding-top: 30px;
+        padding-bottom: 25px;
+    }
+
+    .login-back .row {
+        padding-bottom: 10px;
+    }
+
+    .login-back .row .col {
+        height: 82px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .login-back .submit-btn {
+        border: 1px solid;
+        border-color: white;
+        height: 7vh;
+        border-radius: 13px;
+    }
+
+    .submit-btn {
+        text-transform: none;
+        font-size: 20px !important;
+        font-weight: normal;
+    }
+
+    .back-btn {
+        margin-top: 10px;
+    }
+
 }

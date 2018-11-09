@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-toolbar>
+      <ion-title>
+        {{title}}
+      </ion-title>
+      <ion-buttons start>
+        <button class="white_btn" ion-button (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="reportForm">
+    <!-- title -->
+    <ion-item>
+      <ion-input placeholder="Title" formControlName="title" type="text" [class.invalid]="!reportForm.controls.title.valid && (reportForm.controls.title.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <div text-center>
+      <p class="invalid-message" *ngIf="!reportForm.controls.title.valid  && (reportForm.controls.title.dirty || submitAttempt)">{{error_title}}</p>
+    </div>
+    <!-- description -->
+    <ion-item>
+      <ion-input placeholder="Description" formControlName="description" type="text" [class.invalid]="!reportForm.controls.description.valid && (reportForm.controls.description.dirty || submitAttempt)"></ion-input>
+    </ion-item>
+    <div text-center>
+      <p class="invalid-message" *ngIf="!reportForm.controls.description.valid  && (reportForm.controls.description.dirty || submitAttempt)">{{error_description}}</p>
+    </div>
+  </form>
+
+  <button class="submit-btn" ion-button (click)="submitReport()">{{submit}}</button>
+</ion-content>

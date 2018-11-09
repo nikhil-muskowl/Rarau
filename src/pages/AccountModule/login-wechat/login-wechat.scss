@@ -1,4 +1,7 @@
 page-login-wechat {
+    h1, p{
+        color: #fff;
+    }
     .login-back {
         background-image: url('../assets/imgs/login/login-back.png');
         width: 100%;
@@ -33,5 +36,32 @@ page-login-wechat {
     }
     .back-btn {
         background: transparent !important;
+    }
+
+    /* Added on 6_11_2018 */
+
+    ion-navbar.toolbar {
+        height: 72px;
+    }
+
+    .toolbar-title, .toolbar-title-md {
+        font-size: 5vw;
+    }
+
+    .back-btn {
+        margin-top: 10px !important;
+    }
+
+    .hdr-logo {
+        margin-right: 7px !important;
+    }
+
+    .profile-image {
+        padding-top: 8vh !important;
+    }
+
+    .profile-pic-img {
+        height: 110px !important;
+        width: 110px !important;
     }
 }

@@ -1,0 +1,77 @@
+<ion-content class="main-view">
+
+  <div class="overlay" (click)="closeModal()"></div>
+
+  <div class="modal_content">
+    <!-- Story Search category -->
+    <ion-item>
+      <ion-select placeholder="Category" [(ngModel)]="searchCat" multiple="true" cancelText="Cancel" okText="Okay!">
+        <ion-option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.title}}</ion-option>
+      </ion-select>
+      <!-- <button class="btn-color" clear (click)="searchUsercat()" item-right>
+        <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
+      </button> -->
+    </ion-item>
+
+    <!-- Story Search User -->
+    <ion-item>
+      <ion-searchbar placeholder="{{story_srch_user}}" [(ngModel)]="searchUse" [showCancelButton]="shouldShowCancel"
+        (ionInput)="onUserInput($event)" (ionCancel)="onUserCancel($event)">
+      </ion-searchbar>
+      <!-- <button class="btn-color" clear (click)="searchUserStory()" item-right>
+        <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
+      </button> -->
+    </ion-item>
+    <div *ngIf="searchData?.length > 0" class="item-search">
+      <ion-list>
+        <ion-item ion-item *ngFor="let searchdata of searchData" (click)="searchItemSelected(searchdata)">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="{{searchdata.image_thumb}}" width="20px" height="20px" />
+            </ion-avatar>
+            {{searchdata.name}}
+          </ion-item>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Story Search location -->
+    <ion-item>
+      <ion-searchbar placeholder="{{story_srch_loc}}" [(ngModel)]="searchLoc" [showCancelButton]="shouldShowCancel"
+        (ionInput)="onLocInput($event)" (ionCancel)="onLocCancel($event)">
+      </ion-searchbar>
+      <!-- <button class="btn-color" clear (click)="searchLocation()" item-right>
+        <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
+      </button> -->
+    </ion-item>
+
+    <div *ngIf="locations?.length > 0" style="height: 100px;overflow: scroll;">
+      <ion-list>
+        <ion-item ion-item *ngFor="let location of locations" (click)="locItemSelected(location)">
+          {{location.name}}
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Search user -->
+    <!-- <div padding>
+      <form [formGroup]="searchForm">
+        <ion-item>
+          <ion-input placeholder="Search User's Profile" formControlName="searchUser" type="text"></ion-input>
+          <button class="btn-color" clear (click)="searchUsers($event)" item-right>
+            <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
+          </button>
+        </ion-item>
+      </form>
+    </div> -->
+
+    <!-- <button class="btn-color" clear (click)="globalSearch()" item-right>
+      <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
+    </button> -->
+
+    <button ion-button full class="search-btn" clear (click)="globalSearch()" item-right>
+        {{search_text}}<span> <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon></span>
+      </button>
+  </div>
+
+</ion-content>

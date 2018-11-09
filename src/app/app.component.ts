@@ -1,17 +1,19 @@
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, MenuController } from 'ionic-angular';
+import { Platform, App, Nav, MenuController, Alert, ModalController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { MainTabsPage } from '../pages/MainModule/main-tabs/main-tabs';
 import { HomePage } from '../pages/MainModule/home/home';
-import { PlacesPage } from '../pages/MainModule/places/places';
-import { RankingPage } from '../pages/MainModule/ranking/ranking';
-import { ProfilePage } from '../pages/MainModule/profile/profile';
-import { GalleryPage } from '../pages/story/gallery/gallery';
+import { TutorialPage } from '../pages/MainModule/tutorial/tutorial';
+import { SplashPage } from '../pages/MainModule/splash/splash';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
-
+import { AlertController } from 'ionic-angular';
+import { LanguageProvider } from '../providers/language/language';
+import { ConfigProvider } from '../providers/config/config';
 
 export interface PageInterface {
   title: string;
@@ -29,32 +31,79 @@ export interface PageInterface {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = MainTabsPage;
+  rootPage: any;
+  private alert: Alert;
+  private language;
 
-  pages: PageInterface[] = [
-    { title: 'Home', name: 'TabsPage', component: MainTabsPage, tabComponent: HomePage, index: 0, icon: 'home' },
-    { title: 'Place', name: 'TabsPage', component: MainTabsPage, tabComponent: PlacesPage, index: 0, icon: 'home' },
-    { title: 'Upload', name: 'TabsPage', component: MainTabsPage, tabComponent: GalleryPage, index: 0, icon: 'home' },
-    { title: 'Ranking', name: 'TabsPage', component: MainTabsPage, tabComponent: RankingPage, index: 0, icon: 'home' },
-    { title: 'Profile', name: 'TabsPage', component: MainTabsPage, tabComponent: ProfilePage, index: 0, icon: 'home' }
-  ];
+  // pages: PageInterface[] = [
+  //   { title: 'Home', name: 'TabsPage', component: MainTabsPage, tabComponent: HomePage, index: 0, icon: 'home' },
+  //   { title: 'Upload', name: 'TabsPage', component: MainTabsPage, tabComponent: GalleryPage, index: 0, icon: 'home' },
+  //   { title: 'Ranking', name: 'TabsPage', component: MainTabsPage, tabComponent: RankingPage, index: 0, icon: 'home' },
+  //   { title: 'Profile', name: 'TabsPage', component: MainTabsPage, tabComponent: ProfilePage, index: 0, icon: 'home' }
+  // ];
 
-  constructor(platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    private app: App,
     public menu: MenuController,
-    public locationTracker: LocationTrackerProvider, ) {
+    private alertCtrl: AlertController,
+    public translate: TranslateService,
+    public screenOrientation: ScreenOrientation,
+    public languageProvider: LanguageProvider,
+    public locationTracker: LocationTrackerProvider,
+    public configProvider: ConfigProvider,
+    public modalCtrl: ModalController) {
 
-    this.locationTracker.setLocation();
-
-    platform.ready().then(() => {
+    this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+
+      this.locationTracker.setLocation();
+      this.backEvent();
+
+      this.language = this.languageProvider.getLanguage();
+      console.log(this.language);
+      this.translate.setDefaultLang(this.language);
+
+      let splash = modalCtrl.create(SplashPage);
+      splash.present();
+
+      // Commented these lines for desktop, uncomment for real device(Mobile)
+      // console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
+
+      // // set to landscape
+      // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
+      console.log('tutorial value : ' + this.configProvider.isSeen());
+      let chk = this.configProvider.isSeen();
+      if (chk == '1') {
+        this.rootPage = MainTabsPage;
+      }
+      else {
+        this.rootPage = TutorialPage;
+      }
+      this.initializeApp();
+
+
+      console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
+      console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
+      this.translate.use(this.language);
     });
+
   }
 
+  initializeApp() {
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.statusBar.styleDefault();
+      // this.splashScreen.hide();
+    });
+
+  }
+
+  //for menus
   openPage(page: PageInterface) {
     let params = {};
 
@@ -90,5 +139,53 @@ export class MyApp {
     }
     return;
   }
+
+  backEvent() {
+    this.platform.registerBackButtonAction(() => {
+      const overlayView = this.app._appRoot._overlayPortal._views[0];
+      if (overlayView && overlayView.dismiss) {
+        overlayView.dismiss();
+        return;
+      }
+      if (this.nav.canGoBack()) {
+        this.nav.pop();
+      }
+      else {
+        let view = this.nav.getActive();
+        if (view.component == HomePage) {
+          if (this.alert) {
+            this.alert.dismiss();
+            this.alert = null;
+          } else {
+            this.showAlert();
+          }
+        }
+      }
+    });
+  }
+
+  showAlert() {
+    this.alert = this.alertCtrl.create({
+      title: 'Exit?',
+      message: 'Do you want to exit the app?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.alert = null;
+          }
+        },
+        {
+          text: 'Exit',
+          handler: () => {
+            this.platform.exitApp();
+          }
+        }
+      ]
+    });
+    this.alert.present();
+  }
+
 }
 

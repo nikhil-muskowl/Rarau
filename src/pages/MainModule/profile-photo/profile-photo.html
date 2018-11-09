@@ -1,15 +1,15 @@
 <ion-header>
   <ion-navbar hideBackButton>
-    <ion-toolbar>
-
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='goBack()'>
-          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-        </button>Upload Profile Picture
-        <span style="float:right;">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
-      </ion-title>
-    </ion-toolbar>
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button>
+      <span id="hdr-txt">{{upload_profile_pic}}</span>
+      <div class="hdr-logo">
+        <span class="logo-img"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
+        <span class="logo-txt"> {{rarau}}</span>
+      </div>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -18,9 +18,9 @@
       <div class="col">
         <div text-center>
           <h1>
-            <b>Upload
+            <b>{{upload}}
               <br>
-              <span style="text-decoration: underline;">Profile Picture</span>
+              <span style="text-decoration: underline;">{{profile_picture}}</span>
             </b>
           </h1>
         </div>
@@ -48,7 +48,7 @@
     </div>
     <br>
     <div padding text-center>
-      <button class="submit-btn" ion-button (click)="save()">Upload</button>
+      <button class="submit-btn" ion-button (click)="save()">{{upload}}</button>
     </div>
   </div>
 

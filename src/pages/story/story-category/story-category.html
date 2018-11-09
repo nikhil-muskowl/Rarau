@@ -6,10 +6,10 @@
         <button start class="back-btn" (click)='back()'>
           <ion-icon class="toolbar-icon" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         </button>
-        Category
+        {{category_txt}}
       </ion-title>
       <ion-buttons end>
-        <button class="publish-btn" ion-button type="submit" (click)="saveStory()"> Publish </button>
+        <button class="publish-btn" ion-button type="submit" (click)="saveStory()"> {{publish}} </button>
       </ion-buttons>
     </ion-toolbar>
 
@@ -35,9 +35,9 @@
   </ion-scroll>
 
   <ion-item>
-    <ion-tags-input [placeholder]="'#Write Something Here'" [(ngModel)]="tags" [color]="'danger'" (onChange)="onChange($event)" [verifyMethod]="verifyTag" [separatorStr]="' '"
-      [canEnterAdd]="true" [canBackspaceRemove]="true" ></ion-tags-input>
+    <ion-tags-input [placeholder]="write_something" [(ngModel)]="tags" [color]="'danger'" (onChange)="onChange($event)"
+      [verifyMethod]="verifyTag" [separatorStr]="','" [canEnterAdd]="true" [canBackspaceRemove]="true"></ion-tags-input>
   </ion-item>
- 
+
 
 </ion-content>

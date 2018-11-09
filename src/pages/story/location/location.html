@@ -6,10 +6,10 @@
         <button start class="back-btn" (click)='back()'>
           <ion-icon class="toolbar-icon" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         </button>
-        Location
+        {{location_txt}}
       </ion-title>
       <ion-buttons end>
-        <button class="publish-btn" ion-button type="submit" (click)="Next()"> Next </button>
+        <button class="publish-btn" ion-button type="submit" (click)="Next()"> {{next}} </button>
       </ion-buttons>
     </ion-toolbar>
 
@@ -19,7 +19,7 @@
 
 <ion-content>
   <img style="min-height:93%;" [src]="sanitizer.bypassSecurityTrustResourceUrl(image)">
-  
+
   <ion-searchbar [(ngModel)]="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
   </ion-searchbar>
 

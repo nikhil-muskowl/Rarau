@@ -1,13 +1,17 @@
-
 <ion-header>
-
   <ion-navbar>
-    <ion-title>MyPet</ion-title>
+    <ion-title><span id="hdr-txt">{{title}}</span></ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let pet of petData; let i = index;" (click)="getDetails(pet.id)">
+      <ion-avatar item-start>
+        <img src="{{pet.pet_image_thumb}}">
+      </ion-avatar>
+      <h2>{{pet.pet_name}}</h2>
+      <p>{{pet.level}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

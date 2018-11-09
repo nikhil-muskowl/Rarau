@@ -19,10 +19,11 @@ export class FollowersComponent {
   public pageLength = 5;
   public recordsTotal;
   public filterData;
+  public model: any[] = [];
+
 
   public records;
   public data;
-  public model: any[] = [];
   public name;
   public responseData;
   public params;
@@ -61,7 +62,8 @@ export class FollowersComponent {
       'current_user_id': this.current_user_id
     };
 
-    console.log('id: ' + this.user_id);
+    console.log('user_id: ' + this.user_id);
+    console.log('current_user_id: ' + this.current_user_id);
     this.FollowProvider.getFollowersList(this.filterData).subscribe(
       response => {
         this.records = response;

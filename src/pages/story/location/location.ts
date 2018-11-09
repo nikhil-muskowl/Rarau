@@ -5,33 +5,72 @@ import { LocationTrackerProvider } from '../../../providers/location-tracker/loc
 import { AlertProvider } from '../../../providers/alert/alert';
 import { DomSanitizer } from "@angular/platform-browser";
 import { StoryCategoryPage } from '../story-category/story-category';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
+
 @IonicPage()
 @Component({
   selector: 'page-location',
   templateUrl: 'location.html',
 })
+
 export class LocationPage {
 
   public locations: any;
   public fileterData: any;
   public responseData: any;
   public search = '';
+  public locName = '';
   public latitude: number = 0;
   public longitude: number = 0;
   public data: any;
   public image;
+
+  public error;
+  public location_txt;
+  public enter_value_serach;
+  public next;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
     public locationTrackerProvider: LocationTrackerProvider,
     public baiduProvider: BaiduProvider,
-    public sanitizer: DomSanitizer, ) {
+    public sanitizer: DomSanitizer,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     this.image = this.navParams.get('image');
     console.log('image on location page : ' + this.image);
 
-    this.latitude;
-    this.longitude;
+    //uncommnet below for HK testing 
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
+
+    //uncommnet below for India testing 
+    // this.latitude = 39.919981;
+    // this.longitude = 116.414977;
+    // console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
+    // console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('error').subscribe((text: string) => {
+      this.error = text;
+    });
+    this.translate.get('enter_value_serach').subscribe((text: string) => {
+      this.enter_value_serach = text;
+    });
+    this.translate.get('location').subscribe((text: string) => {
+      this.location_txt = text;
+    });
+    this.translate.get('next').subscribe((text: string) => {
+      this.next = text;
+    });
   }
 
   ionViewDidLoad() {
@@ -42,13 +81,13 @@ export class LocationPage {
 
     if (this.latitude == 0 && this.longitude == 0) {
 
-      this.alertProvider.title = 'Error';
-      this.alertProvider.message = 'Please Enter value to search.';
+      this.alertProvider.title = this.error;
+      this.alertProvider.message = this.enter_value_serach;
       this.alertProvider.showAlert();
     }
     else {
       console.log('next category');
-      this.navCtrl.push(StoryCategoryPage, { image: this.image, latitude: this.latitude, longitude: this.longitude });
+      this.navCtrl.push(StoryCategoryPage, { image: this.image, locName: this.locName, latitude: this.latitude, longitude: this.longitude });
     }
   }
 
@@ -63,6 +102,7 @@ export class LocationPage {
   }
 
   public getLocation() {
+
     this.fileterData = {
       query: this.search,
       location: `${this.latitude},${this.longitude}`
@@ -80,8 +120,10 @@ export class LocationPage {
   }
 
   public itemSelected(location: any) {
-    console.log(location.location);
+    console.log(location);
     if (location) {
+      this.search = location.name;
+      this.locName = location.name;
       this.latitude = location.location.lat;
       this.longitude = location.location.lng;
     }

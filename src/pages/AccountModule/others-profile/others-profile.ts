@@ -5,6 +5,9 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { ProfileProvider } from '../../../providers/profile/profile';
 import { LoginProvider } from '../../../providers/login/login';
 import { FollowProvider } from '../../../providers/follow/follow';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
+import { ReportPage } from '../../Popover/report/report';
 
 @IonicPage()
 @Component({
@@ -21,6 +24,7 @@ export class OthersProfilePage {
   public email;
   public contact;
   public status;
+  public report_user;
 
   public responseData;
   public result;
@@ -31,22 +35,71 @@ export class OthersProfilePage {
   public flames;
   public followed;
 
+  public followers_txt;
+  public flames_txt;
+  public following_txt;
+  public follow_txt;
+  public push;
+  public view_activity_log;
+  public stories;
+  public ranking;
+  private rarau;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingProvider: LoadingProvider,
     public alertProvider: AlertProvider,
     public profileProvider: ProfileProvider,
     public LoginProvider: LoginProvider,
-    public FollowProvider: FollowProvider
-  ) {
+    public FollowProvider: FollowProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
 
+    this.setText();
     this.user = 'Stories';
     this.isLogin();
     console.log('curruserId : ' + this.user_id);
 
     this.id = navParams.get('id');
+    console.log('userId : ' + this.id);
 
     this.getProfile(this.id);
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('followers').subscribe((text: string) => {
+      this.followers_txt = text;
+    });
+    this.translate.get('report_user').subscribe((text: string) => {
+      this.report_user = text;
+    });
+    this.translate.get('flames').subscribe((text: string) => {
+      this.flames_txt = text;
+    });
+    this.translate.get('following').subscribe((text: string) => {
+      this.following_txt = text;
+    });
+    this.translate.get('follow').subscribe((text: string) => {
+      this.follow_txt = text;
+    });
+    this.translate.get('push').subscribe((text: string) => {
+      this.push = text;
+    });
+    this.translate.get('view_activity_log').subscribe((text: string) => {
+      this.view_activity_log = text;
+    });
+    this.translate.get('stories').subscribe((text: string) => {
+      this.stories = text;
+    });
+    this.translate.get('ranking').subscribe((text: string) => {
+      this.ranking = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
   }
 
   ionViewDidLoad() {
@@ -94,13 +147,23 @@ export class OthersProfilePage {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  reportStory() {
+    console.log('Report user');
+    let params = {
+      'user_id': this.id,
+      'type': 1
+    };
+
+    this.navCtrl.push(ReportPage, params);
+  }
+
   dofollow() {
     if (this.user_id) {
       this.loadingProvider.present();
       this.FollowProvider.ActionFollow(this.id, this.user_id).subscribe(
         response => {
           this.responseData = response;
-
+          console.log('follow response : ' + JSON.stringify(this.responseData));
           this.status = this.responseData.status;
           if (this.status) {
             // this.alertProvider.title = 'Success';
@@ -130,6 +193,7 @@ export class OthersProfilePage {
       this.FollowProvider.ActionUnFollow(this.id, this.user_id).subscribe(
         response => {
           this.responseData = response;
+          console.log('unfollow response : ' + JSON.stringify(this.responseData));
 
           this.status = this.responseData.status;
           if (this.status) {

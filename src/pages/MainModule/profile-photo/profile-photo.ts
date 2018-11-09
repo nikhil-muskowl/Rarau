@@ -8,6 +8,8 @@ import { CameraOpenPage } from '../../AccountModule/camera-open/camera-open';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { LoginProvider } from '../../../providers/login/login';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -24,6 +26,15 @@ export class ProfilePhotoPage {
   public status;
   public result;
 
+  public upload_profile_pic;
+  public rarau;
+  public upload;
+  public profile_picture;
+  public error;
+  public select_img_first;
+  public success;
+  public image_uploaded;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
@@ -32,27 +43,60 @@ export class ProfilePhotoPage {
     public camera: Camera,
     public LoginProvider: LoginProvider,
     public profileProvider: ProfileProvider,
-    public loadingProvider: LoadingProvider, ) {
+    public loadingProvider: LoadingProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
+
+    this.setText();
+    this.isLogin();
 
     let backAction = platform.registerBackButtonAction(() => {
       this.navCtrl.pop();
+      this.tabService.show();
     }, 2);
 
     this.image = this.navParams.get('image');
+    console.log('image : ' + this.image);
     this.displayImage = this.image;
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('upload_profile_pic').subscribe((text: string) => {
+      this.upload_profile_pic = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('upload').subscribe((text: string) => {
+      this.upload = text;
+    });
+    this.translate.get('profile_picture').subscribe((text: string) => {
+      this.profile_picture = text;
+    });
+    this.translate.get('error').subscribe((text: string) => {
+      this.error = text;
+    });
+    this.translate.get('select_img_first').subscribe((text: string) => {
+      this.select_img_first = text;
+    });
+    this.translate.get('success').subscribe((text: string) => {
+      this.success = text;
+    });
+    this.translate.get('image_uploaded').subscribe((text: string) => {
+      this.image_uploaded = text;
+    });
   }
 
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
     console.log('ionViewDidLoad ProfilePhotoPage' + this.user_id);
-
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePhotoPage');
-  }
-  ionViewDidLeave() {
-    this.tabService.show();
   }
 
   ionViewWillEnter() {
@@ -61,14 +105,16 @@ export class ProfilePhotoPage {
 
   goBack() {
     this.navCtrl.setRoot(ProfilePage);
+    this.tabService.hide();
   }
 
   save() {
     //code to save
-    console.log('select' + this.imgSend);
+    this.imgSend = this.displayImage;
+    console.log('select : ' + this.imgSend);
     if (this.imgSend == undefined) {
-      this.alertProvider.title = 'Error';
-      this.alertProvider.message = 'Please Select Image First.';
+      this.alertProvider.title = this.error;
+      this.alertProvider.message = this.select_img_first;
       this.alertProvider.showAlert();
     }
     else {
@@ -82,11 +128,12 @@ export class ProfilePhotoPage {
           if (this.status) {
 
             this.result = this.responseData.result;
-            this.alertProvider.title = 'Success';
-            this.alertProvider.message = 'Image Uploaded.';
+            this.alertProvider.title = this.success;
+            this.alertProvider.message = this.image_uploaded;
             this.alertProvider.showAlert();
-
+            this.tabService.show();
             this.navCtrl.setRoot(ProfilePage);
+
           }
         },
         err => {

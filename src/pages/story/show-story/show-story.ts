@@ -6,6 +6,9 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { FormServiceProvider } from '../../../providers/form-service/form-service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
+import { ReportPage } from '../../Popover/report/report';
 
 @IonicPage()
 @Component({
@@ -13,14 +16,16 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: 'show-story.html',
 })
 export class ShowStoryPage {
-  title = 'Story';
 
   public story_id;
   public user_id;
   public paramData;
   public responseData;
   public data;
+  public commResponseData;
+  public commData;
   private id;
+  private language_id;
   private user_name;
   private user_image_thumb;
   private description;
@@ -32,7 +37,7 @@ export class ShowStoryPage {
   private totalDislikes;
   private totalFlames;
   private created_date;
-  private comment;
+  private comment_txt;
   private commentForm: FormGroup;
   public formErrors = {
     comment: '',
@@ -42,6 +47,15 @@ export class ShowStoryPage {
   private messageTitle;
   private message;
 
+  private title;
+  private warning;
+  private success;
+  private rarau;
+  private report_comment;
+  private apo_story;
+  private say_something;
+  private isComment: boolean = false;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
@@ -49,18 +63,66 @@ export class ShowStoryPage {
     public loadingProvider: LoadingProvider,
     private formBuilder: FormBuilder,
     private formServiceProvider: FormServiceProvider,
-    public LoginProvider: LoginProvider, ) {
+    public LoginProvider: LoginProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
+
+
+  }
+
+  ngOnInit() {
+    this.language_id = this.languageProvider.getLanguageId();
+    this.user_id = this.LoginProvider.isLogin();
+    this.setText();
 
     this.createForm();
-    this.isLogin();
     this.story_id = this.navParams.get('story_id');
     this.getStories();
+    this.getComments();
+
+    if (this.user_id != undefined) {
+      this.isComment = true;
+    }
+    else {
+      this.isComment = false;
+    }
+
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('story').subscribe((text: string) => {
+      this.title = text;
+    });
+    this.translate.get('warning').subscribe((text: string) => {
+      this.warning = text;
+    });
+    this.translate.get('success').subscribe((text: string) => {
+      this.success = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('apo_story').subscribe((text: string) => {
+      this.apo_story = text;
+    });
+    this.translate.get('say_something').subscribe((text: string) => {
+      this.say_something = text;
+    });
+    this.translate.get('comment').subscribe((text: string) => {
+      this.comment_txt = text;
+    });
+    this.translate.get('report_comment').subscribe((text: string) => {
+      this.report_comment = text;
+    });
 
   }
 
   public createForm() {
     this.commentForm = this.formBuilder.group({
-      comment: [this.comment, Validators.compose([
+      comment: ['', Validators.compose([
         Validators.minLength(1),
         Validators.maxLength(25),
         Validators.required
@@ -72,12 +134,27 @@ export class ShowStoryPage {
     });
   }
 
+  goToStory(event: any): any {
+    this.navCtrl.pop();
+  }
+
+  reportComment(id) {
+    console.log("comment id : " + id);
+    let params = {
+      'story_comment_id': id,
+      'story_id': this.story_id,
+      'type': 3
+    };
+
+    this.navCtrl.push(ReportPage, params);
+  }
+
   getStories() {
     this.loadingProvider.present();
 
     this.paramData = {
       'story_id': this.story_id,
-      'language_id': 1,
+      'language_id': this.language_id,
     };
 
     this.storyService.getStoryDetail(this.paramData).subscribe(
@@ -98,7 +175,28 @@ export class ShowStoryPage {
         this.totalDislikes = this.responseData.result[0].totalDislikes;
         this.totalFlames = this.responseData.result[0].totalFlames;
         this.created_date = this.responseData.result[0].created_date;
-        this.comments = this.responseData.result[0].comments;
+        this.loadingProvider.dismiss();
+      },
+      err => console.error(err),
+      () => {
+        this.loadingProvider.dismiss();
+      }
+    );
+  }
+
+  getComments() {
+    this.loadingProvider.present();
+    this.commData = [];
+    this.paramData = {
+      'story_id': this.story_id,
+      'language_id': this.language_id,
+    };
+
+    this.storyService.apiGetComments(this.paramData).subscribe(
+      response => {
+        this.commResponseData = response;
+        this.commData = this.commResponseData.data;
+        console.log('comment commResponseData : ' + JSON.stringify(this.commResponseData));
         this.loadingProvider.dismiss();
       },
       err => console.error(err),
@@ -112,10 +210,6 @@ export class ShowStoryPage {
     console.log('ionViewDidLoad ShowStoryPage');
   }
 
-  isLogin() {
-    this.user_id = this.LoginProvider.isLogin();
-  }
-
   goBack() {
     this.navCtrl.pop();
   }
@@ -124,6 +218,7 @@ export class ShowStoryPage {
     this.loadingProvider.present();
 
     this.formServiceProvider.markFormGroupTouched(this.commentForm);
+
     if (this.commentForm.valid) {
       this.loadingProvider.present();
 
@@ -132,7 +227,8 @@ export class ShowStoryPage {
       var data = {
         'story_id': this.story_id,
         'user_id': this.user_id,
-        'comment': this.commentForm.value.comment
+        'comment': this.commentForm.value.comment,
+        'language_id': this.language_id,
       }
 
       this.storyService.setComment(data).subscribe(
@@ -144,7 +240,7 @@ export class ShowStoryPage {
           this.message = this.responseData.message;
 
           if (!this.status) {
-            this.messageTitle = 'Warning!';
+            this.messageTitle = this.warning;
             if (this.responseData.result) {
               this.responseData.result.forEach(element => {
                 if (element.id == 'comment') {
@@ -153,8 +249,9 @@ export class ShowStoryPage {
               });
             }
           } else {
-            this.messageTitle = 'Sucess!';
+            this.messageTitle = this.success;
             this.getStories();
+            this.getComments();
           }
 
           this.loadingProvider.dismiss();

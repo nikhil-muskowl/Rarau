@@ -5,9 +5,14 @@
       <button start class="back-btn" (click)='goBack()'>
         <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
       </button>
-      Search Results
-      <span style="float:right;">
-        <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+      <span id="hdr-txt">{{search_result}}</span>
+      <div class="hdr-logo">
+        <span class="logo-img"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
+        <span class="logo-txt"> {{rarau}}</span>
+      </div>
+
+      <!-- <span style="float:right;">
+        <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span> -->
     </ion-title>
   </ion-navbar>
 
@@ -19,69 +24,24 @@
 
       <ion-item>
         <ion-input placeholder="Search" formControlName="searchText" type="text"></ion-input>
-        <button class="btn-color" clear (click)="search($event)" item-right><ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon></button>
+        <button class="btn-color" clear (click)="search($event)" item-right>
+          <ion-icon class="i-serach" ios="ios-search" md="md-search"></ion-icon>
+        </button>
       </ion-item>
     </form>
+
+    <ion-list *ngFor="let record of model; let i = index;">
+      <ion-item (click)="getProfile(record)">
+        <ion-avatar item-start>
+          <img src="{{record.image_thumb}}" width="40px" height="40px" />
+        </ion-avatar>
+        <h2><b>{{record.name}}</b></h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 
-  <div>
-    <ion-segment [(ngModel)]="SearchPage">
-      <ion-segment-button value="User">
-        User
-      </ion-segment-button>
-      <ion-segment-button value="Category">
-        Category
-      </ion-segment-button>
-      <ion-segment-button value="Location">
-        Location
-      </ion-segment-button>
-    </ion-segment>
-  </div>
-
-  <div [ngSwitch]="SearchPage">
-    <div *ngSwitchCase="'User'">
-      <ion-list *ngFor="let record of model; let i = index;">
-        <ion-item (click)="getProfile(record)">
-          <ion-avatar item-start>
-            <img src="assets/icon/user.png" width="40px" height="40px" />
-          </ion-avatar>
-          <h2><b>{{record.name}}</b></h2>
-        </ion-item>
-      </ion-list>
-
-      <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
-
-    <div *ngSwitchCase="'Category'">
-      <ion-list *ngFor="let record of model; let i = index;">
-        <ion-item (click)="getProfile(record)">
-          <ion-avatar item-start>
-            <img src="assets/icon/user.png" width="40px" height="40px" />
-          </ion-avatar>
-          <h2><b>{{record.name}}</b></h2>
-        </ion-item>
-      </ion-list>
-
-      <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
-
-    <div *ngSwitchCase="'Location'">
-      <ion-list *ngFor="let record of model; let i = index;">
-        <ion-item (click)="getProfile(record)">
-          <ion-avatar item-start>
-            <img src="assets/icon/user.png" width="40px" height="40px" />
-          </ion-avatar>
-          <h2><b>{{record.name}}</b></h2>
-        </ion-item>
-      </ion-list>
-
-      <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
-  </div>
 </ion-content>

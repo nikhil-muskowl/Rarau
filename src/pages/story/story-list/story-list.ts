@@ -5,7 +5,9 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { StoryScreenPage } from '../story-screen/story-screen';
-
+import { SingleStoryPage } from '../single-story/single-story';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -20,9 +22,13 @@ export class StoryListPage {
   private responseData;
   private latitude;
   private longitude;
+  public searchCat;
+  public searchUse;
 
-  title = 'Kuala Lumpur, Malaysia';
-  date = '30 May,18 03:00AM';
+  title;
+  private forbidden;
+  private login_to_continue;
+  private lvl_txt;
 
   constructor(
     public navCtrl: NavController,
@@ -30,10 +36,14 @@ export class StoryListPage {
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
-    public LoginProvider: LoginProvider
+    public LoginProvider: LoginProvider,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider,
   ) {
 
-
+    this.setText();
+    this.searchUse = this.navParams.get('searchUse');
+    this.searchCat = this.navParams.get('searchCat');
     if (this.navParams.get('latitude')) {
       this.latitude = this.navParams.get('latitude');
     } else {
@@ -47,6 +57,22 @@ export class StoryListPage {
 
     this.isLogin();
     this.getStories();
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('forbidden').subscribe((text: string) => {
+      this.forbidden = text;
+    });
+    this.translate.get('login_to_continue').subscribe((text: string) => {
+      this.login_to_continue = text;
+    });
+    this.translate.get('lvl').subscribe((text: string) => {
+      this.lvl_txt = text;
+    });
+
   }
 
   ionViewDidLoad() {
@@ -67,12 +93,16 @@ export class StoryListPage {
       'user_id': this.user_id,
       'latitude': this.latitude,
       'longitude': this.longitude,
+      'searchCat': this.searchCat,
+      'searchUse': this.searchUse,
     };
+    console.log('Story list page : ' + JSON.stringify(this.paramData));
 
     this.storyService.apiTopStory(this.paramData).subscribe(
       response => {
         this.responseData = response;
         this.data = this.responseData.data;
+        this.title = this.data[0].title;
       },
       err => console.error(err),
       () => {
@@ -82,7 +112,18 @@ export class StoryListPage {
   }
 
   showStory(data) {
-    this.navCtrl.push(StoryScreenPage, { story_id: data.id });
+    if (this.user_id) {
+
+      // this.navCtrl.push(StoryScreenPage, this.paramData);
+      this.navCtrl.push(SingleStoryPage, { story_id: data.id });
+
+    }
+    else {
+
+      this.alertProvider.title = this.forbidden;
+      this.alertProvider.message = this.login_to_continue;
+      this.alertProvider.showAlert();
+    }
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -8,13 +10,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TermsPage {
 
-  title = 'Privacy Policy';
+  title;
   constructor(public navCtrl: NavController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
+
+    this.setText();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TermsPage');
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('privacy_policy').subscribe((text: string) => {
+      this.title = text;
+    });
   }
 
   dismiss() {

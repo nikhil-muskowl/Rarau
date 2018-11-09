@@ -5,9 +5,11 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { ToastProvider } from '../../../providers/toast/toast';
 import { LoginPage } from '../../AccountModule/login/login';
 import { UpdatePasswordPage } from '../../AccountModule/update-password/update-password';
-import { EditProfilePage } from '../../MainModule/edit-profile/edit-profile'
-import { FollowersPage } from '../../FollowModule/followers/followers'
-import { ProfilePhotoPage } from '../profile-photo/profile-photo'
+import { ActivityLogsPage } from '../../MainModule/activity-logs/activity-logs';
+import { EditProfilePage } from '../edit-profile/edit-profile';
+import { SettingsPage } from '../settings/settings';
+import { ProfilePhotoPage } from '../profile-photo/profile-photo';
+import { SavedStoriesPage } from '../../story/saved-stories/saved-stories';
 
 //provider
 import { LoadingProvider } from '../../../providers/loading/loading';
@@ -15,6 +17,8 @@ import { ProfileProvider } from '../../../providers/profile/profile';
 
 //component
 import { StoryComponent } from '../../../components/story/story';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -24,7 +28,7 @@ import { StoryComponent } from '../../../components/story/story';
 
 export class ProfilePage {
 
-  public title = 'Profile';
+  public title;
   public name;
   public email;
   public user_id;
@@ -37,13 +41,19 @@ export class ProfilePage {
   public followers;
   public flames;
   public followed;
-
-
-
   private user: string;
-
   public status;
 
+  public my_profile;
+  public rarau;
+  public followers_txt;
+  public flames_txt;
+  public stories;
+  public ranking;
+  public my_pet;
+  public view_log;
+  public saved_stories;
+  public more;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,9 +62,49 @@ export class ProfilePage {
     public toast: ToastProvider,
     public loadingProvider: LoadingProvider,
     public profileProvider: ProfileProvider,
-    
-  ) {
-    
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    console.log("getLanguage() : " + this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('profile').subscribe((text: string) => {
+      this.title = text;
+    });
+    this.translate.get('my_profile').subscribe((text: string) => {
+      this.my_profile = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('followers').subscribe((text: string) => {
+      this.followers_txt = text;
+    });
+    this.translate.get('flames').subscribe((text: string) => {
+      this.flames_txt = text;
+    });
+    this.translate.get('stories').subscribe((text: string) => {
+      this.stories = text;
+    });
+    this.translate.get('ranking').subscribe((text: string) => {
+      this.ranking = text;
+    });
+    this.translate.get('my_pet').subscribe((text: string) => {
+      this.my_pet = text;
+    });
+    this.translate.get('view_log').subscribe((text: string) => {
+      this.view_log = text;
+    });
+    this.translate.get('saved_stories').subscribe((text: string) => {
+      this.saved_stories = text;
+    });
+    this.translate.get('more').subscribe((text: string) => {
+      this.more = text;
+    });
+
   }
 
   ionViewDidLoad() {
@@ -62,6 +112,7 @@ export class ProfilePage {
   }
 
   ionViewWillEnter() {
+    this.setText();
     this.isLogin();
     this.user = 'Stories';
   }
@@ -97,22 +148,12 @@ export class ProfilePage {
     );
   }
 
-  logout() {
-    this.alertProvider.Alert.confirm('Are you sure you want to logout?', 'Logout').then((res) => {
-      console.log('confirmed');
-      this.LoginProvider.unSetData();
-      this.navCtrl.setRoot(LoginPage);
-    }, err => {
-      console.log('user cancelled');
-    });
+  viewActivity() {
+    this.navCtrl.push(ActivityLogsPage);
   }
 
   updatePass() {
     this.navCtrl.push(UpdatePasswordPage);
-  }
-
-  showFollowers() {
-    this.navCtrl.push(FollowersPage);
   }
 
   editProfile() {
@@ -127,5 +168,11 @@ export class ProfilePage {
     this.navCtrl.push(ProfilePhotoPage, { id: this.user_id, image: this.userImage });
   }
 
+  savedStories() {
+    this.navCtrl.push(SavedStoriesPage);
+  }
 
+  goSetting() {
+    this.navCtrl.push(SettingsPage);
+  }
 }

@@ -8,12 +8,15 @@ import { TabsService } from "../../util/tabservice";
 import { TermsPage } from "../../Popover/terms/terms";
 import { BirthdayPage } from "../../Popover/birthday/birthday";
 import { WhyProfilePage } from "../../Popover/why-profile/why-profile";
+import { ProfilePage } from '../../MainModule/profile/profile';
 
 //provider
 import { LoginProvider } from '../../../providers/login/login';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { ContactValidator } from '../../../validators/contact';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageProvider } from '../../../providers/language/language';
 
 @IonicPage()
 @Component({
@@ -43,10 +46,27 @@ export class RegistrationPage {
   private text_message;
   public date: String;
   // errors
-  private error_name = 'field is required';
-  private error_email = 'field is required';
-  private error_password = 'field is required';
-  private error_confirm = 'field is required';
+  private error_name;
+  private error_email;
+  private error_password;
+  private error_confirm;
+
+  private sign_up;
+  private rarau;
+  private login_wechat;
+  private sign_up_wechat;
+  private why_this;
+  private birthday;
+  private male;
+  private female;
+  private by_clicking_sign_up;
+  private terms_policy;
+  private view_edit;
+  private upload_img;
+  private success;
+  private error;
+  private upload_image;
+  private profile_picture_txt;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -55,7 +75,11 @@ export class RegistrationPage {
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
     private tabService: TabsService,
-    public platform: Platform, ) {
+    public platform: Platform,
+    public translate: TranslateService,
+    public languageProvider: LanguageProvider, ) {
+
+    this.setText();
 
     let backAction = platform.registerBackButtonAction(() => {
       this.tabService.show();
@@ -102,12 +126,79 @@ export class RegistrationPage {
 
     if (this.imagePath != undefined) {
       this.uploadIcon = 'assets/imgs/login/right-arrow.png';
-      this.uploadText = 'View & Edit';
+      this.uploadText = this.view_edit;
     }
     else {
       this.uploadIcon = 'assets/imgs/login/upload-icon.png';
-      this.uploadText = 'Upload here';
+      this.uploadText = this.upload_img;
     }
+
+  }
+
+  setText() {
+    this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    this.translate.use(this.languageProvider.getLanguage());
+
+    this.translate.get('sign_up').subscribe((text: string) => {
+      this.sign_up = text;
+    });
+    this.translate.get('view_edit').subscribe((text: string) => {
+      this.view_edit = text;
+    });
+    this.translate.get('upload_img').subscribe((text: string) => {
+      this.upload_img = text;
+    });
+    this.translate.get('rarau').subscribe((text: string) => {
+      this.rarau = text;
+    });
+    this.translate.get('login_wechat').subscribe((text: string) => {
+      this.login_wechat = text;
+    });
+    this.translate.get('sign_up_wechat').subscribe((text: string) => {
+      this.sign_up_wechat = text;
+    });
+    this.translate.get('why_this').subscribe((text: string) => {
+      this.why_this = text;
+    });
+    this.translate.get('birthday').subscribe((text: string) => {
+      this.birthday = text;
+    });
+    this.translate.get('male').subscribe((text: string) => {
+      this.male = text;
+    });
+    this.translate.get('female').subscribe((text: string) => {
+      this.female = text;
+    });
+    this.translate.get('by_clicking_sign_up').subscribe((text: string) => {
+      this.by_clicking_sign_up = text;
+    });
+    this.translate.get('terms_policy').subscribe((text: string) => {
+      this.terms_policy = text;
+    });
+    this.translate.get('error_name').subscribe((text: string) => {
+      this.error_name = text;
+    });
+    this.translate.get('error_email').subscribe((text: string) => {
+      this.error_email = text;
+    });
+    this.translate.get('error_password').subscribe((text: string) => {
+      this.error_password = text;
+    });
+    this.translate.get('error_confirm').subscribe((text: string) => {
+      this.error_confirm = text;
+    });
+    this.translate.get('success').subscribe((text: string) => {
+      this.success = text;
+    });
+    this.translate.get('error').subscribe((text: string) => {
+      this.error = text;
+    });
+    this.translate.get('upload_image').subscribe((text: string) => {
+      this.upload_image = text;
+    });
+    this.translate.get('profile_picture').subscribe((text: string) => {
+      this.profile_picture_txt = text;
+    });
 
   }
 
@@ -140,12 +231,14 @@ export class RegistrationPage {
                 this.id = this.result.id;
                 this.registerForm.reset();
                 this.submitAttempt = false;
-                this.navCtrl.setRoot(LoginPage);
+                this.tabService.show();
+                this.loginProvider.setData(this.responseData.result);
+                this.navCtrl.setRoot(ProfilePage);
               }
 
               if (this.responseData.text_message != '') {
                 this.text_message = this.responseData.text_message;
-                this.alertProvider.title = 'Success';
+                this.alertProvider.title = this.success;
                 this.alertProvider.message = this.text_message;
                 this.alertProvider.showAlert();
               }
@@ -181,8 +274,8 @@ export class RegistrationPage {
           );
       }
       else {
-        this.alertProvider.title = 'Error';
-        this.alertProvider.message = 'Please Upload Image.';
+        this.alertProvider.title = this.error;
+        this.alertProvider.message = this.upload_image;
         this.alertProvider.showAlert();
       }
     }

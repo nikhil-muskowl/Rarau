@@ -1,4 +1,8 @@
 page-registration {
+    h2,
+    p {
+        color: #fff;
+    }
     .login-back {
         background-image: url('../assets/imgs/login/login-back.png');
         min-height: 100%;
@@ -10,43 +14,183 @@ page-registration {
     .login-back ion-item {
         width: 60%;
         border-radius: 15px;
-        margin-left: 20%;   
+        margin-left: 20%;
         margin-bottom: 10px;
     }
-   
     .login-back .submit-btn {
         width: 30vw;
         height: 6vh;
         font-size: 18px;
         border-radius: 15px;
-        background: linear-gradient(to right, #ec3747 , #f45a43);
+        background: linear-gradient(to right, #ec3747, #f45a43);
         margin-bottom: 5px;
     }
-  .date-row {
-    width: 60%;
-    margin-left: 20%;
-  }
-  ion-datetime {
-    background: #fff;
-    border-radius: 15px;
-  }
-  .upload-btn {
-    background: #fff;
-    color: #b3b3b3;
-    width: 60%;
-    border-radius: 15px;
-    padding: 22px 0px;
-  }
-  .upload-btn .button-inner {
-      justify-content: left!important;
-      margin-left: 25px;
-  }
-  .back-btn{
-      background: transparent !important;
-  }
-  .upload-icon {
-    position: relative;
-    top: 10px;
-    right: 45px;
-  }
+    .date-row {
+        width: 68%;
+        margin-left: 16%;
+    }
+    ion-datetime {
+        background: #fff;
+        border-radius: 15px;
+    }
+    .upload-btn {
+        background: #fff;
+        color: #b3b3b3;
+        width: 60%;
+        border-radius: 15px;
+        padding: 22px 0px;
+    }
+    .upload-btn .button-inner {
+        justify-content: left !important;
+        margin-left: 25px;
+    }
+    .upload-icon {
+        position: relative;
+        top: 10px;
+        right: 45px;
+    }
+    /* ------ Added on 3_11_2018 ------ */
+    ion-content {
+        top: 0px !important;
+    }
+    ion-header,
+    ion-navbar {
+        height: 68px;
+    }
+    ion-navbar.toolbar {
+        height: 68px;
+    }
+    .wechat-btn {
+        margin-top: 27px;
+        padding: 18px 24px;
+        margin-bottom: 0px;
+    }
+    .login-back #img-wechat {
+        margin-left: 6px;
+        height: 30px;
+        width: 30px;
+    }
+    .login-back #txt-wechat {
+        font-size: 15px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    /* Added on 6_11_2018 */
+    .txt-or {
+        margin-top: 0rem !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 16px;
+        font-weight: lighter;
+    }
+    .login-back ion-item {
+        width: 66% !important;
+        border-radius: 10px !important;
+        margin-left: 17% !important;
+        margin-bottom: 5px !important;
+        margin-top: 10px !important;
+    }
+    .text-input-md {
+        margin: 0px 0px !important;
+        font-size: 13px;
+    }
+    .item-input ion-input,
+    .item-input ion-textarea {
+        font-size: 13px;
+    }
+    .item-block {
+        min-height: 3.4rem !important;
+    }
+    .birth-p {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 12px;
+    }
+    .spn-small {
+        font-size: 10px;
+    }
+    .birth-text {
+        margin-left: 20vw;
+    }
+    .datetime-md {
+        padding: 9px 8px 8px 0px;
+    }
+    ion-datetime {
+        border-radius: 10px;
+    }
+    .datetime-text {
+        text-align: center;
+    }
+    .male-female-h3 {
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        margin-left: -28px;
+    }
+    .male-female-h3 span {
+        font-size: 17px;
+        font-weight: initial;
+        margin-left: 30px;
+    }
+    .img-male {
+        height: 18px;
+        width: 8px;
+    }
+    .img-female {
+        height: 18px;
+        width: 8px;
+    }
+    .birth-text {
+        margin-left: 20vw;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+    .profile-pic-txt {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 13px;
+    }
+    .upload-btn {
+        width: 66% !important;
+        border-radius: 10px !important;
+        padding: 18px 0px !important;
+        margin-left: 22px !important;
+    }
+    .btn-align {
+        font-size: 13px;
+    }
+    .click-txt {
+        font-size: 12px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+    .tp-spn {
+        text-decoration: underline;
+    }
+    .login-back .submit-btn {
+        width: 32vw;
+        height: 5vh;
+        font-size: 16px;
+        text-transform: none !important;
+        font-weight: initial;
+    }
+    .scroll-content {
+        padding-bottom: 0px !important;
+    }
+    .hdr-logo {
+        position: relative;
+    }
+    .invalid-message {
+        padding-top: 0px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: -135px;
+        font-size: 14px !important;
+    }
+    .item-md.item-block .item-inner {
+        border-bottom: 2px solid #dedede;
+    }
+    .toolbar-title-md {
+        margin-left: 0px !important;
+    }
 }

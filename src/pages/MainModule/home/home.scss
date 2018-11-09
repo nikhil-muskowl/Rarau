@@ -1,11 +1,14 @@
 page-home {
-    // baidu-map {
-    //     display: block;
-    //     width: 100%;
-    //     height: 50%;
-    // }
-
-    .search-bar{
+    ion-title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 90px 1px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+    .search-bar {
         margin-top: 5px;
         margin-bottom: 5px;
         text-align: center;
@@ -20,22 +23,19 @@ page-home {
             margin-top: 1%;
             margin-bottom: 1%;
         }
-
         .text-input-md {
             margin: 0px 0px;
             padding: 0;
             width: calc(100% - 8px - 8px);
         }
-
         .item-md.item-block .item-inner {
             padding-right: 0px;
             border-bottom: 1px solid #dedede;
         }
     }
-
     .map {
         width: 100%;
-        height: 60%;
+        height: 50%;
         display: block;
         overflow: hidden;
         margin: 0;
@@ -50,23 +50,26 @@ page-home {
         height: auto !important;
         background: #eaeaea;
     }
-
-    .category-rank{
+    .category-rank {
         margin-top: 10px;
-        margin-bottom: 10px;    
-        
-        
+        margin-bottom: 10px;
     }
-
-    .border-line {        
-        background-color: #000;                    
-        padding: 1px;               
+    .border-line {
+        background-color: #000;
+        padding: 1px;
     }
     .s-image {
+        width: 50px !important;
+        max-width: 50px !important;
+        height: 50px !important;
+        max-height: 50px !important;
+    }
+    .p-image {
         width: 25px !important;
         max-width: 25px !important;
         height: 25px !important;
         max-height: 25px !important;
+        border-radius: 50%;
     }
     .star {
         width: 15px !important;
@@ -74,24 +77,23 @@ page-home {
         height: 20px !important;
         max-height: 15px !important;
         position: absolute;
-        right: 30%;
+        right: 35%;
     }
     .background-rank {
         background-image: url('../assets/icon/Front-Icons/Vector-Smart-Object1.png');
         font-size: 10px;
-        color: #fff;        
+        color: #fff;
         background-size: 100% 100%;
         background-repeat: no-repeat;
         background-position: center center;
         margin-left: auto;
         padding: 10px;
-        margin-right: auto;        
+        margin-right: auto;
     }
-    
     .item-block {
         border: 1px solid #eaeaea !important;
     }
-    .btn-color {
+    .btn-transparent {
         background: transparent;
         position: relative;
     }
@@ -104,14 +106,27 @@ page-home {
         border-radius: 50%;
         padding: 5px;
     }
-
-    .top-stories{
-        margin-top: -95px;
+    .top-stories {
+        margin-top: -100px;
+    }
+    .back-white {
+        background: #fff !important;
+        ion-icon {
+            display: inline-block;
+            font-size: 2em;
+            text-align: right !important;
+        }
+    }
+    .adv-img {
+        margin-top: 10px;
+        height: 100px !important;
     }
 
+    /* For header logo */
 
-
-
-  
-    
+    .lg-txt-home{
+        display:inline-block;
+        vertical-align: middle;
+        margin-top: -19px;
+    }
 }

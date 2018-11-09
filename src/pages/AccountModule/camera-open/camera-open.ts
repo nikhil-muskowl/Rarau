@@ -7,6 +7,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { TabsService } from "../../util/tabservice";
 import { UpdateProfilePage } from "../update-profile/update-profile";
 import { ProfilePhotoPage } from "../../MainModule/profile-photo/profile-photo";
+import { StoryCategoryPage } from "../../story/story-category/story-category";
 
 @IonicPage()
 @Component({
@@ -22,6 +23,12 @@ export class CameraOpenPage {
   public data;
   public date;
   public gender;
+  public image;
+  public locName;
+  public latitude;
+  public longitude;
+  public sel_cat_id;
+  public isPrivate;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,6 +41,14 @@ export class CameraOpenPage {
     this.tabService.hide();
     this.sendClass = this.navParams.get('sendClass');
 
+    if (this.sendClass == 'Receipt') {
+      this.image = this.navParams.get('image');
+      this.locName = this.navParams.get('locName');
+      this.latitude = this.navParams.get('latitude');
+      this.longitude = this.navParams.get('longitude');
+      this.sel_cat_id = this.navParams.get('sel_cat_id');
+      this.isPrivate = this.navParams.get('isPrivate');
+    }
     this.srcPhoto = this.navParams.get('image');
     this.result = this.navParams.get('imagePath');
     this.data = this.navParams.get('data');
@@ -41,12 +56,9 @@ export class CameraOpenPage {
     this.gender = this.navParams.get('gender');
   }
 
-  ionViewDidLoad() {
-
-  }
-
   ionViewDidLeave() {
     this.stopCamera();
+    this.cameraPreview.hide();
   }
 
   ionViewWillEnter() {
@@ -80,6 +92,12 @@ export class CameraOpenPage {
         }
         if (this.sendClass == 'profile') {
           this.navCtrl.push(ProfilePhotoPage, { image: this.srcPhoto });
+        }
+        if (this.sendClass == 'Receipt') {
+          this.navCtrl.push(StoryCategoryPage, {
+            receiptImage: this.srcPhoto, sel_cat_id: this.sel_cat_id, image: this.image, locName: this.locName,
+            latitude: this.latitude, longitude: this.longitude, receipt_private: this.isPrivate
+          });
         }
       });
 

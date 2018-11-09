@@ -5,9 +5,11 @@
                 <button start class="back-btn" (click)='goBack()'>
                     <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
                 </button>
-                Sign Up
-                <span style="float:right;">
-                    <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
+                <span id="hdr-txt">{{sign_up}}</span>
+                <div class="hdr-logo">
+                    <span class="logo-img"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
+                    <span class="logo-txt"> {{rarau}}</span>
+                </div>
             </ion-title>
         </ion-toolbar>
     </ion-navbar>
@@ -18,14 +20,13 @@
             <div class="col">
                 <div text-center>
                     <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit">
-                        <img src="assets/imgs/login/wechat.png" width="40" height="40">&nbsp;&nbsp;Login with WeChat</button>
+                        <img src="assets/imgs/login/wechat.png" id="img-wechat" width="40" height="40"><span id="txt-wechat">{{sign_up_wechat}}</span></button>
                 </div>
             </div>
         </div>
         <div text-center>
-            <h2>or</h2>
+            <h2 class="txt-or">or</h2>
         </div>
-        <br>
         <form [formGroup]="registerForm">
 
             <div text-center>
@@ -43,14 +44,16 @@
 
             <!-- email -->
             <ion-item>
-                <ion-input placeholder="Email Address" formControlName="email" value={{femail}} type="text" [class.invalid]="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)"></ion-input>
+                <ion-input placeholder="Email Address" formControlName="email" value={{femail}} type="text"
+                    [class.invalid]="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>
                 <p class="invalid-message" *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
             </div>
             <!-- password -->
             <ion-item>
-                <ion-input placeholder="Password" formControlName="password" value={{fpassword}} type="password" [class.invalid]="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)"></ion-input>
+                <ion-input placeholder="Password" formControlName="password" value={{fpassword}} type="password"
+                    [class.invalid]="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>
                 <p class="invalid-message" *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty || submitAttempt)">{{error_password}}</p>
@@ -58,7 +61,8 @@
 
             <!-- confirm password -->
             <ion-item>
-                <ion-input placeholder="Confirm Password" formControlName="passconf" value={{fconfpass}} type="password" [class.invalid]="!registerForm.controls.passconf.valid && (registerForm.controls.passconf.dirty || submitAttempt)"></ion-input>
+                <ion-input placeholder="Confirm Password" formControlName="passconf" value={{fconfpass}} type="password"
+                    [class.invalid]="!registerForm.controls.passconf.valid && (registerForm.controls.passconf.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>
                 <p class="invalid-message" *ngIf="!registerForm.controls.passconf.valid  && (registerForm.controls.passconf.dirty || submitAttempt)">{{error_password}}</p>
@@ -66,28 +70,29 @@
 
             <!-- birthday -->
             <div text-left class="birth-text">
-                <p>Birthday
-                    <span class="small" (click)="gotobirthday()">(Why this?)</span>
+                <p class="birth-p">{{birthday}}
+                    <span class="spn-small" (click)="gotobirthday()">{{why_this}}</span>
                 </p>
             </div>
 
             <!-- <ion-item> -->
-            <div>
+            <div class="dob-div">
                 <ion-row class="date-row">
                     <ion-col col-4>
-                        <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date"
-                            displayFormat="DD">
+                        <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
+                            formControlName="date" displayFormat="DD">
                         </ion-datetime>
                     </ion-col>
 
                     <ion-col col-4>
-                        <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date"
-                            displayFormat="MM">
+                        <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
+                            formControlName="date" displayFormat="MM">
                         </ion-datetime>
                     </ion-col>
 
                     <ion-col col-4>
-                        <ion-datetime placeholder='YYYY &nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()" formControlName="date" displayFormat="YYYY">
+                        <ion-datetime placeholder='YYYY &nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
+                            formControlName="date" displayFormat="YYYY">
                         </ion-datetime>
                     </ion-col>
                 </ion-row>
@@ -95,16 +100,22 @@
             </div>
 
             <div text-center>
-                <h3>
-                    <span [ngStyle]="{'color': male_color}" (click)="manClick()"><img src="{{maleimage}}" width="15" height="25">Male</span>
+                <h3 class="male-female-h3">
+                    <span [ngStyle]="{'color': male_color}" (click)="manClick()">
+                        <img class="img-male" src="{{maleimage}}">
+                        {{male}}
+                    </span>
                     <span style="margin-left:15px;">
-                        <span [ngStyle]="{'color': female_color}" (click)="womanClick()"><img src="{{femaleimage}}" width="15"
-                                height="25">Female</span></span>
+                        <span [ngStyle]="{'color': female_color}" (click)="womanClick()">
+                            <img class="img-female" src="{{femaleimage}}">
+                            {{female}}
+                        </span>
+                    </span>
                 </h3>
             </div>
             <div text-left class="birth-text">
-                <p>Profile Picture
-                    <span (click)="gotoprofile()" class="small">(Why this?)</span>
+                <p class="profile-pic-txt">{{profile_picture_txt}}
+                    <span (click)="gotoprofile()" class="spn-small">{{why_this}}</span>
                 </p>
             </div>
             <div text-center>
@@ -117,14 +128,13 @@
                     <img class="upload-icon" src="{{uploadIcon}}" width="20" height="20">
                 </ion-buttons>
             </div>
-
         </form>
-        <div padding text-center>
-            <p>By clicking Sign Up, you agree to our
-                <br>
-                <span style="text-decoration:underline;" (click)="gototerms()">Terms, Data Policy & Cookie Policy</span>
+
+        <div text-center>
+            <p class="click-txt">{{by_clicking_sign_up}}
+                <span class="tp-spn" (click)="gototerms()">{{terms_policy}}</span>
             </p>
-            <button class="submit-btn" ion-button (click)="save()">Sign Up</button>
+            <button class="submit-btn" ion-button (click)="save()">{{sign_up}}</button>
         </div>
     </div>
 

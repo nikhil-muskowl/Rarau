@@ -1,54 +1,45 @@
 <ion-header>
     <ion-navbar hideBackButton>
-        <ion-toolbar>
-
-            <ion-title class="tool-bar-title">
-                <button start class="back-btn" (click)='goBack()'>
-                    <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-                </button>Upload Profile Picture
-                <span style="float:right;">
-                    <img src="assets/imgs/login/Group-2.png" class="fire-icon">RaRaU</span>
-            </ion-title>
-        </ion-toolbar>
+        <ion-title class="tool-bar-title">
+            <button start class="back-btn" (click)='goBack()'>
+                <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+            </button>
+            <span id="hdr-txt">{{upload_profile_pic}}</span>
+            <div class="hdr-logo">
+              <span class="logo-img"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
+              <span class="logo-txt"> {{rarau}}</span>
+            </div>
+        </ion-title>
     </ion-navbar>
 </ion-header>
+
 <ion-content>
     <div class="login-back" scroll="false">
-        <div class="row">
-            <div class="col">
-                <div text-center>
-                    <h1>
-                        <b>Upload
-                            <br>
-                            <span style="text-decoration: underline;">Profile Picture</span>
-                        </b>
-                    </h1>
-                </div>
-            </div>
+        <div text-center id="profile-img">
+            <h1>{{upload}}<br><span style="text-decoration: underline;">{{profile_picture}}</span></h1>
         </div>
-        <br>
-        <br>
-        <div text-center>
+
+        <div text-center id="display-img">
             <img class="circle-pic" src="{{displayImage}}" width="150" height="150">
         </div>
-        <br>
-        <br>
+
         <div class="row">
             <div class="col border-line">
                 <div text-right>
-                    <img style="margin-right: 15px" src="assets/icon/UploadPicture.png" width="100" height="100" (click)="openGallery()">
+                    <img style="margin-right: 15px" src="assets/icon/UploadPicture.png" width="85" height="85"
+                        (click)="openGallery()">
                 </div>
             </div>
             <!-- <div class="divider"></div> -->
             <div class="col">
                 <div text-left>
-                    <img style="margin-left: 15px" src="assets/icon/Camera.png" width="100" height="100" (click)="openCamera()">
+                    <img style="margin-left: 15px" src="assets/icon/Camera.png" width="85" height="85" (click)="openCamera()">
                 </div>
             </div>
         </div>
-        <br>
+     
         <div padding text-center>
-            <button class="submit-btn" ion-button (click)="save()">Upload</button>
+            <button class="submit-btn" ion-button (click)="save()">{{upload}}</button>
         </div>
     </div>
 

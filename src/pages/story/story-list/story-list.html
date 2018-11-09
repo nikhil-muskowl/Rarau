@@ -19,14 +19,14 @@
       <ion-avatar item-start>
         <img src="{{record.user_image_thumb}}">
         <div class="lvl-image">
-          <p class="background-lvl"><span style="color:#fff;">Lv6</span></p>
+          <p class="background-lvl"><span style="color:#fff;">{{lvl_txt}} {{record.user_level}}</span></p>
         </div>
 
         <div class="fire-div">
           <span *ngIf="record.totalFlames > 0">
             <img class="fire-image" src="assets/imgs/story/Positive-Flame.png">
           </span>
-          <span *ngIf="record?.totalFlames < 0">
+          <span *ngIf="record.totalFlames < 0">
             <img class="fire-image" src="assets/imgs/story/Negative-Flame.png">
           </span>
         </div>
@@ -34,27 +34,28 @@
       </ion-avatar>
 
       <ion-row>
-          <ion-col>
-              <h2>{{record.user_name}}</h2>
-          </ion-col>
-          <ion-col>
-            <ion-note item-end>
-              <span class="flame-number">{{record.totalLikes}} <img src="assets/imgs/story/Negative-Flame.png" width="10"
-                  height="10"></span>
-              <span class="flame-number">{{record.totalDislikes}} <img src="assets/imgs/story/Positive-Flame.png" width="10"
-                  height="10"></span>
-            </ion-note>
-          </ion-col>
-        </ion-row>
+        <ion-col>
+          <h2>{{record.user_name}}</h2>
+        </ion-col>
+        <ion-col>
+          <ion-note item-end>
+            <span class="flame-number">{{record.totalDislikes}} <img src="assets/imgs/story/Negative-Flame.png" width="10"
+                height="10"></span>
+            <span class="flame-number">{{record.totalLikes}} <img src="assets/imgs/story/Positive-Flame.png" width="10"
+                height="10"></span>
+          </ion-note>
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col col-12>
+          <span *ngFor="let tag of record.tags; let j = index;">
+            <span *ngIf="record.tags.length-1 > j">{{tag}},&nbsp;</span>
+            <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
+          </span>
+        </ion-col>
+      </ion-row>
 
-
-     
-
-      <p><span *ngFor="let tag of record.tags; let j = index;">
-          <span *ngIf="record.tags.length-1 > j">{{tag}},&nbsp;</span>
-          <span *ngIf="record.tags.length-1 == j">{{tag}}</span>
-        </span></p>
       <p class="p-date">{{record.created_date}}</p>
 
       <img class="img-grid" src="{{record.image_thumb}}" width="70" height="70">
