@@ -66,8 +66,6 @@ export class MyApp {
       console.log(this.language);
       this.translate.setDefaultLang(this.language);
 
-
-
       let splash = modalCtrl.create(SplashPage);
       splash.present();
 
