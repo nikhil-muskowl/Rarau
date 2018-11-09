@@ -103,7 +103,8 @@ page-login {
         padding-top: 0px;
         margin-top: 5px;
         margin-bottom: 0px;
-        margin-left: -140px;
+        margin-left: -135px;
+        font-size: 14px !important;
     }
 
     .frgt-link {
@@ -118,12 +119,12 @@ page-login {
         border: 1px solid;
         border-color: white;
         border-radius: 12px;
-        height: 3.8rem;
-        width:90px;
+        height: 3.4rem;
+        width:80px;
     }
 
     .submit-btn .button-inner {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: 400;
         text-transform: none;
     }
@@ -136,31 +137,91 @@ page-login {
         margin-top: 25px;
         margin-bottom: 0px;
         font-weight: initial;
-        font-size: 2.0rem;
+        font-size: 1.6rem;
     }
 
     #sign-up {
         margin-top: 0px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         font-weight: initial;
-        font-size: 2.0rem;
+        font-size: 1.6rem;
     }
 
     #txt-rarau {
         margin-top: 8px;
         margin-bottom: 0px;
         font-weight: 400;
-        font-size: 2.0rem;
+        font-size: 1.6rem;
     }
 
     #txt-go {
         margin-top: 0px;
         margin-bottom: 10px;
         font-weight: 400;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
     .scroll-content {
         padding-bottom: 0px !important;
+    }
+
+    .text-input-md {
+        margin: 0px 0px !important;
+        font-size: 13px;
+    }
+
+    .item-input ion-input, .item-input ion-textarea {
+        font-size: 13px;
+    }
+
+    .item-block {
+        min-height: 3.8rem !important;
+    }
+
+    .hdr-logo {
+        position: relative;
+    }
+
+    .wechat-btn {
+        margin-top: 27px;
+        padding: 18px;
+        padding-left: 10px;
+        padding-right: 24px;
+        margin-bottom: 0px;
+    }
+
+    .login-back #img-wechat {
+        margin-left: 10px;
+        height: 30px;
+        width: 30px;
+    }
+
+    .login-back #txt-wechat {
+        font-size: 15px;
+        margin-left: 20px;
+        margin-right: 8px;
+    }
+
+    #txt-or{
+        margin-top: 10px !important;
+        margin-bottom: 18px !important;
+        font-size: 2.0rem !important;
+        font-weight: 400 !important;
+    }
+
+    .login-back ion-item {
+        width: 66% !important;
+        border-radius: 10px !important;
+        margin-left: 17% !important;
+        margin-bottom: 5px !important;
+    }
+
+    .frgt-link {
+        font-size: 1.4rem;
+        margin-right: 17vw;
+    }
+
+    #pass_word {
+        margin-top: 15px;
     }
 }
