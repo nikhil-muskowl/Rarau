@@ -88,48 +88,6 @@ ion-header ion-title .toolbar-title {
 
 /* Added on 5_11_2018 */
 
-/* 
-.alert-md .alert-wrapper {
-    height: 350px !important;
-}
-
-.alert-md .alert-wrapper .alert-head {
-    margin-top: 20px !important;
-    margin-left: 20px !important;
-    margin-right: 20px !important;
-    border-style: dashed !important;
-    border-color: red !important;
-    border-width: thin !important;
-    height: 180px !important;
-    border-bottom: 0px !important;
-    background-image:  url('../assets/imgs/story/pos-flam.png') !important;
-    background-size: cover !important;
-}
-
-.alert-md .alert-title {
-    display: none !important;
-}
-
-.alert-md .alert-wrapper .alert-message {
-    margin-left: 20px !important;
-    margin-right: 20px !important;
-    border-style: dashed !important;
-    border-color: red !important;
-    border-width: thin !important;
-    border-top: 0px !important;
-    border-bottom: 0px !important;
-}
-
-.alert-md .alert-wrapper .alert-button-group {
-    margin-left: 20px !important;
-    margin-right: 20px !important;
-    border-style: dashed !important;
-    border-color: red !important;
-    border-width: thin !important;
-    border-top: 0px !important;
-    height: 90px !important;
-} */
-
 /* for header logo */
  .hdr-logo {
     float:right;
@@ -153,13 +111,8 @@ ion-header ion-title .toolbar-title {
     margin-left: 8px;
 }
 
-.back-button-md {
-    margin: 0 0px !important;
-}
-
-.fire-icon {
-    height: 48px !important;
-    width: 29px !important;
+#hdr-txt {
+    font-size: 20px !important;
 }
 
 .back-btn {
