@@ -1,15 +1,13 @@
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Component, ViewChild } from '@angular/core';
-import { Platform, App, Nav, MenuController, Alert } from 'ionic-angular';
+import { Platform, App, Nav, MenuController, Alert, ModalController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { MainTabsPage } from '../pages/MainModule/main-tabs/main-tabs';
 import { HomePage } from '../pages/MainModule/home/home';
-import { RankingPage } from '../pages/MainModule/ranking/ranking';
-import { ProfilePage } from '../pages/MainModule/profile/profile';
-import { GalleryPage } from '../pages/story/gallery/gallery';
 import { TutorialPage } from '../pages/MainModule/tutorial/tutorial';
+import { SplashPage } from '../pages/MainModule/splash/splash';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
@@ -54,9 +52,12 @@ export class MyApp {
     public screenOrientation: ScreenOrientation,
     public languageProvider: LanguageProvider,
     public locationTracker: LocationTrackerProvider,
-    public configProvider: ConfigProvider) {
+    public configProvider: ConfigProvider,
+    public modalCtrl: ModalController) {
 
     this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
 
       this.locationTracker.setLocation();
       this.backEvent();
@@ -64,18 +65,18 @@ export class MyApp {
       this.language = this.languageProvider.getLanguage();
       console.log(this.language);
       this.translate.setDefaultLang(this.language);
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
 
 
-      this.splashScreen.hide();
+
+      let splash = modalCtrl.create(SplashPage);
+      splash.present();
 
       // Commented these lines for desktop, uncomment for real device(Mobile)
       // console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
 
       // // set to landscape
       // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-      
+
       console.log('tutorial value : ' + this.configProvider.isSeen());
       let chk = this.configProvider.isSeen();
       if (chk == '1') {
@@ -99,7 +100,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      // this.splashScreen.hide();
     });
 
   }
