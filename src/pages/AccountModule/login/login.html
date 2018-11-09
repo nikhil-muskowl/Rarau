@@ -32,8 +32,8 @@
                     <div text-center>
                     <p class="invalid-message" *ngIf="!loginForm.controls.email.valid  && (loginForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
                     </div>
-                    <br>
-                    <ion-item text-center>
+           
+                    <ion-item text-center id="pass_word">
                         <ion-input placeholder="Password" formControlName="password" type="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
                     </ion-item>
                     <div text-center>
