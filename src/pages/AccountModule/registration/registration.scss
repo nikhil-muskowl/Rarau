@@ -220,13 +220,13 @@ page-registration {
         position: relative;
     }
 
-    // .invalid-message {
-    //     padding-top: 0px;
-    //     margin-top: 5px;
-    //     margin-bottom: 5px;
-    //     margin-left: -135px;
-    //     font-size: 14px !important;
-    // }
+    .invalid-message {
+        padding-top: 0px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: -135px;
+        font-size: 14px !important;
+    }
 
     .item-md.item-block .item-inner {
         border-bottom: 2px solid #dedede;
