@@ -99,12 +99,12 @@ export class HomePage {
     this.language_id = this.languageProvider.getLanguageId();
 
     //uncommnet below for HK testing 
-    // this.latitude = this.locationTrackerProvider.getLatitude();
-    // this.longitude = this.locationTrackerProvider.getLongitude();
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
 
     //uncommnet below for India testing 
-    this.latitude = 39.919981;
-    this.longitude = 116.414977;
+    // this.latitude = 39.919981;
+    // this.longitude = 116.414977;
     // console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
     // console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
 
@@ -319,8 +319,10 @@ export class HomePage {
             }
             else {
               this.zoomlatLong = {
-                lat: element.latitude,
-                lng: element.longitude,
+                // lat: element.latitude,
+                // lng: element.longitude,
+                lat: this.latitude,
+                lng: this.longitude,
                 zoom: 15
               }
             }

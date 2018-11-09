@@ -133,7 +133,9 @@ ion-header ion-title .toolbar-title {
 /* for header logo */
  .hdr-logo {
     float:right;
-    margin-right: 5px;
+    margin-right: 10px;
+    width: 85px !important;
+    height: 55px !important;
 }
 
 .logo-img{
@@ -144,20 +146,23 @@ ion-header ion-title .toolbar-title {
     display:inline-block;
     vertical-align: middle;
     margin-top: -19px;
+    font-size: 20px !important;
 }
 
 .toolbar-title-md {
     margin-left: 8px;
 }
 
-.logo-txt{
-    font-size: 18px !important;
-}
-
-#hdr-txt {
-    font-size: 18px !important;
-}
-
 .back-button-md {
     margin: 0 0px !important;
+}
+
+.fire-icon {
+    height: 48px !important;
+    width: 29px !important;
+}
+
+.back-btn {
+    margin-top: 16px;
+    background: transparent !important;
 }
