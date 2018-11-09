@@ -295,12 +295,12 @@ export class HomePage {
                 icon: {
                   imageUrl: element.marker_thumb,
                   size: {
-                    height: 50,
-                    width: 50
+                    height: 32,
+                    width: 32
                   },
                   imageSize: {
-                    height: 50,
-                    width: 50
+                    height: 32,
+                    width: 32
                   }
                 }
               },
