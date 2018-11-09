@@ -145,9 +145,13 @@ export class StoryCategoryPage {
 
   selectCat(category, index) {
 
+    let varChk = true;
     if (this.model[index].isImage) {
+
       this.model[index].isImage = false;
+
       if (category.is_upload == 1) {
+        varChk = false;
         this.receipt_private = 0;
         this.receiptImage = '';
       }
@@ -158,7 +162,7 @@ export class StoryCategoryPage {
     this.bindArray();
 
     console.log(category);
-    if (category.is_upload == 1) {
+    if (category.is_upload == 1 && varChk) {
 
       this.navCtrl.push(UploadReceiptPage, {
         sel_cat_id: this.sel_cat_id,
@@ -251,6 +255,7 @@ export class StoryCategoryPage {
                 this.navCtrl.setRoot(HomePage);
                 this.loadingProvider.dismiss();
               }
+
             },
             err => console.error(err),
             () => {
