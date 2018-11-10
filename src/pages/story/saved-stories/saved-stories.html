@@ -5,14 +5,12 @@
       <button start class="back-btn" (click)='goBack()'>
         <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
       </button>
-      {{saved_story}}
+      <span id="hdr-txt">{{saved_story}}</span>
+      <div class="hdr-logo">
+          <span class="logo-img"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
+          <span class="logo-txt"> {{rarau}}</span>
+      </div>
     </ion-title>
-
-    <ion-buttons end>
-      <span class="logo">
-        <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}
-      </span>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

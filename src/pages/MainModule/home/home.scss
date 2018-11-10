@@ -110,13 +110,21 @@ page-home {
         margin-top: -100px;
     }
     .back-white {
-        background: #fff !important;
+        background: transparent !important;
         ion-icon {
             display: inline-block;
             font-size: 2em;
             text-align: right !important;
         }
     }
+
+    .back-white ion-icon {
+        color: #ed3d46;
+    }
+    .cross {
+        background: transparent !important;
+    }
+    
     .adv-img {
         margin-top: 10px;
         height: 100px !important;

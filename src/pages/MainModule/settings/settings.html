@@ -8,16 +8,19 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label>{{language_txt}}</ion-label>
-      <ion-select [(ngModel)]="language">
-        <ion-option *ngFor="let language of languages" value="{{language.code}}" (ionSelect)="onChange(language)">{{language.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label *ngIf="user_id" (click)="logout()">{{logout_txt}}</ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content>
+  <div class="login-back">
+    <div class="lang-select">
+      <ion-row>
+        <ion-col col-12 text-center>
+            <ion-select [(ngModel)]="language">
+              <ion-option *ngFor="let language of languages" value="{{language.code}}" (ionSelect)="onChange(language)">{{language.name}}</ion-option>
+            </ion-select>
+        </ion-col>
+      </ion-row>
+    </div>
+  <div text-center class="btn-logout">
+      <button class="submit-btn" *ngIf="user_id" ion-button type="submit" (click)="logout()">{{logout_txt}}</button>
+  </div>
+  </div>
 </ion-content>

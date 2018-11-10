@@ -94,6 +94,7 @@ ion-header ion-title .toolbar-title {
     margin-right: 10px;
     width: 85px !important;
     height: 55px !important;
+    position: relative;
 }
 
 .logo-img{
@@ -103,7 +104,7 @@ ion-header ion-title .toolbar-title {
 .logo-txt{
     display:inline-block;
     vertical-align: middle;
-    margin-top: -19px;
+    margin-top: -25px;
     font-size: 20px !important;
 }
 
@@ -116,6 +117,10 @@ ion-header ion-title .toolbar-title {
 }
 
 .back-btn {
-    margin-top: 16px;
+    margin-top: 10px;
     background: transparent !important;
+}
+
+ion-navbar.toolbar {
+    height: 71px !important;
 }

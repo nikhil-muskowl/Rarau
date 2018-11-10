@@ -12,15 +12,67 @@ ranking {
         opacity: 1;
     }
 
+    /* for ranking font size */
+
     .rank-h1{
-        font-size: 18px !important;
-        margin-top: 33px !important;
+        font-size: 23px !important;
+        margin-top: 3px !important;
         color: #ec3747 !important;
-        font-weight: bold !important;
-        border: 1px solid;
-        border-radius: 12px;
-        width: 20px;
-        height: 20px;
+        font-weight: bolder !important;
+        border: 2px solid #ec3747;
+        border-radius: 22px;
+        width: 30px !important;
+        height: 30px !important;
         text-align: center;
+        transform: rotate(-30deg);
+        margin-left: 3px;
+        position: absolute;
+    }
+
+    .rank-h3 {
+        font-size: 1.8rem !important;
+    }
+
+    .rank-p1 {
+        font-size: 1.6rem !important;
+    }
+
+    .rank-spn {
+        font-size: 1.4rem !important;
+    }
+
+    .rank-p2 {
+        font-size: 1.2rem !important;
+    }
+
+    .rank-spn {
+        display:inline-block;
+    }
+
+    .rank-img-1 {
+        height: 50px;
+        width: 60px;
+        position: absolute;
+        transform: rotate(-30deg);
+        margin-left: -6px;
+        margin-top: 2px;    
+    }
+
+    .rank-img-2 {
+        height: 45px;
+        width: 55px;
+        position: absolute;
+        transform: rotate(-30deg);
+        margin-left: -6px;
+        margin-top: 2px;    
+    }
+
+    .rank-img-3 {
+        height: 40px;
+        width: 50px;
+        position: absolute;
+        transform: rotate(-30deg);
+        margin-left: 0px;
+        margin-top: 6px;    
     }
 }
