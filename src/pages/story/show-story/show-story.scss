@@ -6,12 +6,15 @@ page-show-story {
     }
 
     .comment-bar{
+        .item-md [item-left], .item-md [item-right], .item-md [item-start], .item-md [item-end] {
+            margin: 9px 0px 9px 0;
+        }
         .item-md {            
             font-size: 1.4rem;
         }
         .text-input-md {
             margin:0;
-            padding:4px 0 4px 0;
+            padding:4.5px 0 3.5px 5px;
             width: 100%;
             background-color: #eaeaea !important;
         }
@@ -141,6 +144,10 @@ page-show-story {
 
 
     .story-commnets{
+        .note-md {
+            color: #c5c5c5;
+            font-size: 10px;
+        }
         .item-inner {
             background-color: #eaeaea !important;
             padding-left: 10px;
