@@ -36,6 +36,7 @@ export class UploadReceiptPage {
   private receipt_private;
   public receiptImage;
   public sel_cat_id;
+  public index_id;
 
   public flashMode = "off";
 
@@ -68,6 +69,7 @@ export class UploadReceiptPage {
       this.receiptImage = "assets/icon/user.png";
     }
 
+    this.index_id = this.navParams.get('index_id');
     this.sel_cat_id = this.navParams.get('sel_cat_id');
     this.image = this.navParams.get('image');
     this.locName = this.navParams.get('locName');
@@ -118,16 +120,13 @@ export class UploadReceiptPage {
     this.navCtrl.push(StoryCategoryPage, {
       receipt: this.result,
       sel_cat_id: this.sel_cat_id,
+      index_id: this.index_id,
       isPrivate: this.recipt_show,
       image: this.image,
       locName: this.locName,
       latitude: this.latitude,
       longitude: this.longitude
     });
-  }
-
-  ionViewDidLeave() {
-    this.tabService.show();
   }
 
   save() {
@@ -143,6 +142,7 @@ export class UploadReceiptPage {
       this.navCtrl.push(StoryCategoryPage, {
         receiptImage: this.imgSend,
         sel_cat_id: this.sel_cat_id,
+        index_id: this.index_id,
         receipt_private: this.recipt_show,
         image: this.image,
         locName: this.locName,
@@ -160,6 +160,7 @@ export class UploadReceiptPage {
       latitude: this.latitude,
       longitude: this.longitude,
       sel_cat_id: this.sel_cat_id,
+      index_id: this.index_id,
       isPrivate: this.recipt_show,
       sendClass: 'Receipt'
     });

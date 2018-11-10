@@ -42,9 +42,10 @@ export class StoryCategoryPage {
   private receiptImage;
   public paramData;
   public language_id;
+  public index_id;
 
   public btnGo = 1;
-
+  public varRecChk;
   public btnname;
   public publish;
   public category;
@@ -71,7 +72,8 @@ export class StoryCategoryPage {
     this.setText();
     this.language_id = this.languageProvider.getLanguageId();
     this.isLogin();
-
+    //for single receipt image
+    this.varRecChk = '';
     this.sel_cat_id = this.navParams.get('sel_cat_id');
     this.image = this.navParams.get('image');
     this.locName = this.navParams.get('locName');
@@ -79,6 +81,10 @@ export class StoryCategoryPage {
     this.longitude = this.navParams.get('longitude');
     this.receipt_private = this.navParams.get('receipt_private');
     this.receiptImage = this.navParams.get('receiptImage');
+
+    if (this.receiptImage != undefined || this.receiptImage != '') {
+      this.index_id = this.navParams.get('index_id');
+    }
 
     console.log('lat long : ' + this.latitude + ', ' + this.longitude);
     console.log('receipt_private : ' + this.receipt_private);
@@ -148,16 +154,14 @@ export class StoryCategoryPage {
 
   selectCat(category, index) {
 
-    let varChk = true;
     if (this.model[index].isImage) {
 
       this.model[index].isImage = false;
 
-      if (category.is_upload == 1) {
-        varChk = false;
-        this.receipt_private = 0;
-        this.receiptImage = '';
-      }
+      // if (category.is_upload == 1) {
+      //   this.receipt_private = 0;
+      //   this.receiptImage = '';
+      // }
     } else {
       this.model[index].isImage = true;
     }
@@ -165,20 +169,26 @@ export class StoryCategoryPage {
     this.bindArray();
 
     console.log(category);
-    if (category.is_upload == 1 && varChk) {
 
-      this.navCtrl.push(UploadReceiptPage, {
-        sel_cat_id: this.sel_cat_id,
-        image: this.image,
-        locName: this.locName,
-        latitude: this.latitude,
-        longitude: this.longitude
-      });
+    if (category.is_upload == 1) {
+      if (this.receiptImage == undefined || this.receiptImage == '') {
+        this.navCtrl.push(UploadReceiptPage, {
+          index_id: index,
+          sel_cat_id: this.sel_cat_id,
+          image: this.image,
+          locName: this.locName,
+          latitude: this.latitude,
+          longitude: this.longitude
+        });
+      }
+      else if (this.index_id == index) {
+        this.receipt_private = 0;
+        this.receiptImage = '';
+      }
     }
-    else {
-      this.receipt_private = 0;
-      this.receiptImage = '';
-    }
+
+    console.log('receiptImage : ' + this.receiptImage);
+    console.log('this.index_id and index : ' + this.index_id + ',' + index);
   }
 
   bindArray() {
@@ -216,11 +226,6 @@ export class StoryCategoryPage {
 
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
-  }
-
-  ionViewDidLeave() {
-
-    // this.tabService.show();
   }
 
   saveStory() {
