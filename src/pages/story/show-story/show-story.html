@@ -5,98 +5,94 @@
         <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
       </button>
       <span id="hdr-txt">{{title}}</span>
-      <!-- <span style="float:right;">
-        <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}</span> -->
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid style="background: #eaeaea;">
-    <div class="story-top">
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="{{user_image_thumb}}">
-        </ion-avatar>
-        <h3>{{user_name}}{{apo_story}}</h3>
-        <p class="ellipsis-2">
-          <span *ngFor="let tag of tags; let j = index;">
-            <span *ngIf="tags.length-1 > j">{{tag}},&nbsp;</span>
-            <span *ngIf="tags.length-1 == j">{{tag}}</span>
-          </span></p>
-      </ion-item>
-    </div>
-    <!-- <ion-row style="margin-bottom: -25px;">
-      <ion-col col-3 text-center>
-        <img class="circle-pic" src="{{user_image_thumb}}" width="70" height="70">
-      </ion-col>
-      <ion-col col-9>
-        <h3>{{user_name}}{{apo_story}}</h3>
-        <p class="ellipsis-2">
-          <span *ngFor="let tag of tags; let j = index;">
-            <span *ngIf="tags.length-1 > j">{{tag}},&nbsp;</span>
-            <span *ngIf="tags.length-1 == j">{{tag}}</span>
-          </span></p>
-      </ion-col>
-    </ion-row> -->
+  <div class="story-top">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{user_image_thumb}}">
+      </ion-avatar>
+      <h3>{{user_name}}{{apo_story}}</h3>
+      <p class="ellipsis-2">
+        <span *ngFor="let tag of tags; let j = index;">
+          <span *ngIf="tags.length-1 > j">{{tag}},&nbsp;</span>
+          <span *ngIf="tags.length-1 == j">{{tag}}</span>
+        </span></p>
+    </ion-item>
+  </div>
 
-  </ion-grid>
 
-  <div text-center padding>
+  <div class="swipe-bar">
     <ion-row>
       <ion-col col-6 offset-3 swipeAll (swipedown)="goToStory($event)">
         <ion-icon style="font-size:25px;" name="ios-arrow-down-outline"></ion-icon>
       </ion-col>
-      <ion-col col-3><span class="flame-number">{{totalLikes}}
-          <span><img src="assets/imgs/story/Positive-Flame.png" width="15" height="15"></span></span>
-        <span class="flame-number">{{totalDislikes}} <span><img src="assets/imgs/story/Negative-Flame.png" width="15"
-              height="15"></span></span></ion-col>
+      <ion-col col-3>
+
+        <span class="flame-number">
+          {{totalLikes}}
+          <span>
+            <img src="assets/imgs/story/Positive-Flame.png" width="15" height="15">
+          </span>
+        </span>
+
+        <span class="flame-number">
+          {{totalDislikes}}
+          <span>
+            <img src="assets/imgs/story/Negative-Flame.png" width="15" height="15">
+          </span>
+        </span>
+
+      </ion-col>
     </ion-row>
   </div>
 
-  <ion-list no-lines>
-    <form *ngIf="isComment" [formGroup]="commentForm">
 
-      <!-- <ion-item>
-            <button ion-button clear item-left>Say Something</button>
-            <ion-input placeholder="Type here" type="text"></ion-input>
-            <button class="send-btn" clear type="button" item-right>
-              <ion-icon name="ios-send"></ion-icon>
-            </button>
-          </ion-item> -->
+  <div class="comment-bar">
+    <ion-list no-lines>
+      <form *ngIf="isComment" [formGroup]="commentForm">
 
-      <ion-item>
-        <button ion-button clear item-left>{{say_something}}</button>
-        <ion-input placeholder="Type here" formControlName="comment" type="text" [class.valid]="!formErrors.comment"
-          [class.invalid]="formErrors.comment"></ion-input>
+        <ion-item>
+          <button ion-button clear item-left class="btn-left">{{say_something}}</button>
+          
+          <ion-input placeholder="Type here" formControlName="comment" type="text" [class.valid]="!formErrors.comment"
+            [class.invalid]="formErrors.comment"></ion-input>
 
-      </ion-item>
-      <ion-item *ngIf="formErrors.comment">
-        <p class="invalid-text">{{formErrors.comment}}</p>
-      </ion-item>
-    </form>
-    <!-- <button class="send-btn" clear type="button" item-right (click)="commentStory()">
-      <ion-icon name="ios-send"></ion-icon></button> -->
-    <button ion-button full (click)="commentStory()">{{comment_txt}}
-      <ion-icon name="ios-send"></ion-icon></button>
-  </ion-list>
+          <button ion-button clear item-right class="btn-right" (click)="commentStory()">
+            <ion-icon name="ios-send"></ion-icon>
+          </button>
+          
+        </ion-item>
 
-  <ion-list>
-    <ion-item *ngFor="let comment of commData">
-      <ion-row>
-        <ion-col col-2 text-center>
-          <img class="circle-pic" src="{{comment.user_image_thumb}}" width="30" height="30">
-        </ion-col>
-        <ion-col col-10>
-          <div class="background">
-            <h3>{{comment.user_name}}</h3>
+        <ion-item *ngIf="formErrors.comment">
+          <p class="invalid-text">{{formErrors.comment}}</p>
+        </ion-item>
+
+      </form>
+    </ion-list>
+  </div>
+
+<div class="story-commnets">
+    <ion-list>
+        <div *ngFor="let comment of commData">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="{{comment.user_image_thumb}}">
+            </ion-avatar>
+            <h2>{{comment.user_name}}</h2>
             <p>{{comment.comment}}</p>
+            
+            <ion-note item-end (click)="reportComment(comment.id)">{{report_comment}}</ion-note>
+          </ion-item>
+         
+          <div class="comment-date">
+              <p>{{comment.date}}</p>
           </div>
-          <span>{{comment.date}}</span>
-          <span style="float :right" (click)="reportComment(comment.id)"><u>{{report_comment}}</u></span>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-list>
+        </div>
+      </ion-list>
+</div>
 
 </ion-content>
