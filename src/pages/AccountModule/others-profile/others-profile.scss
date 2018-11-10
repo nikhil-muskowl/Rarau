@@ -114,6 +114,7 @@ page-others-profile {
             line-height: normal;
             text-overflow: inherit;
             color: #fff;
+            text-align: center;
         }
         .item-md ion-avatar ion-img,
         .item-md ion-avatar img {
@@ -186,15 +187,22 @@ page-others-profile {
         border-bottom-right-radius: 15px;
         background: linear-gradient(to right, #ec3747, #f45a43);
         background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
+        height: 30px !important;
+        padding: 18px !important;
+        width: 91px !important;
     }
     .follow img {
         height: 20px;
         width: 20px;
+        float: left !important;
+        margin-top: -10px !important;
+        margin-left: -5px !important;
+        margin-right: 4px !important;
     }
     .p-follow {
         margin-top: -5px !important;
         color: #fff !important;
-        font-size: 15px !important;
+        font-size: 12px !important;
     }
 
     .toolbar-title-md {
