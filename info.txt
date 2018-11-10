@@ -1,0 +1,22 @@
+keytool -genkey -v -keystore rarau.jks -keyalg RSA -keysize 2048 -validity 10000 -alias rarau
+
+password & keystore password
+Rarau@123
+
+first and last name
+nadim sheikh
+
+name of your organizational unit
+muskowl
+
+name of your organization?
+muskowl
+
+name of your City or Locality?
+udaipur
+
+name of your State or Province?
+rajasthan
+
+country code for this unit?
+IN
