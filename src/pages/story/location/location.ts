@@ -23,6 +23,8 @@ export class LocationPage {
   public locName = '';
   public latitude: number = 0;
   public longitude: number = 0;
+  public selLatitude: number = 0;
+  public selLongitude: number = 0;
   public data: any;
   public image;
 
@@ -79,7 +81,7 @@ export class LocationPage {
 
   Next() {
 
-    if (this.latitude == 0 && this.longitude == 0) {
+    if (this.selLatitude == 0 && this.selLatitude == 0) {
 
       this.alertProvider.title = this.error;
       this.alertProvider.message = this.enter_value_serach;
@@ -124,12 +126,12 @@ export class LocationPage {
     if (location) {
       this.search = location.name;
       this.locName = location.name;
-      this.latitude = location.location.lat;
-      this.longitude = location.location.lng;
+      this.selLatitude = location.location.lat;
+      this.selLongitude = location.location.lng;
     }
 
-    console.log(this.latitude);
-    console.log(this.longitude);
+    console.log(this.selLatitude);
+    console.log(this.selLongitude);
     this.locations = [];
   }
 }
