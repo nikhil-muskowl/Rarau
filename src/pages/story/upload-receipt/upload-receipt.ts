@@ -127,6 +127,7 @@ export class UploadReceiptPage {
   }
 
   ionViewDidLeave() {
+    this.tabService.show();
   }
 
   save() {
