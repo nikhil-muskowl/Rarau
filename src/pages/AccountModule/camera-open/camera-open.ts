@@ -21,6 +21,7 @@ export class CameraOpenPage {
   public sendClass;
   public result;
   public data;
+  public index_id;
   public date;
   public gender;
   public image;
@@ -38,11 +39,17 @@ export class CameraOpenPage {
     public sanitizer: DomSanitizer,
     private tabService: TabsService,
   ) {
+
+    platform.registerBackButtonAction(() => {
+      this.navCtrl.pop();
+    });
+
     this.tabService.hide();
     this.sendClass = this.navParams.get('sendClass');
 
     if (this.sendClass == 'Receipt') {
       this.image = this.navParams.get('image');
+      this.index_id = this.navParams.get('index_id');
       this.locName = this.navParams.get('locName');
       this.latitude = this.navParams.get('latitude');
       this.longitude = this.navParams.get('longitude');
@@ -95,7 +102,7 @@ export class CameraOpenPage {
         }
         if (this.sendClass == 'Receipt') {
           this.navCtrl.push(StoryCategoryPage, {
-            receiptImage: this.srcPhoto, sel_cat_id: this.sel_cat_id, image: this.image, locName: this.locName,
+            receiptImage: this.srcPhoto, index_id: this.index_id, sel_cat_id: this.sel_cat_id, image: this.image, locName: this.locName,
             latitude: this.latitude, longitude: this.longitude, receipt_private: this.isPrivate
           });
         }
