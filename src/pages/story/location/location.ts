@@ -81,7 +81,7 @@ export class LocationPage {
 
   Next() {
 
-    if (this.selLatitude == 0 && this.selLatitude == 0) {
+    if (this.selLatitude == 0 && this.selLongitude == 0) {
 
       this.alertProvider.title = this.error;
       this.alertProvider.message = this.enter_value_serach;
