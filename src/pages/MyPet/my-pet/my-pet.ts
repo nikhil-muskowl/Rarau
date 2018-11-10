@@ -61,7 +61,7 @@ export class MyPetPage {
       this.title = text;
     });
 
-    this.translate.get('level').subscribe((text: string) => {
+    this.translate.get('lvl').subscribe((text: string) => {
       this.level = text;
     });
   }
