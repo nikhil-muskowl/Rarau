@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { Slides } from 'ionic-angular';
 import { TutorialPage } from '../tutorial/tutorial';
+import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
 
 @Component({
   selector: 'page-home',
@@ -133,6 +134,10 @@ export class HomePage {
         this.loadingProvider.dismiss();
       }
     );
+  }
+
+  gotoUsers(_id) {
+    this.navCtrl.push(OthersProfilePage, { id: _id, user_id: this.user_id });
   }
 
   setText() {

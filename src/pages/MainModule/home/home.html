@@ -22,16 +22,16 @@
 <ion-content>
   <div>
     <ion-slides class="image-slider" slidesPerView="3">
-      <ion-slide *ngFor="let image of categories; let i = index;">
+      <ion-slide *ngFor="let category of categories; let i = index;">
         <div class="category-rank">
           <ion-row>
             <ion-col text-center>
-              <img class="s-image" src="{{image.image}}" width="3" height="3" />
+              <img class="s-image" src="{{category.image}}" width="3" height="3" />
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>
-              <img class="p-image" src="{{image.user_image}}" width="3" height="3">
+            <ion-col (click)="gotoUsers(category.user_id)">
+              <img class="p-image" src="{{category.user_image}}" width="3" height="3">
               <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
             </ion-col>
           </ion-row>
