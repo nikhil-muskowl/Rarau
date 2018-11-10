@@ -22,6 +22,7 @@ export class MyPetPage {
   public petResponse;
   public petData;
   public title;
+  public level;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -58,6 +59,10 @@ export class MyPetPage {
 
     this.translate.get('mypet').subscribe((text: string) => {
       this.title = text;
+    });
+
+    this.translate.get('lvl').subscribe((text: string) => {
+      this.level = text;
     });
   }
 
