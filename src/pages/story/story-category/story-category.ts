@@ -71,6 +71,7 @@ export class StoryCategoryPage {
     this.setText();
     this.language_id = this.languageProvider.getLanguageId();
     this.isLogin();
+
     this.sel_cat_id = this.navParams.get('sel_cat_id');
     this.image = this.navParams.get('image');
     this.locName = this.navParams.get('locName');
@@ -78,6 +79,8 @@ export class StoryCategoryPage {
     this.longitude = this.navParams.get('longitude');
     this.receipt_private = this.navParams.get('receipt_private');
     this.receiptImage = this.navParams.get('receiptImage');
+
+    console.log('lat long : ' + this.latitude + ', ' + this.longitude);
     console.log('receipt_private : ' + this.receipt_private);
     if (this.sel_cat_id != undefined) {
       this.catModal = this.sel_cat_id;
@@ -171,7 +174,10 @@ export class StoryCategoryPage {
         latitude: this.latitude,
         longitude: this.longitude
       });
-
+    }
+    else {
+      this.receipt_private = 0;
+      this.receiptImage = '';
     }
   }
 
@@ -239,6 +245,8 @@ export class StoryCategoryPage {
             'receipt': this.receiptImage,
             'language_id': this.language_id,
           };
+
+          console.log('Param data post : ' + JSON.stringify(this.paramData));
 
           this.storyService.postStory(this.paramData).subscribe(
             response => {
