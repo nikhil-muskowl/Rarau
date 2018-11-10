@@ -6,9 +6,12 @@ page-show-story {
     }
 
     .comment-bar{
+        .item-md {            
+            font-size: 1.4rem;
+        }
         .text-input-md {
             margin:0;
-            padding:3px 0 3px 0;
+            padding:4px 0 4px 0;
             width: 100%;
             background-color: #eaeaea !important;
         }
