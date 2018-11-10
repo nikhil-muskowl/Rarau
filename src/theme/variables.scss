@@ -117,6 +117,10 @@ ion-header ion-title .toolbar-title {
 }
 
 .back-btn {
-    margin-top: 16px;
+    margin-top: 10px;
     background: transparent !important;
+}
+
+ion-navbar.toolbar {
+    height: 71px !important;
 }
