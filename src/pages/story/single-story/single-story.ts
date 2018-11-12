@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ToastController, LoadingController } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
@@ -50,6 +50,7 @@ export class SingleStoryPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public platform: Platform,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
@@ -59,6 +60,10 @@ export class SingleStoryPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
   ) {
+
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
     this.setText();
     this.language_id = this.languageProvider.getLanguageId();

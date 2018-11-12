@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
@@ -33,11 +33,17 @@ export class SavedStoriesPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
+    public platform: Platform,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
     public LoginProvider: LoginProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
+
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
+
 
     this.setText();
     this.isLogin();
