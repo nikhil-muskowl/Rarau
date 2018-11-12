@@ -39,6 +39,7 @@ export class SearchPage {
   public searcLongitude;
   public paramData;
   public user_id;
+  public city_id;
 
   public story_srch_user;
   public story_srch_loc;
@@ -64,7 +65,7 @@ export class SearchPage {
     this.getCategory();
 
     this.locationTracker.setLocation();
-
+    this.city_id = this.baiduProvider.getCity();
     //uncommnet below for HK testing 
     this.latitude = this.locationTrackerProvider.getLatitude();
     this.longitude = this.locationTrackerProvider.getLongitude();
@@ -227,7 +228,8 @@ export class SearchPage {
 
     this.fileterData = {
       query: this.searchLoc,
-      location: `${this.latitude},${this.longitude}`
+      location: this.city_id
+      // location: `${this.latitude},${this.longitude}`
     };
 
     this.baiduProvider.location(this.fileterData).subscribe(
