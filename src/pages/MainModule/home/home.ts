@@ -53,6 +53,7 @@ export class HomePage {
   public paramStryData;
   public paramData;
   public user_id;
+  public city_id;
   public language_id;
   public stories: any;
   public showStories: boolean = false;
@@ -103,6 +104,7 @@ export class HomePage {
     this.latitude = this.locationTrackerProvider.getLatitude();
     this.longitude = this.locationTrackerProvider.getLongitude();
 
+    this.city_id = this.baiduProvider.getCity();
     //uncommnet below for India testing 
     // this.latitude = 39.919981;
     // this.longitude = 116.414977;
@@ -377,7 +379,8 @@ export class HomePage {
 
     this.filterData = {
       query: this.search,
-      location: `${this.latitude},${this.longitude}`
+      location: this.city_id
+      // location: `${this.latitude},${this.longitude}`
     };
 
     this.baiduProvider.location(this.filterData).subscribe(

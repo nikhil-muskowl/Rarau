@@ -7,7 +7,8 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { LoginPage } from '../../AccountModule/login/login';
 import { LoginProvider } from '../../../providers/login/login';
 import { ProfilePage } from "../profile/profile";
-
+import { BaiduProvider } from "../../../providers/baidu/baidu";
+import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { AlertModalPage } from '../../AccountModule/alert-modal/alert-modal';
 
 @IonicPage()
@@ -22,8 +23,10 @@ export class SettingsPage {
   private languages;
   private settings;
   private language;
+  private city;
   private language_txt;
   public sure_logout;
+  public cities;
   public logout_txt;
   private bye_bye;
   private logged_out;
@@ -35,14 +38,17 @@ export class SettingsPage {
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
+    public baiduProvider: BaiduProvider,
     public languageProvider: LanguageProvider,
     private modal: ModalController,
+    public http: HttpClient,
   ) {
 
     platform.registerBackButtonAction(() => {
       this.goBack();
     });
 
+    this.loadCity();
     this.setText();
     this.user_id = this.LoginProvider.isLogin();
     this.language = this.languageProvider.getLanguage();
@@ -73,6 +79,17 @@ export class SettingsPage {
     });
   }
 
+  loadCity() {
+
+    this.http.get('assets/city/baidu_city.json').subscribe(response => {
+      this.cities = response;
+      console.log('this.cities SettingsPage' + JSON.stringify(this.cities));
+    }, err => {
+      console.error(err);
+    }
+    );
+  }
+
   public getLanguages() {
     this.loadingProvider.present();
     this.languageProvider.getLanguages().subscribe(response => {
@@ -90,21 +107,17 @@ export class SettingsPage {
     this.languageProvider.setLanguage(data);
   }
 
+  onChangeCity(data: any) {
+    this.baiduProvider.setCity(data);
+    console.log('selected city : ' + data);
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
   }
 
   logout() {
     this.openModal();
-    // this.LoginProvider.unSetData();
-    // this.navCtrl.setRoot(LoginPage);
-    /*  this.alertProvider.Alert.confirm(this.sure_logout, this.logout_txt).then((res) => {
-        console.log('confirmed');
-        this.LoginProvider.unSetData();
-        this.navCtrl.setRoot(LoginPage);
-      }, err => {
-        console.log('user cancelled');
-      }); */
   }
 
   openModal() {

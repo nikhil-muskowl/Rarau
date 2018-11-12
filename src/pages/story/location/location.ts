@@ -27,7 +27,7 @@ export class LocationPage {
   public selLongitude: number = 0;
   public data: any;
   public image;
-
+  private city_id;
   public error;
   public location_txt;
   public enter_value_serach;
@@ -50,7 +50,7 @@ export class LocationPage {
     this.setText();
     this.image = this.navParams.get('image');
     console.log('image on location page : ' + this.image);
-
+    this.city_id = this.baiduProvider.getCity();
     //uncommnet below for HK testing 
     this.latitude = this.locationTrackerProvider.getLatitude();
     this.longitude = this.locationTrackerProvider.getLongitude();
@@ -116,7 +116,8 @@ export class LocationPage {
 
     this.fileterData = {
       query: this.search,
-      location: `${this.latitude},${this.longitude}`
+      location: this.city_id
+      // location: `${this.latitude},${this.longitude}`
     };
 
     this.baiduProvider.location(this.fileterData).subscribe(

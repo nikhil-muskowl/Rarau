@@ -29,4 +29,27 @@ export class BaiduProvider {
     );
   }
 
+  public setCity(data) {
+    console.log('setCity when setCity : ' + JSON.stringify(data));
+    try {
+      window.localStorage.setItem('City', data);
+    } catch (error) {
+
+    }
+  }
+
+  public unSetCity() {
+    try {
+      window.localStorage.removeItem('City');
+    } catch (error) {
+    }
+  }
+
+  public getCity() {
+    try {
+      return window.localStorage.getItem('City');
+    } catch (error) {
+      return 131;
+    }
+  }
 }
