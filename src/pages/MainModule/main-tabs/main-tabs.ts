@@ -1,12 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { PeoplePage } from '../../AccountModule/people/people';
 import { RankingPage } from '../ranking/ranking';
 import { ProfilePage } from '../profile/profile';
 import { MyPetPage } from '../../MyPet/my-pet/my-pet';
 import { GalleryPage } from '../../story/gallery/gallery';
-import { ShowStoryPage } from '../../story/show-story/show-story';
 
 @IonicPage()
 @Component({
@@ -28,5 +26,4 @@ export class MainTabsPage {
       this.mySelectedIndex = 0;
     }
   }
-
 }
