@@ -114,6 +114,7 @@ export class TutorialPage {
     }
     else {
       this.next = this.next_txt;
+      this.tutCheck = 0;
     }
   }
 }
