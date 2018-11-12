@@ -14,7 +14,8 @@ page-show-story {
         }
         .text-input-md {
             margin:0;
-            padding:4.5px 0 3.5px 5px;
+            //padding:4.5px 0 3.5px 5px !important;
+            padding:4px 0px 4px 5px !important;
             width: 100%;
             background-color: #eaeaea !important;
         }
@@ -160,6 +161,7 @@ page-show-story {
             margin-top: 1rem;
             p{
                 color: #cecece !important;
+                font-size: 12px !important;
             }
         }
     }
