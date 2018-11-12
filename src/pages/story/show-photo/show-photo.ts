@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, Platform } from 'ionic-angular';
 import { filter } from "rxjs/operator/filter";
 import { StoryCategoryPage } from '../../story/story-category/story-category'
 import { LocationPage } from '../../story/location/location'
@@ -68,6 +68,7 @@ export class ShowPhotoPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private filterService: FilterService,
+    public platform: Platform,
     // public dataProvider: DataProvider,
     public loadingProvider: LoadingProvider,
     private tabService: TabsService,
@@ -75,6 +76,10 @@ export class ShowPhotoPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
   ) {
+
+    platform.registerBackButtonAction(() => {
+      this.back();
+    });
 
     this.setText();
     this.tabService.hide();
