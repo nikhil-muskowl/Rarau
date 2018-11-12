@@ -60,6 +60,10 @@ export class UploadReceiptPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
+
     this.setText();
     if (this.srcPhoto != undefined) {
       this.receiptImage = this.srcPhoto;

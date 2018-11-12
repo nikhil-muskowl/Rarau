@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 
@@ -15,8 +15,13 @@ export class ReceiptShowPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public platform: Platform,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
+
+    platform.registerBackButtonAction(() => {
+      this.dismiss();
+    });
 
     this.receipt = this.navParams.get('receipt');
     console.log('receipt : ' + this.receipt);

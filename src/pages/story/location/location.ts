@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { BaiduProvider } from '../../../providers/baidu/baidu';
 import { LocationTrackerProvider } from '../../../providers/location-tracker/location-tracker';
 import { AlertProvider } from '../../../providers/alert/alert';
@@ -36,11 +36,16 @@ export class LocationPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
+    public platform: Platform,
     public locationTrackerProvider: LocationTrackerProvider,
     public baiduProvider: BaiduProvider,
     public sanitizer: DomSanitizer,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
+
+    platform.registerBackButtonAction(() => {
+      this.back();
+    });
 
     this.setText();
     this.image = this.navParams.get('image');
@@ -77,6 +82,10 @@ export class LocationPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LocationPage');
+  }
+
+  back() {
+    this.navCtrl.pop();
   }
 
   Next() {

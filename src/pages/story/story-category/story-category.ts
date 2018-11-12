@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { HomePage } from '../../MainModule/home/home';
@@ -59,6 +59,7 @@ export class StoryCategoryPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public sanitizer: DomSanitizer,
+    public platform: Platform,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
@@ -68,6 +69,10 @@ export class StoryCategoryPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
   ) {
+
+    platform.registerBackButtonAction(() => {
+      this.back();
+    });
 
     this.setText();
     this.language_id = this.languageProvider.getLanguageId();

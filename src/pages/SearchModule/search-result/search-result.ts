@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -43,6 +43,7 @@ export class SearchResultPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
+    public platform: Platform,
     public loadingProvider: LoadingProvider,
     public searchRes: SearchResProvider,
     public LoginProvider: LoginProvider,
@@ -50,6 +51,9 @@ export class SearchResultPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
     this.setText();
     this.searchTxt = this.navParams.data.searchUse;
     console.log('searchTxt: ' + JSON.stringify(this.navParams.data));
