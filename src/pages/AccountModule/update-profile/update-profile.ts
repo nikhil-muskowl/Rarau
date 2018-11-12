@@ -53,12 +53,9 @@ export class UpdateProfilePage {
 
     this.setText();
 
-    let backAction = platform.registerBackButtonAction(() => {
-      this.navCtrl.push(RegistrationPage, {
-        imagePath: this.result, image: this.srcPhoto, data: this.data,
-        date: this.date, gender: this.gender
-      });
-    }, 2);
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
     this.srcPhoto = this.navParams.get('image');
     this.result = this.navParams.get('imagePath');

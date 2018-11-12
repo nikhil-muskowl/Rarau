@@ -30,9 +30,14 @@ export class ActivityLogsPage {
     public LoginProvider: LoginProvider,
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
+    public platform: Platform,
     public profileProvider: ProfileProvider,
     public languageProvider: LanguageProvider,
     public translate: TranslateService, ) {
+
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
     this.user_id = this.LoginProvider.isLogin();
   }
 

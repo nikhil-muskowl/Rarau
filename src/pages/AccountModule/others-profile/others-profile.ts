@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { ProfileProvider } from '../../../providers/profile/profile';
@@ -51,9 +51,14 @@ export class OthersProfilePage {
     public alertProvider: AlertProvider,
     public profileProvider: ProfileProvider,
     public LoginProvider: LoginProvider,
+    public platform: Platform,
     public FollowProvider: FollowProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
+
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
     this.setText();
     this.user = 'Stories';
@@ -215,6 +220,4 @@ export class OthersProfilePage {
       this.alertProvider.showAlert();
     }
   }
-
-
 }

@@ -54,6 +54,7 @@ export class SearchResultPage {
     platform.registerBackButtonAction(() => {
       this.goBack();
     });
+    
     this.setText();
     this.searchTxt = this.navParams.data.searchUse;
     console.log('searchTxt: ' + JSON.stringify(this.navParams.data));

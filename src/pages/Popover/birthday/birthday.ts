@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 
@@ -13,8 +13,12 @@ export class BirthdayPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public translate: TranslateService,
+    public platform: Platform,
     public languageProvider: LanguageProvider, ) {
-      this.setText();
+    platform.registerBackButtonAction(() => {
+      this.dismiss();
+    });
+    this.setText();
   }
 
   ionViewDidLoad() {

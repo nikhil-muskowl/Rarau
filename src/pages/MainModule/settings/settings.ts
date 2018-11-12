@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Modal, ModalController, ModalOptions } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, Modal, ModalController, ModalOptions } from 'ionic-angular';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
@@ -31,12 +31,17 @@ export class SettingsPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public LoginProvider: LoginProvider,
+    public platform: Platform,
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
     private modal: ModalController,
   ) {
+
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
     this.setText();
     this.user_id = this.LoginProvider.isLogin();

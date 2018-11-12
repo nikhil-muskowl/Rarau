@@ -81,10 +81,9 @@ export class RegistrationPage {
 
     this.setText();
 
-    let backAction = platform.registerBackButtonAction(() => {
-      this.tabService.show();
-      this.navCtrl.setRoot(LoginPage);
-    }, 2);
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
     this.date = new Date().toISOString().split('T')[0];
     this.createForm();

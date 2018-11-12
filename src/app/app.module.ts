@@ -30,7 +30,6 @@ import { LoginPage } from '../pages/AccountModule/login/login';
 import { RegistrationPage } from '../pages/AccountModule/registration/registration';
 import { ForgotPasswordPage } from '../pages/AccountModule/forgot-password/forgot-password';
 import { UpdatePasswordPage } from '../pages/AccountModule/update-password/update-password';
-import { PeoplePage } from '../pages/AccountModule/people/people';
 import { LoginWechatPage } from '../pages/AccountModule/login-wechat/login-wechat';
 import { UpdateProfilePage } from '../pages/AccountModule/update-profile/update-profile';
 import { CameraOpenPage } from '../pages/AccountModule/camera-open/camera-open';
@@ -126,7 +125,6 @@ export function createTranslateLoader(http: HttpClient) {
     UpdatePasswordPage,
     RankingPage,
     ProfilePage,
-    PeoplePage,
     OthersProfilePage,
     ShowPhotoPage,
     EditProfilePage,
@@ -191,7 +189,6 @@ export function createTranslateLoader(http: HttpClient) {
         { component: ForgotPasswordPage, name: 'ForgotPasswordPage', segment: 'ForgotPasswordPage' },
         { component: LoginPage, name: 'LoginPage', segment: 'LoginPage' },
         { component: RegistrationPage, name: 'RegistrationPage', segment: 'RegistrationPage' },
-        { component: PeoplePage, name: 'PeoplePage', segment: 'PeoplePage' },
         { component: OthersProfilePage, name: 'OthersProfilePage', segment: 'OthersProfilePage' },
         { component: ShowPhotoPage, name: 'ShowPhotoPage', segment: 'ShowPhotoPage' },
       ]
@@ -211,7 +208,6 @@ export function createTranslateLoader(http: HttpClient) {
     UpdatePasswordPage,
     RankingPage,
     ProfilePage,
-    PeoplePage,
     OthersProfilePage,
     ShowPhotoPage,
     EditProfilePage,

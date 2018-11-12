@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
@@ -35,6 +35,7 @@ export class ReportPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public platform: Platform,
     public translate: TranslateService,
     public formBuilder: FormBuilder,
     public languageProvider: LanguageProvider,
@@ -43,6 +44,9 @@ export class ReportPage {
     public loadingProvider: LoadingProvider,
     public LoginProvider: LoginProvider, ) {
 
+    platform.registerBackButtonAction(() => {
+      this.dismiss();
+    });
     this.setText();
     this.createForm();
     this.type_id = this.navParams.get('type');

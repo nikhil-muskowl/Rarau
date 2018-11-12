@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { LoadingProvider } from '../../../providers/loading/loading';
@@ -37,10 +37,15 @@ export class ForgotPasswordPage {
     public loginProvider: LoginProvider,
     public alertProvider: AlertProvider,
     public formBuilder: FormBuilder,
+    public platform: Platform,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
     public toastProvider: ToastProvider) {
+
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
     this.setText();
 

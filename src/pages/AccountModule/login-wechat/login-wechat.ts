@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { TermsPage } from "../../Popover/terms/terms";
 import { BirthdayPage } from "../../Popover/birthday/birthday";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -29,9 +29,14 @@ export class LoginWechatPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
+    public platform: Platform,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
+    
     this.setText();
     this.date = new Date().toISOString().split('T')[0];
     this.createForm();

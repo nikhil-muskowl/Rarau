@@ -50,10 +50,9 @@ export class ProfilePhotoPage {
     this.setText();
     this.isLogin();
 
-    let backAction = platform.registerBackButtonAction(() => {
-      this.navCtrl.pop();
-      this.tabService.show();
-    }, 2);
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
     this.image = this.navParams.get('image');
     console.log('image : ' + this.image);

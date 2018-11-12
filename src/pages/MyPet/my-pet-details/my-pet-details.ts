@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { MyPetProvider } from '../../../providers/my-pet/my-pet';
@@ -40,21 +40,28 @@ export class MyPetDetailsPage {
     public navParams: NavParams,
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
+    public platform: Platform,
     public LoginProvider: LoginProvider,
     public translate: TranslateService,
     public toastCtrl: ToastController,
     public mypetProvider: MyPetProvider,
     public languageProvider: LanguageProvider, ) {
 
-    this.pet_id = this.navParams.get('id');
-    console.log('this.pet_id : ' + this.pet_id);
-  }
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
-  ngOnInit() {
     this.user_id = this.LoginProvider.isLogin();
     this.language_id = this.languageProvider.getLanguageId();
     this.setText();
     this.getDetails();
+
+    this.pet_id = this.navParams.get('id');
+    console.log('this.pet_id : ' + this.pet_id);
+  }
+
+  goBack() {
+    this.navCtrl.pop();
   }
 
   setText() {
@@ -85,10 +92,10 @@ export class MyPetDetailsPage {
         this.petTitle = this.petResult.pet_name;
         this.petImage = this.petResult.pet_image;
         this.petImageThumb = this.petResult.pet_image_thumb;
-        this.levels =this.petResponse.result.level;
-       // console.log(this.levels);
-       // console.log('petTitle : ' + JSON.stringify(this.petTitle));
-       // console.log('levels : ' + JSON.stringify(this.levels));
+        this.levels = this.petResponse.result.level;
+        // console.log(this.levels);
+        // console.log('petTitle : ' + JSON.stringify(this.petTitle));
+        // console.log('levels : ' + JSON.stringify(this.levels));
       }
       this.loadingProvider.dismiss();
     },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { ProfilePage } from '../../MainModule/profile/profile';
 import { LoginProvider } from '../../../providers/login/login';
 import { AlertProvider } from '../../../providers/alert/alert';
@@ -30,17 +30,25 @@ export class UpdatePasswordPage {
     public navParams: NavParams,
     public loginProvider: LoginProvider,
     public alertProvider: AlertProvider,
+    public platform: Platform,
     public formBuilder: FormBuilder,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
+    platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
     this.setText();
     this.upPassForm = formBuilder.group({
       password: ['', Validators.required],
       passconf: ['', Validators.required]
     });
 
+  }
+
+  goBack() {
+    this.navCtrl.pop();
   }
 
   setText() {
