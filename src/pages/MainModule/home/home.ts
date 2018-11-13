@@ -186,8 +186,8 @@ export class HomePage {
         console.log('data.latitude : ' + data.latitude);
         console.log('data.longitude : ' + data.longitude);
 
-        this.serLatitude = data.searcLatitude;
-        this.serLongitude = data.searcLongitude;
+        this.serLatitude = data.latitude;
+        this.serLongitude = data.longitude;
         this.searchUse = data.searchUse;
         this.searchCat = data.searchCat;
         if (data.searchCat == undefined && data.latitude == undefined && data.longitude == undefined && data.searchUse != undefined) {
@@ -238,7 +238,7 @@ export class HomePage {
 
   public bindMap() {
     this.markers = [];
-
+    console.log("this.serLatitude && this.serLongitude : " + this.serLatitude + ' ' + this.serLongitude);
     if (this.serLatitude != undefined && this.serLongitude != undefined) {
       this.latLong = {
         lat: this.serLatitude,
@@ -386,7 +386,7 @@ export class HomePage {
     this.baiduProvider.location(this.filterData).subscribe(
       response => {
         this.responseData = response;
-        this.locations = this.responseData.results;
+        this.locations = this.responseData.result;
       },
       err => { console.error(err); }
     );

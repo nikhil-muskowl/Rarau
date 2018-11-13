@@ -103,9 +103,11 @@ export class LocationPage {
   }
 
   public onInput(ev: any) {
-    this.search = ev.target.value;
-    this.locations = [];
-    this.getLocation();
+    if (ev.target.value != '' || ev.target.value != undefined) {
+      this.search = ev.target.value;
+      this.locations = [];
+      this.getLocation();
+    }
   }
 
   public onCancel(ev: any) {
@@ -124,7 +126,7 @@ export class LocationPage {
       response => {
         console.log(response);
         this.responseData = response;
-        this.locations = this.responseData.results;
+        this.locations = this.responseData.result;
       },
       err => { console.error(err); }
     );

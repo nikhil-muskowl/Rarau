@@ -24,6 +24,7 @@ export class SettingsPage {
   private settings;
   private language;
   private city;
+  private city_id;
   private language_txt;
   public sure_logout;
   public cities;
@@ -51,6 +52,7 @@ export class SettingsPage {
     this.loadCity();
     this.setText();
     this.user_id = this.LoginProvider.isLogin();
+    this.city_id = this.baiduProvider.getCity();
     this.language = this.languageProvider.getLanguage();
     this.getLanguages();
   }
@@ -80,10 +82,15 @@ export class SettingsPage {
   }
 
   loadCity() {
-
+    this.cities = [];
     this.http.get('assets/city/baidu_city.json').subscribe(response => {
       this.cities = response;
-      console.log('this.cities SettingsPage' + JSON.stringify(this.cities));
+      for (let i = 0; i < this.cities.length; i++) {
+        if (this.cities[i].area_id == this.city_id) {
+          this.city = this.cities[i].name;
+        
+        }
+      }
     }, err => {
       console.error(err);
     }

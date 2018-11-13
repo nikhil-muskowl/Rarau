@@ -10,6 +10,7 @@ import { SearchResProvider } from '../../../providers/search-res/search-res';
 import { LocationTrackerProvider } from '../../../providers/location-tracker/location-tracker';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { Jsonp } from '@angular/http';
 
 @IonicPage()
 @Component({
@@ -131,8 +132,10 @@ export class SearchPage {
     console.log('searchUsercat : ' + this.searchCat);
     console.log('searchUse : ' + this.searchUse);
     console.log('searchLoc : ' + this.searchLoc);
-    console.log('latitude : ' + this.searcLatitude);
-    console.log('longitude : ' + this.searcLongitude);
+    console.log('searchlatitude : ' + this.searcLatitude);
+    console.log('searclongitude : ' + this.searcLongitude);
+    console.log('latitude : ' + this.latitude);
+    console.log('longitude : ' + this.longitude);
 
     if (this.searchCat != undefined || this.searchUse != undefined || this.searchLoc != undefined) {
       const data = {
@@ -142,6 +145,7 @@ export class SearchPage {
         latitude: this.searcLatitude,
         longitude: this.searcLongitude
       };
+      console.log('data in modal : ' + JSON.stringify(data));
       this.view.dismiss(data);
     }
     else {
@@ -236,7 +240,9 @@ export class SearchPage {
       response => {
         console.log(response);
         this.responseData = response;
-        this.locations = this.responseData.results;
+        this.locations = this.responseData.result;
+
+        console.log('location : ' + JSON.stringify(this.locations));
       },
       err => { console.error(err); }
     );
@@ -273,8 +279,8 @@ export class SearchPage {
       // this.longitude = location.location.lng;
     }
 
-    console.log(this.latitude);
-    console.log(this.longitude);
+    console.log(this.searcLatitude);
+    console.log(this.searcLongitude);
     this.locations = [];
   }
 
@@ -298,9 +304,11 @@ export class SearchPage {
   }
 
   public onLocInput(ev: any) {
-    this.searchLoc = ev.target.value;
-    this.locations = [];
-    this.getLocation();
+    if (ev.target.value != '' || ev.target.value != undefined) {
+      this.searchLoc = ev.target.value;
+      this.locations = [];
+      this.getLocation();
+    }
   }
 
   public onLocCancel(ev: any) {
