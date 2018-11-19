@@ -1,0 +1,31 @@
+page-create-event {
+    .content-back {
+        background: #eaeaea;
+        width: 100%;
+        height: 100%;
+    }
+    .invalid-message {
+        padding-top: 0px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: -135px;
+        font-size: 14px !important;
+    }
+    .searchbar-md {
+        .searchbar-search-icon {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+        .searchbar-input {
+            padding: 6px 15px;
+        }
+    }
+    .item-search {
+        height: 100px;
+        overflow: scroll;
+        .label-md {
+            margin: 0px 0px;
+        }
+    }
+}

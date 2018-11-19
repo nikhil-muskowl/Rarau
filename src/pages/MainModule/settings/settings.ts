@@ -92,8 +92,10 @@ export class SettingsPage {
 
   loadCity() {
     this.cities = [];
-    this.http.get('assets/city/baidu_city.json').subscribe(response => {
+
+    this.baiduProvider.getCities().subscribe(response => {
       this.cities = response;
+      console.log('cities : ' + JSON.stringify(this.cities));
       for (let i = 0; i < this.cities.length; i++) {
         if (this.cities[i].area_id == this.city_id) {
           this.city = this.cities[i].name;
@@ -102,8 +104,7 @@ export class SettingsPage {
       }
     }, err => {
       console.error(err);
-    }
-    );
+    });
   }
 
   public getLanguages() {
@@ -129,7 +130,7 @@ export class SettingsPage {
   onChangeCity(data: any) {
     console.log('selected city : ' + JSON.stringify(data));
     this.baiduProvider.setCity(data);
-    
+
   }
 
   ionViewDidLoad() {

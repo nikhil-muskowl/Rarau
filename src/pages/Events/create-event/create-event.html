@@ -1,0 +1,79 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button><span id="hdr-txt">{{create_event}}</span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div class="content-back">
+    <div>
+      <form [formGroup]="eventForm">
+        <ion-item>
+          <ion-label floating>{{event_name}}</ion-label>
+          <ion-input placeholder="{{event_name}}" formControlName="name" value={{fname}} type="text" [class.invalid]="!eventForm.controls.name.valid && (eventForm.controls.name.dirty || submitAttempt)"></ion-input>
+        </ion-item>
+        <div text-center>
+          <p class="invalid-message" *ngIf="!eventForm.controls.name.valid  && (eventForm.controls.name.dirty || submitAttempt)">{{error_name}}</p>
+        </div>
+
+        <ion-item>
+          <ion-label floating>{{event_date}}</ion-label>
+          <ion-datetime displayFormat="DD-MM-YYYY" formControlName="date" [min]="today" [(ngModel)]="todayDate"></ion-datetime>
+        </ion-item>
+        <div text-center>
+          <p class="invalid-message" *ngIf="!eventForm.controls.date.valid  && (eventForm.controls.date.dirty || submitAttempt)">{{error_date}}</p>
+        </div>
+
+        <ion-item>
+          <ion-label floating>{{event_time}}</ion-label>
+          <ion-datetime displayFormat="HH:mm" formControlName="time" [(ngModel)]="todayTime"></ion-datetime>
+        </ion-item>
+        <div text-center>
+          <p class="invalid-message" *ngIf="!eventForm.controls.time.valid  && (eventForm.controls.time.dirty || submitAttempt)">{{error_time}}</p>
+        </div>
+
+        <ion-item>
+          <ion-label floating>{{event_city}}</ion-label>
+          <ion-select [(ngModel)]="city" formControlName="fcity" interface="popover">
+            <ion-option *ngFor="let city of cities" value="{{city.name}}" (ionSelect)="onChangeCity(city.area_id)">{{city.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <div text-center>
+          <p class="invalid-message" *ngIf="!eventForm.controls.fcity.valid && (eventForm.controls.fcity.dirty || submitAttempt)">{{error_city}}</p>
+        </div>
+
+        <ion-item>
+          <ion-searchbar placeholder="{{story_srch_loc}}" formControlName="loc" [(ngModel)]="searchLoc"
+            [showCancelButton]="shouldShowCancel" (ionInput)="onLocInput($event)" (ionCancel)="onLocCancel($event)">
+          </ion-searchbar>
+        </ion-item>
+
+        <div *ngIf="locations?.length > 0" style="height: 100px;overflow: scroll;">
+          <ion-list>
+            <ion-item ion-item *ngFor="let location of locations" (click)="locItemSelected(location)">
+              {{location.name}}
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <ion-item>
+          <ion-label floating>{{event_desc}}</ion-label>
+          <ion-input placeholder="{{event_desc}}" formControlName="desc" value={{fdesc}} type="text" [class.invalid]="!eventForm.controls.desc.valid && (eventForm.controls.desc.dirty || submitAttempt)"></ion-input>
+        </ion-item>
+        <div text-center>
+          <p class="invalid-message" *ngIf="!eventForm.controls.desc.valid  && (eventForm.controls.desc.dirty || submitAttempt)">{{error_desc}}</p>
+        </div>
+      </form>
+
+      <div>
+        <button class="submit-btn" ion-button (click)="save()">{{create_event}}</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

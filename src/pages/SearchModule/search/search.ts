@@ -58,15 +58,13 @@ export class SearchPage {
     public baiduProvider: BaiduProvider,
     public searchProvider: SearchResProvider,
     public translate: TranslateService,
-    public locationTracker: LocationTrackerProvider,
     public languageProvider: LanguageProvider, ) {
 
     this.setText();
-    // this.createForm();
     this.getCategory();
-
-    this.locationTracker.setLocation();
     this.city_id = this.baiduProvider.getCity();
+
+    this.locationTrackerProvider.setLocation();
     //uncommnet below for HK testing 
     this.latitude = this.locationTrackerProvider.getLatitude();
     this.longitude = this.locationTrackerProvider.getLongitude();
@@ -109,12 +107,6 @@ export class SearchPage {
         this.loadingProvider.dismiss();
       }
     );
-  }
-
-  createForm() {
-    this.searchForm = this.formBuilder.group({
-      searchUser: ['', Validators.required],
-    });
   }
 
   ionViewDidLoad() {
@@ -304,7 +296,7 @@ export class SearchPage {
   }
 
   public onLocInput(ev: any) {
-    if (ev.target.value != '' || ev.target.value != undefined) {
+    if (ev.target.value != "" || ev.target.value != undefined) {
       this.searchLoc = ev.target.value;
       this.locations = [];
       this.getLocation();

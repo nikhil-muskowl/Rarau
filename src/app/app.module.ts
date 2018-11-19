@@ -93,6 +93,11 @@ import { FormServiceProvider } from '../providers/form-service/form-service';
 import { LanguageProvider } from '../providers/language/language';
 import { MyPetProvider } from '../providers/my-pet/my-pet';
 
+//Events
+import { CreateEventPage } from '../pages/Events/create-event/create-event';
+import { EventDetailsPage } from '../pages/Events/event-details/event-details';
+import { EventListPage } from '../pages/Events/event-list/event-list';
+
 //PopOvers
 import { BirthdayPage } from '../pages/Popover/birthday/birthday';
 import { TermsPage } from '../pages/Popover/terms/terms';
@@ -110,6 +115,7 @@ import { FollowingComponent } from '../components/following/following';
 import { RankingComponent } from '../components/ranking/ranking';
 import { FollowersComponent } from '../components/followers/followers';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+import { EventProvider } from '../providers/event/event';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/language/', '.json');
@@ -161,6 +167,9 @@ export function createTranslateLoader(http: HttpClient) {
     MyPetDetailsPage,
     ActivityLogsPage,
     SplashPage,
+    CreateEventPage,
+    EventDetailsPage,
+    EventListPage,
   ],
   imports: [
     HttpClientModule,
@@ -244,6 +253,9 @@ export function createTranslateLoader(http: HttpClient) {
     MyPetDetailsPage,
     ActivityLogsPage,
     SplashPage,
+    CreateEventPage,
+    EventDetailsPage,
+    EventListPage,
   ],
   providers: [
     StatusBar,
@@ -287,6 +299,7 @@ export function createTranslateLoader(http: HttpClient) {
     LanguageProvider,
     MyPetProvider,
     ScreenOrientation,
+    EventProvider,
   ]
 })
 
