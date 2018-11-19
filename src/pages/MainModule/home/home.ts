@@ -144,10 +144,12 @@ export class HomePage {
 
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
+    console.log("this.languageProvider.getLanguage() : " + this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
 
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;
+      console.log("this.rarau : " + text);
     });
     this.translate.get('click_to_search').subscribe((text: string) => {
       this.click_to_search = text;

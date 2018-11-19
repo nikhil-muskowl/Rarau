@@ -40,7 +40,7 @@ export class SavedStoriesPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
 

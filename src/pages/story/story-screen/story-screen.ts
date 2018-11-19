@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController, Platform } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
@@ -57,11 +57,15 @@ export class StoryScreenPage {
     public loadingProvider: LoadingProvider,
     public LoginProvider: LoginProvider,
     public toastCtrl: ToastController,
+    public platform: Platform,
     public loadingCtrl: LoadingController,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
   ) {
 
+    this.platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
     this.setText();
 
     this.searchUse = this.navParams.get('searchUse');
@@ -224,7 +228,7 @@ export class StoryScreenPage {
 
     let loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="http://social-app.muskowl.com/upload/fire.png" height="400">`,
+      content: `<img src="http://social-app.muskowl.com/assets/images/ranking/like.png" height="400">`,
       cssClass: 'my-loading-fire',
       duration: 1000
     });
@@ -242,7 +246,7 @@ export class StoryScreenPage {
 
     let loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="http://social-app.muskowl.com/upload/water.png" height="400">`,
+      content: `<img src="http://social-app.muskowl.com/assets/images/ranking/dislike.png" height="400">`,
       cssClass: 'my-loading-water',
       duration: 1000
     });

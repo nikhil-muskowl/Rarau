@@ -19,7 +19,7 @@ export class ReceiptShowPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.dismiss();
     });
 

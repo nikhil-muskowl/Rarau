@@ -31,6 +31,8 @@ export class SettingsPage {
   public logout_txt;
   private bye_bye;
   private logged_out;
+  private ok_text;
+  private cancel_text;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -45,7 +47,7 @@ export class SettingsPage {
     public http: HttpClient,
   ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
 
@@ -53,6 +55,7 @@ export class SettingsPage {
     this.setText();
     this.user_id = this.LoginProvider.isLogin();
     this.city_id = this.baiduProvider.getCity();
+    console.log("this.city_id : " + this.city_id);
     this.language = this.languageProvider.getLanguage();
     this.getLanguages();
   }
@@ -79,6 +82,12 @@ export class SettingsPage {
     this.translate.get('bye_bye').subscribe((text: string) => {
       this.bye_bye = text;
     });
+    this.translate.get('ok').subscribe((text: string) => {
+      this.ok_text = text;
+    });
+    this.translate.get('cancel').subscribe((text: string) => {
+      this.cancel_text = text;
+    });
   }
 
   loadCity() {
@@ -88,7 +97,7 @@ export class SettingsPage {
       for (let i = 0; i < this.cities.length; i++) {
         if (this.cities[i].area_id == this.city_id) {
           this.city = this.cities[i].name;
-        
+
         }
       }
     }, err => {
@@ -111,12 +120,16 @@ export class SettingsPage {
   }
 
   onChange(data: any) {
+    //language
+    console.log('selected language : ' + JSON.stringify(data));
     this.languageProvider.setLanguage(data);
+    this.setText();
   }
 
   onChangeCity(data: any) {
+    console.log('selected city : ' + JSON.stringify(data));
     this.baiduProvider.setCity(data);
-    console.log('selected city : ' + data);
+    
   }
 
   ionViewDidLoad() {

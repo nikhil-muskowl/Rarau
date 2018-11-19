@@ -42,7 +42,7 @@ export class StoryListPage {
     public languageProvider: LanguageProvider,
   ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
 

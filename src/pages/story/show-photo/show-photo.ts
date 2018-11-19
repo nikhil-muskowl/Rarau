@@ -77,7 +77,7 @@ export class ShowPhotoPage {
     public languageProvider: LanguageProvider,
   ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.back();
     });
 

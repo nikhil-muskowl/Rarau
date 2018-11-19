@@ -33,7 +33,7 @@ export class GalleryPage {
     private tabService: TabsService,
     private imagePicker: ImagePicker, ) {
 
-    let backAction = platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       console.log("second");
       this.stopCamera();
       this.tabService.show();

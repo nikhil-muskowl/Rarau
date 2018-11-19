@@ -81,7 +81,7 @@ export class RegistrationPage {
 
     this.setText();
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
 

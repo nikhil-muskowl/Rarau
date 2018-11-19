@@ -61,7 +61,7 @@ export class SingleStoryPage {
     public languageProvider: LanguageProvider,
   ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
 
@@ -191,7 +191,7 @@ export class SingleStoryPage {
 
     let loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="http://social-app.muskowl.com/upload/fire.png" height="400">`,
+      content: `<img src="http://social-app.muskowl.com/assets/images/ranking/like.png" height="400">`,
       cssClass: 'my-loading-fire',
       duration: 1000
     });
@@ -209,7 +209,7 @@ export class SingleStoryPage {
 
     let loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<img src="http://social-app.muskowl.com/upload/water.png" height="400">`,
+      content: `<img src="http://social-app.muskowl.com/assets/images/ranking/dislike.png" height="400">`,
       cssClass: 'my-loading-water',
       duration: 1000
     });

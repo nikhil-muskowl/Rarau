@@ -12,7 +12,7 @@
   <div class="login-back">
     <ion-row>
       <ion-col col-12 text-center>
-        <ion-select [(ngModel)]="language">
+        <ion-select [(ngModel)]="language" okText={{ok_text}} cancelText={{cancel_text}} interface="popover">
           <ion-option *ngFor="let language of languages" value="{{language.code}}" (ionSelect)="onChange(language)">{{language.name}}</ion-option>
         </ion-select>
       </ion-col>
@@ -20,7 +20,7 @@
 
     <ion-row>
       <ion-col col-12 text-center>
-        <ion-select [(ngModel)]="city">
+        <ion-select [(ngModel)]="city" okText={{ok_text}} cancelText={{cancel_text}} interface="popover">
           <ion-option *ngFor="let city of cities" value="{{city.name}}" (ionSelect)="onChangeCity(city.area_id)">{{city.name}}</ion-option>
         </ion-select>
       </ion-col>

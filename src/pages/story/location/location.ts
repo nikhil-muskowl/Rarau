@@ -43,7 +43,7 @@ export class LocationPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.back();
     });
 

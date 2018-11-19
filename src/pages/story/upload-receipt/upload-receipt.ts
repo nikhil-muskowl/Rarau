@@ -60,7 +60,7 @@ export class UploadReceiptPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
 

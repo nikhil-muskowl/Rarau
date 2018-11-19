@@ -14,6 +14,7 @@ import { LocationTrackerProvider } from '../providers/location-tracker/location-
 import { AlertController } from 'ionic-angular';
 import { LanguageProvider } from '../providers/language/language';
 import { ConfigProvider } from '../providers/config/config';
+import { BaiduProvider } from "../providers/baidu/baidu";
 
 export interface PageInterface {
   title: string;
@@ -34,6 +35,7 @@ export class MyApp {
   rootPage: any;
   private alert: Alert;
   private language;
+  private city_id;
 
   // pages: PageInterface[] = [
   //   { title: 'Home', name: 'TabsPage', component: MainTabsPage, tabComponent: HomePage, index: 0, icon: 'home' },
@@ -51,6 +53,7 @@ export class MyApp {
     public translate: TranslateService,
     public screenOrientation: ScreenOrientation,
     public languageProvider: LanguageProvider,
+    public baiduProvider: BaiduProvider,
     public locationTracker: LocationTrackerProvider,
     public configProvider: ConfigProvider,
     public modalCtrl: ModalController) {
@@ -65,6 +68,12 @@ export class MyApp {
       this.language = this.languageProvider.getLanguage();
       console.log(this.language);
       this.translate.setDefaultLang(this.language);
+
+      //check city
+      this.city_id = this.baiduProvider.getCity();
+      if (this.city_id == undefined || this.city_id == '' || this.city_id == null) {
+          this.baiduProvider.setCity('131');
+      }
 
       let splash = modalCtrl.create(SplashPage);
       splash.present();

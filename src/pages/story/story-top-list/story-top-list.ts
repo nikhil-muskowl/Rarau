@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { StoryListPage } from '../story-list/story-list';
 import { LoadingProvider } from '../../../providers/loading/loading';
@@ -32,6 +32,7 @@ export class StoryTopListPage {
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
     public LoginProvider: LoginProvider,
+    public platform: Platform,
   ) {
 
     if (this.navParams.get('marker')) {

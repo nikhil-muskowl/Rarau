@@ -70,7 +70,7 @@ export class StoryCategoryPage {
     public languageProvider: LanguageProvider,
   ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.back();
     });
 
