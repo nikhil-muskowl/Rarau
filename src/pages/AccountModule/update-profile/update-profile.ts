@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from "@angular/platform-browser";
@@ -45,6 +45,7 @@ export class UpdateProfilePage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public zone: NgZone,
     public platform: Platform,
     public sanitizer: DomSanitizer,
     private tabService: TabsService,
@@ -143,17 +144,20 @@ export class UpdateProfilePage {
           this.status = this.responseData.status;
           if (this.status) {
 
-            this.result = this.responseData.result;
-            this.alertProvider.title = this.success_txt;
-            this.alertProvider.message = this.image_uploaded;
-            this.alertProvider.showAlert();
+            //for synchronize saving
+            this.zone.run(() => {
+              //to save image into gallery
+              this.cameraUtils.saveToGallery(this.imgSend);
 
-            //to sav image into gallery
-            this.cameraUtils.saveToGallery(this.imgSend);
+              this.result = this.responseData.result;
+              this.alertProvider.title = this.success_txt;
+              this.alertProvider.message = this.image_uploaded;
+              this.alertProvider.showAlert();
 
-            this.navCtrl.push(RegistrationPage, {
-              imagePath: this.result, image: this.imgSend, data: this.data,
-              date: this.date, gender: this.gender
+              this.navCtrl.push(RegistrationPage, {
+                imagePath: this.result, image: this.imgSend, data: this.data,
+                date: this.date, gender: this.gender
+              });
             });
           }
         },

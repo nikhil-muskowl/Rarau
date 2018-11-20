@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { LoadingProvider } from '../../../providers/loading/loading';
@@ -61,6 +61,7 @@ export class StoryCategoryPage {
     public navParams: NavParams,
     public sanitizer: DomSanitizer,
     public platform: Platform,
+    public zone: NgZone,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
@@ -268,23 +269,26 @@ export class StoryCategoryPage {
               this.message = this.responseData.message;
 
               if (this.responseData.status) {
+                
+                //for synchronize saving
+                this.zone.run(() => {
+                  for (let i = 0; i < this.images.length; i++) {
+                    //to save image into gallery
+                    this.cameraUtils.saveToGallery(this.images[i].image);
+                  }
+                  if (this.receiptImage != undefined || this.receiptImage != '') {
+                    //to save image into gallery
+                    this.cameraUtils.saveToGallery(this.receiptImage);
+                  }
 
-                for (let i = 0; i < this.images.length; i++) {
-                  //to sav image into gallery
-                  this.cameraUtils.saveToGallery(this.images[i].image);
-                }
-                if (this.receiptImage != undefined || this.receiptImage != '') {
-                  //to sav image into gallery
-                  this.cameraUtils.saveToGallery(this.receiptImage);
-                }
+                  this.alertProvider.title = this.success;
+                  this.alertProvider.message = this.message;
+                  this.alertProvider.showAlert();
 
-                this.alertProvider.title = this.success;
-                this.alertProvider.message = this.message;
-                this.alertProvider.showAlert();
-
-                this.tabService.show();
-                this.navCtrl.setRoot(HomePage);
-                this.loadingProvider.dismiss();
+                  this.tabService.show();
+                  this.navCtrl.setRoot(HomePage);
+                  this.loadingProvider.dismiss();
+                });
               }
 
             },

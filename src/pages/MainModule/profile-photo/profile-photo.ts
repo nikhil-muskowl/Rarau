@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { ProfileProvider } from '../../../providers/profile/profile';
@@ -38,6 +38,7 @@ export class ProfilePhotoPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public zone: NgZone,
     public platform: Platform,
     private tabService: TabsService,
     public alertProvider: AlertProvider,
@@ -127,17 +128,19 @@ export class ProfilePhotoPage {
           this.responseData = response;
           this.status = this.responseData.status;
           if (this.status) {
+            //for synchronize saving
+            this.zone.run(() => {
+              //to save image into gallery
+              this.cameraUtils.saveToGallery(this.imgSend);
 
-            //to sav image into gallery
-            this.cameraUtils.saveToGallery(this.imgSend);
-
-            this.result = this.responseData.result;
-            this.alertProvider.title = this.success;
-            this.alertProvider.message = this.image_uploaded;
-            this.alertProvider.showAlert();
-            this.tabService.show();
-            this.navCtrl.setRoot(ProfilePage);
-
+              console.log("inside upload");
+              this.result = this.responseData.result;
+              this.alertProvider.title = this.success;
+              this.alertProvider.message = this.image_uploaded;
+              this.alertProvider.showAlert();
+              this.tabService.show();
+              this.navCtrl.setRoot(ProfilePage);
+            });
           }
         },
         err => {

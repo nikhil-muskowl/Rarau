@@ -43,8 +43,8 @@ export class CameraUtilsProvider {
     return new Promise((resolve, reject) => {
 
       this.fName = this.createFileName();
-      var realData = src.split(",")[1]
-      let blob = this.b64toBlob(realData, 'image/jpeg')
+      var realData = src.split(",")[1];
+      let blob = this.b64toBlob(realData, 'image/jpeg');
 
       this.file.writeFile(this.pictureDir, this.fName, blob)
         .then(() => {
