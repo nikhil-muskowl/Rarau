@@ -11,6 +11,7 @@ import { TabsService } from "../../util/tabservice";
 import { UploadReceiptPage } from "../upload-receipt/upload-receipt";
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
 
 @IonicPage()
 @Component({
@@ -66,6 +67,7 @@ export class StoryCategoryPage {
     public cofigPro: ConfigProvider,
     private tabService: TabsService,
     public LoginProvider: LoginProvider,
+    public cameraUtils: CameraUtilsProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
   ) {
@@ -193,7 +195,7 @@ export class StoryCategoryPage {
     }
 
     console.log('receiptImage : ' + this.receiptImage);
-    console.log('this.index_id and index : ' + this.index_id + ',' + index);
+    console.log('this.index_id and index : ' + this.index_id + ' , ' + index);
   }
 
   bindArray() {
@@ -243,6 +245,7 @@ export class StoryCategoryPage {
           if (this.receipt_private == undefined) {
             this.receipt_private = 0;
           }
+
           this.paramData = {
             'tags': this.tags,
             'images': this.images,
@@ -265,6 +268,16 @@ export class StoryCategoryPage {
               this.message = this.responseData.message;
 
               if (this.responseData.status) {
+
+                for (let i = 0; i < this.images.length; i++) {
+                  //to sav image into gallery
+                  this.cameraUtils.saveToGallery(this.images[i].image);
+                }
+                if (this.receiptImage != undefined || this.receiptImage != '') {
+                  //to sav image into gallery
+                  this.cameraUtils.saveToGallery(this.receiptImage);
+                }
+
                 this.alertProvider.title = this.success;
                 this.alertProvider.message = this.message;
                 this.alertProvider.showAlert();

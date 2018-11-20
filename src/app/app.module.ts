@@ -82,6 +82,7 @@ import { FollowProvider } from '../providers/follow/follow';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
 import { IonTagsInputModule } from "ionic-tags-input";
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
 import { BaiduProvider } from '../providers/baidu/baidu';
@@ -116,10 +117,12 @@ import { RankingComponent } from '../components/ranking/ranking';
 import { FollowersComponent } from '../components/followers/followers';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { EventProvider } from '../providers/event/event';
+import { CameraUtilsProvider } from '../providers/camera-utils/camera-utils';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/language/', '.json');
 }
+
 @NgModule({
   declarations: [
     MyApp,
@@ -300,6 +303,7 @@ export function createTranslateLoader(http: HttpClient) {
     MyPetProvider,
     ScreenOrientation,
     EventProvider,
+    CameraUtilsProvider,
   ]
 })
 

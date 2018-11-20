@@ -10,6 +10,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { LoginProvider } from '../../../providers/login/login';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
 
 @IonicPage()
 @Component({
@@ -45,6 +46,7 @@ export class ProfilePhotoPage {
     public profileProvider: ProfileProvider,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
+    public cameraUtils: CameraUtilsProvider,
     public languageProvider: LanguageProvider, ) {
 
     this.setText();
@@ -125,6 +127,9 @@ export class ProfilePhotoPage {
           this.responseData = response;
           this.status = this.responseData.status;
           if (this.status) {
+
+            //to sav image into gallery
+            this.cameraUtils.saveToGallery(this.imgSend);
 
             this.result = this.responseData.result;
             this.alertProvider.title = this.success;

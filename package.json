@@ -28,6 +28,7 @@
     "@ionic-native/date-picker": "^4.11.0",
     "@ionic-native/device": "^4.11.0",
     "@ionic-native/file": "^4.11.0",
+    "@ionic-native/file-path": "^4.17.0",
     "@ionic-native/file-transfer": "^4.11.0",
     "@ionic-native/geolocation": "^4.11.0",
     "@ionic-native/image-picker": "^4.11.0",
@@ -53,6 +54,7 @@
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "~5.0.0",
     "cordova-plugin-file-transfer": "~1.7.1",
+    "cordova-plugin-filepath": "1.4.2",
     "cordova-plugin-geolocation": "~4.0.1",
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
@@ -113,7 +115,8 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-screen-orientation": {}
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-filepath": {}
     },
     "platforms": [
       "android"

@@ -15,6 +15,7 @@ import { AlertController } from 'ionic-angular';
 import { LanguageProvider } from '../providers/language/language';
 import { ConfigProvider } from '../providers/config/config';
 import { BaiduProvider } from "../providers/baidu/baidu";
+import { File } from '@ionic-native/file';
 
 export interface PageInterface {
   title: string;
@@ -56,11 +57,25 @@ export class MyApp {
     public baiduProvider: BaiduProvider,
     public locationTracker: LocationTrackerProvider,
     public configProvider: ConfigProvider,
+    public file: File,
     public modalCtrl: ModalController) {
 
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      if (platform.is('android')) {
+
+        this.file.checkDir(this.file.externalRootDirectory, 'RaRaU Images').then(response => {
+          console.log('Directory exists' + response);
+        }).catch(err => {
+          console.log('Directory doesn\'t exist' + JSON.stringify(err));
+          this.file.createDir(this.file.externalRootDirectory, 'RaRaU Images', false).then(response => {
+            console.log('Directory create' + JSON.stringify(response));
+          }).catch(err => {
+            console.log('Directory no create' + JSON.stringify(err));
+          });
+        });
+      }
 
       this.locationTracker.setLocation();
       this.backEvent();
@@ -72,7 +87,7 @@ export class MyApp {
       //check city
       this.city_id = this.baiduProvider.getCity();
       if (this.city_id == undefined || this.city_id == '' || this.city_id == null) {
-          this.baiduProvider.setCity('131');
+        this.baiduProvider.setCity('131');
       }
 
       let splash = modalCtrl.create(SplashPage);

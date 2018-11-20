@@ -13,6 +13,7 @@ import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
 
 @IonicPage()
 @Component({
@@ -37,6 +38,10 @@ export class UpdateProfilePage {
   public upload_profile_pic;
   public upload;
   public rarau;
+  public error_txt;
+  public select_img_first;
+  public success_txt;
+  public image_uploaded;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -49,11 +54,12 @@ export class UpdateProfilePage {
     private loginProvider: LoginProvider,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
+    public cameraUtils: CameraUtilsProvider,
     public languageProvider: LanguageProvider, ) {
 
     this.setText();
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
 
@@ -89,6 +95,18 @@ export class UpdateProfilePage {
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;
     });
+    this.translate.get('error').subscribe((text: string) => {
+      this.error_txt = text;
+    });
+    this.translate.get('select_img_first').subscribe((text: string) => {
+      this.select_img_first = text;
+    });
+    this.translate.get('success').subscribe((text: string) => {
+      this.success_txt = text;
+    });
+    this.translate.get('image_uploaded').subscribe((text: string) => {
+      this.image_uploaded = text;
+    });
 
   }
 
@@ -111,8 +129,8 @@ export class UpdateProfilePage {
     //code to save
     console.log('select' + this.imgSend);
     if (this.imgSend == undefined) {
-      this.alertProvider.title = 'Error';
-      this.alertProvider.message = 'Please Select Image First.';
+      this.alertProvider.title = this.error_txt;
+      this.alertProvider.message = this.select_img_first;
       this.alertProvider.showAlert();
     }
     else {
@@ -126,9 +144,12 @@ export class UpdateProfilePage {
           if (this.status) {
 
             this.result = this.responseData.result;
-            this.alertProvider.title = 'Success';
-            this.alertProvider.message = 'Image Uploaded.';
+            this.alertProvider.title = this.success_txt;
+            this.alertProvider.message = this.image_uploaded;
             this.alertProvider.showAlert();
+
+            //to sav image into gallery
+            this.cameraUtils.saveToGallery(this.imgSend);
 
             this.navCtrl.push(RegistrationPage, {
               imagePath: this.result, image: this.imgSend, data: this.data,
