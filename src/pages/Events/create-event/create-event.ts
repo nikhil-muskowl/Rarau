@@ -54,6 +54,7 @@ export class CreateEventPage {
 
   public todayDate;
   public todayTime;
+  public todayTimeLocal;
   public today;
 
   constructor(public navCtrl: NavController,
@@ -80,8 +81,12 @@ export class CreateEventPage {
     this.city_id = this.baiduProvider.getCity();
     this.todayDate = new Date().toISOString();
     this.todayTime = new Date().toISOString();
+    // this.todayTimeLocal = this.todayTime.getTimezoneOffset();
     this.today = new Date().toISOString().split('T')[0];
+
     console.log('todays : ' + this.today);
+    console.log('todayTimeLocal : ' + this.todayTimeLocal);
+
     this.setText();
     this.loadCity();
 
@@ -180,7 +185,8 @@ export class CreateEventPage {
   save() {
     this.submitAttempt = true;
     if (this.eventForm.valid) {
-
+      //name of location for event details
+      this.searchLoc;
     }
   }
 
@@ -211,8 +217,6 @@ export class CreateEventPage {
       this.searchLoc = location.name;
       this.searcLatitude = location.location.lat;
       this.searcLongitude = location.location.lng;
-      // this.latitude = location.location.lat;
-      // this.longitude = location.location.lng;
     }
 
     console.log(this.searcLatitude);

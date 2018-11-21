@@ -117,6 +117,8 @@ export class StoryListPage {
   }
 
   showStory(data) {
+
+    this.isLogin();
     if (this.user_id) {
 
       // this.navCtrl.push(StoryScreenPage, this.paramData);

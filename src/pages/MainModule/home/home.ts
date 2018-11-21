@@ -375,8 +375,8 @@ export class HomePage {
   }
 
   openTutorial() {
-    // this.navCtrl.setRoot(TutorialPage);
-    this.navCtrl.push(CreateEventPage);
+    this.navCtrl.setRoot(TutorialPage);
+    // this.navCtrl.push(CreateEventPage);
   }
 
   public getLocation() {

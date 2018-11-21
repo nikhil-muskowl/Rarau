@@ -54,6 +54,7 @@ export class ProfilePage {
   public view_log;
   public saved_stories;
   public more;
+  public change_text;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -103,6 +104,9 @@ export class ProfilePage {
     });
     this.translate.get('more').subscribe((text: string) => {
       this.more = text;
+    });
+    this.translate.get('change').subscribe((text: string) => {
+      this.change_text = text;
     });
 
   }

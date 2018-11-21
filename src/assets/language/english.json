@@ -124,6 +124,7 @@
   "logged_in": "Login Succesfully",
   "logged_out": "Log-Out Succesfully",
   "keep_going": "KEEP GOING",
+  "home": "Home",
   "events": "Events",
   "create_event": "Create Event",
   "event_name": "Event Name",
@@ -136,5 +137,7 @@
   "error_time": "field is required",
   "error_date": "field is required",
   "error_city": "field is required",
-  "home": "Home"
+  "change": "Change",
+  "event_detail": "Event Detail",
+  "event_list": "Event List"
 }
