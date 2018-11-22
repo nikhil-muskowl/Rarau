@@ -17,6 +17,7 @@ import { Slides } from 'ionic-angular';
 import { TutorialPage } from '../tutorial/tutorial';
 import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
 import { CreateEventPage } from '../../Events/create-event/create-event';
+import { EventListPage } from '../../Events/event-list/event-list';
 
 @Component({
   selector: 'page-home',
@@ -375,8 +376,8 @@ export class HomePage {
   }
 
   openTutorial() {
-    this.navCtrl.setRoot(TutorialPage);
-    // this.navCtrl.push(CreateEventPage);
+    // this.navCtrl.setRoot(TutorialPage);
+    this.navCtrl.push(EventListPage);
   }
 
   public getLocation() {

@@ -138,5 +138,7 @@
   "error_city": "field is required",
   "change": "Change",
   "event_detail": "Event Detail",
-  "event_list": "Event List"
+  "event_list": "Event List",
+  "latest_event": "Latest Events",
+  "past_event": "Past Events"
 }

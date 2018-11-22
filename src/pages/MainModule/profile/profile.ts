@@ -118,6 +118,7 @@ export class ProfilePage {
   ionViewWillEnter() {
     this.setText();
     this.isLogin();
+    //set segment
     this.user = 'Stories';
   }
 

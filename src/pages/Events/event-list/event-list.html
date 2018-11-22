@@ -10,9 +10,38 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let eve of events; let i = index;">
-      <h1>{{eve.name}}</h1>
-    </ion-item>
-  </ion-list>
+  <div>
+    <ion-segment [(ngModel)]="event">
+      <ion-segment-button value="Upcoming">
+        {{latest_event_txt}}
+      </ion-segment-button>
+      <ion-segment-button value="History">
+        {{past_event_txt}}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="event">
+    <div *ngSwitchCase="'Upcoming'" (click)="UpcomingEve()">
+      <ion-list>
+        <ion-item *ngFor="let upEve of upEveData; let i = index;">
+          <h1>{{upEve.title}}</h1>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="UplistScrollDown($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+
+    <div *ngSwitchCase="'History'" (click)="PastEve()">
+      <ion-list>
+        <ion-item *ngFor="let pastEve of pastEveData; let i = index;">
+          <h1>{{pastEve.title}}</h1>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="PastlistScrollDown($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
 </ion-content>
