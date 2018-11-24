@@ -6,6 +6,7 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { StoryScreenPage } from '../story-screen/story-screen';
 import { SingleStoryPage } from '../single-story/single-story';
+import { LoginPage } from '../../AccountModule/login/login';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 
@@ -80,10 +81,6 @@ export class StoryListPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StoryListPage');
-  }
-
   goBack() {
     this.navCtrl.pop();
   }
@@ -93,6 +90,7 @@ export class StoryListPage {
   }
 
   getStories() {
+    this.isLogin();
     this.loadingProvider.present();
     this.paramData = {
       'user_id': this.user_id,
@@ -120,16 +118,19 @@ export class StoryListPage {
 
     this.isLogin();
     if (this.user_id) {
-
       // this.navCtrl.push(StoryScreenPage, this.paramData);
       this.navCtrl.push(SingleStoryPage, { story_id: data.id });
-
     }
     else {
-
       this.alertProvider.title = this.forbidden;
       this.alertProvider.message = this.login_to_continue;
-      this.alertProvider.showAlert();
+      // this.alertProvider.showAlert();
+      this.alertProvider.Alert.confirm(this.login_to_continue, this.forbidden).then((res) => {
+        console.log('confirmed');
+        this.navCtrl.setRoot(LoginPage);
+      }, err => {
+        console.log('user cancelled');
+      });
     }
   }
 

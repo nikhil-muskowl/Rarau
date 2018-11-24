@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { EventDetailsPage } from '../event-details/event-details';
 
 //provider
 import { LoginProvider } from '../../../providers/login/login';
@@ -83,6 +84,7 @@ export class EventListPage {
 
   UpcomingEve() {
 
+    console.log("in upcoming event");
     this.upParamData = { 'start': this.upPageStart, 'length': this.pageLength };
 
     this.loadingProvider.present();
@@ -100,6 +102,7 @@ export class EventListPage {
   }
 
   PastEve() {
+    console.log("in Past event");
     this.pastParamData = { 'start': this.pastPageStart, 'length': this.pageLength };
 
     this.loadingProvider.present();
@@ -191,5 +194,22 @@ export class EventListPage {
     }
 
     infiniteScroll.complete();
+  }
+
+  segmentChanged(segmentEvent) {
+
+    console.log("change : " + JSON.stringify(segmentEvent.value));
+    if (segmentEvent.value === 'Upcoming') {
+      this.UpcomingEve();
+    }
+
+    if (segmentEvent.value === 'History') {
+      this.PastEve();
+    }
+  }
+
+  eveDetails(event) {
+
+    this.navCtrl.push(EventDetailsPage, { id: event.id });
   }
 }

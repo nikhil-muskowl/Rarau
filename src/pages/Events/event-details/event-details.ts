@@ -7,6 +7,7 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { EventProvider } from '../../../providers/event/event';
 
 @IonicPage()
 @Component({
@@ -15,20 +16,27 @@ import { LanguageProvider } from '../../../providers/language/language';
 })
 export class EventDetailsPage {
 
+  public _id;
   public user_id;
+  public EveResponse;
+  public EveStatus;
+  public EveResult;
 
   public event_detail;
   public event_name;
-  public event_date;
+  public event_from_date;
+  public event_to_date;
   public event_time;
   public event_city;
   public event_loc;
   public event_desc;
 
   public evnt_name;
-  public evnt_date;
+  public evnt_from_date;
+  public evnt_to_date;
   public evnt_time;
   public evnt_city;
+  public evnt_banner;
   public evnt_loc_name;
   public evnt_desc;
 
@@ -39,17 +47,20 @@ export class EventDetailsPage {
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
     public platform: Platform,
+    public eventProvider: EventProvider,
     public languageProvider: LanguageProvider, ) {
-
+    this._id = this.navParams.get('id');
   }
 
   ngOnInit() {
+
     this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
 
     this.user_id = this.loginProvider.isLogin();
     this.setText();
+    this.getDetails(this._id);
   }
 
   setText() {
@@ -62,8 +73,11 @@ export class EventDetailsPage {
     this.translate.get('event_name').subscribe((text: string) => {
       this.event_name = text;
     });
-    this.translate.get('event_date').subscribe((text: string) => {
-      this.event_date = text;
+    this.translate.get('event_to_date').subscribe((text: string) => {
+      this.event_to_date = text;
+    });
+    this.translate.get('event_from_date').subscribe((text: string) => {
+      this.event_from_date = text;
     });
     this.translate.get('event_time').subscribe((text: string) => {
       this.event_time = text;
@@ -83,14 +97,26 @@ export class EventDetailsPage {
     this.navCtrl.pop();
   }
 
-  getDetails() {
+  getDetails(id) {
+    this.eventProvider.apiGetEventDetails(id).subscribe(
+      response => {
+        this.EveResponse = response;
+        this.EveStatus = this.EveResponse.status;
+        this.EveResult = this.EveResponse.result;
 
-    this.evnt_name;
-    this.evnt_date;
-    this.evnt_time;
-    this.evnt_city;
-    this.evnt_loc_name;
-    this.evnt_desc;
+        this.evnt_name = this.EveResult.title;
+        console.log("this.evnt_name : " + this.evnt_name);
+        this.evnt_from_date = this.EveResult.from_date;
+        this.evnt_to_date = this.EveResult.to_date;
+        this.evnt_banner = this.EveResult.image;
+        // this.evnt_city = this.EveResult.location;
+        this.evnt_loc_name = this.EveResult.location;
+        this.evnt_desc = this.EveResult.description;
+      },
+      err => console.error(err),
+      () => {
+        this.loadingProvider.dismiss();
+      });
   }
 
 }

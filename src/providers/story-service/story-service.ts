@@ -289,6 +289,29 @@ export class StoryServiceProvider {
     );
   }
 
+  getStoriesRank(data) {
+    this.formData = new FormData();
+
+    if (data.user_id != undefined)
+      this.formData.append('user_id', data.user_id);
+
+    this.formData.append('story_type_id', data.story_type_id);
+    this.formData.append('length', data.length);
+    this.formData.append('start', data.start);
+    this.formData.append('order[0][column]', '3');
+    this.formData.append('order[0][dir]', 'desc');
+
+    if (data.location != undefined)
+      this.formData.append('location', data.location);
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
   apicommentComplain(data) {
     this.formData = new FormData();
 

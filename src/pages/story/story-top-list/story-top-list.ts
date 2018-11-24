@@ -59,10 +59,6 @@ export class StoryTopListPage {
     this.getStories();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StoryTopListPage');
-  }
-
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }

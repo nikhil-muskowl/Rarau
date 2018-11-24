@@ -9,6 +9,7 @@ import { ConfigProvider } from '../../../providers/config/config';
 import { LoginProvider } from '../../../providers/login/login';
 import { TabsService } from "../../util/tabservice";
 import { UploadReceiptPage } from "../upload-receipt/upload-receipt";
+import { LocationPage } from "../location/location";
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
@@ -132,13 +133,9 @@ export class StoryCategoryPage {
     this.translate.get('write_something').subscribe((text: string) => {
       this.write_something = text;
     });
-
     this.translate.get('category').subscribe((text: string) => {
       this.category_txt = text;
     });
-  }
-
-  ionViewDidLoad() {
   }
 
   setCategory() {
@@ -177,9 +174,9 @@ export class StoryCategoryPage {
     this.bindArray();
 
     console.log(category);
-
+    console.log('this.model[index].isImage : ' + this.model[index].isImage);
     if (category.is_upload == 1) {
-      if (this.receiptImage == undefined || this.receiptImage == '') {
+      if (this.model[index].isImage && this.receiptImage == undefined || this.receiptImage == '') {
         this.navCtrl.push(UploadReceiptPage, {
           index_id: index,
           sel_cat_id: this.sel_cat_id,
@@ -269,7 +266,7 @@ export class StoryCategoryPage {
               this.message = this.responseData.message;
 
               if (this.responseData.status) {
-                
+
                 //for synchronize saving
                 this.zone.run(() => {
                   for (let i = 0; i < this.images.length; i++) {
@@ -316,7 +313,7 @@ export class StoryCategoryPage {
   }
 
   back() {
-    this.navCtrl.pop();
+    this.navCtrl.push(LocationPage);
   }
 
   bindtags() {

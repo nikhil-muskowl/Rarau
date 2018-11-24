@@ -85,7 +85,7 @@ export class RankingComponent {
       start: this.start
     };
 
-    this.storiesProvider.getRankedStory(this.filterData).subscribe(
+    this.storiesProvider.getStoriesRank(this.filterData).subscribe(
       response => {
         this.responseData = response;
         this.items = this.responseData.data;

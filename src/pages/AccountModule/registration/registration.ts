@@ -235,6 +235,13 @@ export class RegistrationPage {
                 this.navCtrl.setRoot(ProfilePage);
               }
 
+              if (!this.responseData.status) {
+                this.result = this.responseData.result;
+                this.alertProvider.title = this.error;
+                this.alertProvider.message = this.result[0].text;
+                this.alertProvider.showAlert();
+              }
+
               if (this.responseData.text_message != '') {
                 this.text_message = this.responseData.text_message;
                 this.alertProvider.title = this.success;
@@ -251,7 +258,6 @@ export class RegistrationPage {
                 this.registerForm.controls['email'].setErrors({ 'incorrect': true });
                 this.error_email = this.responseData.error_email;
               }
-
 
               if (this.responseData.error_password != '') {
                 this.registerForm.controls['password'].setErrors({ 'incorrect': true });

@@ -14,7 +14,7 @@
 <ion-content>
 
   <div *ngIf="isSearch">
-    <ion-select [(ngModel)]="country" (ionChange)="oncountryChange(country)" interface="popover">
+    <ion-select [(ngModel)]="country" placeholder="{{select_country}}" (ionChange)="oncountryChange(country)" interface="popover">
       <ion-option *ngFor="let ctry of countries" value="{{ctry.location}}">{{ctry.location}}</ion-option>
     </ion-select>
   </div>
@@ -47,7 +47,7 @@
           <div *ngIf="(i+1 >= 4)">
             <h1 class="rank-h1">{{i+1}}</h1>
           </div>
-          <img style="border-radius: 15px;" (click)="itemTapped(item)" src="{{item.image_thumb}}">
+          <img class="img-bord" (click)="itemTapped(item)" src="{{item.image_thumb}}">
           <!-- <img *ngIf="item.rank_image" class="img-badge" width="30px" height="30px" src="{{item.rank_image}}"> -->
         </ion-col>
         <ion-col col-7>

@@ -45,6 +45,7 @@ export class RankingPage {
   public from;
   public location_txt;
   public enter_value_serach;
+  public select_country;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -94,6 +95,9 @@ export class RankingPage {
     });
     this.translate.get('location').subscribe((text: string) => {
       this.location_txt = text;
+    });
+    this.translate.get('select_country').subscribe((text: string) => {
+      this.select_country = text;
     });
   }
 

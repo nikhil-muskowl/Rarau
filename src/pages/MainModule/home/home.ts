@@ -241,6 +241,7 @@ export class HomePage {
   }
 
   public bindMap() {
+    this.user_id = this.LoginProvider.isLogin();
     this.markers = [];
     console.log("this.serLatitude && this.serLongitude : " + this.serLatitude + ' ' + this.serLongitude);
     if (this.serLatitude != undefined && this.serLongitude != undefined) {
@@ -402,6 +403,7 @@ export class HomePage {
     // var Param = {
     //   marker: JSON.stringify(marker.getPosition())
     // }    
+    this.user_id = this.LoginProvider.isLogin();
     this.showStories = true;
     let markerData = JSON.parse(JSON.stringify(marker.getPosition()));
     console.log('Marker position latitude' + JSON.stringify(markerData));
