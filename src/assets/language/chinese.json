@@ -142,5 +142,7 @@
   "event_list": "Event List",
   "latest_event": "Latest Events",
   "past_event": "Past Events",
-  "select_country": "Select Country"
+  "select_country": "Select Country",
+  "sel_event": "Select Event",
+  "show_in_event": "Show in Event"
 }

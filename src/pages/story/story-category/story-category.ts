@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, Modal, ModalController, ModalOptions } from 'ionic-angular';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { HomePage } from '../../MainModule/home/home';
@@ -13,6 +13,7 @@ import { LocationPage } from "../location/location";
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
+import { EventModalPage } from '../../Events/event-modal/event-modal';
 
 @IonicPage()
 @Component({
@@ -45,6 +46,7 @@ export class StoryCategoryPage {
   public paramData;
   public language_id;
   public index_id;
+  public Event_id;
 
   public btnGo = 1;
   public varRecChk;
@@ -57,12 +59,15 @@ export class StoryCategoryPage {
   public field_not_blank;
   public choose_category;
   public write_something;
+  public show_in_event;
+  public event_will;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public sanitizer: DomSanitizer,
     public platform: Platform,
     public zone: NgZone,
+    private modal: ModalController,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
@@ -135,6 +140,51 @@ export class StoryCategoryPage {
     });
     this.translate.get('category').subscribe((text: string) => {
       this.category_txt = text;
+    });
+    this.translate.get('show_in_event').subscribe((text: string) => {
+      this.show_in_event = text;
+    });
+  }
+
+  SetEvent() {
+    if (this.event_will) {
+      //cheecked means user want to set an event
+      console.log('Tutorial will be showen : ' + this.event_will);
+      this.OpenEveModal();
+    }
+    else {
+      //means user dont't want to see tutorial on every startup
+      console.log('Tutorial will not be showen : ' + this.event_will);
+      this.Event_id = '';
+    }
+  }
+
+  OpenEveModal() {
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+
+    const myModalData = {
+      name: 'Nikhil Suwalka',
+      occupation: 'Android Developer'
+    };
+
+    const myModal: Modal = this.modal.create(EventModalPage, { data: myModalData }, myModalOptions);
+
+    myModal.present();
+
+    myModal.onDidDismiss((data) => {
+      console.log('data from model : ' + JSON.stringify(data));
+
+      if (data) {
+        console.log('data.EveId : ' + data.EveId);
+        this.Event_id = data.EveId;
+      }
+    });
+
+    myModal.onWillDismiss((data) => {
+      console.log("I'm about to dismiss");
+      console.log(data);
     });
   }
 
@@ -255,6 +305,7 @@ export class StoryCategoryPage {
             'receipt_private': this.receipt_private,
             'receipt': this.receiptImage,
             'language_id': this.language_id,
+            'event_id': this.Event_id,
           };
 
           console.log('Param data post : ' + JSON.stringify(this.paramData));

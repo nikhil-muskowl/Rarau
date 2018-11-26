@@ -74,10 +74,6 @@ export class TutorialPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TutorialPage');
-  }
-
   tuteSeen() {
     console.log('click on next btn');
     let currentIndex = this.slides.getActiveIndex();

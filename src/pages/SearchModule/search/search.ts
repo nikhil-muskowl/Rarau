@@ -10,7 +10,6 @@ import { SearchResProvider } from '../../../providers/search-res/search-res';
 import { LocationTrackerProvider } from '../../../providers/location-tracker/location-tracker';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
-import { Jsonp } from '@angular/http';
 
 @IonicPage()
 @Component({
@@ -107,10 +106,6 @@ export class SearchPage {
         this.loadingProvider.dismiss();
       }
     );
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
   }
 
   closeModal() {

@@ -12,14 +12,16 @@
         <button class="publish-btn" ion-button type="submit" (click)="saveStory()"> {{publish}} </button>
       </ion-buttons>
     </ion-toolbar>
-
   </ion-navbar>
-
 </ion-header>
 
 <ion-content>
 
   <img style="min-height:93%;" [src]="sanitizer.bypassSecurityTrustResourceUrl(image)">
+  <div>
+    <ion-label class="white-col">{{show_in_event}}</ion-label>
+    <ion-checkbox [(ngModel)]="event_will" (ionChange)="SetEvent()"></ion-checkbox>
+  </div>
 
   <ion-scroll scrollX="true" style="width:100vw; height:60px">
     <ion-row nowrap class="headerChip">
@@ -38,6 +40,5 @@
     <ion-tags-input [placeholder]="write_something" [(ngModel)]="tags" [color]="'danger'" (onChange)="onChange($event)"
       [verifyMethod]="verifyTag" [separatorStr]="','" [canEnterAdd]="true" [canBackspaceRemove]="true"></ion-tags-input>
   </ion-item>
-
 
 </ion-content>

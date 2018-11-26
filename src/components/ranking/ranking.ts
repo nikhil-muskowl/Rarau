@@ -89,9 +89,9 @@ export class RankingComponent {
       response => {
         this.responseData = response;
         this.items = this.responseData.data;
+        console.log("Here" + JSON.stringify(this.items));
         this.recordsTotal = this.responseData.recordsTotal;
         this.bindUpdata();
-        console.log("Here" + JSON.stringify(this.items));
         this.loadingProvider.dismiss();
       },
       err => {

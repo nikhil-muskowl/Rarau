@@ -112,6 +112,7 @@ export class StoryServiceProvider {
     var receipt_private = data.receipt_private;
     var receipt = data.receipt;
     var language_id = data.language_id;
+    var event_id = data.event_id;
 
     console.log('images : ' + JSON.stringify(images));
     this.formData = new FormData();
@@ -126,6 +127,7 @@ export class StoryServiceProvider {
     this.formData.append('images', JSON.stringify(images));
     this.formData.append('user_id', user_id);
     this.formData.append('types', JSON.stringify(catId));
+    this.formData.append('event_id', event_id);
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/api_save',
       this.formData,
