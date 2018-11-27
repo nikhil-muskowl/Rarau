@@ -14,15 +14,25 @@
 <ion-content>
 
   <div *ngIf="isSearch">
-    <ion-select [(ngModel)]="country" placeholder="{{select_country}}" (ionChange)="oncountryChange(country)" interface="popover">
-      <ion-option *ngFor="let ctry of countries" value="{{ctry.location}}">{{ctry.location}}</ion-option>
-    </ion-select>
+    <ion-item>
+      <ion-searchbar placeholder="{{search_country}}" [(ngModel)]="country" [showCancelButton]="shouldShowCancel"
+        (ionInput)="onLocInput($event)" (ionCancel)="onLocCancel($event)">
+      </ion-searchbar>
+    </ion-item>
+
+    <div *ngIf="countries?.length > 0" style="height: 100px;overflow: scroll;">
+      <ion-list>
+        <ion-item ion-item *ngFor="let ctry of countries" (click)="locItemSelected(ctry)">
+          {{ctry.location}}
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
 
   <div>
     <ion-slides slidesPerView="4">
       <ion-slide *ngFor="let type of types" (click)="typeChanged(type)">
-        <ion-segment [(ngModel)]="story_type_id" color="primary">
+        <ion-segment [(ngModel)]="story_type_id" color="danger">
           <ion-segment-button value="{{type.id}}">
             {{type.title}}
           </ion-segment-button>

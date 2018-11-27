@@ -86,7 +86,7 @@ export class LocationPage {
   }
 
   back() {
-    this.navCtrl.push(ShowPhotoPage);
+    this.navCtrl.push(ShowPhotoPage, { photo: this.image });
   }
 
   Next() {

@@ -2,7 +2,7 @@
   <div>
     <ion-slides slidesPerView="4">
       <ion-slide *ngFor="let type of types" (click)="typeChanged(type)">
-        <ion-segment [(ngModel)]="story_type_id" color="primary">
+        <ion-segment [(ngModel)]="story_type_id" color="danger">
           <ion-segment-button value="{{type.id}}">
             {{type.title}}
           </ion-segment-button>

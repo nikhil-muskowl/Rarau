@@ -57,7 +57,7 @@ export class HomePage {
   public user_id;
   public city_id;
   public language_id;
-  public stories: any;
+  public stories: any = [];
   public showStories: boolean = false;
   public markerHtml;
 
@@ -330,6 +330,27 @@ export class HomePage {
               }
             }
             else {
+              this.markers.push({
+                options: {
+                  // enableDragging: true,
+                  icon: {
+                    imageUrl: 'assets/imgs/marker.png',
+                    size: {
+                      height: 32,
+                      width: 32
+                    },
+                    imageSize: {
+                      height: 32,
+                      width: 32
+                    }
+                  }
+                },
+                point: {
+                  lat: this.latitude,
+                  lng: this.longitude
+                }
+              });
+
               this.zoomlatLong = {
                 // lat: element.latitude,
                 // lng: element.longitude,
@@ -404,7 +425,6 @@ export class HomePage {
     //   marker: JSON.stringify(marker.getPosition())
     // }    
     this.user_id = this.LoginProvider.isLogin();
-    this.showStories = true;
     let markerData = JSON.parse(JSON.stringify(marker.getPosition()));
     console.log('Marker position latitude' + JSON.stringify(markerData));
     this.paramData = {
@@ -422,6 +442,10 @@ export class HomePage {
       response => {
         this.responseData = response;
         this.stories = this.responseData.data;
+        console.log("this.stories.length : " + this.stories.length);
+        if (this.stories.length > 0) {
+          this.showStories = true;
+        }
         this.loadingProvider.hide();
       },
       err => console.error(err),

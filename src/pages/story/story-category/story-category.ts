@@ -59,6 +59,7 @@ export class StoryCategoryPage {
   public field_not_blank;
   public choose_category;
   public write_something;
+  public comma_separate;
   public show_in_event;
   public event_will;
 
@@ -100,15 +101,15 @@ export class StoryCategoryPage {
       this.index_id = this.navParams.get('index_id');
     }
 
-    console.log('lat long : ' + this.latitude + ', ' + this.longitude);
+    // console.log('lat long : ' + this.latitude + ', ' + this.longitude);
     console.log('receipt_private : ' + this.receipt_private);
     if (this.sel_cat_id != undefined) {
       this.catModal = this.sel_cat_id;
-      console.log('catModal : ' + this.catModal);
+      // console.log('catModal : ' + this.catModal);
     }
     console.log('sel_cat_id : ' + this.sel_cat_id);
-    console.log('receiptImage : ' + this.receiptImage);
-    console.log('image : ' + this.image);
+    // console.log('receiptImage : ' + this.receiptImage);
+    // console.log('image : ' + this.image);
     this.setCategory();
     this.bindtags();
   }
@@ -143,6 +144,9 @@ export class StoryCategoryPage {
     });
     this.translate.get('show_in_event').subscribe((text: string) => {
       this.show_in_event = text;
+    });
+    this.translate.get('comma_separate').subscribe((text: string) => {
+      this.comma_separate = text;
     });
   }
 
@@ -180,6 +184,9 @@ export class StoryCategoryPage {
         console.log('data.EveId : ' + data.EveId);
         this.Event_id = data.EveId;
       }
+      else {
+        this.event_will = false;
+      }
     });
 
     myModal.onWillDismiss((data) => {
@@ -195,7 +202,7 @@ export class StoryCategoryPage {
     this.storyService.getCategory().subscribe(
       response => {
         this.responseData = response;
-        console.log('Category : ' + JSON.stringify(response));
+        // console.log('Category : ' + JSON.stringify(response));
 
         this.categories = this.responseData.data;
         this.bindList();
@@ -212,21 +219,18 @@ export class StoryCategoryPage {
     if (this.model[index].isImage) {
 
       this.model[index].isImage = false;
-
-      // if (category.is_upload == 1) {
-      //   this.receipt_private = 0;
-      //   this.receiptImage = '';
-      // }
     } else {
       this.model[index].isImage = true;
     }
 
+
     this.bindArray();
 
     console.log(category);
+    console.log('this.model[index] : ' + index);
     console.log('this.model[index].isImage : ' + this.model[index].isImage);
     if (category.is_upload == 1) {
-      if (this.model[index].isImage && this.receiptImage == undefined || this.receiptImage == '') {
+      if (this.model[index].isImage && (this.receiptImage == undefined || this.receiptImage == '')) {
         this.navCtrl.push(UploadReceiptPage, {
           index_id: index,
           sel_cat_id: this.sel_cat_id,
@@ -236,11 +240,13 @@ export class StoryCategoryPage {
           longitude: this.longitude
         });
       }
+      //for clear only that category image index
       else if (this.index_id == index) {
         this.receipt_private = 0;
         this.receiptImage = '';
       }
     }
+    console.log('after model[index].isImage : ' + this.model[index].isImage);
 
     console.log('receiptImage : ' + this.receiptImage);
     console.log('this.index_id and index : ' + this.index_id + ' , ' + index);
@@ -364,7 +370,7 @@ export class StoryCategoryPage {
   }
 
   back() {
-    this.navCtrl.push(LocationPage);
+    this.navCtrl.push(LocationPage, { image: this.image });
   }
 
   bindtags() {

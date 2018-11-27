@@ -71,7 +71,7 @@ export class UploadReceiptPage {
       this.imgSend = this.srcPhoto;
     }
     else {
-      this.receiptImage = "assets/icon/user.png";
+      this.receiptImage = "assets/imgs/receipt.png";
     }
 
     this.index_id = this.navParams.get('index_id');

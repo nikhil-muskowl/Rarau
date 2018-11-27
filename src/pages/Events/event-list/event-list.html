@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <div>
-    <ion-segment [(ngModel)]="event" (ionChange)="segmentChanged($event)">
+    <ion-segment [(ngModel)]="event" color="danger" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="Upcoming">
         {{latest_event_txt}}
       </ion-segment-button>

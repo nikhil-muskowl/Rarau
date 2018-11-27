@@ -65,6 +65,8 @@ export class RankingComponent {
 
   public typeChanged(event) {
     this.story_type_id = event.id;
+    this.rankItems = [];
+    this.start = 0;
     this.getList();
   }
 

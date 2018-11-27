@@ -366,9 +366,12 @@ export class StoryServiceProvider {
     );
   }
 
-  apiGetAllLocations() {
+  apiGetAllLocations(data) {
+    this.formData = new FormData();
+    this.formData.append('location', data);
 
-    return this.http.get(ConfigProvider.BASE_URL + 'story_module/api/stories_api/allLocations',
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/allLocations',
+      this.formData,
       {
         headers: this.headers,
       }
