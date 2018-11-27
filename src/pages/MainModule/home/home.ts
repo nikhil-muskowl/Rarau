@@ -146,7 +146,6 @@ export class HomePage {
 
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
-    console.log("this.languageProvider.getLanguage() : " + this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
 
     this.translate.get('rarau').subscribe((text: string) => {
@@ -299,7 +298,6 @@ export class HomePage {
         this.responseData = response;
 
         if (this.responseData.data.length > 0) {
-          console.log('responseData.data : ' + JSON.stringify(this.responseData.data));
           this.responseData.data.forEach(element => {
             this.markers.push({
               options: {
@@ -421,9 +419,7 @@ export class HomePage {
   }
 
   public showWindow({ e, marker, map }: any): void {
-    // var Param = {
-    //   marker: JSON.stringify(marker.getPosition())
-    // }    
+      
     this.user_id = this.LoginProvider.isLogin();
     let markerData = JSON.parse(JSON.stringify(marker.getPosition()));
     console.log('Marker position latitude' + JSON.stringify(markerData));
@@ -442,7 +438,7 @@ export class HomePage {
       response => {
         this.responseData = response;
         this.stories = this.responseData.data;
-        console.log("this.stories.length : " + this.stories.length);
+
         if (this.stories.length > 0) {
           this.showStories = true;
         }

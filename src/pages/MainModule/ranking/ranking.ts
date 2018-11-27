@@ -114,7 +114,6 @@ export class RankingPage {
       response => {
         this.cntryresponseData = response;
         this.countries = this.cntryresponseData.data;
-        console.log('Countries data : ' + this.countries);
       },
       err => {
         console.error(err);
@@ -199,10 +198,6 @@ export class RankingPage {
     if (location) {
       this.searchLoc = location.name;
       this.location = location.location;
-      // this.latitude = location.location.lat;
-      // this.longitude = location.location.lng;
-      console.info("selected country name : ", this.location);
-
     }
     this.countries = [];
   }

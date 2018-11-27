@@ -69,7 +69,7 @@ export class ProfilePage {
 
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
-    console.log("getLanguage() : " + this.languageProvider.getLanguage());
+
     this.translate.use(this.languageProvider.getLanguage());
 
     this.translate.get('profile').subscribe((text: string) => {
@@ -111,10 +111,6 @@ export class ProfilePage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-  }
-
   ionViewWillEnter() {
     this.setText();
     this.isLogin();
@@ -138,7 +134,6 @@ export class ProfilePage {
       response => {
         this.responseData = response;
         this.result = this.responseData.result;
-        console.log(response);
         this.name = this.result.name;
         this.email = this.result.email;
         this.userImage = this.result.image_thumb;
