@@ -179,6 +179,11 @@ ion-navbar.toolbar {
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
+
+    .select-ios {
+        display: inline-block !important;
+        padding: 11px 8px 2px 18px !important;
+    }
 }
 
 /* iPhone 6+, 7+, 8+ ----------- */
@@ -206,6 +211,11 @@ ion-navbar.toolbar {
 
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
+    }
+
+    .select-ios {
+        display: inline-block !important;
+        padding: 11px 8px 2px 18px !important;
     }
 }
 
@@ -235,6 +245,11 @@ ion-navbar.toolbar {
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
+
+    .select-ios {
+        display: inline-block !important;
+        padding: 11px 8px 2px 18px !important;
+    }
 }
 
 /* iPhone X ----------- */
@@ -262,6 +277,11 @@ ion-navbar.toolbar {
   
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
+    }
+
+    .select-ios {
+        display: inline-block !important;
+        padding: 11px 8px 2px 18px !important;
     }
 }
 
@@ -291,6 +311,11 @@ ion-navbar.toolbar {
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
+
+    .select-ios {
+        display: inline-block !important;
+        padding: 11px 8px 2px 18px !important;
+    }
 }
 
 /* iPhone 4 ----------- */
@@ -318,5 +343,10 @@ ion-navbar.toolbar {
   
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
+    }
+
+    .select-ios {
+        display: inline-block !important;
+        padding: 11px 8px 2px 18px !important;
     }
 }
