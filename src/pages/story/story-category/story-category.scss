@@ -33,7 +33,7 @@ page-story-category {
     .back-btn {
         background: transparent !important;
         color: #fff;
-        margin-top: 10px !important;
+        margin-top: 0px !important;
     }
     ion-header button {
         color: #fff;
@@ -49,5 +49,23 @@ page-story-category {
     .ion-tags-input .iti-input {
         width: auto !important;
     }
-   
+    .item.item-md .checkbox-md {
+        position: relative;
+        display: block;
+        margin: 0px 0px -29px 15px!important;
+        .item-cover {
+            left: 0;
+            top: 0;
+            position: inherit;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            cursor: pointer;
+        }
+    }
+    ion-item .button-inner {
+        color: #000;
+        background: #fff;
+        border: none;
+    }
 }

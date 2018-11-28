@@ -4,11 +4,11 @@ page-ranking {
         color: #000;
     }
     .segment-md-primary .segment-button {
-        color: #000;
+        color: #ec3747;
     }
     .segment-md .segment-button.segment-activated {
-        border-color: #000;
-        color: #000;
+        border-color: #ec3747;
+        color: #ec3747;
         opacity: 1;
     }
     .input-wrapper {
@@ -19,8 +19,7 @@ page-ranking {
         font-size: 6vw;
         color: #fff;
     }
-    .round_img{
-        
+    .round_img {
         ion-icon {
             display: inline-block;
             font-size: 2em;
@@ -30,10 +29,9 @@ page-ranking {
         background: transparent;
         position: absolute;
         top: 0px;
-        left: 0px;        
+        left: 0px;
     }
-
-    .rank-h1{
+    .rank-h1 {
         font-size: 23px !important;
         margin-top: 3px !important;
         color: #ec3747 !important;
@@ -47,56 +45,45 @@ page-ranking {
         margin-left: 3px;
         position: absolute;
     }
-
     /* for ranking font size */
-
     .rank-h3 {
         font-size: 1.8rem !important;
     }
-
     .rank-p1 {
         font-size: 1.6rem !important;
     }
-
     .rank-spn {
         font-size: 1.4rem !important;
+        display: inline-block;
     }
-
     .rank-p2 {
         font-size: 1.2rem !important;
     }
-
-    .rank-spn {
-        display:inline-block;
+    .img-bord {
+        border-radius: 15px;
     }
-
     .rank-img-1 {
         height: 50px;
         width: 60px;
         position: absolute;
-        transform: rotate(-30deg);
-        //margin-left: -20px;
+        transform: rotate(-30deg); //margin-left: -20px;
         margin-left: -6px;
-        margin-top: 2px;    
+        margin-top: 2px;
     }
-
     .rank-img-2 {
         height: 45px;
         width: 55px;
         position: absolute;
-        transform: rotate(-30deg);
-        //margin-left: -20px;
+        transform: rotate(-30deg); //margin-left: -20px;
         margin-left: -6px;
-        margin-top: 2px;    
+        margin-top: 2px;
     }
-
     .rank-img-3 {
         height: 40px;
         width: 50px;
         position: absolute;
-        transform: rotate(-30deg);
-        //margin-left: -20px;
+        transform: rotate(-30deg); //margin-left: -20px;
         margin-left: -6px;
-        margin-top: 2px;    
+        margin-top: 2px;
     }
 }

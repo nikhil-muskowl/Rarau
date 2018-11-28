@@ -54,6 +54,7 @@ export class ProfilePage {
   public view_log;
   public saved_stories;
   public more;
+  public change_text;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -68,7 +69,7 @@ export class ProfilePage {
 
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
-    console.log("getLanguage() : " + this.languageProvider.getLanguage());
+
     this.translate.use(this.languageProvider.getLanguage());
 
     this.translate.get('profile').subscribe((text: string) => {
@@ -104,16 +105,16 @@ export class ProfilePage {
     this.translate.get('more').subscribe((text: string) => {
       this.more = text;
     });
+    this.translate.get('change').subscribe((text: string) => {
+      this.change_text = text;
+    });
 
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
   }
 
   ionViewWillEnter() {
     this.setText();
     this.isLogin();
+    //set segment
     this.user = 'Stories';
   }
 
@@ -133,7 +134,6 @@ export class ProfilePage {
       response => {
         this.responseData = response;
         this.result = this.responseData.result;
-        console.log(response);
         this.name = this.result.name;
         this.email = this.result.email;
         this.userImage = this.result.image_thumb;

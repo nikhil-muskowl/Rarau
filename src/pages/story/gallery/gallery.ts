@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { CameraPreview } from "@ionic-native/camera-preview";
+import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from "@ionic-native/camera-preview";
 import { ShowPhotoPage } from "../show-photo/show-photo";
 import { HomePage } from "../../MainModule/home/home";
 import { LoginPage } from "../../AccountModule/login/login";
@@ -109,16 +109,15 @@ export class GalleryPage {
 
   takePicture() {
 
-    const pictureOpts = {
+    const pictureOpts: CameraPreviewPictureOptions = {
       quality: 60,
-      width: 640,
-      height: 900,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
+      width: 360,
+      height: 640,
+      // destinationType: this.camera.DestinationType.DATA_URL,
+      // encodingType: this.camera.EncodingType.JPEG,
+      // mediaType: this.camera.MediaType.PICTURE,
       // correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.CAMERA,
-
+      // sourceType: this.camera.PictureSourceType.CAMERA,
     };
 
     this.cameraPreview.takePicture(pictureOpts).then(imageData => {

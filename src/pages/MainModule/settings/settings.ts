@@ -95,7 +95,6 @@ export class SettingsPage {
 
     this.baiduProvider.getCities().subscribe(response => {
       this.cities = response;
-      console.log('cities : ' + JSON.stringify(this.cities));
       for (let i = 0; i < this.cities.length; i++) {
         if (this.cities[i].area_id == this.city_id) {
           this.city = this.cities[i].name;

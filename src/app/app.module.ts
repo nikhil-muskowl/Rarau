@@ -98,6 +98,7 @@ import { MyPetProvider } from '../providers/my-pet/my-pet';
 import { CreateEventPage } from '../pages/Events/create-event/create-event';
 import { EventDetailsPage } from '../pages/Events/event-details/event-details';
 import { EventListPage } from '../pages/Events/event-list/event-list';
+import { EventModalPage } from '../pages/Events/event-modal/event-modal';
 
 //PopOvers
 import { BirthdayPage } from '../pages/Popover/birthday/birthday';
@@ -173,6 +174,7 @@ export function createTranslateLoader(http: HttpClient) {
     CreateEventPage,
     EventDetailsPage,
     EventListPage,
+    EventModalPage,
   ],
   imports: [
     HttpClientModule,
@@ -259,6 +261,7 @@ export function createTranslateLoader(http: HttpClient) {
     CreateEventPage,
     EventDetailsPage,
     EventListPage,
+    EventModalPage
   ],
   providers: [
     StatusBar,

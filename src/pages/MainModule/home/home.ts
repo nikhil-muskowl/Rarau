@@ -17,6 +17,7 @@ import { Slides } from 'ionic-angular';
 import { TutorialPage } from '../tutorial/tutorial';
 import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
 import { CreateEventPage } from '../../Events/create-event/create-event';
+import { EventListPage } from '../../Events/event-list/event-list';
 
 @Component({
   selector: 'page-home',
@@ -56,7 +57,7 @@ export class HomePage {
   public user_id;
   public city_id;
   public language_id;
-  public stories: any;
+  public stories: any = [];
   public showStories: boolean = false;
   public markerHtml;
 
@@ -145,7 +146,6 @@ export class HomePage {
 
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
-    console.log("this.languageProvider.getLanguage() : " + this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
 
     this.translate.get('rarau').subscribe((text: string) => {
@@ -240,6 +240,7 @@ export class HomePage {
   }
 
   public bindMap() {
+    this.user_id = this.LoginProvider.isLogin();
     this.markers = [];
     console.log("this.serLatitude && this.serLongitude : " + this.serLatitude + ' ' + this.serLongitude);
     if (this.serLatitude != undefined && this.serLongitude != undefined) {
@@ -297,7 +298,6 @@ export class HomePage {
         this.responseData = response;
 
         if (this.responseData.data.length > 0) {
-          console.log('responseData.data : ' + JSON.stringify(this.responseData.data));
           this.responseData.data.forEach(element => {
             this.markers.push({
               options: {
@@ -328,6 +328,27 @@ export class HomePage {
               }
             }
             else {
+              this.markers.push({
+                options: {
+                  // enableDragging: true,
+                  icon: {
+                    imageUrl: 'assets/imgs/marker.png',
+                    size: {
+                      height: 32,
+                      width: 32
+                    },
+                    imageSize: {
+                      height: 32,
+                      width: 32
+                    }
+                  }
+                },
+                point: {
+                  lat: this.latitude,
+                  lng: this.longitude
+                }
+              });
+
               this.zoomlatLong = {
                 // lat: element.latitude,
                 // lng: element.longitude,
@@ -376,7 +397,7 @@ export class HomePage {
 
   openTutorial() {
     // this.navCtrl.setRoot(TutorialPage);
-    this.navCtrl.push(CreateEventPage);
+    this.navCtrl.push(EventListPage);
   }
 
   public getLocation() {
@@ -398,10 +419,8 @@ export class HomePage {
   }
 
   public showWindow({ e, marker, map }: any): void {
-    // var Param = {
-    //   marker: JSON.stringify(marker.getPosition())
-    // }    
-    this.showStories = true;
+      
+    this.user_id = this.LoginProvider.isLogin();
     let markerData = JSON.parse(JSON.stringify(marker.getPosition()));
     console.log('Marker position latitude' + JSON.stringify(markerData));
     this.paramData = {
@@ -419,6 +438,10 @@ export class HomePage {
       response => {
         this.responseData = response;
         this.stories = this.responseData.data;
+
+        if (this.stories.length > 0) {
+          this.showStories = true;
+        }
         this.loadingProvider.hide();
       },
       err => console.error(err),

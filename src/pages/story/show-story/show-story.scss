@@ -1,36 +1,40 @@
 page-show-story {
-
-    .swipe-bar{
+    .swipe-bar {
         margin-top: 10px;
         text-align: center;
     }
-
-    .comment-bar{
-        .item-md [item-left], .item-md [item-right], .item-md [item-start], .item-md [item-end] {
+    .comment-bar {
+        .item-md [item-left],
+        .item-md [item-right],
+        .item-md [item-start],
+        .item-md [item-end] {
             margin: 9px 0px 9px 0;
         }
-        .item-md {            
+        .item-md {
             font-size: 1.4rem;
         }
         .text-input-md {
-            margin:0;
-            //padding:4.5px 0 3.5px 5px !important;
-            padding:4px 0px 4px 5px !important;
+            margin: 0; //padding:4.5px 0 3.5px 5px !important;
+            padding: 4px 0px 4px 5px !important;
             width: 100%;
             background-color: #eaeaea !important;
         }
-        .text-input {            
+        .text-input {
             width: 100%;
         }
-        .btn-left{
+        .btn-left {
             background-color: #c3c3c3 !important;
             border-top-left-radius: 15px;
             border-bottom-left-radius: 15px;
         }
-        .btn-right{
+        .btn-right {
             background-color: #eaeaea !important;
             border-top-right-radius: 15px;
             border-bottom-right-radius: 15px;
+            ion-icon {
+                font-size: 3rem !important;
+                padding: 2px 2px;
+            }
         }
         .button-clear-md {
             border-color: transparent;
@@ -41,25 +45,20 @@ page-show-story {
             opacity: 1;
         }
     }
-
     .flame-number {
         float: right;
         font-size: 1.5rem;
         margin-top: 10px;
     }
-
     a {
         color: #fff;
     }
-
     h3,
     p {
         color: #333 !important;
         font-weight: 500 !important;
         margin-top: -8px;
     }
-
-
     .grid {
         padding: 0;
         margin-left: auto;
@@ -142,9 +141,7 @@ page-show-story {
         z-index: 2;
         cursor: pointer;
     }
-
-
-    .story-commnets{
+    .story-commnets {
         .note-md {
             color: #c5c5c5;
             font-size: 10px;
@@ -155,15 +152,13 @@ page-show-story {
             border-radius: 10px;
             margin-right: 2rem;
         }
-
-        .comment-date{
+        .comment-date {
             margin-left: 7rem;
             margin-top: 1rem;
-            p{
+            p {
                 color: #cecece !important;
                 font-size: 12px !important;
             }
         }
     }
-
 }

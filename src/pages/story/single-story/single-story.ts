@@ -9,6 +9,7 @@ import { ReceiptShowPage } from '../receipt-show/receipt-show';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { ReportPage } from '../../Popover/report/report';
+import { LoginPage } from '../../AccountModule/login/login';
 
 @IonicPage()
 @Component({
@@ -47,6 +48,8 @@ export class SingleStoryPage {
   private already_saved;
   private saved;
   private story_saved;
+  private forbidden;
+  private login_to_continue;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -98,11 +101,12 @@ export class SingleStoryPage {
     this.translate.get('story_saved').subscribe((text: string) => {
       this.story_saved = text;
     });
-
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SingleStoryPage');
+    this.translate.get('forbidden').subscribe((text: string) => {
+      this.forbidden = text;
+    });
+    this.translate.get('login_to_continue').subscribe((text: string) => {
+      this.login_to_continue = text;
+    });
   }
 
   isLogin() {
@@ -155,12 +159,20 @@ export class SingleStoryPage {
 
   reportStory() {
     console.log('Report user');
-    let params = {
-      'story_id': this.id,
-      'type': 2
-    };
+    console.log('Swipe comment', event);
+    this.isLogin();
 
-    this.navCtrl.push(ReportPage, params);
+    if (this.user_id) {
+      let params = {
+        'story_id': this.id,
+        'type': 2
+      };
+
+      this.navCtrl.push(ReportPage, params);
+    } else {
+
+      this.loginAlert();
+    }
   }
 
   showReceipt() {
@@ -169,7 +181,13 @@ export class SingleStoryPage {
 
   goToComments(event: any): any {
     console.log('Swipe comment', event);
-    this.navCtrl.push(ShowStoryPage, { story_id: this.story_id });
+    this.isLogin();
+
+    if (this.user_id) {
+      this.navCtrl.push(ShowStoryPage, { story_id: this.story_id });
+    } else {
+      this.loginAlert();
+    }
   }
 
   swipeAll(event: any): any {
@@ -185,40 +203,53 @@ export class SingleStoryPage {
   }
 
   swipeUp(event: any): any {
+
     console.log('Swipe Up', event);
+    this.isLogin();
 
-    this.rankStory(1);
+    if (this.user_id) {
 
-    let loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: `<img src="http://social-app.muskowl.com/assets/images/ranking/like.png" height="400">`,
-      cssClass: 'my-loading-fire',
-      duration: 1000
-    });
+      this.rankStory(1);
 
-    loading.onDidDismiss(() => {
-      console.log('Dismissed loading');
-    });
-
-    loading.present();
+      let loading = this.loadingCtrl.create({
+        spinner: 'hide',
+        content: `<img src="http://social-app.muskowl.com/assets/images/ranking/like.png" height="400">`,
+        cssClass: 'my-loading-fire',
+        duration: 1000
+      });
+      loading.onDidDismiss(() => {
+        console.log('Dismissed loading');
+      });
+      loading.present();
+    } else {
+      this.loginAlert();
+    }
   }
 
   swipeDown(event: any): any {
     console.log('Swipe Down', event);
-    this.rankStory(0);
 
-    let loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: `<img src="http://social-app.muskowl.com/assets/images/ranking/dislike.png" height="400">`,
-      cssClass: 'my-loading-water',
-      duration: 1000
-    });
+    this.isLogin();
 
-    loading.onDidDismiss(() => {
-      console.log('Dismissed loading');
-    });
+    if (this.user_id) {
 
-    loading.present();
+      this.rankStory(0);
+
+      let loading = this.loadingCtrl.create({
+        spinner: 'hide',
+        content: `<img src="http://social-app.muskowl.com/assets/images/ranking/dislike.png" height="400">`,
+        cssClass: 'my-loading-water',
+        duration: 1000
+      });
+
+      loading.onDidDismiss(() => {
+        console.log('Dismissed loading');
+      });
+
+      loading.present();
+    } else {
+      this.loginAlert();
+    }
   }
 
   public rankStory(rank: number) {
@@ -281,41 +312,61 @@ export class SingleStoryPage {
   }
 
   saveStory() {
-    this.loadingProvider.present();
-    console.log('clicked to save story');
-    var data = {
-      'user_id': this.user_id,
-      'story_id': this.story_id,
-    };
-    console.log('this.user_id' + this.user_id);
 
-    this.storyService.saveStory(data).subscribe(
-      response => {
+    this.isLogin();
 
-        this.responseData = response;
-        this.status = this.responseData.status;
-        if (!this.status) {
-          this.alertProvider.title = this.already_saved;
-          if (this.responseData.result) {
-            this.responseData.result.forEach(element => {
-              if (element.id == 'story_id') {
-                this.alertProvider.message = element.text;
-              }
-            });
+    if (this.user_id) {
+
+      this.loadingProvider.present();
+      console.log('clicked to save story');
+      var data = {
+        'user_id': this.user_id,
+        'story_id': this.story_id,
+      };
+      console.log('this.user_id' + this.user_id);
+
+      this.storyService.saveStory(data).subscribe(
+        response => {
+
+          this.responseData = response;
+          this.status = this.responseData.status;
+          if (!this.status) {
+            this.alertProvider.title = this.already_saved;
+            if (this.responseData.result) {
+              this.responseData.result.forEach(element => {
+                if (element.id == 'story_id') {
+                  this.alertProvider.message = element.text;
+                }
+              });
+            }
           }
-        }
-        else {
-          this.alertProvider.title = this.saved;
-          this.alertProvider.message = this.story_saved;
-        }
-        this.loadingProvider.dismiss();
+          else {
+            this.alertProvider.title = this.saved;
+            this.alertProvider.message = this.story_saved;
+          }
+          this.loadingProvider.dismiss();
 
-        this.alertProvider.showAlert();
-      },
-      err => {
-        console.error(err);
-        this.loadingProvider.dismiss();
-      }
-    );
+          this.alertProvider.showAlert();
+        },
+        err => {
+          console.error(err);
+          this.loadingProvider.dismiss();
+        }
+      );
+    } else {
+     this.loginAlert();
+    }
+  }
+
+  loginAlert() {
+    this.alertProvider.title = this.forbidden;
+    this.alertProvider.message = this.login_to_continue;
+    // this.alertProvider.showAlert();
+    this.alertProvider.Alert.confirm(this.login_to_continue, this.forbidden).then((res) => {
+      console.log('confirmed');
+      this.navCtrl.setRoot(LoginPage);
+    }, err => {
+      console.log('user cancelled');
+    });
   }
 }

@@ -41,10 +41,15 @@ export class TutorialPage {
       this.tutorial_will = true;
     }
     this.tutImages = [
-      { image: 'assets/imgs/Profile/img1.png' },
-      { image: 'assets/imgs/Profile/img2.png' },
-      { image: 'assets/imgs/Profile/img1.png' },
-      { image: 'assets/imgs/Profile/img2.png' }];
+      { image: 'assets/rarau_tutorial/map_search/2.png' },
+      { image: 'assets/rarau_tutorial/map_search/4.png' },
+      { image: 'assets/rarau_tutorial/story_view/1.png' },
+      { image: 'assets/rarau_tutorial/story_view/2.png' },
+      { image: 'assets/rarau_tutorial/story_view/3.png' },
+      { image: 'assets/rarau_tutorial/story_view/4.png' },
+      { image: 'assets/rarau_tutorial/3.png' },
+      { image: 'assets/rarau_tutorial/1.png' },
+      { image: 'assets/rarau_tutorial/2.png' }];
   }
 
   setText() {
@@ -67,10 +72,6 @@ export class TutorialPage {
     this.translate.get('show_tutorial').subscribe((text: string) => {
       this.show_tutorial = text;
     });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TutorialPage');
   }
 
   tuteSeen() {

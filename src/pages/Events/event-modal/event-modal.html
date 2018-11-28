@@ -1,0 +1,15 @@
+<ion-content class="main-view">
+
+  <div class="overlay" (click)="closeModal()"></div>
+
+  <div class="modal_content">
+    <ion-list>
+      <ion-item ion-item *ngFor="let event of events" (click)="ItemSelected(event)">
+        <ion-avatar item-start>
+          <img src="{{event.image_thumb}}" width="20px" height="20px" />
+        </ion-avatar>
+        {{event.title}}
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

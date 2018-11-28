@@ -55,6 +55,8 @@ export class ShowStoryPage {
   private apo_story;
   private say_something;
   private isComment: boolean = false;
+  private forbidden;
+  private login_to_continue;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -66,7 +68,6 @@ export class ShowStoryPage {
     public LoginProvider: LoginProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
-
 
   }
 
@@ -117,7 +118,12 @@ export class ShowStoryPage {
     this.translate.get('report_comment').subscribe((text: string) => {
       this.report_comment = text;
     });
-
+    this.translate.get('forbidden').subscribe((text: string) => {
+      this.forbidden = text;
+    });
+    this.translate.get('login_to_continue').subscribe((text: string) => {
+      this.login_to_continue = text;
+    });
   }
 
   public createForm() {
@@ -215,57 +221,65 @@ export class ShowStoryPage {
   }
 
   public commentStory() {
-    this.loadingProvider.present();
+    this.user_id = this.LoginProvider.isLogin();
 
-    this.formServiceProvider.markFormGroupTouched(this.commentForm);
-
-    if (this.commentForm.valid) {
+    if (this.user_id) {
       this.loadingProvider.present();
 
-      console.log(this.commentForm.value.comment);
+      this.formServiceProvider.markFormGroupTouched(this.commentForm);
 
-      var data = {
-        'story_id': this.story_id,
-        'user_id': this.user_id,
-        'comment': this.commentForm.value.comment,
-        'language_id': this.language_id,
-      }
+      if (this.commentForm.valid) {
+        this.loadingProvider.present();
 
-      this.storyService.setComment(data).subscribe(
-        response => {
-          this.responseData = response;
-          console.log(this.responseData);
+        console.log(this.commentForm.value.comment);
 
-          this.status = this.responseData.status;
-          this.message = this.responseData.message;
-
-          if (!this.status) {
-            this.messageTitle = this.warning;
-            if (this.responseData.result) {
-              this.responseData.result.forEach(element => {
-                if (element.id == 'comment') {
-                  this.formErrors.comment = element.text
-                }
-              });
-            }
-          } else {
-            this.messageTitle = this.success;
-            this.getStories();
-            this.getComments();
-          }
-
-          this.loadingProvider.dismiss();
-          this.commentForm.reset();
-        },
-        err => {
-          console.error(err);
-          this.loadingProvider.dismiss();
+        var data = {
+          'story_id': this.story_id,
+          'user_id': this.user_id,
+          'comment': this.commentForm.value.comment,
+          'language_id': this.language_id,
         }
-      );
-    } else {
-      this.formErrors = this.formServiceProvider.validateForm(this.commentForm, this.formErrors, false);
-    }
 
+        this.storyService.setComment(data).subscribe(
+          response => {
+            this.responseData = response;
+            console.log(this.responseData);
+
+            this.status = this.responseData.status;
+            this.message = this.responseData.message;
+
+            if (!this.status) {
+              this.messageTitle = this.warning;
+              if (this.responseData.result) {
+                this.responseData.result.forEach(element => {
+                  if (element.id == 'comment') {
+                    this.formErrors.comment = element.text
+                  }
+                });
+              }
+            } else {
+              this.messageTitle = this.success;
+              this.getStories();
+              this.getComments();
+            }
+
+            this.loadingProvider.dismiss();
+            this.commentForm.reset();
+          },
+          err => {
+            console.error(err);
+            this.loadingProvider.dismiss();
+          }
+        );
+      } else {
+        this.formErrors = this.formServiceProvider.validateForm(this.commentForm, this.formErrors, false);
+      }
+    }
+    else {
+      this.alertProvider.title = this.forbidden;
+      this.alertProvider.message = this.login_to_continue;
+      this.alertProvider.showAlert();
+    }
     this.loadingProvider.dismiss();
   }
 

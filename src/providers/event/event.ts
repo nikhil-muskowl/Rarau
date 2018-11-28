@@ -1,5 +1,6 @@
 import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ConfigProvider } from '../config/config';
 
 @Injectable()
 export class EventProvider {
@@ -12,13 +13,11 @@ export class EventProvider {
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
-  apiCreateEvent(data: any) {
+  apiGetPastEvents(data: any) {
 
     this.formData = new FormData();
-    this.formData.append('query', data.query);
-    this.formData.append('location', data.location);
 
-    this.URL = 'http://social-app.muskowl.com/baidu/location';
+    this.URL = ConfigProvider.BASE_URL + 'event_module/api/events_api';
     return this.http.post(this.URL,
       this.formData,
       {
@@ -27,13 +26,24 @@ export class EventProvider {
     );
   }
 
-  apiGetEvents(data: any) {
+  apiGetUpcomingEvents(data: any) {
 
     this.formData = new FormData();
-    this.formData.append('query', data.query);
-    this.formData.append('location', data.location);
 
-    this.URL = 'http://social-app.muskowl.com/baidu/location';
+    this.URL = ConfigProvider.BASE_URL + 'event_module/api/events_api';
+    return this.http.post(this.URL,
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
+  apiGetEventDetails(id: any) {
+
+    this.formData = new FormData();
+
+    this.URL = ConfigProvider.BASE_URL + 'event_module/api/events_api/detail/' + id;
     return this.http.post(this.URL,
       this.formData,
       {

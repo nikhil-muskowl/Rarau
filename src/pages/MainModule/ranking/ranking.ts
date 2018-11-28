@@ -32,10 +32,12 @@ export class RankingPage {
   private filterData: any;
   public search = '';
   public locName = '';
+  public country;
   public data: any;
   public cntryresponseData;
   public countries;
   public location: any;
+  public searchLoc: any;
 
   public length = 5;
   public start = 0;
@@ -45,6 +47,7 @@ export class RankingPage {
   public from;
   public location_txt;
   public enter_value_serach;
+  public search_country;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -70,6 +73,11 @@ export class RankingPage {
 
   openSearch() {
     this.isSearch = !this.isSearch;
+    if (this.isSearch) {
+      this.searchLoc = '';
+      this.country = '';
+      this.countries = [];
+    }
     console.log("this.isSearch : " + this.isSearch);
   }
 
@@ -95,15 +103,17 @@ export class RankingPage {
     this.translate.get('location').subscribe((text: string) => {
       this.location_txt = text;
     });
+    this.translate.get('search_country').subscribe((text: string) => {
+      this.search_country = text;
+    });
   }
 
   getCountry() {
 
-    this.storiesProvider.apiGetAllLocations().subscribe(
+    this.storiesProvider.apiGetAllLocations(this.searchLoc).subscribe(
       response => {
         this.cntryresponseData = response;
         this.countries = this.cntryresponseData.data;
-        console.log('Countries data : ' + this.countries);
       },
       err => {
         console.error(err);
@@ -111,18 +121,8 @@ export class RankingPage {
     );
   }
 
-  oncountryChange(selectedValue) {
-    console.info("country name:", selectedValue);
-    this.location = selectedValue;
-    this.getTypes();
-  }
-
   public onCancel(ev: any) {
     this.search = '';
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RankingPage');
   }
 
   public typeChanged(event) {
@@ -179,5 +179,26 @@ export class RankingPage {
 
   public itemTapped(data: any) {
     this.navCtrl.push(SingleStoryPage, { story_id: data.id });
+  }
+
+  public onLocCancel(ev: any) {
+    this.searchLoc = '';
+  }
+
+  public onLocInput(ev: any) {
+    if (ev.target.value != "" || ev.target.value != undefined) {
+      this.searchLoc = ev.target.value;
+      this.countries = [];
+      this.getCountry();
+    }
+  }
+
+  public locItemSelected(location: any) {
+    console.log(location);
+    if (location) {
+      this.searchLoc = location.name;
+      this.location = location.location;
+    }
+    this.countries = [];
   }
 }

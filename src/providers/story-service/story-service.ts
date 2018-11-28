@@ -112,6 +112,7 @@ export class StoryServiceProvider {
     var receipt_private = data.receipt_private;
     var receipt = data.receipt;
     var language_id = data.language_id;
+    var event_id = data.event_id;
 
     console.log('images : ' + JSON.stringify(images));
     this.formData = new FormData();
@@ -126,6 +127,7 @@ export class StoryServiceProvider {
     this.formData.append('images', JSON.stringify(images));
     this.formData.append('user_id', user_id);
     this.formData.append('types', JSON.stringify(catId));
+    this.formData.append('event_id', event_id);
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/api_save',
       this.formData,
@@ -289,6 +291,29 @@ export class StoryServiceProvider {
     );
   }
 
+  getStoriesRank(data) {
+    this.formData = new FormData();
+
+    if (data.user_id != undefined)
+      this.formData.append('user_id', data.user_id);
+
+    this.formData.append('story_type_id', data.story_type_id);
+    this.formData.append('length', data.length);
+    this.formData.append('start', data.start);
+    this.formData.append('order[0][column]', '3');
+    this.formData.append('order[0][dir]', 'desc');
+
+    if (data.location != undefined)
+      this.formData.append('location', data.location);
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
   apicommentComplain(data) {
     this.formData = new FormData();
 
@@ -341,9 +366,12 @@ export class StoryServiceProvider {
     );
   }
 
-  apiGetAllLocations() {
+  apiGetAllLocations(data) {
+    this.formData = new FormData();
+    this.formData.append('location', data);
 
-    return this.http.get(ConfigProvider.BASE_URL + 'story_module/api/stories_api/allLocations',
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/allLocations',
+      this.formData,
       {
         headers: this.headers,
       }

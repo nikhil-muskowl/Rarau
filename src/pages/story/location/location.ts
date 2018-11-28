@@ -5,6 +5,7 @@ import { LocationTrackerProvider } from '../../../providers/location-tracker/loc
 import { AlertProvider } from '../../../providers/alert/alert';
 import { DomSanitizer } from "@angular/platform-browser";
 import { StoryCategoryPage } from '../story-category/story-category';
+import { ShowPhotoPage } from '../show-photo/show-photo';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 
@@ -85,7 +86,7 @@ export class LocationPage {
   }
 
   back() {
-    this.navCtrl.pop();
+    this.navCtrl.push(ShowPhotoPage, { photo: this.image });
   }
 
   Next() {

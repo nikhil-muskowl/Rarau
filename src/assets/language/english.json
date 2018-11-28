@@ -124,10 +124,12 @@
   "logged_in": "Login Succesfully",
   "logged_out": "Log-Out Succesfully",
   "keep_going": "KEEP GOING",
+  "home": "Home",
   "events": "Events",
   "create_event": "Create Event",
   "event_name": "Event Name",
-  "event_date": "Event Date",
+  "event_to_date": "Event to Date",
+  "event_from_date": "Event from Date",
   "event_time": "Event Time",
   "event_city": "Event City",
   "event_loc": "Event Location",
@@ -136,5 +138,13 @@
   "error_time": "field is required",
   "error_date": "field is required",
   "error_city": "field is required",
-  "home": "Home"
+  "change": "Change",
+  "event_detail": "Event Detail",
+  "event_list": "Event List",
+  "latest_event": "Latest Events",
+  "past_event": "Past Events",
+  "search_country": "Search Country",
+  "sel_event": "Select Event",
+  "show_in_event": "Show in Event",
+  "comma_separate": "Enter Comma(,) to separate"
 }

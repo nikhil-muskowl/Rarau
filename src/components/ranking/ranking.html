@@ -2,7 +2,7 @@
   <div>
     <ion-slides slidesPerView="4">
       <ion-slide *ngFor="let type of types" (click)="typeChanged(type)">
-        <ion-segment [(ngModel)]="story_type_id" color="primary">
+        <ion-segment [(ngModel)]="story_type_id" color="danger">
           <ion-segment-button value="{{type.id}}">
             {{type.title}}
           </ion-segment-button>
@@ -12,23 +12,23 @@
   </div>
 
   <ion-list>
-    <ion-item *ngFor="let item of items;">
+    <ion-item *ngFor="let item of rankItems;">
       <ion-row>
-          <ion-col col-5 class="round_img">
-              <div *ngIf="(item.rank == 1)"> 
-                  <img class="rank-img-1" src="../assets/imgs/ranking/gold.png">  
-                </div> 
-                <div *ngIf="(item.rank == 2)">
-                  <img class="rank-img-2" src="../assets/imgs/ranking/silver.png">  
-                </div> 
-                <div *ngIf="(item.rank == 3)">
-                  <img class="rank-img-3" src="../assets/imgs/ranking/bronz.png">  
-                </div>
-                <div *ngIf="(item.rank >= 4)">
-                  <h1 class="rank-h1">{{item.rank}}</h1>
-                </div>
-            <img style="border-radius: 15px;" (click)="itemTapped(item)" src="{{item.image_thumb}}">
-          </ion-col>
+        <ion-col col-5 class="round_img">
+          <div *ngIf="(item.rank == 1)">
+            <img class="rank-img-1" src="assets/imgs/ranking/gold.png">
+          </div>
+          <div *ngIf="(item.rank == 2)">
+            <img class="rank-img-2" src="assets/imgs/ranking/silver.png">
+          </div>
+          <div *ngIf="(item.rank == 3)">
+            <img class="rank-img-3" src="assets/imgs/ranking/bronz.png">
+          </div>
+          <div *ngIf="(item.rank >= 4)">
+            <h1 class="rank-h1">{{item.rank}}</h1>
+          </div>
+          <img style="border-radius: 15px;" (click)="itemTapped(item)" src="{{item.image_thumb}}">
+        </ion-col>
         <ion-col col-7>
           <h3>{{item.title}}</h3>
           <p> <span *ngFor="let cat of item.categories; let j = index;">
@@ -52,4 +52,8 @@
       </ion-row>
     </ion-item>
   </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </div>

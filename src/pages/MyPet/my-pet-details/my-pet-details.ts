@@ -47,17 +47,16 @@ export class MyPetDetailsPage {
     public mypetProvider: MyPetProvider,
     public languageProvider: LanguageProvider, ) {
 
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
+    this.pet_id = this.navParams.get('id');
+    console.log('this.pet_id : ' + this.pet_id);
 
     this.user_id = this.LoginProvider.isLogin();
     this.language_id = this.languageProvider.getLanguageId();
     this.setText();
     this.getDetails();
-
-    this.pet_id = this.navParams.get('id');
-    console.log('this.pet_id : ' + this.pet_id);
   }
 
   goBack() {

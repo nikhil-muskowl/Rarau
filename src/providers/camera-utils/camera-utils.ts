@@ -40,22 +40,22 @@ export class CameraUtilsProvider {
 
   public saveToGallery(src) {
 
-    return new Promise((resolve, reject) => {
+    // return new Promise((resolve, reject) => {
 
-      this.fName = this.createFileName();
-      var realData = src.split(",")[1];
-      let blob = this.b64toBlob(realData, 'image/jpeg');
+    //   this.fName = this.createFileName();
+    //   var realData = src.split(",")[1];
+    //   let blob = this.b64toBlob(realData, 'image/jpeg');
 
-      this.file.writeFile(this.pictureDir, this.fName, blob)
-        .then(() => {
-          resolve(this.pictureDir + this.fName);
-          console.log("Image saved.");
-        })
-        .catch((err) => {
-          console.log('error writing blob')
-          reject(err)
-        })
-    });
+    //   this.file.writeFile(this.pictureDir, this.fName, blob)
+    //     .then(() => {
+    //       resolve(this.pictureDir + this.fName);
+    //       console.log("Image saved.");
+    //     })
+    //     .catch((err) => {
+    //       console.log('error writing blob')
+    //       reject(err)
+    //     })
+    // });
   }
 
   public b64toBlob(b64Data, contentType) {

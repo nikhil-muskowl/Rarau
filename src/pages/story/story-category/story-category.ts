@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, Modal, ModalController, ModalOptions } from 'ionic-angular';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { HomePage } from '../../MainModule/home/home';
@@ -9,9 +9,11 @@ import { ConfigProvider } from '../../../providers/config/config';
 import { LoginProvider } from '../../../providers/login/login';
 import { TabsService } from "../../util/tabservice";
 import { UploadReceiptPage } from "../upload-receipt/upload-receipt";
+import { LocationPage } from "../location/location";
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
+import { EventModalPage } from '../../Events/event-modal/event-modal';
 
 @IonicPage()
 @Component({
@@ -44,6 +46,7 @@ export class StoryCategoryPage {
   public paramData;
   public language_id;
   public index_id;
+  public Event_id;
 
   public btnGo = 1;
   public varRecChk;
@@ -56,12 +59,16 @@ export class StoryCategoryPage {
   public field_not_blank;
   public choose_category;
   public write_something;
+  public comma_separate;
+  public show_in_event;
+  public event_will;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public sanitizer: DomSanitizer,
     public platform: Platform,
     public zone: NgZone,
+    private modal: ModalController,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
@@ -94,15 +101,15 @@ export class StoryCategoryPage {
       this.index_id = this.navParams.get('index_id');
     }
 
-    console.log('lat long : ' + this.latitude + ', ' + this.longitude);
+    // console.log('lat long : ' + this.latitude + ', ' + this.longitude);
     console.log('receipt_private : ' + this.receipt_private);
     if (this.sel_cat_id != undefined) {
       this.catModal = this.sel_cat_id;
-      console.log('catModal : ' + this.catModal);
+      // console.log('catModal : ' + this.catModal);
     }
     console.log('sel_cat_id : ' + this.sel_cat_id);
-    console.log('receiptImage : ' + this.receiptImage);
-    console.log('image : ' + this.image);
+    // console.log('receiptImage : ' + this.receiptImage);
+    // console.log('image : ' + this.image);
     this.setCategory();
     this.bindtags();
   }
@@ -132,13 +139,60 @@ export class StoryCategoryPage {
     this.translate.get('write_something').subscribe((text: string) => {
       this.write_something = text;
     });
-
     this.translate.get('category').subscribe((text: string) => {
       this.category_txt = text;
     });
+    this.translate.get('show_in_event').subscribe((text: string) => {
+      this.show_in_event = text;
+    });
+    this.translate.get('comma_separate').subscribe((text: string) => {
+      this.comma_separate = text;
+    });
   }
 
-  ionViewDidLoad() {
+  SetEvent() {
+    if (this.event_will) {
+      //cheecked means user want to set an event
+      console.log('Tutorial will be showen : ' + this.event_will);
+      this.OpenEveModal();
+    }
+    else {
+      //means user dont't want to see tutorial on every startup
+      console.log('Tutorial will not be showen : ' + this.event_will);
+      this.Event_id = '';
+    }
+  }
+
+  OpenEveModal() {
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+
+    const myModalData = {
+      name: 'Nikhil Suwalka',
+      occupation: 'Android Developer'
+    };
+
+    const myModal: Modal = this.modal.create(EventModalPage, { data: myModalData }, myModalOptions);
+
+    myModal.present();
+
+    myModal.onDidDismiss((data) => {
+      console.log('data from model : ' + JSON.stringify(data));
+
+      if (data) {
+        console.log('data.EveId : ' + data.EveId);
+        this.Event_id = data.EveId;
+      }
+      else {
+        this.event_will = false;
+      }
+    });
+
+    myModal.onWillDismiss((data) => {
+      console.log("I'm about to dismiss");
+      console.log(data);
+    });
   }
 
   setCategory() {
@@ -148,7 +202,7 @@ export class StoryCategoryPage {
     this.storyService.getCategory().subscribe(
       response => {
         this.responseData = response;
-        console.log('Category : ' + JSON.stringify(response));
+        // console.log('Category : ' + JSON.stringify(response));
 
         this.categories = this.responseData.data;
         this.bindList();
@@ -165,21 +219,18 @@ export class StoryCategoryPage {
     if (this.model[index].isImage) {
 
       this.model[index].isImage = false;
-
-      // if (category.is_upload == 1) {
-      //   this.receipt_private = 0;
-      //   this.receiptImage = '';
-      // }
     } else {
       this.model[index].isImage = true;
     }
 
+
     this.bindArray();
 
     console.log(category);
-
+    console.log('this.model[index] : ' + index);
+    console.log('this.model[index].isImage : ' + this.model[index].isImage);
     if (category.is_upload == 1) {
-      if (this.receiptImage == undefined || this.receiptImage == '') {
+      if (this.model[index].isImage && (this.receiptImage == undefined || this.receiptImage == '')) {
         this.navCtrl.push(UploadReceiptPage, {
           index_id: index,
           sel_cat_id: this.sel_cat_id,
@@ -189,11 +240,13 @@ export class StoryCategoryPage {
           longitude: this.longitude
         });
       }
+      //for clear only that category image index
       else if (this.index_id == index) {
         this.receipt_private = 0;
         this.receiptImage = '';
       }
     }
+    console.log('after model[index].isImage : ' + this.model[index].isImage);
 
     console.log('receiptImage : ' + this.receiptImage);
     console.log('this.index_id and index : ' + this.index_id + ' , ' + index);
@@ -258,6 +311,7 @@ export class StoryCategoryPage {
             'receipt_private': this.receipt_private,
             'receipt': this.receiptImage,
             'language_id': this.language_id,
+            'event_id': this.Event_id,
           };
 
           console.log('Param data post : ' + JSON.stringify(this.paramData));
@@ -269,7 +323,7 @@ export class StoryCategoryPage {
               this.message = this.responseData.message;
 
               if (this.responseData.status) {
-                
+
                 //for synchronize saving
                 this.zone.run(() => {
                   for (let i = 0; i < this.images.length; i++) {
@@ -316,7 +370,7 @@ export class StoryCategoryPage {
   }
 
   back() {
-    this.navCtrl.pop();
+    this.navCtrl.push(LocationPage, { image: this.image });
   }
 
   bindtags() {

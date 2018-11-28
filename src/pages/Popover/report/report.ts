@@ -108,6 +108,8 @@ export class ReportPage {
 
   sendCommentReport() {
 
+    this.complain_by = this.LoginProvider.isLogin();
+
     if (this.reportForm.valid) {
       this.loadingProvider.present();
 
@@ -142,6 +144,8 @@ export class ReportPage {
   }
 
   sendUserReport() {
+    this.complain_by = this.LoginProvider.isLogin();
+
     if (this.reportForm.valid) {
       this.loadingProvider.present();
 
@@ -175,7 +179,8 @@ export class ReportPage {
   }
 
   sendStoryReport() {
-
+    this.complain_by = this.LoginProvider.isLogin();
+    
     if (this.reportForm.valid) {
       this.loadingProvider.present();
 

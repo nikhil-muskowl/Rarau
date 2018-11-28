@@ -1,18 +1,76 @@
-<!--
-  Generated template for the EventListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>EventList</ion-title>
+  <ion-navbar hideBackButton>
+    <ion-title class="tool-bar-title">
+      <button start class="back-btn" (click)='goBack()'>
+        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+      </button><span id="hdr-txt">{{event_list}}</span>
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+  <div>
+    <ion-segment [(ngModel)]="event" color="danger" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="Upcoming">
+        {{latest_event_txt}}
+      </ion-segment-button>
+      <ion-segment-button value="History">
+        {{past_event_txt}}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
+  <div [ngSwitch]="event">
+    <div *ngSwitchCase="'Upcoming'">
+      <ion-list>
+        <ion-item *ngFor="let upEve of upEveData; let i = index;" (click)="eveDetails(upEve)">
+          <ion-row>
+            <ion-col col-5 class="round_img">
+              <img class="img-bord" src="{{upEve.image_thumb}}">
+            </ion-col>
+            <ion-col col-7>
+              <h3 class="rank-h3 ellipsis-1">{{upEve.title}}</h3>
+              <p class="rank-p1 ellipsis-2">
+                {{upEve.description}}
+              </p>
+              <p class="rank-p2 ellipsis-1">
+                {{upEve.from_date}}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="UplistScrollDown($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+
+    <div *ngSwitchCase="'History'">
+      <ion-list>
+        <ion-item *ngFor="let pastEve of pastEveData; let i = index;" (click)="eveDetails(pastEve)">
+
+          <ion-row>
+            <ion-col col-5 class="round_img">
+              <img class="img-bord" src="{{pastEve.image_thumb}}">
+            </ion-col>
+            <ion-col col-7>
+              <h3 class="rank-h3 ellipsis-1">{{pastEve.title}}</h3>
+              <p class="rank-p1 ellipsis-2">
+                {{pastEve.description}}
+              </p>
+              <p class="rank-p2 ellipsis-1">
+                {{pastEve.from_date}}
+              </p>
+
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+
+      <ion-infinite-scroll (ionInfinite)="PastlistScrollDown($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
 </ion-content>

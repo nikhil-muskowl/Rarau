@@ -181,6 +181,14 @@ page-profile {
         margin-top: 15px;
         margin-left: 40px;
     }
+    .segment-md-primary .segment-button {
+        color: #ec3747;
+    }
+    .segment-md .segment-button.segment-activated {
+        border-color: #ec3747;
+        color: #ec3747;
+        opacity: 1;
+    }
     .segment-grid {
         padding: 0 !important;
     }

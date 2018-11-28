@@ -42,6 +42,7 @@ export class UploadReceiptPage {
 
   public rarau;
   public error;
+  public receipt;
   public select_img_first;
   public show_rec_public;
   public upload;
@@ -70,7 +71,7 @@ export class UploadReceiptPage {
       this.imgSend = this.srcPhoto;
     }
     else {
-      this.receiptImage = "assets/icon/user.png";
+      this.receiptImage = "assets/imgs/receipt.png";
     }
 
     this.index_id = this.navParams.get('index_id');
@@ -103,6 +104,9 @@ export class UploadReceiptPage {
     this.translate.get('upload').subscribe((text: string) => {
       this.upload = text;
     });
+    this.translate.get('receipt').subscribe((text: string) => {
+      this.receipt = text;
+    });
   }
 
   ionViewWillEnter() {
@@ -117,6 +121,7 @@ export class UploadReceiptPage {
       this.recipt_show = 0;
     }
     console.log('Receipt privacy is : ' + this.receipt_private);
+    console.log('Receipt recipt_show is : ' + this.recipt_show);
 
   }
 
@@ -125,7 +130,7 @@ export class UploadReceiptPage {
       receipt: this.result,
       sel_cat_id: this.sel_cat_id,
       index_id: this.index_id,
-      isPrivate: this.recipt_show,
+      receipt_private: this.recipt_show,
       image: this.image,
       locName: this.locName,
       latitude: this.latitude,

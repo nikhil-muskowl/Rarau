@@ -8,6 +8,7 @@ import { FollowProvider } from '../../../providers/follow/follow';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { ReportPage } from '../../Popover/report/report';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -44,6 +45,8 @@ export class OthersProfilePage {
   public stories;
   public ranking;
   private rarau;
+  private forbidden;
+  private login_to_continue;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -105,6 +108,12 @@ export class OthersProfilePage {
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;
     });
+    this.translate.get('forbidden').subscribe((text: string) => {
+      this.forbidden = text;
+    });
+    this.translate.get('login_to_continue').subscribe((text: string) => {
+      this.login_to_continue = text;
+    });
   }
 
   ionViewDidLoad() {
@@ -154,12 +163,25 @@ export class OthersProfilePage {
 
   reportStory() {
     console.log('Report user');
-    let params = {
-      'user_id': this.id,
-      'type': 1
-    };
+    this.isLogin();
+    if (this.user_id) {
+      let params = {
+        'user_id': this.id,
+        'type': 1
+      };
 
-    this.navCtrl.push(ReportPage, params);
+      this.navCtrl.push(ReportPage, params);
+    } else {
+      this.alertProvider.title = this.forbidden;
+      this.alertProvider.message = this.login_to_continue;
+      // this.alertProvider.showAlert();
+      this.alertProvider.Alert.confirm(this.login_to_continue, this.forbidden).then((res) => {
+        console.log('confirmed');
+        this.navCtrl.setRoot(LoginPage);
+      }, err => {
+        console.log('user cancelled');
+      });
+    }
   }
 
   dofollow() {
@@ -185,9 +207,15 @@ export class OthersProfilePage {
       );
       this.loadingProvider.dismiss();
     } else {
-      this.alertProvider.title = 'Warning';
-      this.alertProvider.message = 'Please Login First!';
-      this.alertProvider.showAlert();
+      this.alertProvider.title = this.forbidden;
+      this.alertProvider.message = this.login_to_continue;
+      // this.alertProvider.showAlert();
+      this.alertProvider.Alert.confirm(this.login_to_continue, this.forbidden).then((res) => {
+        console.log('confirmed');
+        this.navCtrl.setRoot(LoginPage);
+      }, err => {
+        console.log('user cancelled');
+      });
     }
   }
 
