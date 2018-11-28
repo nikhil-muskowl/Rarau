@@ -1,21 +1,18 @@
 <ion-header>
-
-  <ion-navbar hideBackButton>
-    <ion-toolbar>
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='back()'>
-          <ion-icon class="toolbar-icon" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button (click)="goBack()">
+          <ion-icon name="arrow-back"></ion-icon>
         </button>
-        <span id="hdr-txt">{{location_txt}}</span>
+      </ion-buttons>
+      <ion-title text-center>
+        {{location_txt}}
       </ion-title>
-      <ion-buttons end>
+      <ion-buttons right>
         <button class="publish-btn" ion-button type="submit" (click)="Next()"> {{next}} </button>
       </ion-buttons>
-    </ion-toolbar>
-
-  </ion-navbar>
-
-</ion-header>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content>
   <img style="min-height:93%;" [src]="sanitizer.bypassSecurityTrustResourceUrl(image)">

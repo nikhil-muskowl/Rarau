@@ -1,15 +1,15 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title><span id="hdr-txt">{{title}}</span></ion-title>
-    <ion-buttons end class="btn-type">
-      <button style="background: transparent">
-        <img src="assets/icon/search_home.png" (click)="openSearch()" width="30px" height="30px" name="search">
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-
-</ion-header>
+    <ion-navbar hideBackButton>
+      <ion-title text-center>
+        {{title}}
+      </ion-title>
+      <ion-buttons right>
+        <button style="background: transparent">
+          <img src="assets/icon/search_home.png" (click)="openSearch()" width="30px" height="30px" name="search">
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content>
 

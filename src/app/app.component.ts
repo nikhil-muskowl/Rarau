@@ -90,8 +90,8 @@ export class MyApp {
         this.baiduProvider.setCity('131');
       }
 
-      let splash = modalCtrl.create(SplashPage);
-      splash.present();
+      // let splash = modalCtrl.create(SplashPage);
+      // splash.present();
 
       // Commented these lines for desktop, uncomment for real device(Mobile)
       // console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
