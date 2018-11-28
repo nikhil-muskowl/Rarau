@@ -35,44 +35,49 @@
     </div>
 
     <ion-grid class="story-footer">
-      <ion-row>
-        <ion-col col-9>
-          <button (click)="saveStory()" clear style="background: transparent">
-            <img src="assets/icon/download_color.png" height="40" width="40">
-          </button>
-          <button (click)="reportStory()" clear style="background: transparent">
-            <img src="assets/icon/report_color.png" height="40" width="40">
-          </button>
-          <button *ngIf="receipt_private == 0 || receipt_private == null" (click)="showReceipt()" clear style="background: transparent">
-            <img src="assets/icon/invoice-icon_color.png" height="40" width="40">
-          </button>
-        </ion-col>
-        <ion-col col-3>
-          <div class="fire-div">
-            <span *ngIf="totalFlames > 0">
-              <span class="like-head">{{totalLikes}}</span>
-              <span class="fire-image-area">
-                <img class="fire-image" height="30" width="30" src="assets/imgs/story/pos-flam.png">
+        <ion-row>
+          <ion-col col-9>
+            <button (click)="saveStory()" clear style="background: transparent">
+              <img src="assets/icon/download_color.png" height="40" width="40">
+            </button>
+            <button (click)="reportStory()" clear style="background: transparent">
+              <img src="assets/icon/report_color.png" height="40" width="40">
+            </button>
+            <button *ngIf="receipt_private == 0 || receipt_private == null" (click)="showReceipt()" clear style="background: transparent">
+              <img src="assets/icon/invoice-icon_color.png" height="40" width="40">
+            </button>
+          </ion-col>
+          <ion-col col-3>
+            <div class="fire-div">
+              <span *ngIf="totalFlames > 0">
+                <span class="like-head">{{totalLikes}}</span>
+                <span class="fire-image-area">
+                  <img class="fire-image" height="30" width="30" src="assets/imgs/story/pos-flam.png">
+                </span>
+    
               </span>
-
-            </span>
-            <span *ngIf="totalFlames < 0">
-              <span class="like-head">{{totalDislikes}}</span>
-              <span class="fire-image-area">
-                <img class="fire-image" height="30" width="30" src="assets/imgs/story/neg-flame.png">
+              <span *ngIf="totalFlames < 0">
+                <span class="like-head">{{totalDislikes}}</span>
+                <span class="fire-image-area">
+                  <img class="fire-image" height="30" width="30" src="assets/imgs/story/neg-flame.png">
+                </span>
               </span>
-            </span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="comment-back" swipeAll (swipeup)="goToComments($event)" text-center>
-        <ion-col col-12>
-          <p>{{swipe_comment}}</p>
-          <div>
-            <img class="comment-img" src="assets/imgs/up-arrow.png">
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+            </div>
+          </ion-col>
+        </ion-row>
+    
+      </ion-grid>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+ 
+  <ion-row class="comment-back" swipeAll (swipeup)="goToComments($event)" text-center>
+    <ion-col col-12>
+      <p>{{swipe_comment}}</p>
+      <div>
+        <img class="comment-img" src="assets/imgs/up-arrow.png">
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-footer>
