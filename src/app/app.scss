@@ -619,7 +619,7 @@ ion-loading.my-loading-water {
     background-position: center;
     background-size: cover;    
     text-align: center;
-    color: #fff;
+    color: #fff !important;        
     height: 36px;
     width: 90px;
     h2{
@@ -630,17 +630,19 @@ ion-loading.my-loading-water {
     }
     p{
         font-size: 1rem;
-        margin-left: 10px;           
+        margin-left: 10px;   
+        padding-top: 10px;
+        color: #fff !important;           
     }
 }
 
-.following-btn{
+.followers-btn{
     background-image: url('../assets/icon/profile/following-btn.png');
     background-repeat: no-repeat;   
     background-position: center;
     background-size: cover;    
     text-align: center;
-    color: #fff;
+    color: #fff !important;        
     height: 36px;
     width: 90px;
     h2{
@@ -651,7 +653,31 @@ ion-loading.my-loading-water {
     }
     p{
         font-size: 1rem;
-        margin-left: 10px;           
+        margin-left: 10px;    
+        color: #fff !important;          
+    }
+}
+
+.followed-btn{
+    background-image: url('../assets/icon/profile/followed-btn.png');
+    background-repeat: no-repeat;   
+    background-position: center;
+    background-size: cover;    
+    text-align: center;
+    color: #fff !important;        
+    height: 36px;
+    width: 90px;
+    h2{
+        font-size: 1.5rem;
+        color: #fff !important;        
+        line-height: 0px;
+        padding-top: 10px;
+    }
+    p{
+        font-size: 1rem;
+        margin-left: 10px;   
+        padding-top: 10px;      
+        color: #fff !important;        
     }
 }
 
@@ -661,7 +687,7 @@ ion-loading.my-loading-water {
     background-position: center;
     background-size: cover;    
     text-align: center;
-    color: #fff;
+    color: #fff !important;        
     height: 36px;
     width: 90px;
     h2{
@@ -672,7 +698,8 @@ ion-loading.my-loading-water {
     }
     p{
         font-size: 1rem;
-        margin-left: 10px;           
+        margin-left: 10px;   
+        color: #fff !important;           
     }
 }
 

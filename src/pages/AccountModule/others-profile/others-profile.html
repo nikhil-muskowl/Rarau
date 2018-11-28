@@ -1,21 +1,20 @@
 <ion-header>
-    <ion-navbar hideBackButton>
-      <ion-buttons left>
-        <button ion-button (click)="goBack()">
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title text-center>
-        {{name}}
-      </ion-title>
-      <ion-buttons right>
-  
-          <button class="back-btn">
-              <img src="assets/icon/report_color.png" width="30px" height="30px" (click)="reportStory()">
-            </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      {{name}}
+    </ion-title>
+    <ion-buttons right>
+      <button class="back-btn">
+        <img src="assets/icon/report_color.png" width="30px" height="30px" (click)="reportStory()">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 
 <ion-content padding>
@@ -23,63 +22,51 @@
   <ion-grid>
     <ion-row>
       <ion-col col-5>
-        <div text-center>
-          <img src="{{userImage}}" class="circle-pic">
-          <!-- <div class="layer"><span style="color:#fff;">Change</span></div> -->
+
+        <div class="profile-container">
+          <img src="{{userImage}}" class="image">
         </div>
+
         <h3>{{name}}</h3>
       </ion-col>
 
       <ion-col col-7>
-        <ion-row>
-          <ion-col col-6>
-            <div class="fl-button">
-              <ion-item>
-                <ion-avatar item-start>
-                  <img src="assets/icon/total_follower.png">
-                </ion-avatar>
-                <h2 text-center>{{followers}}</h2>
-                <p class="foll-txt">{{followers_txt}}</p>
-              </ion-item>
-            </div>
-          </ion-col>
-          <ion-col col-6>
-            <div class="fl-button">
-              <ion-list>
-                <ion-item>
-                  <ion-avatar item-start>
-                    <img src="assets/icon/flame.png">
-                  </ion-avatar>
-                  <h2 text-center>{{flames}}</h2>
-                  <p class="foll-txt">{{flames_txt}}</p>
-                </ion-item>
-              </ion-list>
-            </div>
-          </ion-col>
-        </ion-row>
+        <div>
 
-        <ion-row>
-          <ion-col col-5 text-center *ngIf="id!=user_id">
-            <div *ngIf="!followed" class="follow" (click)="dofollow()">
-              <img src="assets/imgs/follow.png" width="25" height="25">
-              <!-- <span text-center class="p-follow">{{follow_txt}}</span> -->
-              <p text-center class="p-follow">{{follow_txt}}</p>
-            </div>
-            <div *ngIf="followed" class="follow" (click)="doUnFollow()">
-              <img src="assets/imgs/following.png" width="25" height="25">
-              <!-- <span text-center class="p-follow">{{following_txt}}</span> -->
-              <p text-center class="p-follow">{{following_txt}}</p>
-            </div>
-            <!-- <img src="assets/imgs/Other-Profile/Follow.png" class="img-responsive" (click)="doFollow()"> -->
-          </ion-col>
-          <!-- <ion-col col-3 text-center>
-            <img src="assets/imgs/Profile/My Profile Icon/view.png" class="img-responsive custom-size">
-            <p style="font-size: 2.5vw;">{{view_activity_log}}</p>
-          </ion-col> -->
-        </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <div class="followers-btn">
+                <h2 text-center>{{followers}}</h2>
+                <p>{{followers_txt}}</p>
+              </div>
+            </ion-col>
+            <ion-col col-6>
+              <div class="flames-btn">
+                <h2 text-center>{{flames}}</h2>
+                <p>{{flames_txt}}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-5 text-center *ngIf="id!=user_id">
+              <div *ngIf="!followed" (click)="dofollow()">
+                <div class="follow-btn">
+                  <p>{{follow_txt}}</p>
+                </div>
+              </div>
+              <div *ngIf="followed" (click)="doUnFollow()">
+                <div class="followed-btn">
+                  <p>{{following_txt}}</p>
+                </div>
+              </div>              
+            </ion-col>            
+          </ion-row>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
+
 
   <div>
     <ion-segment [(ngModel)]="user" color="danger">
