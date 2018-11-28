@@ -30,32 +30,24 @@
       </ion-col>
 
       <ion-col col-7>
-        <div>         
+        <div>
 
           <ion-row>
             <ion-col col-6>
-              <div class="following-btn">
-                  <h2 text-center>{{followers}}</h2>
-                  <p>{{followers_txt}}</p>
-              </div>            
+              <div class="followers-btn">
+                <h2 text-center>{{followers}}</h2>
+                <p>{{followers_txt}}</p>
+              </div>
             </ion-col>
             <ion-col col-6>
-                <div class="flames-btn">
-                    <h2 text-center>{{flames}}</h2>
-                    <p>{{flames_txt}}</p>
-                </div>              
+              <div class="flames-btn">
+                <h2 text-center>{{flames}}</h2>
+                <p>{{flames_txt}}</p>
+              </div>
             </ion-col>
           </ion-row>
 
-          <ion-row>
-            <!-- <ion-col text-center (click)="editProfile()">
-                  <img src="assets/imgs/Profile/My Profile Icon/edit.png" class="img-responsive">
-                  <p style="font-size: 2.5vw;">Edit Profile</p>
-                </ion-col> -->
-            <!-- <ion-col text-center>
-                  <img src="assets/imgs/Profile/My Profile Icon/pets.png" class="img-responsive">
-                  <p style="font-size: 2.5vw;">{{my_pet}}</p>
-                </ion-col> -->
+          <ion-row>           
             <ion-col text-center (click)="viewActivity()">
               <img src="assets/imgs/Profile/My Profile Icon/view.png" class="img-responsive">
               <p style="font-size: 2.5vw;">{{view_log}}</p>
