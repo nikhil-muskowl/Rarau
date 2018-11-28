@@ -612,3 +612,45 @@ ion-loading.my-loading-water {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
+.follower-section{
+    background-image: url('../assets/icon/folowers-profile.png');
+    background-repeat: no-repeat;   
+    background-position: center;
+    background-size: cover;
+    height: 40px;
+    width: 80px;
+    text-align: center;
+    color: #fff;
+    h2{
+        font-size: 1.5rem;
+        color: #fff !important;        
+        line-height: 1px;
+        padding-top: 10px;
+    }
+    p{
+        font-size: 1rem;
+        margin-left: 20px;
+    }
+}
+
+.flames-section{
+    background-image: url('../assets/icon/flames-profile.png');
+    background-repeat: no-repeat;   
+    background-position: center;
+    background-size: cover;
+    height: 40px;
+    width: 80px;
+    text-align: center;
+    color: #fff;
+    h2{
+        font-size: 1.5rem;
+        color: #fff !important;        
+        line-height: 1px;
+        padding-top: 10px;
+    }
+    p{
+        font-size: 1rem;
+        margin-left: 20px;
+    }
+}
