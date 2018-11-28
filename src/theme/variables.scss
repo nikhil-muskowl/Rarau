@@ -209,6 +209,7 @@ ion-navbar.toolbar {
     }
 }
 
+/* iPhone 5 ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
     .tabs-ios .tab-button-icon {
         height: 54px !important;
@@ -236,7 +237,64 @@ ion-navbar.toolbar {
     }
 }
 
+/* iPhone X ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+    .tabs-ios .tab-button-icon {
+        height: 45px !important;
+    }
+
+    .searchbar-ios .searchbar-input  {
+        height: 4rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .searchbar-ios {
+        background: none !important; 
+    }
+
+    page-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+
+    page-others-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+  
+    .item-ios ion-avatar[item-start] {
+        margin: 16px 16px 0px 0px !important;
+    }
+}
+
+/* iPhone XS Max, XR ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+    .tabs-ios .tab-button-icon {
+        height: 45px !important;
+    }
+
+    .searchbar-ios .searchbar-input  {
+        height: 4rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .searchbar-ios {
+        background: none !important; 
+    }
+
+    page-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+
+    page-others-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+  
+    .item-ios ion-avatar[item-start] {
+        margin: 16px 16px 0px 0px !important;
+    }
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
     .tabs-ios .tab-button-icon {
         height: 45px !important;
     }
