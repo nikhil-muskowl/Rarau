@@ -131,19 +131,13 @@ ion-navbar.toolbar {
    // background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* iPhone 6+, 7+, 8+ ----------- */
-@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
-    .tabs-ios .tab-button-icon {
-        height: 45px !important;
-    }
-}
 
 /* iPhone 6, 7, 8 ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
     .tabs-ios .tab-button-icon {
         height: 45px !important;
     }
-
+/*
     .back-button-ios {
         margin: 0;
         z-index: 99;
@@ -161,6 +155,94 @@ ion-navbar.toolbar {
         height: 32px;
         border: 0;
         font-size: 1.7rem;
+    } 
+    
+    */
+
+    .searchbar-ios .searchbar-input  {
+        height: 4rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .searchbar-ios {
+        background: none !important; 
+    }
+
+    page-profile .segment-grid {
+        margin-top: 5px !important;
     }
   
+    .item-ios ion-avatar[item-start] {
+        margin: 16px 16px 0px 0px !important;
+    }
+}
+
+/* iPhone 6+, 7+, 8+ ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+    .tabs-ios .tab-button-icon {
+        height: 54px !important;
+    }
+
+    .searchbar-ios .searchbar-input  {
+        height: 4rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .searchbar-ios {
+        background: none !important; 
+    }
+
+    page-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+
+    .item-ios ion-avatar[item-start] {
+        margin: 16px 16px 0px 0px !important;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+    .tabs-ios .tab-button-icon {
+        height: 54px !important;
+    }
+
+    .searchbar-ios .searchbar-input  {
+        height: 4rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .searchbar-ios {
+        background: none !important; 
+    }
+
+    page-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+
+    .item-ios ion-avatar[item-start] {
+        margin: 16px 16px 0px 0px !important;
+    }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+    .tabs-ios .tab-button-icon {
+        height: 45px !important;
+    }
+
+    .searchbar-ios .searchbar-input  {
+        height: 4rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .searchbar-ios {
+        background: none !important; 
+    }
+
+    page-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+  
+    .item-ios ion-avatar[item-start] {
+        margin: 16px 16px 0px 0px !important;
+    }
 }
