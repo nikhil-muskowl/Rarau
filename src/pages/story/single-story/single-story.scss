@@ -10,6 +10,10 @@ page-single-story {
     a {
         color: #fff;
     }
+
+    .swipe-area{
+        height: 200px;
+    }
     .grid {
         padding: 0;
         margin-left: auto;
@@ -95,7 +99,7 @@ page-single-story {
     .story-footer {
         background-color: rgba(0, 0, 0, 0.3);
         // position: fixed;
-        // bottom: 47px;
+        // bottom: 50px;
         width: 100%;
         color: #fff;
         .grid {
