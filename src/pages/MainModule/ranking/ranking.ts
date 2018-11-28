@@ -37,7 +37,7 @@ export class RankingPage {
   public cntryresponseData;
   public countries;
   public location: any;
-  public searchLoc: any;
+
 
   public length = 5;
   public start = 0;
@@ -74,8 +74,8 @@ export class RankingPage {
   openSearch() {
     this.isSearch = !this.isSearch;
     if (this.isSearch) {
-      this.searchLoc = '';
       this.country = '';
+      this.location = '';
       this.countries = [];
     }
     console.log("this.isSearch : " + this.isSearch);
@@ -110,7 +110,7 @@ export class RankingPage {
 
   getCountry() {
 
-    this.storiesProvider.apiGetAllLocations(this.searchLoc).subscribe(
+    this.storiesProvider.apiGetAllLocations(this.country).subscribe(
       response => {
         this.cntryresponseData = response;
         this.countries = this.cntryresponseData.data;
@@ -182,12 +182,12 @@ export class RankingPage {
   }
 
   public onLocCancel(ev: any) {
-    this.searchLoc = '';
+    this.country = '';
   }
 
   public onLocInput(ev: any) {
     if (ev.target.value != "" || ev.target.value != undefined) {
-      this.searchLoc = ev.target.value;
+      this.country = ev.target.value;
       this.countries = [];
       this.getCountry();
     }
@@ -196,9 +196,10 @@ export class RankingPage {
   public locItemSelected(location: any) {
     console.log(location);
     if (location) {
-      this.searchLoc = location.name;
+      this.country = location.location;
       this.location = location.location;
     }
     this.countries = [];
+    this.getList();
   }
 }

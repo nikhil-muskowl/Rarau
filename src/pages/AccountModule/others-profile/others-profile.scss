@@ -95,6 +95,14 @@ page-others-profile {
             min-width: 0px;
             min-height: 0px;
         }
+        .segment-md-primary .segment-button {
+            color: #ec3747;
+        }
+        .segment-md .segment-button.segment-activated {
+            border-color: #ec3747;
+            color: #ec3747;
+            opacity: 1;
+        }
         .item-md ion-avatar[item-left],
         .item-md ion-thumbnail[item-left],
         .item-md ion-avatar[item-start],
