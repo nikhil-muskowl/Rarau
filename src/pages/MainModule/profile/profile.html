@@ -1,21 +1,16 @@
 <ion-header>
-  <ion-navbar>
-
-    <ion-title class="tool-bar-title">
-      <span id="hdr-txt">{{my_profile}}</span>
-    </ion-title>
-    <!-- <span class="logo">
-        <img src="assets/imgs/login/Group-2.png" class="fire-icon">{{rarau}}
-      </span> -->
-
-    <ion-buttons end>
-      <button class="back-btn">
-        <img src="assets/icon/settings.png" width="30px" height="30px" (click)="goSetting()">
-      </button>
-    </ion-buttons>
-
-  </ion-navbar>
-</ion-header>
+    <ion-navbar hideBackButton>
+      <ion-title text-center>
+        {{my_profile}}
+      </ion-title>
+      <ion-buttons right>
+  
+          <button class="back-btn">
+              <img src="assets/icon/settings.png" width="30px" height="30px" (click)="goSetting()">
+            </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content padding>
   <ion-grid>

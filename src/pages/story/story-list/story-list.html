@@ -1,15 +1,15 @@
 <ion-header>
-  <ion-navbar hideBackButton>
-    <ion-toolbar>
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='goBack()'>
-          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button (click)="goBack()">
+          <ion-icon name="arrow-back"></ion-icon>
         </button>
-        <span id="hdr-txt">{{title}}</span>
+      </ion-buttons>
+      <ion-title text-center>
+        {{title}}
       </ion-title>
-    </ion-toolbar>
-  </ion-navbar>
-</ion-header>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content class="list">
 

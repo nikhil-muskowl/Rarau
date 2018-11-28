@@ -1,18 +1,21 @@
 <ion-header>
-  <ion-navbar hideBackButton>
-    <ion-toolbar>
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='goBack()'>
-          <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
-        </button>{{upload}} {{receipt}}
-        <div class="hdr-logo">
-          <span class="logo-img"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
-          <span class="logo-txt"> {{rarau}}</span>
-        </div>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button (click)="goBack()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title text-center>
+          {{upload}} {{receipt}}
       </ion-title>
-    </ion-toolbar>
-  </ion-navbar>
-</ion-header>
+      <ion-buttons right>
+  
+        <span class="logo">
+          <img src="assets/imgs/login/Group-2.png" class="fire-icon">        
+        </span>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content>
   <div class="login-back" scroll="false">

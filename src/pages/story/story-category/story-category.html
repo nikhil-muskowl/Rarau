@@ -1,19 +1,19 @@
 <ion-header>
-
-  <ion-navbar hideBackButton>
-    <ion-toolbar>
-      <ion-title class="tool-bar-title">
-        <button start class="back-btn" (click)='back()'>
-          <ion-icon class="toolbar-icon" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button (click)="goBack()">
+          <ion-icon name="arrow-back"></ion-icon>
         </button>
-        <span id="hdr-txt">{{category_txt}}</span>
-      </ion-title>
-      <ion-buttons end>
-        <button class="publish-btn" ion-button type="submit" (click)="saveStory()"> {{publish}} </button>
       </ion-buttons>
-    </ion-toolbar>
-  </ion-navbar>
-</ion-header>
+      <ion-title text-center>
+        {{category_txt}}
+      </ion-title>
+      <ion-buttons right>
+          <button class="publish-btn" ion-button type="submit" (click)="saveStory()"> {{publish}} </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
 
 <ion-content>
 
