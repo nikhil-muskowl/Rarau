@@ -1,22 +1,19 @@
 <ion-header>
   <ion-navbar hideBackButton>
-
-    <ion-title class="tool-bar-title">
-      <button start class="back-btn" (click)='goBack()'>
-        <ion-icon class="toolbar-icon" name="arrow-back"></ion-icon>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
       </button>
-      <span id="hdr-txt">{{story}}</span>
-      <div class="hdr-logo">
-        <span class="logo-img"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
-        <span class="logo-txt"> {{rarau}}</span>
-      </div>
+    </ion-buttons>
+    <ion-title text-center>
+      {{story}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-grid class="background" [style.background]="'url('+image+')'">
-    
+
     <div class="story-top">
       <ion-item>
         <ion-avatar item-start>
