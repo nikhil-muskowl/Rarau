@@ -277,7 +277,7 @@ export class StoryServiceProvider {
     this.formData.append('story_type_id', data.story_type_id);
     this.formData.append('length', data.length);
     this.formData.append('start', data.start);
-    this.formData.append('order[0][column]', '2');
+    this.formData.append('order[0][column]', '3');
     this.formData.append('order[0][dir]', 'desc');
 
     if (data.location != undefined)

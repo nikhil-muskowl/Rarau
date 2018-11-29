@@ -145,5 +145,6 @@
   "search_country": "Search Country",
   "sel_event": "Select Event",
   "show_in_event": "Show in Event",
-  "comma_separate":"Enter Comma(,) to separate"
+  "comma_separate": "Enter Comma(,) to separate",
+  "event_story": "Event's Story"
 }
