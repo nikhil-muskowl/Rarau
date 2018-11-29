@@ -634,11 +634,11 @@ page-settings {
         p {
             font-size: 1.6rem !important;
         }
+    }
 
-        page-alert-modal .overlay {
-            opacity: 0 !important;
-            background-color: none !important;
-        }
+    page-alert-modal .overlay {
+        opacity: 0 !important;
+        background-color: none !important;
     }
 
  }
