@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { SingleStoryPage } from '../../story/single-story/single-story';
 
 //provider
 import { LoginProvider } from '../../../providers/login/login';
@@ -103,6 +104,10 @@ export class EventDetailsPage {
     this.translate.get('event_story').subscribe((text: string) => {
       this.event_story = text;
     });
+  }
+
+  public itemTapped(data: any) {
+    this.navCtrl.push(SingleStoryPage, { story_id: data.id });
   }
 
   goBack() {
