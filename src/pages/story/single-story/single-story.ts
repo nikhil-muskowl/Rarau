@@ -119,7 +119,7 @@ export class SingleStoryPage {
 
   getStories() {
     this.loadingProvider.present();
-
+    this.language_id = this.languageProvider.getLanguageId();
     this.paramData = {
       'story_id': this.story_id,
       'language_id': this.language_id,
@@ -354,7 +354,7 @@ export class SingleStoryPage {
         }
       );
     } else {
-     this.loginAlert();
+      this.loginAlert();
     }
   }
 
