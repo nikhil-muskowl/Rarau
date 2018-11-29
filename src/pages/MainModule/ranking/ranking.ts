@@ -24,6 +24,9 @@ export class RankingPage {
   public title;
   public fileterData: any;
   private responseData: any;
+  private recordsTotal: any;
+  private rankItems: any = [];
+
   private id;
   private items;
   public isSearch: boolean = false;
@@ -126,6 +129,8 @@ export class RankingPage {
   }
 
   public typeChanged(event) {
+    this.rankItems = [];
+    this.start = 0;
     this.story_type_id = event.id;
     this.getList();
   }
@@ -142,6 +147,8 @@ export class RankingPage {
       response => {
         this.responseData = response;
         this.items = this.responseData.data;
+        this.recordsTotal = this.responseData.recordsTotal;
+        this.bindUpdata();
         this.loadingProvider.dismiss();
       },
       err => {
@@ -150,6 +157,52 @@ export class RankingPage {
       }
     );
     return event;
+  }
+
+  bindUpdata() {
+
+    for (let i = 0; i < this.items.length; i++) {
+      this.rankItems.push({
+        id: this.items[i].id,
+        title: this.items[i].title,
+        description: this.items[i].description,
+        rank: this.items[i].rank,
+        rank_image: this.items[i].rank_image,
+        user_id: this.items[i].user_id,
+        user_name: this.items[i].user_name,
+        user_level: this.items[i].user_level,
+        user_image: this.items[i].user_image,
+        user_image_thumb: this.items[i].user_image_thumb,
+        image: this.items[i].image,
+        image_thumb: this.items[i].image_thumb,
+        banner: this.items[i].banner,
+        banner_thumb: this.items[i].banner_thumb,
+        tags: this.items[i].tags,
+        categories: this.items[i].categories,
+        latitude: this.items[i].latitude,
+        longitude: this.items[i].longitude,
+        location: this.items[i].location,
+        distance: this.items[i].distance,
+        totalLikes: this.items[i].totalLikes,
+        totalDislikes: this.items[i].totalDislikes,
+        totalFlames: this.items[i].totalFlames,
+        status: this.items[i].status,
+        created_date: this.items[i].created_date,
+        modified_date: this.items[i].modified_date
+      });
+    }
+  }
+
+  onScrollDown(infiniteScroll) {
+
+    console.log(this.start);
+
+    if (this.start <= this.recordsTotal) {
+      this.start += this.length;
+      this.getList();
+    }
+
+    infiniteScroll.complete();
   }
 
   public goToProfile(user_id) {

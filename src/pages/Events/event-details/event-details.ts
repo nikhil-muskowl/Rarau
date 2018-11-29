@@ -22,6 +22,9 @@ export class EventDetailsPage {
   public EveStatus;
   public EveResult;
 
+  public responseData;
+  public items;
+
   public event_detail;
   public event_name;
   public event_from_date;
@@ -38,7 +41,12 @@ export class EventDetailsPage {
   public evnt_city;
   public evnt_banner;
   public evnt_loc_name;
+  public event_story;
   public evnt_desc;
+
+  private filterData: any;
+  public length = 3;
+  public start = 0;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,6 +69,7 @@ export class EventDetailsPage {
     this.user_id = this.loginProvider.isLogin();
     this.setText();
     this.getDetails(this._id);
+    this.getList(this._id);
   }
 
   setText() {
@@ -91,6 +100,9 @@ export class EventDetailsPage {
     this.translate.get('event_city').subscribe((text: string) => {
       this.event_city = text;
     });
+    this.translate.get('event_story').subscribe((text: string) => {
+      this.event_story = text;
+    });
   }
 
   goBack() {
@@ -117,6 +129,28 @@ export class EventDetailsPage {
       () => {
         this.loadingProvider.dismiss();
       });
+  }
+
+  public getList(id) {
+    this.loadingProvider.present();
+    this.filterData = {
+      event_id: id,
+      length: this.length,
+      start: this.start,
+    };
+
+    this.eventProvider.getRankedStory(this.filterData).subscribe(
+      response => {
+        this.responseData = response;
+        this.items = this.responseData.data;
+        this.loadingProvider.dismiss();
+      },
+      err => {
+        console.error(err);
+        this.loadingProvider.dismiss();
+      }
+    );
+    return event;
   }
 
 }

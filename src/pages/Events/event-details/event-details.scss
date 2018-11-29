@@ -11,5 +11,82 @@ page-event-details {
     }
     .upper {
         text-transform: uppercase;
+    } // For Story List
+    .round_img {
+        ion-icon {
+            display: inline-block;
+            font-size: 2em;
+        }
+    }
+    .h1-story {
+        text-align: center;
+        margin-top: 10px!important;
+        background: -webkit-linear-gradient(left, #ec3747, #f45a43);
+        background: -o-linear-gradient(right, #ec3747, #f45a43);
+        background: -moz-linear-gradient(right, #ec3747, #f45a43);
+        background: linear-gradient(to right, #ec3747, #f45a43);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .img-badge {
+        background: transparent;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    .rank-h1 {
+        font-size: 23px !important;
+        margin-top: 3px !important;
+        color: #ec3747 !important;
+        font-weight: bolder !important;
+        border: 2px solid #ec3747;
+        border-radius: 22px;
+        width: 30px !important;
+        height: 30px !important;
+        text-align: center;
+        transform: rotate(-30deg);
+        margin-left: 3px;
+        position: absolute;
+    }
+    /* for ranking font size */
+    .rank-h3 {
+        font-size: 1.8rem !important;
+    }
+    .rank-p1 {
+        font-size: 1.6rem !important;
+    }
+    .rank-spn {
+        font-size: 1.4rem !important;
+        display: inline-block;
+    }
+    .rank-p2 {
+        font-size: 1.2rem !important;
+    }
+    .img-bord {
+        border-radius: 15px;
+    }
+    .rank-img-1 {
+        height: 50px;
+        width: 60px;
+        position: absolute;
+        transform: rotate(-30deg); //margin-left: -20px;
+        margin-left: -6px;
+        margin-top: 2px;
+    }
+    .rank-img-2 {
+        height: 45px;
+        width: 55px;
+        position: absolute;
+        transform: rotate(-30deg); //margin-left: -20px;
+        margin-left: -6px;
+        margin-top: 2px;
+    }
+    .rank-img-3 {
+        height: 40px;
+        width: 50px;
+        position: absolute;
+        transform: rotate(-30deg); //margin-left: -20px;
+        margin-left: -6px;
+        margin-top: 2px;
     }
 }

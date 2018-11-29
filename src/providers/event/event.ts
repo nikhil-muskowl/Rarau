@@ -26,6 +26,27 @@ export class EventProvider {
     );
   }
 
+  getRankedStory(data) {
+    this.formData = new FormData();
+
+    this.formData.append('event_id', data.event_id);
+    this.formData.append('length', data.length);
+    this.formData.append('start', data.start);
+    this.formData.append('order[0][column]', '3');
+    this.formData.append('order[0][dir]', 'desc');
+
+    if (data.location != undefined)
+      this.formData.append('location', data.location);
+
+    return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api',
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
+
   apiGetUpcomingEvents(data: any) {
 
     this.formData = new FormData();
