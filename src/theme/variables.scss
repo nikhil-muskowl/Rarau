@@ -66,11 +66,6 @@ add-story .scroll-content {
     background-color: $transparent !important;
 }
 
-@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
-    /* Styles */
-    
-}
-
 /* Added on 3_11_2018 */
 
 ion-header ion-title .toolbar-title {
@@ -132,7 +127,7 @@ ion-navbar.toolbar {
 }
 
 .tabs-ios .tab-button-icon {
-    height: 45px !important;
+    height: 50px !important;
 }
 
 page-settings {
@@ -150,7 +145,7 @@ page-settings {
 /* iPhone 6, 7, 8 ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
     .tabs-ios .tab-button-icon {
-        height: 45px !important;
+        height: 50px !important;
     }
 /*
     .back-button-ios {
@@ -279,7 +274,7 @@ page-settings {
 /* iPhone X ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
     .tabs-ios .tab-button-icon {
-        height: 45px !important;
+        height: 50px !important;
     }
 
     .searchbar-ios .searchbar-input  {
@@ -312,7 +307,7 @@ page-settings {
 /* iPhone XS Max, XR ----------- */
 @media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
     .tabs-ios .tab-button-icon {
-        height: 45px !important;
+        height: 50px !important;
     }
 
     .searchbar-ios .searchbar-input  {
@@ -345,7 +340,7 @@ page-settings {
 /* iPhone 4 ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
     .tabs-ios .tab-button-icon {
-        height: 45px !important;
+        height: 50px !important;
     }
 
     .searchbar-ios .searchbar-input  {
@@ -518,7 +513,8 @@ page-settings {
     }
 
     .tabs-ios .tab-button-icon {
-        height: 50px !important;
+        height: 70px !important;
+        width: 70px !important;
     }
 
     .followers-btn {
