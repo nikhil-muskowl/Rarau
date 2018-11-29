@@ -33,6 +33,8 @@ export class SettingsPage {
   private logged_out;
   private ok_text;
   private cancel_text;
+  private select_lang_text;
+  private select_city_text;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -88,6 +90,13 @@ export class SettingsPage {
     this.translate.get('cancel').subscribe((text: string) => {
       this.cancel_text = text;
     });
+    this.translate.get('select_language').subscribe((text: string) => {
+      this.select_lang_text = text;
+    });
+    this.translate.get('select_city').subscribe((text: string) => {
+      this.select_city_text = text;
+    });
+    
   }
 
   loadCity() {

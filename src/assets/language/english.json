@@ -147,5 +147,7 @@
   "sel_event": "Select Event",
   "show_in_event": "Show in Event",
   "comma_separate": "Enter Comma(,) to separate",
-  "event_story": "Event's Story"
+  "event_story": "Event's Story",
+  "select_language": "Select language",
+  "select_city": "Select city"
 }
