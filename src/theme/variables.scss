@@ -131,6 +131,21 @@ ion-navbar.toolbar {
    // background-color: rgba(0, 0, 0, 0.3);
 }
 
+.tabs-ios .tab-button-icon {
+    height: 45px !important;
+}
+
+page-settings {
+    ion-select {
+        max-width: 100% !important;
+    }
+    .label-md {
+        font-size: 16px !important;
+    }
+    .select-md {
+        display: inline-flex !important;
+    }
+}
 
 /* iPhone 6, 7, 8 ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
@@ -260,6 +275,7 @@ ion-navbar.toolbar {
     }
 }
 
+
 /* iPhone X ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
     .tabs-ios .tab-button-icon {
@@ -358,3 +374,275 @@ ion-navbar.toolbar {
         padding: 11px 8px 2px 18px !important;
     }
 }
+
+/* iPad ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
+    .toolbar-title, .toolbar-title-md {
+        font-size: 3vw !important;
+    }
+
+    .tabs-ios .tab-button-icon {
+        height: 50px !important;
+    }
+
+    .followers-btn {
+        height: 54px !important;
+        width: 150px !important;
+        margin-left: 15px !important;
+    }
+
+    .followers-btn h2 {
+        font-size: 2.5rem !important;
+        padding-top: 16px !important;
+    }
+
+    .followers-btn p {
+        font-size: 1.5rem !important;
+    }
+
+    .flames-btn {
+        height: 54px !important;
+        width: 150px !important;
+        margin-left: -30px !important;
+    }
+
+    .flames-btn h2 {
+        font-size: 2.5rem !important;
+        padding-top: 16px !important;
+    }
+
+    .flames-btn p {
+        font-size: 1.5rem !important;
+    }
+
+    page-profile .img-responsive {
+        width: 75px !important;
+    }
+
+    .segment-ios .segment-button {
+        font-size: 1.6rem !important;
+    }
+
+    page-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+
+    page-others-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+
+    page-search .overlay {
+        opacity: 0 !important;
+        background-color: none !important;
+    }
+
+    .searchbar-ios .searchbar-input  {
+        height: 4rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .searchbar-ios {
+        background: none !important; 
+    }
+
+    .select-ios {
+        display: inline-block !important;
+        padding: 11px 8px 2px 18px !important;
+    }
+
+    page-login {
+        .login-back #txt-wechat {
+            font-size: 19px !important;
+        }
+        #txt-or {
+            font-size: 2.5rem !important;
+        }
+        .item-input ion-input{
+            font-size: 16px !important;
+        }
+        .frgt-link {
+            font-size: 2rem !important;
+        }
+        .submit-btn .button-inner {
+            font-size: 2rem !important;
+        }
+        .login-back .submit-btn {
+            width: 96px !important;
+        }
+        h3 {
+            font-size: 2rem !important;
+        }
+        p {
+            font-size: 1.6rem !important;
+        }
+    }
+
+    page-registration {
+        .login-back #txt-wechat {
+            font-size: 19px !important;
+        }
+        #txt-or {
+            font-size: 2.5rem !important;
+        }
+        .item-input ion-input{
+            font-size: 16px !important;
+        }
+        .frgt-link {
+            font-size: 2rem !important;
+        }
+        .submit-btn .button-inner {
+            font-size: 2rem !important;
+        }
+        .login-back .submit-btn {
+            width: 96px !important;
+        }
+        h3 {
+            font-size: 2rem !important;
+        }
+        p {
+            font-size: 1.6rem !important;
+        }
+    }
+
+    page-alert-modal .overlay {
+        opacity: 0 !important;
+        background-color: none !important;
+    }
+
+ }
+
+ /* iPad Pro ----------- */
+ @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2)  and (orientation: portrait)  {
+    .toolbar-title, .toolbar-title-md {
+        font-size: 3vw !important;
+    }
+
+    .tabs-ios .tab-button-icon {
+        height: 50px !important;
+    }
+
+    .followers-btn {
+        height: 54px !important;
+        width: 150px !important;
+        margin-left: 15px !important;
+    }
+
+    .followers-btn h2 {
+        font-size: 2.5rem !important;
+        padding-top: 16px !important;
+    }
+
+    .followers-btn p {
+        font-size: 1.5rem !important;
+    }
+
+    .flames-btn {
+        height: 54px !important;
+        width: 150px !important;
+        margin-left: -30px !important;
+    }
+
+    .flames-btn h2 {
+        font-size: 2.5rem !important;
+        padding-top: 16px !important;
+    }
+
+    .flames-btn p {
+        font-size: 1.5rem !important;
+    }
+
+    page-profile .img-responsive {
+        width: 75px !important;
+    }
+
+    .segment-ios .segment-button {
+        font-size: 1.6rem !important;
+    }
+
+    page-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+
+    page-others-profile .segment-grid {
+        margin-top: 5px !important;
+    }
+
+    page-search .overlay {
+        opacity: 0 !important;
+        background-color: none !important;
+    }
+
+    .searchbar-ios .searchbar-input  {
+        height: 4rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .searchbar-ios {
+        background: none !important; 
+    }
+
+    .select-ios {
+        display: inline-block !important;
+        padding: 11px 8px 2px 18px !important;
+    }
+
+    page-login {
+        .login-back #txt-wechat {
+            font-size: 19px !important;
+        }
+        #txt-or {
+            font-size: 2.5rem !important;
+        }
+        .item-input ion-input{
+            font-size: 16px !important;
+        }
+        .frgt-link {
+            font-size: 2rem !important;
+        }
+        .submit-btn .button-inner {
+            font-size: 2rem !important;
+        }
+        .login-back .submit-btn {
+            width: 96px !important;
+        }
+        h3 {
+            font-size: 2rem !important;
+        }
+        p {
+            font-size: 1.6rem !important;
+        }
+    }
+
+    page-registration {
+        .login-back #txt-wechat {
+            font-size: 19px !important;
+        }
+        #txt-or {
+            font-size: 2.5rem !important;
+        }
+        .item-input ion-input{
+            font-size: 16px !important;
+        }
+        .frgt-link {
+            font-size: 2rem !important;
+        }
+        .submit-btn .button-inner {
+            font-size: 2rem !important;
+        }
+        .login-back .submit-btn {
+            width: 96px !important;
+        }
+        h3 {
+            font-size: 2rem !important;
+        }
+        p {
+            font-size: 1.6rem !important;
+        }
+
+        page-alert-modal .overlay {
+            opacity: 0 !important;
+            background-color: none !important;
+        }
+    }
+
+ }

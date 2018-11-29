@@ -361,6 +361,8 @@ export class HomePage {
             this.options = {
               centerAndZoom: this.zoomlatLong,
               enableKeyboard: true,
+              enableScrollWheelZoom: true,
+              enableInertialDragging: true,
               mapType: MapTypeEnum.BMAP_NORMAL_MAP
             };
           });
@@ -419,7 +421,7 @@ export class HomePage {
   }
 
   public showWindow({ e, marker, map }: any): void {
-      
+
     this.user_id = this.LoginProvider.isLogin();
     let markerData = JSON.parse(JSON.stringify(marker.getPosition()));
     console.log('Marker position latitude' + JSON.stringify(markerData));
@@ -453,7 +455,7 @@ export class HomePage {
   }
 
   loadMap(map: any) {
-    console.log('map instance here', map);
+    console.log('map instance here', map);    
   }
 
   clickMarker(marker: any) {
@@ -470,4 +472,6 @@ export class HomePage {
     this.showStories = false;
     this.navCtrl.push(StoryListPage, this.paramData);
   }
+
+
 }
