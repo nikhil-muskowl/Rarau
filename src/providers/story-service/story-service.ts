@@ -127,7 +127,10 @@ export class StoryServiceProvider {
     this.formData.append('images', JSON.stringify(images));
     this.formData.append('user_id', user_id);
     this.formData.append('types', JSON.stringify(catId));
-    this.formData.append('event_id', event_id);
+    if (event_id != undefined || event_id !='')
+      this.formData.append('event_id', event_id);
+    else
+      this.formData.append('event_id', '0');
 
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/stories_api/api_save',
       this.formData,
@@ -277,6 +280,7 @@ export class StoryServiceProvider {
     this.formData.append('story_type_id', data.story_type_id);
     this.formData.append('length', data.length);
     this.formData.append('start', data.start);
+    this.formData.append('language_id', data.language_id);
     this.formData.append('order[0][column]', '3');
     this.formData.append('order[0][dir]', 'desc');
 
@@ -291,7 +295,7 @@ export class StoryServiceProvider {
     );
   }
 
-  getStoriesRank(data) {
+  getProfileStoriesRank(data) {
     this.formData = new FormData();
 
     if (data.user_id != undefined)
@@ -300,6 +304,7 @@ export class StoryServiceProvider {
     this.formData.append('story_type_id', data.story_type_id);
     this.formData.append('length', data.length);
     this.formData.append('start', data.start);
+    this.formData.append('language_id', data.language_id);
     this.formData.append('order[0][column]', '3');
     this.formData.append('order[0][dir]', 'desc');
 

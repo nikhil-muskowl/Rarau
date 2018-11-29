@@ -75,6 +75,15 @@ export class MyApp {
             console.log('Directory no create' + JSON.stringify(err));
           });
         });
+
+        // let splash = modalCtrl.create(SplashPage);
+        // splash.present();
+
+        // Commented these lines for desktop, uncomment for real device(Mobile)
+        // console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
+
+        // set to landscape
+        // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }
 
       this.locationTracker.setLocation();
@@ -90,15 +99,6 @@ export class MyApp {
         this.baiduProvider.setCity('131');
       }
 
-      // let splash = modalCtrl.create(SplashPage);
-      // splash.present();
-
-      // Commented these lines for desktop, uncomment for real device(Mobile)
-      // console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
-
-      // // set to landscape
-      // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-
       console.log('tutorial value : ' + this.configProvider.isSeen());
       let chk = this.configProvider.isSeen();
       if (chk == '1') {
@@ -108,7 +108,6 @@ export class MyApp {
         this.rootPage = TutorialPage;
       }
       this.initializeApp();
-
 
       console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
       console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());

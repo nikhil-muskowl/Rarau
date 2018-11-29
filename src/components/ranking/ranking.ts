@@ -20,6 +20,7 @@ export class RankingComponent {
   private recordsTotal: any;
   private rankItems: any = [];
   private id;
+  private language_id;
   private items;
   private types;
   private story_type_id = 0;
@@ -46,6 +47,8 @@ export class RankingComponent {
     this.getTypes();
     this.user_id = this.LoginProvider.isLogin();
     console.log(this.story_type_id);
+    this.language_id = this.languageProvider.getLanguageId();
+
   }
 
   setText() {
@@ -71,6 +74,7 @@ export class RankingComponent {
   }
 
   public getList() {
+    this.language_id = this.languageProvider.getLanguageId();
     this.loadingProvider.present();
     let id;
     if (this.othr_user_id != undefined) {
@@ -83,11 +87,12 @@ export class RankingComponent {
     this.filterData = {
       story_type_id: this.story_type_id,
       user_id: id,
+      language_id: this.language_id,
       length: this.length,
       start: this.start
     };
 
-    this.storiesProvider.getStoriesRank(this.filterData).subscribe(
+    this.storiesProvider.getProfileStoriesRank(this.filterData).subscribe(
       response => {
         this.responseData = response;
         this.items = this.responseData.data;
@@ -144,6 +149,7 @@ export class RankingComponent {
   }
 
   public getTypes() {
+
     this.loadingProvider.present();
     this.storiesProvider.getCategory().subscribe(
       response => {

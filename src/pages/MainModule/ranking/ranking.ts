@@ -29,6 +29,7 @@ export class RankingPage {
 
   private id;
   private items;
+  public language_id;
   public isSearch: boolean = false;
   private types;
   private story_type_id = 0;
@@ -71,6 +72,7 @@ export class RankingPage {
     this.getTypes();
     this.getCountry();
     this.location = undefined;
+    this.language_id = this.languageProvider.getLanguageId();
     console.log(this.story_type_id);
   }
 
@@ -136,11 +138,13 @@ export class RankingPage {
   }
 
   public getList() {
+    this.language_id = this.languageProvider.getLanguageId();
     this.loadingProvider.present();
     this.filterData = {
       story_type_id: this.story_type_id,
       length: this.length,
       start: this.start,
+      language_id: this.language_id,
       location: this.location,
     };
     this.storiesProvider.getRankedStory(this.filterData).subscribe(
