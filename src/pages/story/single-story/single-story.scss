@@ -4,15 +4,17 @@ page-single-story {
     h3 {
         color: #fff !important;
     }
-    p {        
+    p {
         font-size: 1rem;
     }
     a {
         color: #fff;
     }
-
-    .swipe-area{
+    .swipe-area {
         height: 200px;
+    }
+    .no-scroll .scroll-content {
+        overflow: hidden;
     }
     .grid {
         padding: 0;
@@ -97,9 +99,9 @@ page-single-story {
         cursor: pointer;
     }
     .story-footer {
-        background-color: rgba(0, 0, 0, 0.3);
-        position: fixed;
-        bottom: 0;
+        background-image: url('../assets/imgs/black-back.jpeg');
+        background-color: rgba(0, 0, 0, 0.3); // position: fixed;
+        // bottom: 0;
         width: 100%;
         color: #fff;
         .grid {
@@ -151,7 +153,7 @@ page-single-story {
     .comment-back {
         background: linear-gradient(to top, #383838, #000000);
         background: -webkit-gradient(linear, from(#383838), to(#000000));
-        color: #fff; 
+        color: #fff;
         p {
             line-height: 0;
             font-size: 1rem;
@@ -159,9 +161,8 @@ page-single-story {
         .comment-img {
             height: 10px !important;
             width: 10px !important;
-        }       
+        }
     }
-   
     .button-md {
         background-color: #c3c3c3;
         text-transform: unset !important;
@@ -204,7 +205,6 @@ page-single-story {
         -webkit-border-radius: 50%;
         border-radius: 50%;
     }
-    
     .back-btn {
         margin-top: 16px !important;
     }

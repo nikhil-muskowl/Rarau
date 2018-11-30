@@ -11,7 +11,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="no-scroll">
   <ion-grid class="background" [style.background]="'url('+image+')'">
 
     <div class="story-top">
@@ -29,11 +29,9 @@
       </ion-item>
     </div>
 
-
     <div class="swipe-area" swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)"
       (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
     </div>
-
   </ion-grid>
 </ion-content>
 

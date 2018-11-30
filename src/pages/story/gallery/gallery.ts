@@ -34,12 +34,8 @@ export class GalleryPage {
     private imagePicker: ImagePicker, ) {
 
     this.platform.registerBackButtonAction(() => {
-      console.log("second");
-      this.stopCamera();
-      this.tabService.show();
-      this.navCtrl.setRoot(HomePage);
-    }, 2);
-
+      this.back();
+    });
 
     // this.startCamera();
   }
@@ -62,6 +58,13 @@ export class GalleryPage {
 
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
+  }
+
+  back() {
+    console.log("second");
+    this.stopCamera();
+    this.tabService.show();
+    this.navCtrl.setRoot(HomePage);
   }
 
   openGallery() {
