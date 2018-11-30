@@ -84,20 +84,21 @@ ion-header ion-title .toolbar-title {
 /* Added on 5_11_2018 */
 
 /* for header logo */
- .hdr-logo {
-    float:right;
+
+.hdr-logo {
+    float: right;
     margin-right: 10px;
     width: 85px !important;
     height: 55px !important;
     position: relative;
 }
 
-.logo-img{
+.logo-img {
     margin-right: -3px;
 }
 
-.logo-txt{
-    display:inline-block;
+.logo-txt {
+    display: inline-block;
     vertical-align: middle;
     margin-top: -25px;
     font-size: 20px !important;
@@ -121,9 +122,8 @@ ion-navbar.toolbar {
 }
 
 .slide-zoom {
-    align-self: baseline !important;
-   // transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) !important;
-   // background-color: rgba(0, 0, 0, 0.3);
+    align-self: baseline !important; // transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    // background-color: rgba(0, 0, 0, 0.3);
 }
 
 .tabs-ios .tab-button-icon {
@@ -142,12 +142,25 @@ page-settings {
     }
 }
 
+page-location {
+    .scroll-content {
+        margin-left: -10px;
+        margin-top: 63px !important;
+    }
+    .scroll-content img {
+        width: -webkit-fill-available;
+    }
+}
+
+
+
 /* iPhone 6, 7, 8 ----------- */
-@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
     .tabs-ios .tab-button-icon {
         height: 50px !important;
     }
-/*
+    /*
     .back-button-ios {
         margin: 0;
         z-index: 99;
@@ -168,28 +181,22 @@ page-settings {
     } 
     
     */
-
-    .searchbar-ios .searchbar-input  {
+    .searchbar-ios .searchbar-input {
         height: 4rem;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
     }
-
     .searchbar-ios {
-        background: none !important; 
+        background: none !important;
     }
-
     page-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-others-profile .segment-grid {
         margin-top: 5px !important;
     }
-  
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
-
     .select-ios {
         display: inline-block !important;
         padding: 11px 8px 2px 18px !important;
@@ -197,32 +204,27 @@ page-settings {
 }
 
 /* iPhone 6+, 7+, 8+ ----------- */
-@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
     .tabs-ios .tab-button-icon {
         height: 54px !important;
     }
-
-    .searchbar-ios .searchbar-input  {
+    .searchbar-ios .searchbar-input {
         height: 4rem;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
     }
-
     .searchbar-ios {
-        background: none !important; 
+        background: none !important;
     }
-
     page-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-others-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
-
     .select-ios {
         display: inline-block !important;
         padding: 11px 8px 2px 18px !important;
@@ -230,74 +232,61 @@ page-settings {
 }
 
 /* iPhone 5 ----------- */
-@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
     .tabs-ios .tab-button-icon {
         height: 54px !important;
     }
-
-    .searchbar-ios .searchbar-input  {
+    .searchbar-ios .searchbar-input {
         height: 4rem;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
     }
-
     .searchbar-ios {
-        background: none !important; 
+        background: none !important;
     }
-
     page-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-others-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
-
     .select-ios {
         display: inline-block !important;
         padding: 11px 8px 2px 18px !important;
     }
-
     .followers-btn {
         margin-left: -8px !important;
     }
-
     .flames-btn {
         margin-left: -2px !important;
     }
 }
 
-
 /* iPhone X ----------- */
-@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
     .tabs-ios .tab-button-icon {
         height: 50px !important;
     }
-
-    .searchbar-ios .searchbar-input  {
+    .searchbar-ios .searchbar-input {
         height: 4rem;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
     }
-
     .searchbar-ios {
-        background: none !important; 
+        background: none !important;
     }
-
     page-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-others-profile .segment-grid {
         margin-top: 5px !important;
     }
-  
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
-
     .select-ios {
         display: inline-block !important;
         padding: 11px 8px 2px 18px !important;
@@ -305,32 +294,27 @@ page-settings {
 }
 
 /* iPhone XS Max, XR ----------- */
-@media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
     .tabs-ios .tab-button-icon {
         height: 50px !important;
     }
-
-    .searchbar-ios .searchbar-input  {
+    .searchbar-ios .searchbar-input {
         height: 4rem;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
     }
-
     .searchbar-ios {
-        background: none !important; 
+        background: none !important;
     }
-
     page-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-others-profile .segment-grid {
         margin-top: 5px !important;
     }
-  
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
-
     .select-ios {
         display: inline-block !important;
         padding: 11px 8px 2px 18px !important;
@@ -338,32 +322,27 @@ page-settings {
 }
 
 /* iPhone 4 ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
     .tabs-ios .tab-button-icon {
         height: 50px !important;
     }
-
-    .searchbar-ios .searchbar-input  {
+    .searchbar-ios .searchbar-input {
         height: 4rem;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
     }
-
     .searchbar-ios {
-        background: none !important; 
+        background: none !important;
     }
-
     page-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-others-profile .segment-grid {
         margin-top: 5px !important;
     }
-  
     .item-ios ion-avatar[item-start] {
         margin: 16px 16px 0px 0px !important;
     }
-
     .select-ios {
         display: inline-block !important;
         padding: 11px 8px 2px 18px !important;
@@ -371,80 +350,66 @@ page-settings {
 }
 
 /* iPad ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
-    .toolbar-title, .toolbar-title-md {
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    .toolbar-title,
+    .toolbar-title-md {
         font-size: 3vw !important;
     }
-
     .tabs-ios .tab-button-icon {
         height: 50px !important;
     }
-
     .followers-btn {
         height: 54px !important;
         width: 150px !important;
         margin-left: 15px !important;
     }
-
     .followers-btn h2 {
         font-size: 2.5rem !important;
         padding-top: 16px !important;
     }
-
     .followers-btn p {
         font-size: 1.5rem !important;
     }
-
     .flames-btn {
         height: 54px !important;
         width: 150px !important;
         margin-left: -30px !important;
     }
-
     .flames-btn h2 {
         font-size: 2.5rem !important;
         padding-top: 16px !important;
     }
-
     .flames-btn p {
         font-size: 1.5rem !important;
     }
-
     page-profile .img-responsive {
         width: 75px !important;
     }
-
     .segment-ios .segment-button {
         font-size: 1.6rem !important;
     }
-
     page-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-others-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-search .overlay {
         opacity: 0 !important;
         background-color: none !important;
     }
-
-    .searchbar-ios .searchbar-input  {
+    .searchbar-ios .searchbar-input {
         height: 4rem;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
     }
-
     .searchbar-ios {
-        background: none !important; 
+        background: none !important;
     }
-
     .select-ios {
         display: inline-block !important;
         padding: 11px 8px 2px 18px !important;
     }
-
     page-login {
         .login-back #txt-wechat {
             font-size: 19px !important;
@@ -452,7 +417,7 @@ page-settings {
         #txt-or {
             font-size: 2.5rem !important;
         }
-        .item-input ion-input{
+        .item-input ion-input {
             font-size: 16px !important;
         }
         .frgt-link {
@@ -471,7 +436,6 @@ page-settings {
             font-size: 1.6rem !important;
         }
     }
-
     page-registration {
         .login-back #txt-wechat {
             font-size: 19px !important;
@@ -479,7 +443,7 @@ page-settings {
         #txt-or {
             font-size: 2.5rem !important;
         }
-        .item-input ion-input{
+        .item-input ion-input {
             font-size: 16px !important;
         }
         .frgt-link {
@@ -498,90 +462,74 @@ page-settings {
             font-size: 1.6rem !important;
         }
     }
-
     page-alert-modal .overlay {
         opacity: 0 !important;
         background-color: none !important;
     }
+}
 
- }
+/* iPad Pro ----------- */
 
- /* iPad Pro ----------- */
- @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2)  and (orientation: portrait)  {
-    .toolbar-title, .toolbar-title-md {
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    .toolbar-title,
+    .toolbar-title-md {
         font-size: 3vw !important;
     }
-
     .tabs-ios .tab-button-icon {
         height: 70px !important;
         width: 70px !important;
     }
-
     .followers-btn {
         height: 54px !important;
         width: 150px !important;
         margin-left: 15px !important;
     }
-
     .followers-btn h2 {
         font-size: 2.5rem !important;
         padding-top: 16px !important;
     }
-
     .followers-btn p {
         font-size: 1.5rem !important;
     }
-
     .flames-btn {
         height: 54px !important;
         width: 150px !important;
         margin-left: -30px !important;
     }
-
     .flames-btn h2 {
         font-size: 2.5rem !important;
         padding-top: 16px !important;
     }
-
     .flames-btn p {
         font-size: 1.5rem !important;
     }
-
     page-profile .img-responsive {
         width: 75px !important;
     }
-
     .segment-ios .segment-button {
         font-size: 1.6rem !important;
     }
-
     page-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-others-profile .segment-grid {
         margin-top: 5px !important;
     }
-
     page-search .overlay {
         opacity: 0 !important;
         background-color: none !important;
     }
-
-    .searchbar-ios .searchbar-input  {
+    .searchbar-ios .searchbar-input {
         height: 4rem;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
     }
-
     .searchbar-ios {
-        background: none !important; 
+        background: none !important;
     }
-
     .select-ios {
         display: inline-block !important;
         padding: 11px 8px 2px 18px !important;
     }
-
     page-login {
         .login-back #txt-wechat {
             font-size: 19px !important;
@@ -589,7 +537,7 @@ page-settings {
         #txt-or {
             font-size: 2.5rem !important;
         }
-        .item-input ion-input{
+        .item-input ion-input {
             font-size: 16px !important;
         }
         .frgt-link {
@@ -608,7 +556,6 @@ page-settings {
             font-size: 1.6rem !important;
         }
     }
-
     page-registration {
         .login-back #txt-wechat {
             font-size: 19px !important;
@@ -616,7 +563,7 @@ page-settings {
         #txt-or {
             font-size: 2.5rem !important;
         }
-        .item-input ion-input{
+        .item-input ion-input {
             font-size: 16px !important;
         }
         .frgt-link {
@@ -635,10 +582,8 @@ page-settings {
             font-size: 1.6rem !important;
         }
     }
-
     page-alert-modal .overlay {
         opacity: 0 !important;
         background-color: none !important;
     }
-
- }
+}

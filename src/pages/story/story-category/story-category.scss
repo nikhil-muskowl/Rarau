@@ -6,6 +6,16 @@ page-story-category {
     h1 {
         color: red !important;
     }
+
+    .background {
+        background-color: #000;
+        color: #fff;
+        min-height: 100%;
+        width: 100%;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+    }
     ion-chip.chip.chip-md {
         margin: 4px 4px 4px 4px;
         border-radius: 10px;
