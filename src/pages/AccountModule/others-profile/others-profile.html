@@ -8,7 +8,7 @@
     <ion-title text-center>
       {{name}}
     </ion-title>
-    <ion-buttons right>
+    <ion-buttons right *ngIf="id!=user_id">
       <button class="back-btn">
         <img src="assets/icon/report_color.png" width="30px" height="30px" (click)="reportStory()">
       </button>
