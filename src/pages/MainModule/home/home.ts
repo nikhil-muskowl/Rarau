@@ -274,8 +274,8 @@ export class HomePage {
         'user_id': this.user_id,
         'searchCat': this.searchCat,
         'searchUse': this.searchUse,
-        // 'latitude': this.latitude,
-        // 'longitude': this.longitude
+        'latitude': this.latitude,
+        'longitude': this.longitude
       };
     }
     else {

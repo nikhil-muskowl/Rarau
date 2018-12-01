@@ -16,12 +16,7 @@
 
 
 <ion-content>
-  <ion-grid class="background" [style.background]="'url('+image+')'">
-    <!-- <img style="min-height:93%;" [src]="sanitizer.bypassSecurityTrustResourceUrl(image)"> -->
-    <ion-item>
-      <ion-label class="white-col">{{show_in_event}}</ion-label>
-      <ion-checkbox color="danger" [(ngModel)]="event_will" (ionChange)="SetEvent()"></ion-checkbox>
-    </ion-item>
+  <ion-grid class="background" [style.background-image]="'url('+image+')'">
 
     <ion-scroll scrollX="true" style="width:100vw; height:60px">
       <ion-row nowrap class="headerChip">
@@ -36,10 +31,18 @@
       </ion-row>
     </ion-scroll>
 
-    <ion-item>
-      <ion-tags-input [placeholder]="comma_separate" [(ngModel)]="tags" [color]="'danger'" (onChange)="onChange($event)"
-        [verifyMethod]="verifyTag" [separatorStr]="','" [canEnterAdd]="true" [canBackspaceRemove]="true"></ion-tags-input>
-    </ion-item>
-    
+    <div>
+      <ion-list>
+        <ion-item>
+          <ion-label>{{show_in_event}}</ion-label>
+          <!-- <ion-checkbox color="danger" [(ngModel)]="event_will" (ionChange)="SetEvent()"></ion-checkbox> -->
+          <ion-toggle color="danger" [(ngModel)]="event_will" (ionChange)="SetEvent()"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-tags-input [placeholder]="comma_separate" [(ngModel)]="tags" [color]="'danger'" (onChange)="onChange($event)"
+            [verifyMethod]="verifyTag" [separatorStr]="','" [canEnterAdd]="true" [canBackspaceRemove]="true"></ion-tags-input>
+        </ion-item>
+      </ion-list>
+    </div>
   </ion-grid>
 </ion-content>

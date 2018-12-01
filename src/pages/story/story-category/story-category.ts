@@ -81,7 +81,7 @@ export class StoryCategoryPage {
   ) {
 
     this.platform.registerBackButtonAction(() => {
-      this.back();
+      this.goBack();
     });
 
     this.setText();
@@ -91,6 +91,8 @@ export class StoryCategoryPage {
     this.varRecChk = '';
     this.sel_cat_id = this.navParams.get('sel_cat_id');
     this.image = this.navParams.get('image');
+  
+    // this.image = this.sanitizer.bypassSecurityTrustStyle(`url(${imgsrc})`);
     this.locName = this.navParams.get('locName');
     this.latitude = this.navParams.get('latitude');
     this.longitude = this.navParams.get('longitude');
@@ -369,7 +371,7 @@ export class StoryCategoryPage {
     }
   }
 
-  back() {
+  goBack() {
     this.navCtrl.push(LocationPage, { image: this.image });
   }
 
