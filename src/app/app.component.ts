@@ -76,8 +76,8 @@ export class MyApp {
           });
         });
 
-        // let splash = modalCtrl.create(SplashPage);
-        // splash.present();
+        let splash = modalCtrl.create(SplashPage);
+        splash.present();
 
         // Commented these lines for desktop, uncomment for real device(Mobile)
         // console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
@@ -92,6 +92,10 @@ export class MyApp {
       this.language = this.languageProvider.getLanguage();
       console.log(this.language);
       this.translate.setDefaultLang(this.language);
+
+      //custom splash
+      let splash = modalCtrl.create(SplashPage);
+      splash.present();
 
       //check city
       this.city_id = this.baiduProvider.getCity();
