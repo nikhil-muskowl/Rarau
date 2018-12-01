@@ -55,20 +55,15 @@ export class AlertModalPage {
   }
 
   openPage() {
-    // this.navCtrl.setRoot(ProfilePage);
-
-    // if (this.from == 0) {
-    //   this.view.dismiss();
-
-    // }
-    // else {
+    const data = {
+      close:1
+    };
     this.view.dismiss();
-    // }
   }
 
   closeModal() {
     const data = {
-
+      close:0
     };
     this.view.dismiss();
   }

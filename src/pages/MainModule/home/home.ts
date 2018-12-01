@@ -118,7 +118,6 @@ export class HomePage {
     this.setText();
     this.bindMap();
     this.setCategory();
-    this.getLocation();
     this.getAdvertisement();
   }
 
@@ -129,8 +128,6 @@ export class HomePage {
     this.storyService.getCategory().subscribe(
       response => {
         this.categoriesData = response;
-        console.log('Category : ' + JSON.stringify(response));
-
         this.categories = this.categoriesData.data;
       },
       err => console.error(err),
@@ -150,7 +147,6 @@ export class HomePage {
 
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;
-      console.log("this.rarau : " + text);
     });
     this.translate.get('click_to_search').subscribe((text: string) => {
       this.click_to_search = text;
@@ -209,7 +205,7 @@ export class HomePage {
   }
 
   getAdvertisement() {
-
+    this.language_id = this.languageProvider.getLanguageId();
     let param;
     param = {
       'language_id': this.language_id
@@ -328,27 +324,6 @@ export class HomePage {
               }
             }
             else {
-              this.markers.push({
-                options: {
-                  // enableDragging: true,
-                  icon: {
-                    imageUrl: 'assets/imgs/marker.png',
-                    size: {
-                      height: 32,
-                      width: 32
-                    },
-                    imageSize: {
-                      height: 32,
-                      width: 32
-                    }
-                  }
-                },
-                point: {
-                  lat: this.latitude,
-                  lng: this.longitude
-                }
-              });
-
               this.zoomlatLong = {
                 // lat: element.latitude,
                 // lng: element.longitude,
@@ -372,7 +347,36 @@ export class HomePage {
           this.alertProvider.message = this.no_location;
           this.alertProvider.showAlert();
         }
+
+        if (this.serLatitude != undefined && this.serLongitude != undefined) {
+        }
+        else {
+          this.markers.push({
+            options: {
+              // enableDragging: true,
+              icon: {
+                imageUrl: 'assets/imgs/marker.png',
+                size: {
+                  height: 32,
+                  width: 32
+                },
+                imageSize: {
+                  height: 32,
+                  width: 32
+                }
+              }
+            },
+            point: {
+              lat: this.latitude,
+              lng: this.longitude
+            }
+          });
+
+        }
+
         this.loadingProvider.dismiss();
+
+        console.log("this.markers : " + JSON.stringify(this.markers));
       },
       err => console.error(err),
       () => {
@@ -400,24 +404,6 @@ export class HomePage {
   openTutorial() {
     // this.navCtrl.setRoot(TutorialPage);
     this.navCtrl.push(EventListPage);
-  }
-
-  public getLocation() {
-
-    this.filterData = {
-      query: this.search,
-      location: this.city_id
-      // location: `${this.latitude},${this.longitude}`
-    };
-
-    this.baiduProvider.location(this.filterData).subscribe(
-      response => {
-        this.responseData = response;
-        this.locations = this.responseData.result;
-      },
-      err => { console.error(err); }
-    );
-    console.log(this.locations);
   }
 
   public showWindow({ e, marker, map }: any): void {
@@ -455,7 +441,7 @@ export class HomePage {
   }
 
   loadMap(map: any) {
-    console.log('map instance here', map);    
+    console.log('map instance here', map);
   }
 
   clickMarker(marker: any) {

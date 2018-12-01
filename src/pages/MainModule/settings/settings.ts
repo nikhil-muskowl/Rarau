@@ -96,7 +96,7 @@ export class SettingsPage {
     this.translate.get('select_city').subscribe((text: string) => {
       this.select_city_text = text;
     });
-    
+
   }
 
   loadCity() {
@@ -141,10 +141,6 @@ export class SettingsPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
-  }
-
   logout() {
     this.openModal();
   }
@@ -165,9 +161,16 @@ export class SettingsPage {
 
     myModal.present();
 
-    myModal.onDidDismiss(() => {
-      this.LoginProvider.unSetData();
-      this.navCtrl.setRoot(LoginPage);
+    myModal.onDidDismiss((data) => {
+      
+      if (data) {
+        var close = data.close;
+        if (close) {
+          this.LoginProvider.unSetData();
+          this.navCtrl.setRoot(LoginPage);
+        }
+      }
+
     });
 
     myModal.onWillDismiss(() => {
