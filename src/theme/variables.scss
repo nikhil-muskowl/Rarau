@@ -152,7 +152,21 @@ page-location {
     }
 }
 
+page-show-photo {
+    .scroll-content {
+        margin-left: -10px;
+        margin-top: 63px !important;
+    }
+    .scroll-content img {
+        width: -webkit-fill-available;
+    }
+}
 
+page-story-category {
+    .scroll-content {
+        margin-left: -10px;
+    }
+}
 
 /* iPhone 6, 7, 8 ----------- */
 

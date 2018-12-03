@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { ToastProvider } from '../../../providers/toast/toast';
@@ -19,6 +19,7 @@ import { ProfileProvider } from '../../../providers/profile/profile';
 import { StoryComponent } from '../../../components/story/story';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -61,10 +62,16 @@ export class ProfilePage {
     public LoginProvider: LoginProvider,
     public alertProvider: AlertProvider,
     public toast: ToastProvider,
+    public platform: Platform,
     public loadingProvider: LoadingProvider,
     public profileProvider: ProfileProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
+
+    this.platform.registerBackButtonAction(() => {
+      this.navCtrl.setRoot(HomePage);
+    });
+
   }
 
   setText() {

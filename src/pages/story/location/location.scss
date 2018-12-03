@@ -7,8 +7,22 @@ page-location {
     ion-header button {
         color: #fff;
     }
-    .publish-btn{
-    // .button-inner {
+    .searchbar-md {
+        background: transparent !important;
+        padding: 8px;
+        margin-left: 5px !important;
+    }
+    .background {
+        background-color: transparent !important;
+        color: #fff;
+        min-height: 100%;
+        width: 100%;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+    }
+    .publish-btn {
+        // .button-inner {
         border-radius: 15px;
         background: linear-gradient(to bottom, #ec3747, #f45a43);
         margin-bottom: 5px;

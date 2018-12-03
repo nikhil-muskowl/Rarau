@@ -31,13 +31,15 @@ page-story-category {
         color: #fff;
         border: 1px solid transparent;
     }
-    .button-inner {
-        border-radius: 15px;
-        background: linear-gradient(to bottom, #ec3747, #f45a43);
-        margin-bottom: 5px;
-        color: #fff;
-        padding: 12px;
-        border: 1px solid #ec3747;
+    .publish-btn {
+        .button-inner {
+            border-radius: 15px;
+            background: linear-gradient(to bottom, #ec3747, #f45a43) !important;
+            margin-bottom: 5px;
+            color: #fff !important;
+            padding: 12px;
+            border: 1px solid #ec3747 !important;
+        }
     }
     .back-btn {
         background: transparent !important;
@@ -47,39 +49,43 @@ page-story-category {
     ion-header button {
         color: #fff;
     }
-    ion-scroll {
+    .horizontal {
+        width: 100vw !important;
+        height: 60px !important;
         position: absolute;
-        bottom: 43px;
-        left: 0px;
+        margin-left: 15px !important;
+        bottom: 90px;
+        ion-scroll {
+            position: absolute !important;
+            bottom: 43px !important;
+            left: 0px !important;
+        }
+        ion-scroll .scroll-content {
+            background: transparent !important;
+        }
+        .scroll-content {
+            background-color: transparent !important;
+        }
     }
-    ion-scroll .scroll-content {
-        background: transparent !important;
+    .bottom_tag {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        .item-md {
+            background-color: transparent !important;
+            color: #fff !important;
+        }
+        .list-md {
+            margin: 0px 0 0px;
+        }
     }
     .ion-tags-input .iti-input {
         width: auto !important;
     }
-    // .item.item-md .checkbox-md {
-    //     position: relative;
-    //     display: block;
-    //     margin: 0px 0px -29px 15px !important;
-    //     .item-cover {
-    //         left: 0;
-    //         top: 0;
-    //         position: inherit;
-    //         width: 100%;
-    //         height: 100%;
-    //         background: transparent;
-    //         cursor: pointer;
-    //     }
-    // }
-    ion-item .button-inner {
-        color: #000;
-        background: #fff;
-        border: none;
-    }
     .check-back {
-        background: transparent!important;
-        color: #fff!important;
-        background-color: rgba(0, 0, 0, 0.3)!important;
+        background: transparent !important;
+        color: #fff !important;
+        background-color: rgba(0, 0, 0, 0.3) !important;
     }
 }
