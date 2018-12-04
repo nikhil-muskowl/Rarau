@@ -56,15 +56,15 @@ export class AlertModalPage {
 
   openPage() {
     const data = {
-      close:1
+      close: 1
     };
-    this.view.dismiss();
+    this.view.dismiss(data);
   }
 
   closeModal() {
     const data = {
-      close:0
+      close: 0
     };
-    this.view.dismiss();
+    this.view.dismiss(data);
   }
 }
