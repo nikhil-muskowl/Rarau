@@ -36,6 +36,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any;
+  isApp;
   private alert: Alert;
   private language;
   private city_id;
@@ -66,7 +67,13 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      if (platform.is('android')) {
+      if (this.platform.is('core') || this.platform.is('mobileweb')) {
+        this.isApp = false;
+        console.log('this.isApp : ' + this.isApp);
+      }
+      else {
+        this.isApp = true;
+        console.log('this.isApp : ' + this.isApp);
 
         this.file.checkDir(this.file.externalRootDirectory, 'RaRaU Images').then(response => {
           console.log('Directory exists' + response);
