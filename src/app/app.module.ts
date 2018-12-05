@@ -119,6 +119,7 @@ import { FollowersComponent } from '../components/followers/followers';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { EventProvider } from '../providers/event/event';
 import { CameraUtilsProvider } from '../providers/camera-utils/camera-utils';
+import { NotiProvider } from '../providers/noti/noti';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/language/', '.json');
@@ -307,6 +308,7 @@ export function createTranslateLoader(http: HttpClient) {
     ScreenOrientation,
     EventProvider,
     CameraUtilsProvider,
+    NotiProvider,
   ]
 })
 

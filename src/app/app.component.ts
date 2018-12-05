@@ -16,6 +16,8 @@ import { LanguageProvider } from '../providers/language/language';
 import { ConfigProvider } from '../providers/config/config';
 import { BaiduProvider } from "../providers/baidu/baidu";
 import { File } from '@ionic-native/file';
+import { NotiProvider } from '../providers/noti/noti';
+declare var Pushy: any;
 
 export interface PageInterface {
   title: string;
@@ -55,6 +57,7 @@ export class MyApp {
     public screenOrientation: ScreenOrientation,
     public languageProvider: LanguageProvider,
     public baiduProvider: BaiduProvider,
+    public notiProvider: NotiProvider,
     public locationTracker: LocationTrackerProvider,
     public configProvider: ConfigProvider,
     public file: File,
@@ -76,6 +79,10 @@ export class MyApp {
           });
         });
 
+        //Push notification setup
+        this.pushSetup();
+
+        //custom splash
         let splash = modalCtrl.create(SplashPage);
         splash.present();
 
@@ -93,9 +100,6 @@ export class MyApp {
       console.log(this.language);
       this.translate.setDefaultLang(this.language);
 
-      //custom splash
-      let splash = modalCtrl.create(SplashPage);
-      splash.present();
 
       //check city
       this.city_id = this.baiduProvider.getCity();
@@ -118,6 +122,38 @@ export class MyApp {
       this.translate.use(this.language);
     });
 
+  }
+
+  pushSetup() {
+    document.addEventListener('deviceready', function () {
+      // Start the Pushy service
+      Pushy.listen();
+      Pushy.requestStoragePermission();
+
+      Pushy.register(function (err, deviceToken) {
+        // Handle registration errors
+        if (err) {
+          return console.log(err);
+        }
+
+        // Display an console with device token
+        console.log('Pushy device token: ' + deviceToken);
+        let data = { code: deviceToken };
+        this.notiProvider.setToken(data);
+        // Send the token to your backend server via an HTTP GET request
+        //await fetch('https://your.api.hostname/register/device?token=' + deviceToken);
+
+        // Succeeded, optionally do something to alert the user
+      });
+    });
+
+    Pushy.setNotificationListener(function (data) {
+      // Print notification payload data
+      console.log('Received notification: ' + JSON.stringify(data));
+
+      // Display an alert with the "message" payload value
+      console.log(data.message);
+    });
   }
 
   initializeApp() {

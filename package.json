@@ -76,6 +76,8 @@
     "ionic-tags-input": "^0.1.2",
     "ionicons": "3.0.0",
     "jquery": "^3.3.1",
+    "pushy-cordova": "1.0.22",
+    "pushy-cordova-receiver": "file:plugins/pushy-cordova/receiver",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
@@ -116,7 +118,9 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-filepath": {}
+      "cordova-plugin-filepath": {},
+      "pushy-cordova": {},
+      "pushy-cordova-receiver": {}
     },
     "platforms": [
       "android"

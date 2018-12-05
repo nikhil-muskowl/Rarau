@@ -109,4 +109,6 @@
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-filepath" spec="1.4.2" />
     <engine name="android" spec="7.1.2" />
+    <plugin name="pushy-cordova" spec="1.0.22" />
+    <plugin name="pushy-cordova-receiver" spec="./plugins/pushy-cordova/receiver/" />
 </widget>
