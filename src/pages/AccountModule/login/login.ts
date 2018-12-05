@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Modal, ModalController, ModalOptions } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Modal, ModalController, ModalOptions, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrationPage } from '../registration/registration';
 import { ProfilePage } from '../../MainModule/profile/profile';
@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { TabsService } from "../../util/tabservice";
 import { AlertModalPage } from '../alert-modal/alert-modal';
+import { NotiProvider } from '../../../providers/noti/noti';
 
 @IonicPage()
 @Component({
@@ -32,6 +33,9 @@ export class LoginPage {
   private error_email;
   private error_password;
   private success;
+  public token;
+  public type;
+
   private failed;
   private success_msg;
   private error_warning;
@@ -55,7 +59,9 @@ export class LoginPage {
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
     private tabService: TabsService,
+    private platform: Platform,
     public translate: TranslateService,
+    public notiProvider: NotiProvider,
     public languageProvider: LanguageProvider,
     private modal: ModalController,
   ) {
@@ -67,6 +73,15 @@ export class LoginPage {
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
       password: ['', Validators.required]
     });
+
+    this.token = this.notiProvider.getToken();
+    console.log('Pushy device token : ' + this.token);
+    if (this.platform.is('ios')) {
+      this.type = 'ios';
+    }
+    if (this.platform.is('android')) {
+      this.type = 'android';
+    }
 
     if (this.loginProvider.user_id) {
       this.navCtrl.setRoot(ProfilePage);
@@ -162,9 +177,21 @@ export class LoginPage {
              this.submitAttempt = false;*/
             this.loginProvider.setData(this.responseData.result);
 
+            //register device to FCM
+            let data = {
+              user_id: this.responseData.result.id,
+              type: this.type,
+              code: this.token,
+              provider: 'pushy'
+            }
+            this.notiProvider.apiRegisterDevice(data).subscribe(
+              notiResponse => {
+
+                console.log("Noti response" + JSON.stringify(notiResponse));
+              });
+
             //open modal
             this.openModal();
-
 
             // this.navCtrl.setRoot(ProfilePage);//on modal dismiss
           }
@@ -173,7 +200,6 @@ export class LoginPage {
             this.alertProvider.message = this.email_password_incorrect;
             this.alertProvider.showAlert();
           }
-
         },
         err => console.error(err),
         () => {

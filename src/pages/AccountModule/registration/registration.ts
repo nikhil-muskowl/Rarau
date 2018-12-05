@@ -17,6 +17,7 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { ContactValidator } from '../../../validators/contact';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { NotiProvider } from '../../../providers/noti/noti';
 
 @IonicPage()
 @Component({
@@ -34,6 +35,8 @@ export class RegistrationPage {
   public uploadIcon;
   public uploadText;
   public data;
+  public token;
+  public type;
   //form fields
   public fname;
   public femail;
@@ -76,6 +79,7 @@ export class RegistrationPage {
     public loadingProvider: LoadingProvider,
     private tabService: TabsService,
     public platform: Platform,
+    public notiProvider: NotiProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
@@ -87,6 +91,15 @@ export class RegistrationPage {
 
     this.date = new Date().toISOString().split('T')[0];
     this.createForm();
+
+    this.token = this.notiProvider.getToken();
+    console.log('Pushy device token : ' + this.token);
+    if (this.platform.is('ios')) {
+      this.type = 'ios';
+    }
+    if (this.platform.is('android')) {
+      this.type = 'android';
+    }
 
     this.image = this.navParams.get('image');
     this.imagePath = this.navParams.get('imagePath');
@@ -232,6 +245,20 @@ export class RegistrationPage {
                 this.submitAttempt = false;
                 this.tabService.show();
                 this.loginProvider.setData(this.responseData.result);
+
+                //register device to FCM
+                let data = {
+                  user_id: this.responseData.result.id,
+                  type: this.type,
+                  code: this.token,
+                  provider: 'pushy'
+                }
+                this.notiProvider.apiRegisterDevice(data).subscribe(
+                  notiResponse => {
+
+                    console.log("Noti response" + JSON.stringify(notiResponse));
+                  });
+
                 this.navCtrl.setRoot(ProfilePage);
               }
 
