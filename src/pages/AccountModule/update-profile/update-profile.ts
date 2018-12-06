@@ -123,9 +123,6 @@ export class UpdateProfilePage {
     });
   }
 
-  ionViewDidLeave() {
-  }
-
   save() {
     //code to save
     console.log('select' + this.imgSend);

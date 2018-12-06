@@ -129,6 +129,7 @@ export class CameraOpenPage {
       width: this.platform.width(),
       height: this.platform.height(),
       toBack: true,
+      camera: 'rear',//for Rear camera
       previewDrag: false,
       tapPhoto: true
     }).then(() => {
