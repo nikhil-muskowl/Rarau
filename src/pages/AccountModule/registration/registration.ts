@@ -53,6 +53,12 @@ export class RegistrationPage {
   private error_email;
   private error_password;
   private error_confirm;
+  private pass_not_match;
+  //field placeholders
+  public ph_fname;
+  public ph_femail;
+  public ph_fpassword;
+  public ph_fconfpass;
 
   private sign_up;
   private rarau;
@@ -211,6 +217,21 @@ export class RegistrationPage {
     this.translate.get('profile_picture').subscribe((text: string) => {
       this.profile_picture_txt = text;
     });
+    this.translate.get('fname').subscribe((text: string) => {
+      this.ph_fname = text;
+    });
+    this.translate.get('fmail').subscribe((text: string) => {
+      this.ph_femail = text;
+    });
+    this.translate.get('fpass').subscribe((text: string) => {
+      this.ph_fpassword = text;
+    });
+    this.translate.get('fconpass').subscribe((text: string) => {
+      this.ph_fconfpass = text;
+    });
+    this.translate.get('pass_not_match').subscribe((text: string) => {
+      this.pass_not_match = text;
+    });
 
   }
 
@@ -226,84 +247,91 @@ export class RegistrationPage {
     if (this.registerForm.valid) {
 
       if (this.imagePath != undefined) {
-        this.loadingProvider.present();
+        if (this.registerForm.value.password == this.registerForm.value.passconf) {
+          this.loadingProvider.present();
 
-        this.formData = this.registerForm.valid;
+          this.formData = this.registerForm.valid;
 
-        this.loginProvider.apiRegister(this.registerForm.value, this.gender_id, this.date,
-          this.imagePath).subscribe(
-            response => {
+          this.loginProvider.apiRegister(this.registerForm.value, this.gender_id, this.date,
+            this.imagePath).subscribe(
+              response => {
 
-              this.responseData = response;
+                this.responseData = response;
 
-              this.submitAttempt = true;
+                this.submitAttempt = true;
 
-              if (this.responseData.status) {
-                this.result = this.responseData.result;
-                this.id = this.result.id;
-                this.registerForm.reset();
-                this.submitAttempt = false;
-                this.tabService.show();
-                this.loginProvider.setData(this.responseData.result);
+                if (this.responseData.status) {
+                  this.result = this.responseData.result;
+                  this.id = this.result.id;
+                  this.registerForm.reset();
+                  this.submitAttempt = false;
+                  this.tabService.show();
+                  this.loginProvider.setData(this.responseData.result);
 
-                //register device to FCM
-                let data = {
-                  user_id: this.responseData.result.id,
-                  type: this.type,
-                  code: this.token,
-                  provider: 'pushy'
+                  //register device to FCM
+                  let data = {
+                    user_id: this.responseData.result.id,
+                    type: this.type,
+                    code: this.token,
+                    provider: 'pushy'
+                  }
+                  this.notiProvider.apiRegisterDevice(data).subscribe(
+                    notiResponse => {
+
+                      console.log("Noti response" + JSON.stringify(notiResponse));
+                    });
+
+                  this.navCtrl.setRoot(ProfilePage);
                 }
-                this.notiProvider.apiRegisterDevice(data).subscribe(
-                  notiResponse => {
 
-                    console.log("Noti response" + JSON.stringify(notiResponse));
-                  });
+                if (!this.responseData.status) {
+                  this.result = this.responseData.result;
+                  this.alertProvider.title = this.error;
+                  this.alertProvider.message = this.result[0].text;
+                  this.alertProvider.showAlert();
+                }
 
-                this.navCtrl.setRoot(ProfilePage);
+                if (this.responseData.text_message != '') {
+                  this.text_message = this.responseData.text_message;
+                  this.alertProvider.title = this.success;
+                  this.alertProvider.message = this.text_message;
+                  this.alertProvider.showAlert();
+                }
+
+                if (this.responseData.error_firstname != '') {
+                  this.registerForm.controls['name'].setErrors({ 'incorrect': true });
+                  this.error_name = this.responseData.error_firstname;
+                }
+
+                if (this.responseData.error_email != '') {
+                  this.registerForm.controls['email'].setErrors({ 'incorrect': true });
+                  this.error_email = this.responseData.error_email;
+                }
+
+                if (this.responseData.error_password != '') {
+                  this.registerForm.controls['password'].setErrors({ 'incorrect': true });
+                  this.error_password = this.responseData.error_password;
+                }
+
+                if (this.responseData.error_confirm != '') {
+                  this.registerForm.controls['passconf'].setErrors({ 'incorrect': true });
+                  this.error_confirm = this.responseData.error_confirm;
+                }
+              },
+              err => {
+                console.error(err);
+                this.loadingProvider.dismiss();
+              },
+              () => {
+                this.loadingProvider.dismiss();
               }
-
-              if (!this.responseData.status) {
-                this.result = this.responseData.result;
-                this.alertProvider.title = this.error;
-                this.alertProvider.message = this.result[0].text;
-                this.alertProvider.showAlert();
-              }
-
-              if (this.responseData.text_message != '') {
-                this.text_message = this.responseData.text_message;
-                this.alertProvider.title = this.success;
-                this.alertProvider.message = this.text_message;
-                this.alertProvider.showAlert();
-              }
-
-              if (this.responseData.error_firstname != '') {
-                this.registerForm.controls['name'].setErrors({ 'incorrect': true });
-                this.error_name = this.responseData.error_firstname;
-              }
-
-              if (this.responseData.error_email != '') {
-                this.registerForm.controls['email'].setErrors({ 'incorrect': true });
-                this.error_email = this.responseData.error_email;
-              }
-
-              if (this.responseData.error_password != '') {
-                this.registerForm.controls['password'].setErrors({ 'incorrect': true });
-                this.error_password = this.responseData.error_password;
-              }
-
-              if (this.responseData.error_confirm != '') {
-                this.registerForm.controls['passconf'].setErrors({ 'incorrect': true });
-                this.error_confirm = this.responseData.error_confirm;
-              }
-            },
-            err => {
-              console.error(err);
-              this.loadingProvider.dismiss();
-            },
-            () => {
-              this.loadingProvider.dismiss();
-            }
-          );
+            );
+        }
+        else {
+          this.alertProvider.title = this.error;
+          this.alertProvider.message = this.pass_not_match;
+          this.alertProvider.showAlert();
+        }
       }
       else {
         this.alertProvider.title = this.error;

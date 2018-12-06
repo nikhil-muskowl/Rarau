@@ -51,6 +51,8 @@ export class LoginPage {
   private welcome;
   private logged_in;
   private email_password_incorrect;
+  private reg_mail;
+  private pass_text;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -142,7 +144,12 @@ export class LoginPage {
     this.translate.get('logged_in').subscribe((text: string) => {
       this.logged_in = text;
     });
-
+    this.translate.get('reg_mail').subscribe((text: string) => {
+      this.reg_mail = text;
+    });
+    this.translate.get('fpass').subscribe((text: string) => {
+      this.pass_text = text;
+    });
   }
 
   ionViewDidLoad() {

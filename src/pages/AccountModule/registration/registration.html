@@ -40,7 +40,7 @@
 
             <!-- name -->
             <ion-item>
-                <ion-input placeholder="Nick Name" formControlName="name" value={{fname}} type="text" [class.invalid]="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)"></ion-input>
+                <ion-input placeholder="{{ph_fname}}" formControlName="name" value={{fname}} type="text" [class.invalid]="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>
                 <p class="invalid-message" *ngIf="!registerForm.controls.name.valid  && (registerForm.controls.name.dirty || submitAttempt)">{{error_name}}</p>
@@ -48,7 +48,7 @@
 
             <!-- email -->
             <ion-item>
-                <ion-input placeholder="Email Address" formControlName="email" value={{femail}} type="text"
+                <ion-input placeholder="{{ph_femail}}" formControlName="email" value={{femail}} type="text"
                     [class.invalid]="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>
@@ -56,7 +56,7 @@
             </div>
             <!-- password -->
             <ion-item>
-                <ion-input placeholder="Password" formControlName="password" value={{fpassword}} type="password"
+                <ion-input placeholder="{{ph_fpassword}}" formControlName="password" value={{fpassword}} type="password"
                     [class.invalid]="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>
@@ -65,7 +65,7 @@
 
             <!-- confirm password -->
             <ion-item>
-                <ion-input placeholder="Confirm Password" formControlName="passconf" value={{fconfpass}} type="password"
+                <ion-input placeholder="{{ph_fconfpass}}" formControlName="passconf" value={{fconfpass}} type="password"
                     [class.invalid]="!registerForm.controls.passconf.valid && (registerForm.controls.passconf.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>

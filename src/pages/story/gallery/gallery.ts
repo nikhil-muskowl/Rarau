@@ -40,10 +40,6 @@ export class GalleryPage {
     // this.startCamera();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GalleryPage');
-  }
-
   ionViewWillEnter() {
 
     this.isLogin();
@@ -136,10 +132,6 @@ export class GalleryPage {
     });
   }
 
-  ionViewDidLeave() {
-
-    // this.tabService.show();
-  }
 
   startCamera() {
 
