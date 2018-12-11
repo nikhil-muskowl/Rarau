@@ -66,7 +66,8 @@ export class RankingPage {
     this.isSearch = false;
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
+
     this.content.resize();
     this.setText();
     this.getTypes();

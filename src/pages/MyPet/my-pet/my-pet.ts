@@ -36,7 +36,6 @@ export class MyPetPage {
   }
 
   ionViewWillEnter() {
-
     this.user_id = this.LoginProvider.isLogin();
     if (this.user_id == undefined || this.user_id == '') {
       this.navCtrl.setRoot(LoginPage);
@@ -46,11 +45,6 @@ export class MyPetPage {
       this.setText();
       this.getPets();
     }
-  }
-
-  ngOnInit() {
-    // Let's navigate from TabsPage to Page1
-    this.user_id = this.LoginProvider.isLogin();
   }
 
   setText() {
@@ -66,11 +60,8 @@ export class MyPetPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyPetPage');
-  }
-
   getPets() {
+    this.user_id = this.LoginProvider.isLogin();
     let param;
     param = {
       'language_id': this.language_id,
