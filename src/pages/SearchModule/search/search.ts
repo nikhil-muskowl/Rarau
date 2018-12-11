@@ -44,6 +44,7 @@ export class SearchPage {
   public story_srch_user;
   public story_srch_loc;
   public search_text;
+  public category_txt;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -59,14 +60,14 @@ export class SearchPage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-    this.setText();
-    this.getCategory();
-    this.city_id = this.baiduProvider.getCity();
+    // this.setText();
+    // this.getCategory();
+    // this.city_id = this.baiduProvider.getCity();
 
-    this.locationTrackerProvider.setLocation();
+    // this.locationTrackerProvider.setLocation();
     //uncommnet below for HK testing 
-    this.latitude = this.locationTrackerProvider.getLatitude();
-    this.longitude = this.locationTrackerProvider.getLongitude();
+    // this.latitude = this.locationTrackerProvider.getLatitude();
+    // this.longitude = this.locationTrackerProvider.getLongitude();
 
     //uncommnet below for India testing 
     // this.latitude = 39.919981;
@@ -75,7 +76,19 @@ export class SearchPage {
     // console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
   }
 
+  ionViewWillEnter() {
+    this.setText();
+    this.getCategory();
+    this.city_id = this.baiduProvider.getCity();
+
+    this.locationTrackerProvider.setLocation();
+    //uncommnet below for HK testing 
+    this.latitude = this.locationTrackerProvider.getLatitude();
+    this.longitude = this.locationTrackerProvider.getLongitude();
+  }
+
   setText() {
+
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
 
@@ -87,6 +100,9 @@ export class SearchPage {
     });
     this.translate.get('search').subscribe((text: string) => {
       this.search_text = text;
+    });
+    this.translate.get('category').subscribe((text: string) => {
+      this.category_txt = text;
     });
   }
 

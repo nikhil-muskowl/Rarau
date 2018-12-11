@@ -5,7 +5,7 @@
   <div class="modal_content">
     <!-- Story Search category -->
     <ion-item>
-      <ion-select placeholder="Category" [(ngModel)]="searchCat" multiple="true" cancelText="Cancel" okText="Okay!">
+      <ion-select placeholder="{{category_txt}}" [(ngModel)]="searchCat" multiple="true" cancelText="Cancel" okText="Okay!">
         <ion-option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.title}}</ion-option>
       </ion-select>
     </ion-item>

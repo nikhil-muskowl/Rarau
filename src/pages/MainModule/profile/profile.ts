@@ -120,9 +120,14 @@ export class ProfilePage {
 
   ionViewWillEnter() {
     this.setText();
-    this.isLogin();
-    //set segment
-    this.user = 'Stories';
+    this.user_id = this.LoginProvider.isLogin();
+    if (!this.user_id) {
+      this.navCtrl.setRoot(LoginPage);
+    } else {
+      this.getProfileData(this.user_id);
+      //set segment
+      this.user = 'Stories';
+    }
   }
 
   isLogin() {
@@ -131,6 +136,8 @@ export class ProfilePage {
       this.navCtrl.setRoot(LoginPage);
     } else {
       this.getProfileData(this.user_id);
+      //set segment
+      this.user = 'Stories';
     }
   }
 

@@ -67,7 +67,27 @@ export class LoginPage {
     public languageProvider: LanguageProvider,
     private modal: ModalController,
   ) {
+    this.tabService.show();
 
+    this.setText();
+
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
+      password: ['', Validators.required]
+    });
+
+    this.token = this.notiProvider.getToken();
+    console.log('Pushy device token : ' + this.token);
+    if (this.platform.is('ios')) {
+      this.type = 'ios';
+    }
+    if (this.platform.is('android')) {
+      this.type = 'android';
+    }
+
+    if (this.loginProvider.user_id) {
+      this.navCtrl.setRoot(ProfilePage);
+    }
   }
 
   setText() {
@@ -131,33 +151,9 @@ export class LoginPage {
     });
   }
 
-  ionViewWillEnter() {
-    this.tabService.show();
-
-    this.setText();
-
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
-      password: ['', Validators.required]
-    });
-
-    this.token = this.notiProvider.getToken();
-    console.log('Pushy device token : ' + this.token);
-    if (this.platform.is('ios')) {
-      this.type = 'ios';
-    }
-    if (this.platform.is('android')) {
-      this.type = 'android';
-    }
-
-    if (this.loginProvider.user_id) {
-      this.navCtrl.setRoot(ProfilePage);
-    }
-  }
-
   ionViewDidLoad() {
-    // this.tabService.show();
-    // console.log('ionViewDidLoad LoginPage');
+    this.tabService.show();
+    console.log('ionViewDidLoad LoginPage');
   }
 
   goToRegsiter() {
