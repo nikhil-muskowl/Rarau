@@ -291,13 +291,6 @@ export class RegistrationPage {
                   this.alertProvider.showAlert();
                 }
 
-                if (this.responseData.text_message != '') {
-                  this.text_message = this.responseData.text_message;
-                  this.alertProvider.title = this.success;
-                  this.alertProvider.message = this.text_message;
-                  this.alertProvider.showAlert();
-                }
-
                 if (this.responseData.error_firstname != '') {
                   this.registerForm.controls['name'].setErrors({ 'incorrect': true });
                   this.error_name = this.responseData.error_firstname;

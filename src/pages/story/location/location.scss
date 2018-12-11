@@ -30,12 +30,18 @@ page-location {
         border: 1px solid #ec3747;
     }
     .myLocBtn {
-        background-color: #fff;
-        color: #ec3747;
+        background-color: #fff !important;
+        color: #ec3747 !important;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
     }
     .myLocBtnclicked {
-        background-color: #ec3747;
-        color: #fff;
+        background-color: #ec3747 !important;
+        color: #fff !important;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
     }
     .div-botm {
         width: 100% !important;

@@ -5,26 +5,26 @@ page-my-pet-details {
     }
     .h2-grad {
         text-align: center;
-        
         background: -webkit-linear-gradient(left, #ec3747, #f45a43);
         background: -o-linear-gradient(right, #ec3747, #f45a43);
         background: -moz-linear-gradient(right, #ec3747, #f45a43);
-        background: linear-gradient(to right, #ec3747, #f45a43); 
-       -webkit-background-clip: text;
-       -webkit-text-fill-color: transparent;
+        background: linear-gradient(to right, #ec3747, #f45a43);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
-
     .lvl-div {
         text-align: center;
         font-size: 2rem;
-        font-weight: bold; 
+        font-weight: bold;
     }
-
     .toolbar-title-md {
         margin-left: 0px !important;
     }
-
     .back-button-md {
         margin: 0 0px;
+    }
+    .col-md-12 {
+        text-align: center;
     }
 }

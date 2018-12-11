@@ -27,7 +27,7 @@ export class LocationPage {
   public selLatitude: number = 0;
   public selLongitude: number = 0;
   public data: any;
-  public isMycurrLoc = 0;
+  public isMycurrLoc;
   public image;
   private city_id;
   public error;
@@ -37,7 +37,6 @@ export class LocationPage {
   public next;
   //for css
   public myLocBtn;
-
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,6 +51,10 @@ export class LocationPage {
     this.platform.registerBackButtonAction(() => {
       this.back();
     });
+
+    //css for loc button
+    this.isMycurrLoc = 0;
+    this.myLocBtn = 'myLocBtn';
 
     this.setText();
     this.image = this.navParams.get('image');
@@ -100,10 +103,14 @@ export class LocationPage {
       this.isMycurrLoc = 1;
       this.selLatitude = this.latitude;
       this.selLongitude = this.longitude;
+      console.log(" this.selLatitude : " + this.selLatitude);
     }
     else {
       this.myLocBtn = 'myLocBtn';
       this.isMycurrLoc = 0;
+      this.selLatitude = 0;
+      this.selLongitude = 0;
+      console.log(" this.selLatitude : " + this.selLatitude);
     }
   }
 
