@@ -26,9 +26,8 @@ import { EventListPage } from '../../Events/event-list/event-list';
 
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
-  @ViewChild('map') mapElement: ElementRef;
 
-  public title = 'Home';
+  public BdMap;
   public images: Array<any>;
   public latLong;
   public zoomlatLong;
@@ -442,6 +441,9 @@ export class HomePage {
 
   loadMap(map: any) {
     console.log('map instance here', map);
+    this.BdMap = map;
+    var cntr = this.BdMap.getCenter();
+    console.log('map center here', JSON.stringify(cntr));
   }
 
   clickMarker(marker: any) {

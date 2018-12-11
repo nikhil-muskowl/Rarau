@@ -10,7 +10,6 @@ page-location {
     .searchbar-md {
         background: transparent !important;
         padding: 8px;
-        margin-left: 5px !important;
     }
     .background {
         background-color: transparent !important;
@@ -29,5 +28,18 @@ page-location {
         color: #fff !important;
         padding: 12px;
         border: 1px solid #ec3747;
+    }
+    .myLocBtn {
+        background-color: #fff;
+        color: #ec3747;
+    }
+    .myLocBtnclicked {
+        background-color: #ec3747;
+        color: #fff;
+    }
+    .div-botm {
+        width: 100% !important;
+        position: absolute;
+        bottom: 0px;
     }
 }

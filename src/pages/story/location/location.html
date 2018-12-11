@@ -17,13 +17,16 @@
 <ion-content>
   <ion-grid class="background" [style.background-image]="'url('+image+')'">
 
-    <ion-searchbar [(ngModel)]="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
-    </ion-searchbar>
-
-    <ion-list>
-      <button ion-item *ngFor="let location of locations" (click)="itemSelected(location)">
-        {{ location.name }}
-      </button>
-    </ion-list>
+    <div class="div-botm">
+      <button class="{{myLocBtn}}" (click)="MyLocation()">{{my_location_txt}}<ion-icon ios="ios-locate" md="md-locate"></ion-icon></button>
+      <ion-searchbar *ngIf="!isMycurrLoc" [(ngModel)]="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)"
+        (ionCancel)="onCancel($event)">
+      </ion-searchbar>
+      <ion-list>
+        <button ion-item *ngFor="let location of locations" (click)="itemSelected(location)">
+          {{ location.name }}
+        </button>
+      </ion-list>
+    </div>
   </ion-grid>
 </ion-content>

@@ -155,5 +155,6 @@
   "fpass": "Password",
   "fconpass": "Confirm Password",
   "pass_not_match": "Password and Confirm Password not Matched!",
-  "reg_mail": "Enter Registered Email"
+  "reg_mail": "Enter Registered Email",
+  "my_location": "My Current Location"
 }

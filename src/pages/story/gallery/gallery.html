@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-fab left top small>
+  <ion-fab left top small class="back_layer_hide">
     <button (click)="back()" ion-fab clear color="transparent">
       <ion-icon name="arrow-back" color="light"></ion-icon>
     </button>
@@ -17,12 +17,12 @@
     </button>
   </ion-fab>
 
-  <ion-fab right bottom small>
-    <button (click)="flash()" ion-fab clear color="transparent">
+  <!-- <ion-fab right bottom small>
+    <button (click)="flash()" ion-fab clear color="transparent" class="flash">  
       <ion-icon name="ios-flash-outline" *ngIf="flashMode == 'off'" color="light"></ion-icon>
       <ion-icon name="ios-flash" *ngIf="flashMode == 'on'" color="light"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
 
   <ion-fab center bottom medium>
     <button (click)="takePicture()" ion-fab color="gray" class="take-photo">

@@ -27,12 +27,17 @@ export class LocationPage {
   public selLatitude: number = 0;
   public selLongitude: number = 0;
   public data: any;
+  public isMycurrLoc = 0;
   public image;
   private city_id;
   public error;
   public location_txt;
+  public my_location_txt;
   public enter_value_serach;
   public next;
+  //for css
+  public myLocBtn;
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -79,10 +84,27 @@ export class LocationPage {
     this.translate.get('next').subscribe((text: string) => {
       this.next = text;
     });
+    this.translate.get('my_location').subscribe((text: string) => {
+      this.my_location_txt = text;
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LocationPage');
+  }
+
+  MyLocation() {
+    console.log("In my current location");
+    if (this.isMycurrLoc == 0) {
+      this.myLocBtn = 'myLocBtnclicked';
+      this.isMycurrLoc = 1;
+      this.selLatitude = this.latitude;
+      this.selLongitude = this.longitude;
+    }
+    else {
+      this.myLocBtn = 'myLocBtn';
+      this.isMycurrLoc = 0;
+    }
   }
 
   back() {

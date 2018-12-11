@@ -2,7 +2,7 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class BaiduProvider {
+export class BaiduProvider{
   public headers = new HttpHeaders();
   public formData: FormData = new FormData();
   public responseData: any;
