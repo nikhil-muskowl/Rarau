@@ -5,6 +5,13 @@
     </button>
   </ion-fab>
 
+  <ion-fab right top small>
+    <button (click)="flash()" ion-fab clear color="transparent" class="flash">
+      <ion-icon name="ios-flash-outline" *ngIf="flashMode == 'off'" color="light"></ion-icon>
+      <ion-icon name="ios-flash" *ngIf="flashMode == 'on'" color="light"></ion-icon>
+    </button>
+  </ion-fab>
+
   <ion-fab left bottom small>
     <button (click)="switchCamera()" ion-fab clear color="transparent">
       <ion-icon name="reverse-camera" color="light"></ion-icon>
