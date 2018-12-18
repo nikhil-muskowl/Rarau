@@ -27,7 +27,7 @@ export class LocationPage {
   public selLatitude: number = 0;
   public selLongitude: number = 0;
   public data: any;
-  public isMycurrLoc;
+  
   public image;
   private city_id;
   public error;
@@ -37,7 +37,8 @@ export class LocationPage {
   public next;
   //for css
   public myLocBtn;
-
+  public isMycurrLoc;
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
