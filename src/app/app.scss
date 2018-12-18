@@ -263,7 +263,7 @@ div.messages {
 .logo {
     color: #fff;
     font-size: 2rem;
-    .fire-icon{
+    .fire-icon {
         height: 33px !important;
     }
 }
@@ -465,13 +465,20 @@ $FONT_COLOR: rgb(248, 6, 6);
     background-repeat: repeat-x;
 }
 
-.tabs-md .tabbar,
-.tabs-ios .tabbar {
-    background: #fff !important;
-}
-
 .tabbar {
     opacity: 0.5;
+}
+
+.header-md::after,
+.tabs-md[tabsPlacement="top"]>.tabbar::after,
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"]>.tabbar::before {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background-image: none !important;
+    background-repeat: repeat-x;
+    content: "";
 }
 
 .toolbar-title,
@@ -614,92 +621,92 @@ ion-loading.my-loading-water {
     -webkit-box-orient: vertical;
 }
 
-.follow-btn{
+.follow-btn {
     background-image: url('../assets/icon/profile/follow-btn.png');
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;    
+    background-size: cover;
     text-align: center;
-    color: #fff !important;        
+    color: #fff !important;
     height: 36px;
     width: 90px;
-    h2{
+    h2 {
         font-size: 1.5rem;
-        color: #fff !important;        
+        color: #fff !important;
         line-height: 0px;
         padding-top: 10px;
     }
-    p{
+    p {
         font-size: 1rem;
-        margin-left: 10px;   
+        margin-left: 10px;
         padding-top: 10px;
-        color: #fff !important;           
+        color: #fff !important;
     }
 }
 
-.followers-btn{
+.followers-btn {
     background-image: url('../assets/icon/profile/following-btn.png');
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;    
+    background-size: cover;
     text-align: center;
-    color: #fff !important;        
+    color: #fff !important;
     height: 36px;
     width: 90px;
-    h2{
+    h2 {
         font-size: 1.5rem;
-        color: #fff !important;        
+        color: #fff !important;
         line-height: 0px;
         padding-top: 10px;
     }
-    p{
+    p {
         font-size: 1rem;
-        margin-left: 10px;    
-        color: #fff !important;          
+        margin-left: 10px;
+        color: #fff !important;
     }
 }
 
-.followed-btn{
+.followed-btn {
     background-image: url('../assets/icon/profile/followed-btn.png');
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;    
+    background-size: cover;
     text-align: center;
-    color: #fff !important;        
+    color: #fff !important;
     height: 36px;
     width: 90px;
-    h2{
+    h2 {
         font-size: 1.5rem;
-        color: #fff !important;        
+        color: #fff !important;
         line-height: 0px;
         padding-top: 10px;
     }
-    p{
+    p {
         font-size: 1rem;
-        margin-left: 10px;   
-        padding-top: 10px;      
-        color: #fff !important;        
+        margin-left: 10px;
+        padding-top: 10px;
+        color: #fff !important;
     }
 }
 
-.flames-btn{
+.flames-btn {
     background-image: url('../assets/icon/profile/flames-btn.png');
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;    
+    background-size: cover;
     text-align: center;
-    color: #fff !important;        
+    color: #fff !important;
     height: 36px;
     width: 90px;
-    h2{
+    h2 {
         font-size: 1.5rem;
-        color: #fff !important;        
+        color: #fff !important;
         line-height: 0px;
         padding-top: 10px;
     }
-    p{
+    p {
         font-size: 1rem;
-        margin-left: 10px;   
-        color: #fff !important;           
+        margin-left: 10px;
+        color: #fff !important;
     }
 }

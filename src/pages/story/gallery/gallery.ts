@@ -181,11 +181,7 @@ export class GalleryPage {
   }
 
   setFlashMode() {
-    this.cameraPreview.setFlashMode(this.flashMode).then(() => {
-
-    }).catch(() => {
-
-    });
+    this.cameraPreview.setFlashMode(this.flashMode);
   }
 
   switchCamera() {

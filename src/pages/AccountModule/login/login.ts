@@ -62,8 +62,8 @@ export class LoginPage {
     public loadingProvider: LoadingProvider,
     private tabService: TabsService,
     private platform: Platform,
-    public translate: TranslateService,
     public notiProvider: NotiProvider,
+    public translate: TranslateService,
     public languageProvider: LanguageProvider,
     private modal: ModalController,
   ) {

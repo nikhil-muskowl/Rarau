@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
 import { EventModalPage } from '../../Events/event-modal/event-modal';
+import { StoryModalPage } from '../story-modal/story-modal';
 
 @IonicPage()
 @Component({
@@ -338,13 +339,18 @@ export class StoryCategoryPage {
                   this.cameraUtils.saveToGallery(this.receiptImage);
                 }
 
-                this.alertProvider.title = this.success;
-                this.alertProvider.message = this.message;
-                this.alertProvider.showAlert();
+                // this.alertProvider.title = this.success;
+                // this.alertProvider.message = this.message;
+                // this.alertProvider.showAlert();
 
-                this.tabService.show();
-                this.navCtrl.setRoot(HomePage);
+                // this.tabService.show();
+                // this.navCtrl.setRoot(HomePage);
+
                 this.loadingProvider.dismiss();
+
+                //Remove alert and call modal 17/12/2018
+                this.openModal(this.success, this.message);
+
               });
             }
 
@@ -370,6 +376,32 @@ export class StoryCategoryPage {
     else {
       console.log('Click on Next');
     }
+  }
+
+  openModal(title, msg) {
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+
+    const myModalData = {
+      title: title,
+      image: 'assets/icon/upload_success.png',
+      msg: msg,
+    };
+
+    const myModal: Modal = this.modal.create(StoryModalPage, { data: myModalData }, myModalOptions);
+
+    myModal.present();
+
+    myModal.onDidDismiss(() => {
+      this.tabService.show();
+      this.navCtrl.setRoot(HomePage);
+    });
+
+    myModal.onWillDismiss(() => {
+      this.tabService.show();
+      this.navCtrl.setRoot(HomePage);
+    });
   }
 
   goBack() {

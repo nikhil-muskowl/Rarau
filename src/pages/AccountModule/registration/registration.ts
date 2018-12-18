@@ -340,7 +340,7 @@ export class RegistrationPage {
 
   createForm() {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.maxLength(32), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      name: ['', Validators.compose([Validators.maxLength(32), Validators.pattern('[a-zA-Z0-9_.-]*'), Validators.required])],
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
       password: ['', Validators.required],
       passconf: ['', Validators.required],

@@ -14,9 +14,7 @@ import { SearchPage } from '../../SearchModule/search/search';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { Slides } from 'ionic-angular';
-import { TutorialPage } from '../tutorial/tutorial';
 import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
-import { CreateEventPage } from '../../Events/create-event/create-event';
 import { EventListPage } from '../../Events/event-list/event-list';
 
 @Component({
@@ -25,6 +23,7 @@ import { EventListPage } from '../../Events/event-list/event-list';
 })
 
 export class HomePage {
+  @ViewChild(Slides) homeSlides: Slides;
   @ViewChild(Slides) slides: Slides;
 
   public BdMap;
@@ -88,15 +87,21 @@ export class HomePage {
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
 
-    // this.images = [
-    //   { categoryFirst: 'assets/icon/Front-Icons/food.png', text: '8', categoryPerson: 'assets/icon/user.png' },
-    //   { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '5', categoryPerson: 'assets/icon/user.png' },
-    //   { categoryFirst: 'assets/icon/Front-Icons/world.png', text: '7', categoryPerson: 'assets/icon/user.png' },
-    //   { categoryFirst: 'assets/icon/Front-Icons/VectorSmartObject.png', text: '2', categoryPerson: 'assets/icon/user.png' },
-    // ]
   }
 
   ngOnInit() {
+    this.InitMethods();
+  }
+
+  homeSlidesNext() {
+    this.homeSlides.slideNext();
+  }
+
+  homeSlidesPrev() {
+    this.homeSlides.slidePrev();
+  }
+
+  InitMethods() {
     // Let's navigate from TabsPage to Page1
     this.user_id = this.LoginProvider.isLogin();
     this.language_id = this.languageProvider.getLanguageId();
@@ -106,12 +111,6 @@ export class HomePage {
     this.longitude = this.locationTrackerProvider.getLongitude();
 
     this.city_id = this.baiduProvider.getCity();
-    //uncommnet below for India testing 
-    // this.latitude = 39.919981;
-    // this.longitude = 116.414977;
-    // console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
-    // console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
-
     this.showStories = false;
 
     this.setText();
@@ -354,7 +353,7 @@ export class HomePage {
             options: {
               // enableDragging: true,
               icon: {
-                imageUrl: 'assets/imgs/marker.png',
+                imageUrl: 'assets/imgs/location.png',
                 size: {
                   height: 32,
                   width: 32
@@ -370,7 +369,6 @@ export class HomePage {
               lng: this.longitude
             }
           });
-
         }
 
         this.loadingProvider.dismiss();

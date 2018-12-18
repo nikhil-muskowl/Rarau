@@ -114,14 +114,16 @@ export class MyApp {
         this.baiduProvider.setCity('131');
       }
 
-      console.log('tutorial value : ' + this.configProvider.isSeen());
-      let chk = this.configProvider.isSeen();
-      if (chk == '1') {
-        this.rootPage = MainTabsPage;
-      }
-      else {
-        this.rootPage = TutorialPage;
-      }
+      // console.log('tutorial value : ' + this.configProvider.isSeen());
+      // let chk = this.configProvider.isSeen();
+      // if (chk == '1') {
+      //   this.rootPage = MainTabsPage;
+      // }
+      // else {
+      //   this.rootPage = TutorialPage;
+      // }
+      this.rootPage = MainTabsPage;
+
       this.initializeApp();
 
       console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());

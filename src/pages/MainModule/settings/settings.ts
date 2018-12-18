@@ -10,6 +10,7 @@ import { ProfilePage } from "../profile/profile";
 import { BaiduProvider } from "../../../providers/baidu/baidu";
 import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { AlertModalPage } from '../../AccountModule/alert-modal/alert-modal';
+import { TutorialPage } from '../tutorial/tutorial';
 
 @IonicPage()
 @Component({
@@ -35,6 +36,7 @@ export class SettingsPage {
   private cancel_text;
   private select_lang_text;
   private select_city_text;
+  private tutorial_txt;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -96,6 +98,9 @@ export class SettingsPage {
     this.translate.get('select_city').subscribe((text: string) => {
       this.select_city_text = text;
     });
+    this.translate.get('tutorial').subscribe((text: string) => {
+      this.tutorial_txt = text;
+    });
 
   }
 
@@ -113,6 +118,10 @@ export class SettingsPage {
     }, err => {
       console.error(err);
     });
+  }
+
+  tutorial() {
+    this.navCtrl.setRoot(TutorialPage);
   }
 
   public getLanguages() {
@@ -162,7 +171,7 @@ export class SettingsPage {
     myModal.present();
 
     myModal.onDidDismiss((data) => {
-      
+
       if (data) {
         var close = data.close;
         if (close) {

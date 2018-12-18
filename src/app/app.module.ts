@@ -48,6 +48,8 @@ import { SavedStoriesPage } from '../pages/story/saved-stories/saved-stories';
 import { SingleStoryPage } from '../pages/story/single-story/single-story';
 import { UploadReceiptPage } from '../pages/story/upload-receipt/upload-receipt';
 import { ReceiptShowPage } from '../pages/story/receipt-show/receipt-show';
+import { StoryModalPage } from '../pages/story/story-modal/story-modal';
+
 //Services
 import { ImageService } from '../pages/util/imageservice';
 import { UnsplashItUtil } from '../pages/util/unsplashItutil';
@@ -176,6 +178,7 @@ export function createTranslateLoader(http: HttpClient) {
     EventDetailsPage,
     EventListPage,
     EventModalPage,
+    StoryModalPage,
   ],
   imports: [
     HttpClientModule,
@@ -262,7 +265,8 @@ export function createTranslateLoader(http: HttpClient) {
     CreateEventPage,
     EventDetailsPage,
     EventListPage,
-    EventModalPage
+    EventModalPage,
+    StoryModalPage,
   ],
   providers: [
     StatusBar,

@@ -11,7 +11,7 @@
       <button class="btn-transparent" (click)="openModal()">
         <img src="assets/icon/search_home.png" width="40" height="40">
       </button>
-      <button class="btn-transparent" (click)="openTutorial()">
+      <button class="btn-transparent" (click)="openEvents()">
         <img src="assets/icon/event.png" width="40" height="40">
       </button>
     </ion-buttons>
@@ -20,8 +20,8 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-slides class="image-slider" slidesPerView="3">
+  <div class="home-slides">
+    <ion-slides slidesPerView="3" #homeSlides>
       <ion-slide *ngFor="let category of categories; let i = index;">
         <div class="category-rank">
           <ion-row>
@@ -38,6 +38,14 @@
         </div>
       </ion-slide>
     </ion-slides>
+
+    <button type="submit" float-left color="light" class="swiper-button-prev swiper-button-black" (click)="homeSlidesPrev()">
+      <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+    </button>
+    <button type="submit" float-right color="light" class="swiper-button-next swiper-button-black" (click)="homeSlidesNext()">
+      <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+    </button>
+
   </div>
 
   <div class="map">
@@ -75,7 +83,7 @@
     <ion-slides *ngIf="Advdata" autoplay="3000" loop="true" speed="500" (ionSlideDidChange)="slideChanged()">
       <ion-slide *ngFor="let slide of Advdata">
         <div>
-          <img class="adv-img" src="{{slide.image_thumb}}" height="100" width="100">
+          <img class="adv-img" src="{{slide.image_thumb}}" height="75" width="100">
           <p>{{slide.title}}</p>
         </div>
       </ion-slide>

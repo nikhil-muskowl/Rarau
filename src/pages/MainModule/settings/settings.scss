@@ -1,5 +1,6 @@
 page-settings {
-    .item-select .label-md, .item-datetime .label-md {
+    .item-select .label-md,
+    .item-datetime .label-md {
         color: #000;
     }
     .back-btn {
@@ -8,48 +9,63 @@ page-settings {
     .toolbar-title-md {
         margin-left: 0px !important;
     }
-
     .login-back {
         background: #eaeaea;
         width: 100%;
         height: 100%;
     }
-
     .list-md {
         background: #eaeaea;
     }
-
     .submit-btn {
         border: 1px solid;
         border-color: white;
-        border-radius: 12px;
-        height: 3.4rem;
-        width:80px;
+        border-radius: 12px; // height: 3.4rem;
+        // width:80px;
         background-color: #f25044 !important;
     }
-
     .submit-btn .button-inner {
         font-size: 1.6rem;
         font-weight: 400;
         text-transform: none;
         background-color: #f25044 !important;
     }
-
+    .txt-grad {
+        text-align: center;
+        background: -webkit-linear-gradient(left, #ec3747, #f45a43);
+        background: -o-linear-gradient(right, #ec3747, #f45a43);
+        background: -moz-linear-gradient(right, #ec3747, #f45a43);
+        background: linear-gradient(to right, #ec3747, #f45a43);
+        -webkit-background-clip: text;
+        background-clip: text;
+        font-size: 15px;
+        text-align: right;
+        -webkit-text-fill-color: transparent;
+        img {
+            height: 20px;
+            width: 20px;
+            margin-top: -3px;
+            position: absolute !important;
+            margin-left: -25px;
+        }
+    }
     ion-select {
         max-width: 30%;
         font-size: 18px;
     }
-
     .select-md {
         display: inline-block;
         padding: 13px 8px 0px 8px;
     }
-
     .col-md-12 {
         text-align: center;
     }
-
     .toolbar-title-md {
         margin-left: 0px !important;
+    }
+    .tu-img {
+        margin: 0px 5px 0px 0px !important;
+        width: 20px !important;
+        height: 20px !important;
     }
 }

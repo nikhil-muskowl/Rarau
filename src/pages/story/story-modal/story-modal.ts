@@ -1,45 +1,40 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
-import { LoginProvider } from '../../../providers/login/login';
 
 @IonicPage()
 @Component({
-  selector: 'page-alert-modal',
-  templateUrl: 'alert-modal.html',
+  selector: 'page-story-modal',
+  templateUrl: 'story-modal.html',
 })
-export class AlertModalPage {
+export class StoryModalPage {
 
   public paramData;
   public user_id;
-  public welcome_txt;
+  public title_txt;
   public image;
-  public logged_txt;
+  public msg_txt;
 
   public keep_going;
   public from;
 
-  constructor(
-    public navCtrl: NavController,
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public loadingProvider: LoadingProvider,
     private view: ViewController,
     public translate: TranslateService,
-    public languageProvider: LanguageProvider,
-    public LoginProvider: LoginProvider,
-  ) {
+    public languageProvider: LanguageProvider, ) {
+
     this.setText();
     this.getData();
   }
 
   getData() {
     let data = this.navParams.get('data');
-    // console.log('modal data :  ' + JSON.stringify(data));
-    this.welcome_txt = data.welcome;
+
+    this.title_txt = data.title;
     this.image = data.image;
-    this.logged_txt = data.logged;
+    this.msg_txt = data.msg;
     this.from = data.from;
   }
 
@@ -56,13 +51,14 @@ export class AlertModalPage {
     const data = {
       close: 1
     };
-    this.view.dismiss(data);
+    this.view.dismiss();
   }
 
   closeModal() {
     const data = {
       close: 0
     };
-    this.view.dismiss(data);
+    this.view.dismiss();
   }
+
 }

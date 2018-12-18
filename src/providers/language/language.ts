@@ -41,12 +41,12 @@ export class LanguageProvider {
 
   public getLanguage() {
     try {
-      if(window.localStorage.getItem('language')){
+      if (window.localStorage.getItem('language')) {
         return window.localStorage.getItem('language');
-      }else{
-        return 'english';  
+      } else {
+        return 'english';
       }
-      
+
     } catch (error) {
       return 'english';
     }

@@ -67,7 +67,6 @@ export class RankingPage {
   }
 
   ionViewWillEnter() {
-
     this.content.resize();
     this.setText();
     this.getTypes();
