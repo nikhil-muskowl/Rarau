@@ -56,6 +56,7 @@ p {
     text-align: center;
 } //Set header buttons and title to white
 ion-header {
+    z-index: 0 !important;
     button {
         color: #fff !important;
     }
