@@ -5,6 +5,9 @@
     </ion-title>
     <ion-buttons right>
       <button class="back-btn">
+        <img src="assets/icon/notification.png" width="30px" height="30px" (click)="goNoti()">
+      </button>
+      <button class="back-btn">
         <img src="assets/icon/settings.png" width="30px" height="30px" (click)="goSetting()">
       </button>
     </ion-buttons>
@@ -47,7 +50,7 @@
             </ion-col>
           </ion-row>
 
-          <ion-row>           
+          <ion-row>
             <ion-col text-center (click)="viewActivity()">
               <img src="assets/imgs/Profile/My Profile Icon/view.png" class="img-responsive">
               <p style="font-size: 2.5vw;">{{view_log}}</p>

@@ -398,8 +398,7 @@ export class HomePage {
     console.log("Click on close icon");
   }
 
-  openTutorial() {
-    // this.navCtrl.setRoot(TutorialPage);
+  openEvents() {
     this.navCtrl.push(EventListPage);
   }
 

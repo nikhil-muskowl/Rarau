@@ -24,6 +24,7 @@ import { SettingsPage } from '../pages/MainModule/settings/settings';
 import { TutorialPage } from '../pages/MainModule/tutorial/tutorial';
 import { ActivityLogsPage } from '../pages/MainModule/activity-logs/activity-logs';
 import { SplashPage } from '../pages/MainModule/splash/splash';
+import { NotificationListPage } from '../pages/MainModule/notification-list/notification-list';
 
 //Account module
 import { LoginPage } from '../pages/AccountModule/login/login';
@@ -179,6 +180,7 @@ export function createTranslateLoader(http: HttpClient) {
     EventListPage,
     EventModalPage,
     StoryModalPage,
+    NotificationListPage,
   ],
   imports: [
     HttpClientModule,
@@ -267,6 +269,7 @@ export function createTranslateLoader(http: HttpClient) {
     EventListPage,
     EventModalPage,
     StoryModalPage,
+    NotificationListPage,
   ],
   providers: [
     StatusBar,

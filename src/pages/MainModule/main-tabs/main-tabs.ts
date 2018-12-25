@@ -25,5 +25,6 @@ export class MainTabsPage {
     } else {
       this.mySelectedIndex = 0;
     }
+    
   }
 }

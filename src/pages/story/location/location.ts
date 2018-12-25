@@ -27,7 +27,7 @@ export class LocationPage {
   public selLatitude: number = 0;
   public selLongitude: number = 0;
   public data: any;
-  
+
   public image;
   private city_id;
   public error;
@@ -38,7 +38,11 @@ export class LocationPage {
   //for css
   public myLocBtn;
   public isMycurrLoc;
-  
+  //for story_title
+  story_title;
+  public story_title_txt;
+  public error_story_title;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
@@ -91,6 +95,12 @@ export class LocationPage {
     this.translate.get('my_location').subscribe((text: string) => {
       this.my_location_txt = text;
     });
+    this.translate.get('enter_story_title').subscribe((text: string) => {
+      this.story_title_txt = text;
+    });
+    this.translate.get('error_story_title').subscribe((text: string) => {
+      this.error_story_title = text;
+    });
   }
 
   ionViewDidLoad() {
@@ -102,6 +112,7 @@ export class LocationPage {
     if (this.isMycurrLoc == 0) {
       this.myLocBtn = 'myLocBtnclicked';
       this.isMycurrLoc = 1;
+      this.story_title = '';
       this.selLatitude = this.latitude;
       this.selLongitude = this.longitude;
       console.log(" this.selLatitude : " + this.selLatitude);
@@ -120,16 +131,28 @@ export class LocationPage {
   }
 
   Next() {
-
-    if (this.selLatitude == 0 && this.selLongitude == 0) {
-
-      this.alertProvider.title = this.error;
-      this.alertProvider.message = this.enter_value_serach;
-      this.alertProvider.showAlert();
+    if (this.isMycurrLoc == 1) {
+      if (this.story_title != '') {
+        this.locName = this.story_title;
+        this.navCtrl.push(StoryCategoryPage, { image: this.image, locName: this.locName, latitude: this.selLatitude, longitude: this.selLongitude });
+      } else {
+        this.alertProvider.title = this.error;
+        this.alertProvider.message = this.error_story_title;
+        this.alertProvider.showAlert();
+      }
     }
     else {
-      console.log('next category');
-      this.navCtrl.push(StoryCategoryPage, { image: this.image, locName: this.locName, latitude: this.selLatitude, longitude: this.selLongitude });
+      if (this.selLatitude == 0 && this.selLongitude == 0) {
+
+        this.alertProvider.title = this.error;
+        this.alertProvider.message = this.enter_value_serach;
+        this.alertProvider.showAlert();
+      } else {
+        console.log('next category');
+        console.log("this.locName : " + this.locName);
+
+        this.navCtrl.push(StoryCategoryPage, { image: this.image, locName: this.locName, latitude: this.selLatitude, longitude: this.selLongitude });
+      }
     }
   }
 

@@ -53,4 +53,19 @@ export class NotiProvider {
       return '0';
     }
   }
+
+  apiNotiList(data) {
+    this.formData = new FormData();
+    this.URL = ConfigProvider.BASE_URL + 'notifications_module/api/user_notifications_api';
+
+    this.formData.append('user_id', data.user_id);
+    this.formData.append('language_id', data.language_id);
+
+    return this.http.post(this.URL,
+      this.formData,
+      {
+        headers: this.headers,
+      }
+    );
+  }
 }

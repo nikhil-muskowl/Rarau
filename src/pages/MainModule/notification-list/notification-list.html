@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      {{title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let item of notiItems; let i = index;">
+      <ion-row>
+        <p class="ellipsis-1"><b>{{item.title}}</b></p>
+        <p class="ellipsis-2">{{item.description}}</p>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

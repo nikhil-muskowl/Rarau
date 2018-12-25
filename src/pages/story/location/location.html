@@ -20,6 +20,13 @@
     <div class="div-botm">
       <button ion-button float-right class="{{myLocBtn}}" (click)="MyLocation()">{{my_location_txt}}<ion-icon ios="ios-locate"
           md="md-locate"></ion-icon></button>
+
+      <ion-list>
+        <ion-item *ngIf="isMycurrLoc">
+          <ion-input placeholder="{{story_title_txt}}" [(ngModel)]="story_title" type="text"></ion-input>
+        </ion-item>
+      </ion-list>
+      
       <ion-searchbar *ngIf="!isMycurrLoc" [(ngModel)]="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)"
         (ionCancel)="onCancel($event)">
       </ion-searchbar>

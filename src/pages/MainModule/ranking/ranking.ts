@@ -71,6 +71,7 @@ export class RankingPage {
     this.setText();
     this.getTypes();
     this.getCountry();
+    this.rankItems = [];
     this.location = undefined;
     this.language_id = this.languageProvider.getLanguageId();
     console.log(this.story_type_id);

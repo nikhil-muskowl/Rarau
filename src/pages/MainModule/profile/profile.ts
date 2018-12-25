@@ -20,6 +20,7 @@ import { StoryComponent } from '../../../components/story/story';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { HomePage } from '../home/home';
+import { NotificationListPage } from '../notification-list/notification-list';
 
 @IonicPage()
 @Component({
@@ -188,5 +189,10 @@ export class ProfilePage {
 
   goSetting() {
     this.navCtrl.push(SettingsPage);
+  }
+
+  
+  goNoti() {
+    this.navCtrl.push(NotificationListPage);
   }
 }
