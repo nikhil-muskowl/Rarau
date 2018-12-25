@@ -126,6 +126,7 @@
   "event_time": "Event Time",
   "event_city": "Event City",
   "event_loc": "Event Location",
+  "event_desc": "Event Description",
   "error_description": "Description field is required",
   "error_title": "Title field is required",
   "error_name": "Please fill the Name field.",
@@ -137,6 +138,7 @@
   "error_time": "Time field is required",
   "error_date": "Date field is required",
   "error_city": "City field is required",
+  "error_story_title": "Story Title is required",
   "change": "Change",
   "event_detail": "Event Detail",
   "event_list": "Event List",
@@ -155,5 +157,7 @@
   "fconpass": "Confirm Password",
   "pass_not_match": "Password and Confirm Password not Matched!",
   "reg_mail": "Enter Registered Email",
-  "my_location": "My Current Location"
+  "my_location": "My Current Location",
+  "notification": "Notification",
+  "enter_story_title": "Enter Story Title"
 }
