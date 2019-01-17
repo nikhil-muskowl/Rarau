@@ -20,7 +20,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="home-slides">
+  <div class="home-slides" style="height: 20%;">
     <ion-slides slidesPerView="3" #homeSlides>
       <ion-slide *ngFor="let category of categories; let i = index;">
         <div class="category-rank">
@@ -48,7 +48,7 @@
 
   </div>
 
-  <div class="map">
+  <div class="map"style="height: 60%;">
     <baidu-map [options]="options" (onMapLoaded)="loadMap($event)" (clicked)="clickmap($event)">
       <marker *ngFor="let marker of markers" [point]="marker.point" [options]="marker.options" (clicked)="showWindow($event)"></marker>
       <control type="navigation" [options]="navOptions"></control>
@@ -79,12 +79,12 @@
     </ion-list>
   </div>
 
-  <div>
+  <div style="height: 20%;">
     <ion-slides *ngIf="Advdata" autoplay="3000" loop="true" speed="500" (ionSlideDidChange)="slideChanged()">
       <ion-slide *ngFor="let slide of Advdata">
         <div>
-          <img class="adv-img" src="{{slide.image_thumb}}" height="75" width="100">
-          <p>{{slide.title}}</p>
+          <img class="adv-img" src="{{slide.image}}" height="75" width="100">
+          <!-- <p>{{slide.title}}</p> -->
         </div>
       </ion-slide>
     </ion-slides>

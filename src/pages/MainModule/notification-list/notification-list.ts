@@ -22,9 +22,10 @@ export class NotificationListPage {
   public responseData;
   public recordsTotal;
   public items;
-  public notiItems:any=[];
+  public notiItems: any = [];
   public length = 10;
   public start = 0;
+  public isInfinite = true;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -102,11 +103,16 @@ export class NotificationListPage {
 
   onScrollDown(infiniteScroll) {
 
-    console.log(this.start);
-
+    console.log("this.start : " + this.start);
+    console.log("this.recordsTotal : " + this.recordsTotal);
+    this.start += this.length;
     if (this.start <= this.recordsTotal) {
-      this.start += this.length;
+      // this.start += this.length;
       this.getList();
+      this.isInfinite = true;
+    }
+    else {
+      this.isInfinite = false;
     }
     infiniteScroll.complete();
   }

@@ -136,7 +136,9 @@ export class HomePage {
   }
 
   gotoUsers(_id) {
-    this.navCtrl.push(OthersProfilePage, { id: _id, user_id: this.user_id });
+    if (_id) {
+      this.navCtrl.push(OthersProfilePage, { id: _id, user_id: this.user_id });
+    }
   }
 
   setText() {

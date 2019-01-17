@@ -13,8 +13,8 @@ export class CameraUtilsProvider {
   constructor(public http: HttpClient,
     public file: File,
     public platform: Platform) {
-    console.log('Hello CameraUtilsProvider Provider');
 
+    console.log('Hello CameraUtilsProvider Provider');
     this.createDirective();
 
   }

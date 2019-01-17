@@ -89,7 +89,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
+  <ion-infinite-scroll *ngIf="isInfinite" (ionInfinite)="onScrollDown($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
