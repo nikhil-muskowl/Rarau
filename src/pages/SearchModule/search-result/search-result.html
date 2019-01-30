@@ -1,21 +1,25 @@
 <ion-header>
-    <ion-navbar hideBackButton>
-      <ion-buttons left>
-        <button ion-button (click)="goBack()">
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title text-center>
-        {{search_result}}
-      </ion-title>
-      <ion-buttons right>
-  
-        <span class="logo">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">        
-        </span>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar hideBackButton>
+
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title text-center>
+      {{search_result}}
+    </ion-title>
+
+    <ion-buttons right>
+      <span class="logo">
+        <img src="assets/imgs/login/Group-2.png" class="fire-icon">
+        <span class="logo-txt"> {{rarau}}</span>
+      </span>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
 
 <ion-content padding>
   <div>

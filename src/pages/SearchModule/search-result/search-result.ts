@@ -10,6 +10,7 @@ import { SearchResProvider } from '../../../providers/search-res/search-res';
 import { LoginProvider } from '../../../providers/login/login';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -44,6 +45,7 @@ export class SearchResultPage {
     public navParams: NavParams,
     public alertProvider: AlertProvider,
     public platform: Platform,
+    public network: NetworkProvider,
     public loadingProvider: LoadingProvider,
     public searchRes: SearchResProvider,
     public LoginProvider: LoginProvider,
@@ -54,7 +56,7 @@ export class SearchResultPage {
     platform.registerBackButtonAction(() => {
       this.goBack();
     });
-    
+
     this.setText();
     this.searchTxt = this.navParams.data.searchUse;
     console.log('searchTxt: ' + JSON.stringify(this.navParams.data));
@@ -83,9 +85,6 @@ export class SearchResultPage {
     });
   }
 
-  ionViewDidLoad() {
-  }
-
   ionViewWillEnter() {
     this.isLogin();
   }
@@ -95,33 +94,37 @@ export class SearchResultPage {
   }
 
   getSearch(search) {
+    if (this.network.checkStatus() == true) {
+      this.loadingProvider.present();
+      this.filterData = { "search": search, "start": this.pageStart, "length": this.pageLength };
 
-    this.loadingProvider.present();
-    this.filterData = { "search": search, "start": this.pageStart, "length": this.pageLength };
+      this.searchRes.apiSearchRes(this.filterData).subscribe(
+        response => {
+          this.responseData = response;
+          this.recordsTotal = this.responseData.recordsTotal;
+          this.data = this.responseData.data;
 
-    this.searchRes.apiSearchRes(this.filterData).subscribe(
-      response => {
-        this.responseData = response;
-        this.recordsTotal = this.responseData.recordsTotal;
-        this.data = this.responseData.data;
-
-        if (this.data.length > 0) {
-          this.binddata();
+          if (this.data.length > 0) {
+            this.binddata();
+          }
+          else {
+            this.alertProvider.title = this.no_result;
+            this.alertProvider.message = this.no_result_found;
+            this.alertProvider.showAlert();
+          }
+        },
+        err => {
+          console.error(err);
+          this.loadingProvider.dismiss();
+        },
+        () => {
+          this.loadingProvider.dismiss();
         }
-        else {
-          this.alertProvider.title = this.no_result;
-          this.alertProvider.message = this.no_result_found;
-          this.alertProvider.showAlert();
-        }
-      },
-      err => {
-        console.error(err);
-        this.loadingProvider.dismiss();
-      },
-      () => {
-        this.loadingProvider.dismiss();
-      }
-    );
+      );
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   goBack() {
@@ -140,11 +143,11 @@ export class SearchResultPage {
   }
 
   onScrollDown(infiniteScroll) {
+    this.pageStart += this.pageLength;
+
     if (this.pageStart <= this.recordsTotal) {
-      this.pageStart += this.pageLength;
       this.getSearch(this.search);
     }
-
     infiniteScroll.complete();
   }
 

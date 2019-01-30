@@ -1,4 +1,18 @@
 page-home {
+    .myLocBtn {
+        background-color: #fff !important;
+        color: rgb(24, 126, 209) !important;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+    .myLocBtnclicked {
+        background-color: #fff !important;
+        color: #ec3747 !important;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
     ion-title {
         position: absolute;
         top: 0;

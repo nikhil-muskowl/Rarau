@@ -14,6 +14,7 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -47,6 +48,7 @@ export class UpdateProfilePage {
     public navParams: NavParams,
     public zone: NgZone,
     public platform: Platform,
+    public network: NetworkProvider,
     public sanitizer: DomSanitizer,
     private tabService: TabsService,
     private imagePicker: ImagePicker,
@@ -124,6 +126,7 @@ export class UpdateProfilePage {
   }
 
   save() {
+
     //code to save
     console.log('select' + this.imgSend);
     if (this.imgSend == undefined) {
@@ -132,40 +135,44 @@ export class UpdateProfilePage {
       this.alertProvider.showAlert();
     }
     else {
+      if (this.network.checkStatus() == true) {
+        this.loadingProvider.present();
 
-      this.loadingProvider.present();
+        this.loginProvider.apiProfileUpload(this.imgSend).subscribe(
+          response => {
+            this.responseData = response;
+            this.status = this.responseData.status;
+            if (this.status) {
 
-      this.loginProvider.apiProfileUpload(this.imgSend).subscribe(
-        response => {
-          this.responseData = response;
-          this.status = this.responseData.status;
-          if (this.status) {
+              //for synchronize saving
+              this.zone.run(() => {
+                //to save image into gallery
+                this.cameraUtils.saveToGallery(this.imgSend);
 
-            //for synchronize saving
-            this.zone.run(() => {
-              //to save image into gallery
-              this.cameraUtils.saveToGallery(this.imgSend);
+                this.result = this.responseData.result;
+                this.alertProvider.title = this.success_txt;
+                this.alertProvider.message = this.image_uploaded;
+                this.alertProvider.showAlert();
 
-              this.result = this.responseData.result;
-              this.alertProvider.title = this.success_txt;
-              this.alertProvider.message = this.image_uploaded;
-              this.alertProvider.showAlert();
-
-              this.navCtrl.push(RegistrationPage, {
-                imagePath: this.result, image: this.imgSend, data: this.data,
-                date: this.date, gender: this.gender
+                this.navCtrl.push(RegistrationPage, {
+                  imagePath: this.result, image: this.imgSend, data: this.data,
+                  date: this.date, gender: this.gender
+                });
               });
-            });
+            }
+          },
+          err => {
+            console.error(err);
+            this.loadingProvider.dismiss();
+          },
+          () => {
+            this.loadingProvider.dismiss();
           }
-        },
-        err => {
-          console.error(err);
-          this.loadingProvider.dismiss();
-        },
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
+        );
+      }
+      else {
+        this.network.displayNetworkUpdate();
+      }
     }
   }
 

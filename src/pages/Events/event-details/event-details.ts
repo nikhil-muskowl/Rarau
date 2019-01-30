@@ -9,6 +9,8 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { EventProvider } from '../../../providers/event/event';
+import { NetworkProvider } from '../../../providers/network/network';
+
 
 @IonicPage()
 @Component({
@@ -56,6 +58,7 @@ export class EventDetailsPage {
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
     public platform: Platform,
+    public network: NetworkProvider,
     public eventProvider: EventProvider,
     public languageProvider: LanguageProvider, ) {
     this._id = this.navParams.get('id');
@@ -69,8 +72,11 @@ export class EventDetailsPage {
 
     this.user_id = this.loginProvider.isLogin();
     this.setText();
-    this.getDetails(this._id);
-    this.getList(this._id);
+
+    if (this.network.checkStatus() == true) {
+      this.getDetails(this._id);
+      this.getList(this._id);
+    }
   }
 
   setText() {
@@ -107,7 +113,9 @@ export class EventDetailsPage {
   }
 
   public itemTapped(data: any) {
-    this.navCtrl.push(SingleStoryPage, { story_id: data.id });
+    if (this.network.checkStatus() == true) {
+      this.navCtrl.push(SingleStoryPage, { story_id: data.id });
+    }
   }
 
   goBack() {
@@ -157,5 +165,4 @@ export class EventDetailsPage {
     );
     return event;
   }
-
 }

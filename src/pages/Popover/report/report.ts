@@ -7,6 +7,7 @@ import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -32,10 +33,13 @@ export class ReportPage {
   public type;
   public error_description;
   public error_title;
+  public success_txt;
+  public report_submit;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
+    public network: NetworkProvider,
     public translate: TranslateService,
     public formBuilder: FormBuilder,
     public languageProvider: LanguageProvider,
@@ -47,6 +51,7 @@ export class ReportPage {
     platform.registerBackButtonAction(() => {
       this.dismiss();
     });
+
     this.setText();
     this.createForm();
     this.type_id = this.navParams.get('type');
@@ -90,8 +95,14 @@ export class ReportPage {
     this.translate.get('error_description').subscribe((text: string) => {
       this.error_description = text;
     });
+    this.translate.get('success').subscribe((text: string) => {
+      this.success_txt = text;
+    });
     this.translate.get('submit').subscribe((text: string) => {
       this.submit = text;
+    });
+    this.translate.get('report_submit').subscribe((text: string) => {
+      this.report_submit = text;
     });
   }
 
@@ -122,24 +133,28 @@ export class ReportPage {
         'description': this.reportForm.value.description,
       };
       console.log("params : " + JSON.stringify(params));
+      if (this.network.checkStatus() == true) {
+        this.storyService.apicommentComplain(params).subscribe(
+          response => {
+            this.responseData = response;
+            this.status = this.responseData.status;
+            this.loadingProvider.dismiss();
 
-      this.storyService.apicommentComplain(params).subscribe(
-        response => {
-          this.responseData = response;
-          this.status = this.responseData.status;
-          this.loadingProvider.dismiss();
+            if (this.status) {
+              console.log("responseData : " + JSON.stringify(this.responseData));
 
-          if (this.status) {
-            console.log("responseData : " + JSON.stringify(this.responseData));
-
-            this.reportForm.reset();
+              this.reportForm.reset();
+            }
+          },
+          err => console.error(err),
+          () => {
+            this.loadingProvider.dismiss();
           }
-        },
-        err => console.error(err),
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
+        );
+      }
+    }
+    else {
+      this.network.displayNetworkUpdate();
     }
   }
 
@@ -157,32 +172,35 @@ export class ReportPage {
         'description': this.reportForm.value.description,
       };
       console.log("params : " + JSON.stringify(params));
+      if (this.network.checkStatus() == true) {
+        this.storyService.apiUserComplain(params).subscribe(
+          response => {
+            this.responseData = response;
+            this.status = this.responseData.status;
+            this.loadingProvider.dismiss();
 
-      this.storyService.apiUserComplain(params).subscribe(
-        response => {
-          this.responseData = response;
-          this.status = this.responseData.status;
-          this.loadingProvider.dismiss();
+            if (this.status) {
+              console.log("responseData : " + JSON.stringify(this.responseData));
 
-          if (this.status) {
-            console.log("responseData : " + JSON.stringify(this.responseData));
-
-            this.reportForm.reset();
+              this.reportForm.reset();
+            }
+          },
+          err => console.error(err),
+          () => {
+            this.loadingProvider.dismiss();
           }
-        },
-        err => console.error(err),
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
+        );
+      }
+      else {
+        this.network.displayNetworkUpdate();
+      }
     }
   }
 
   sendStoryReport() {
     this.complain_by = this.LoginProvider.isLogin();
-    
+
     if (this.reportForm.valid) {
-      this.loadingProvider.present();
 
       let params = {
         'user_id': this.complain_by,
@@ -193,23 +211,34 @@ export class ReportPage {
       };
 
       console.log("params : " + JSON.stringify(params));
-      this.storyService.apiStoryComplain(params).subscribe(
-        response => {
-          this.responseData = response;
-          this.status = this.responseData.status;
-          this.loadingProvider.dismiss();
+      if (this.network.checkStatus() == true) {
 
-          if (this.status) {
-            console.log("responseData : " + JSON.stringify(this.responseData));
+        this.loadingProvider.present();
 
-            this.reportForm.reset();
+        this.storyService.apiStoryComplain(params).subscribe(
+          response => {
+            this.responseData = response;
+            this.status = this.responseData.status;
+            this.loadingProvider.dismiss();
+
+            if (this.status) {
+              console.log("responseData : " + JSON.stringify(this.responseData));
+
+              this.reportForm.reset();
+              this.alertProvider.title = this.success_txt;
+              this.alertProvider.message = this.report_submit;
+              this.alertProvider.showAlert();
+            }
+          },
+          err => console.error(err),
+          () => {
+            this.loadingProvider.dismiss();
           }
-        },
-        err => console.error(err),
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
+        );
+      }
+      else {
+        this.network.displayNetworkUpdate();
+      }
     }
   }
 }

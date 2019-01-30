@@ -76,7 +76,7 @@ export class CameraOpenPage {
   takePicture() {
 
     const pictureOpts: CameraPreviewPictureOptions = {
-      quality: 60,
+      quality: 50,
       width: 360,
       height: 640,
       // destinationType: this.camera.DestinationType.DATA_URL,
@@ -125,7 +125,7 @@ export class CameraOpenPage {
 
     this.cameraPreview.startCamera({
       x: 0,
-      y: 44,
+      y: 0,
       width: this.platform.width(),
       height: this.platform.height(),
       toBack: true,

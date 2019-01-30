@@ -16,6 +16,10 @@ page-single-story {
     .no-scroll .scroll-content {
         overflow: hidden;
     }
+    .item-ios.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: none !important;
+      }
     .grid {
         padding: 0;
         margin-left: auto;
@@ -38,7 +42,7 @@ page-single-story {
         background-color: rgba(0, 0, 0, 0.3);
         margin: 0;
         padding: 0;
-        .item-md {
+        .item-md, .item-ios {
             margin-top: 10px;
             border: none;
             border-radius: 0;

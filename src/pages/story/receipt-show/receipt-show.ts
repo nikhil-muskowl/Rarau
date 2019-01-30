@@ -37,10 +37,6 @@ export class ReceiptShowPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ReceiptShowPage');
-  }
-
   dismiss() {
     this.navCtrl.pop();
   }

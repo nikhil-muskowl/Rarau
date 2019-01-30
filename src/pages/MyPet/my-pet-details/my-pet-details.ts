@@ -7,6 +7,7 @@ import { LoginProvider } from '../../../providers/login/login';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { Slides } from 'ionic-angular';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -39,6 +40,7 @@ export class MyPetDetailsPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
+    public network: NetworkProvider,
     public loadingProvider: LoadingProvider,
     public platform: Platform,
     public LoginProvider: LoginProvider,
@@ -56,7 +58,14 @@ export class MyPetDetailsPage {
     this.user_id = this.LoginProvider.isLogin();
     this.language_id = this.languageProvider.getLanguageId();
     this.setText();
-    this.getDetails();
+
+
+    if (this.network.checkStatus() == true) {
+      this.getDetails();
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   goBack() {

@@ -21,6 +21,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { HomePage } from '../home/home';
 import { NotificationListPage } from '../notification-list/notification-list';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -64,6 +65,7 @@ export class ProfilePage {
     public alertProvider: AlertProvider,
     public toast: ToastProvider,
     public platform: Platform,
+    public network: NetworkProvider,
     public loadingProvider: LoadingProvider,
     public profileProvider: ProfileProvider,
     public translate: TranslateService,
@@ -122,12 +124,15 @@ export class ProfilePage {
   ionViewWillEnter() {
     this.setText();
     this.user_id = this.LoginProvider.isLogin();
+    //change on 25/12 tab OnChange
     if (!this.user_id) {
       this.navCtrl.setRoot(LoginPage);
     } else {
-      this.getProfileData(this.user_id);
-      //set segment
-      this.user = 'Stories';
+      if (this.network.checkStatus() == true) {
+        this.getProfileData(this.user_id);
+        //set segment
+        this.user = 'Stories';
+      }
     }
   }
 
@@ -191,7 +196,6 @@ export class ProfilePage {
     this.navCtrl.push(SettingsPage);
   }
 
-  
   goNoti() {
     this.navCtrl.push(NotificationListPage);
   }

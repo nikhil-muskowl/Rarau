@@ -50,15 +50,17 @@ page-story-category {
         color: #fff;
     }
     .horizontal {
-        width: 100vw !important;
+        width: 100% !important;
         height: 60px !important;
-        position: absolute;
+        // position: absolute;
         margin-left: 15px !important;
-        bottom: 90px;
+        margin-right: 15px !important;
+        // bottom: 90px;
         ion-scroll {
-            position: absolute !important;
-            bottom: 43px !important;
+            // position: absolute !important;
+            // bottom: 43px !important;
             left: 0px !important;
+            right: 0px !important;
         }
         ion-scroll .scroll-content {
             background: transparent !important;

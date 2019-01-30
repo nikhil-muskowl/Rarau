@@ -9,6 +9,7 @@ import { SingleStoryPage } from '../single-story/single-story';
 import { LoginPage } from '../../AccountModule/login/login';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -34,6 +35,7 @@ export class StoryListPage {
   constructor(
     public navCtrl: NavController,
     public platform: Platform,
+    public network: NetworkProvider,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
@@ -63,6 +65,7 @@ export class StoryListPage {
 
     this.isLogin();
     this.getStories();
+
   }
 
   setText() {
@@ -100,18 +103,20 @@ export class StoryListPage {
       'searchUse': this.searchUse,
     };
     console.log('Story list page : ' + JSON.stringify(this.paramData));
+    if (this.network.checkStatus() == true) {
 
-    this.storyService.apiTopStory(this.paramData).subscribe(
-      response => {
-        this.responseData = response;
-        this.data = this.responseData.data;
-        this.title = this.data[0].title;
-      },
-      err => console.error(err),
-      () => {
-        this.loadingProvider.dismiss();
-      }
-    );
+      this.storyService.apiTopStory(this.paramData).subscribe(
+        response => {
+          this.responseData = response;
+          this.data = this.responseData.data;
+          this.title = this.data[0].title;
+        },
+        err => console.error(err),
+        () => {
+          this.loadingProvider.dismiss();
+        }
+      );
+    }
   }
 
   showStory(data) {

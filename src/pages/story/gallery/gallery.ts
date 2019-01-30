@@ -36,13 +36,12 @@ export class GalleryPage {
     this.platform.registerBackButtonAction(() => {
       this.back();
     });
-
-    // this.startCamera();
   }
 
   ionViewWillEnter() {
 
     this.isLogin();
+    //change on 25/12 tab OnChange
     if (this.user_id == undefined || this.user_id == '') {
       this.navCtrl.setRoot(LoginPage);
     }
@@ -57,15 +56,12 @@ export class GalleryPage {
   }
 
   back() {
-    console.log("second");
     this.stopCamera();
     this.tabService.show();
     this.navCtrl.setRoot(HomePage);
   }
 
   openGallery() {
-
-    console.log("open gallery");
     const options: CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -88,29 +84,14 @@ export class GalleryPage {
       }
 
     }, (err) => {
-      // Handle error
+      console.error(err);
     });
-
-
-    // this.imagePicker.getPictures(options).then((results) => {
-    //   if (results != '') {
-
-    //     this.galBas = "data:image/jpeg;base64," + results[0];
-    //     this.navCtrl.push(ShowPhotoPage, { photo: this.galBas });
-
-
-    //   }
-    //   else {
-    //     this.startCamera();
-    //   }
-    // }, (err) => { alert(err); });
-
   }
 
   takePicture() {
 
     const pictureOpts: CameraPreviewPictureOptions = {
-      quality: 60,
+      quality: 50,
       width: 360,
       height: 640,
       // destinationType: this.camera.DestinationType.DATA_URL,
@@ -133,7 +114,6 @@ export class GalleryPage {
     });
   }
 
-
   startCamera() {
 
     this.stopCamera();
@@ -145,7 +125,7 @@ export class GalleryPage {
 
     this.cameraPreview.startCamera({
       x: 0,
-      y: 44,
+      y: 0,
       width: this.platform.width(),
       height: this.platform.height(),
       toBack: true,

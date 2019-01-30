@@ -8,6 +8,7 @@ import { LoginPage } from '../login/login';
 import { ToastProvider } from '../../../providers/toast/toast';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -38,6 +39,7 @@ export class ForgotPasswordPage {
     public alertProvider: AlertProvider,
     public formBuilder: FormBuilder,
     public platform: Platform,
+    public network: NetworkProvider,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
@@ -52,7 +54,6 @@ export class ForgotPasswordPage {
     this.forgotForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
     });
-
 
   }
 
@@ -102,34 +103,39 @@ export class ForgotPasswordPage {
   }
 
   sendForm() {
-    this.submitAttempt = true;
-    this.formData = this.forgotForm.valid;
-    if (this.forgotForm.valid) {
-      this.loadingProvider.present();
+    if (this.network.checkStatus() == true) {
+      this.submitAttempt = true;
+      this.formData = this.forgotForm.valid;
+      if (this.forgotForm.valid) {
+        this.loadingProvider.present();
 
-      this.loginProvider.apiForgot(this.forgotForm.value).subscribe(
-        response => {
-          this.responseData = response;
-          console.log(response);
-          this.submitAttempt = true;
+        this.loginProvider.apiForgot(this.forgotForm.value).subscribe(
+          response => {
+            this.responseData = response;
+            console.log(response);
+            this.submitAttempt = true;
 
-          if (this.responseData.status == true) {
+            if (this.responseData.status == true) {
 
-            this.forgotForm.reset();
-            this.submitAttempt = false;
-            this.toastProvider.presentToast(this.check_email);
+              this.forgotForm.reset();
+              this.submitAttempt = false;
+              this.toastProvider.presentToast(this.check_email);
 
 
+            }
+            else {
+              this.toastProvider.presentToast(this.email_not_found);
+            }
+          },
+          err => console.error(err),
+          () => {
+            this.loadingProvider.dismiss();
           }
-          else {
-            this.toastProvider.presentToast(this.email_not_found);
-          }
-        },
-        err => console.error(err),
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
+        );
+      }
+    }
+    else {
+      this.network.displayNetworkUpdate();
     }
   }
 

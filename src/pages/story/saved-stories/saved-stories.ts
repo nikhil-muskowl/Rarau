@@ -7,6 +7,7 @@ import { StoryServiceProvider } from '../../../providers/story-service/story-ser
 import { SingleStoryPage } from '../single-story/single-story';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -34,6 +35,7 @@ export class SavedStoriesPage {
     public navParams: NavParams,
     public alertProvider: AlertProvider,
     public platform: Platform,
+    public network: NetworkProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
     public LoginProvider: LoginProvider,
@@ -44,10 +46,11 @@ export class SavedStoriesPage {
       this.goBack();
     });
 
-
     this.setText();
     this.isLogin();
+    if (this.network.checkStatus() == true) {
     this.getSavedStories();
+    }
   }
 
   setText() {

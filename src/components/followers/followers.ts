@@ -5,6 +5,7 @@ import { ToastProvider } from '../../providers/toast/toast';
 import { FollowProvider } from '../../providers/follow/follow';
 import { LoginProvider } from '../../providers/login/login';
 import { OthersProfilePage } from '../../pages/AccountModule/others-profile/others-profile';
+import { NetworkProvider } from '../../providers/network/network';
 
 @Component({
   selector: 'followers',
@@ -36,13 +37,16 @@ export class FollowersComponent {
     public ToastProvider: ToastProvider,
     public FollowProvider: FollowProvider,
     public loadingProvider: LoadingProvider,
+    public network: NetworkProvider,
   ) {
   }
 
   ngOnChanges() {
     this.isLogin();
     console.log(this.user_id);
-    this.getData();
+    if (this.network.checkStatus() == true) {
+      this.getData();
+    }
   }
 
   isLogin() {

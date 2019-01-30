@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { ReportPage } from '../../Popover/report/report';
 import { LoginPage } from '../login/login';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -55,6 +56,7 @@ export class OthersProfilePage {
     public profileProvider: ProfileProvider,
     public LoginProvider: LoginProvider,
     public platform: Platform,
+    public network: NetworkProvider,
     public FollowProvider: FollowProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
@@ -70,8 +72,12 @@ export class OthersProfilePage {
 
     this.id = navParams.get('id');
     console.log('userId : ' + this.id);
-
-    this.getProfile(this.id);
+    if (this.network.checkStatus() == true) {
+      this.getProfile(this.id);
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   setText() {
@@ -114,10 +120,6 @@ export class OthersProfilePage {
     this.translate.get('login_to_continue').subscribe((text: string) => {
       this.login_to_continue = text;
     });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
   }
 
   getProfile(id) {
@@ -186,26 +188,31 @@ export class OthersProfilePage {
 
   dofollow() {
     if (this.user_id) {
-      this.loadingProvider.present();
-      this.FollowProvider.ActionFollow(this.id, this.user_id).subscribe(
-        response => {
-          this.responseData = response;
-          console.log('follow response : ' + JSON.stringify(this.responseData));
-          this.status = this.responseData.status;
-          if (this.status) {
-            // this.alertProvider.title = 'Success';
-            // this.alertProvider.message = 'Follow Request Sent';
-            // this.alertProvider.showAlert();
+      if (this.network.checkStatus() == true) {
+        this.loadingProvider.present();
+        this.FollowProvider.ActionFollow(this.id, this.user_id).subscribe(
+          response => {
+            this.responseData = response;
+            console.log('follow response : ' + JSON.stringify(this.responseData));
+            this.status = this.responseData.status;
+            if (this.status) {
+              // this.alertProvider.title = 'Success';
+              // this.alertProvider.message = 'Follow Request Sent';
+              // this.alertProvider.showAlert();
 
-            this.followed = true;
+              this.followed = true;
+            }
+          },
+          err => console.error(err),
+          () => {
+            this.loadingProvider.dismiss();
           }
-        },
-        err => console.error(err),
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
-      this.loadingProvider.dismiss();
+        );
+        this.loadingProvider.dismiss();
+      }
+      else {
+        this.network.displayNetworkUpdate();
+      }
     } else {
       this.alertProvider.title = this.forbidden;
       this.alertProvider.message = this.login_to_continue;
@@ -221,31 +228,42 @@ export class OthersProfilePage {
 
   doUnFollow() {
     if (this.user_id) {
-      this.loadingProvider.present();
+      if (this.network.checkStatus() == true) {
+        this.loadingProvider.present();
 
-      this.FollowProvider.ActionUnFollow(this.id, this.user_id).subscribe(
-        response => {
-          this.responseData = response;
-          console.log('unfollow response : ' + JSON.stringify(this.responseData));
+        this.FollowProvider.ActionUnFollow(this.id, this.user_id).subscribe(
+          response => {
+            this.responseData = response;
+            console.log('unfollow response : ' + JSON.stringify(this.responseData));
 
-          this.status = this.responseData.status;
-          if (this.status) {
-            // this.alertProvider.title = 'Success';
-            // this.alertProvider.message = 'Follow Request Sent';
-            // this.alertProvider.showAlert();
-            this.followed = false;
+            this.status = this.responseData.status;
+            if (this.status) {
+              // this.alertProvider.title = 'Success';
+              // this.alertProvider.message = 'Follow Request Sent';
+              // this.alertProvider.showAlert();
+              this.followed = false;
+            }
+          },
+          err => console.error(err),
+          () => {
+            this.loadingProvider.dismiss();
           }
-        },
-        err => console.error(err),
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
-      this.loadingProvider.dismiss();
+        );
+        this.loadingProvider.dismiss();
+      }
+      else {
+        this.network.displayNetworkUpdate();
+      }
     } else {
-      this.alertProvider.title = 'Warning';
-      this.alertProvider.message = 'Please Login First!';
-      this.alertProvider.showAlert();
+      this.alertProvider.title = this.forbidden;
+      this.alertProvider.message = this.login_to_continue;
+      // this.alertProvider.showAlert();
+      this.alertProvider.Alert.confirm(this.login_to_continue, this.forbidden).then((res) => {
+        console.log('confirmed');
+        this.navCtrl.setRoot(LoginPage);
+      }, err => {
+        console.log('user cancelled');
+      });
     }
   }
 }

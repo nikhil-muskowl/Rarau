@@ -47,6 +47,7 @@ export class UploadReceiptPage {
   public show_rec_public;
   public upload;
   public submit;
+  public skip_txt;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -106,6 +107,9 @@ export class UploadReceiptPage {
     });
     this.translate.get('receipt').subscribe((text: string) => {
       this.receipt = text;
+    });
+    this.translate.get('skip').subscribe((text: string) => {
+      this.skip_txt = text;
     });
   }
 

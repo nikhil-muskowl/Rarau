@@ -38,6 +38,10 @@ export class HomePage {
   public longitude;
   public data: any;
 
+  //for css
+  public myLocBtn;
+  public isMycurrLoc;
+
   public Advdata: any;
   public Advres;
 
@@ -235,6 +239,24 @@ export class HomePage {
     }
   }
 
+  getCurrenLocation() {
+    this.locationTrackerProvider.setLocation();
+
+    if (this.isMycurrLoc == 0) {
+      this.myLocBtn = 'myLocBtnclicked';
+      this.isMycurrLoc = 1;
+      this.bindMap();
+    }
+    else {
+      this.myLocBtn = 'myLocBtn';
+      this.isMycurrLoc = 0;
+      this.searchCat = undefined;
+      this.searchUse = undefined;
+      this.serLatitude = undefined;
+      this.serLongitude = undefined;
+    }
+  }
+
   public bindMap() {
     this.user_id = this.LoginProvider.isLogin();
     this.markers = [];
@@ -349,6 +371,26 @@ export class HomePage {
         }
 
         if (this.serLatitude != undefined && this.serLongitude != undefined) {
+          this.markers.push({
+            options: {
+              // enableDragging: true,
+              icon: {
+                imageUrl: 'assets/imgs/location.png',
+                size: {
+                  height: 32,
+                  width: 32
+                },
+                imageSize: {
+                  height: 32,
+                  width: 32
+                }
+              }
+            },
+            point: {
+              lat: this.serLatitude,
+              lng: this.serLongitude
+            }
+          });
         }
         else {
           this.markers.push({

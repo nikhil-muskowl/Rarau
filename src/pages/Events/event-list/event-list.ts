@@ -9,6 +9,7 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { EventProvider } from '../../../providers/event/event';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -46,6 +47,7 @@ export class EventListPage {
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
     public platform: Platform,
+    public network: NetworkProvider,
     public eventProvider: EventProvider,
     public languageProvider: LanguageProvider, ) {
 
@@ -60,7 +62,13 @@ export class EventListPage {
 
     this.user_id = this.loginProvider.isLogin();
     this.setText();
-    this.UpcomingEve();
+
+    if (this.network.checkStatus() == true) {
+      this.UpcomingEve();
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   setText() {
@@ -86,37 +94,47 @@ export class EventListPage {
 
     console.log("in upcoming event");
     this.upParamData = { 'start': this.upPageStart, 'length': this.pageLength };
+    if (this.network.checkStatus() == true) {
 
-    this.loadingProvider.present();
-    this.eventProvider.apiGetUpcomingEvents(this.upParamData).subscribe(
-      response => {
-        this.upEveRes = response;
-        this.upEveRecords = this.upEveRes.recordsTotal;
-        this.upEveData = this.upEveRes.data;
-        this.bindUpdata();
-      },
-      err => console.error(err),
-      () => {
-        this.loadingProvider.dismiss();
-      });
+      this.loadingProvider.present();
+      this.eventProvider.apiGetUpcomingEvents(this.upParamData).subscribe(
+        response => {
+          this.upEveRes = response;
+          this.upEveRecords = this.upEveRes.recordsTotal;
+          this.upEveData = this.upEveRes.data;
+          this.bindUpdata();
+        },
+        err => console.error(err),
+        () => {
+          this.loadingProvider.dismiss();
+        });
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   PastEve() {
     console.log("in Past event");
     this.pastParamData = { 'start': this.pastPageStart, 'length': this.pageLength };
 
-    this.loadingProvider.present();
-    this.eventProvider.apiGetPastEvents(this.pastParamData).subscribe(
-      response => {
-        this.pastEveRes = response;
-        this.pastEveRecords = this.pastEveRes.recordsTotal;
-        this.pastEveData = this.pastEveRes.data;
-        this.bindPastdata();
-      },
-      err => console.error(err),
-      () => {
-        this.loadingProvider.dismiss();
-      });
+    if (this.network.checkStatus() == true) {
+      this.loadingProvider.present();
+      this.eventProvider.apiGetPastEvents(this.pastParamData).subscribe(
+        response => {
+          this.pastEveRes = response;
+          this.pastEveRecords = this.pastEveRes.recordsTotal;
+          this.pastEveData = this.pastEveRes.data;
+          this.bindPastdata();
+        },
+        err => console.error(err),
+        () => {
+          this.loadingProvider.dismiss();
+        });
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   bindUpdata() {
@@ -200,16 +218,21 @@ export class EventListPage {
 
     console.log("change : " + JSON.stringify(segmentEvent.value));
     if (segmentEvent.value === 'Upcoming') {
-      this.UpcomingEve();
+      if (this.network.checkStatus() == true) {
+        this.UpcomingEve();
+      }
     }
 
     if (segmentEvent.value === 'History') {
-      this.PastEve();
+      if (this.network.checkStatus() == true) {
+        this.PastEve();
+      }
     }
   }
 
   eveDetails(event) {
-
-    this.navCtrl.push(EventDetailsPage, { id: event.id });
+    if (this.network.checkStatus() == true) {
+      this.navCtrl.push(EventDetailsPage, { id: event.id });
+    }
   }
 }

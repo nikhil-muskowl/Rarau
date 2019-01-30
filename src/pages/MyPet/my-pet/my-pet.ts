@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { MyPetProvider } from '../../../providers/my-pet/my-pet';
@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { MyPetDetailsPage } from '../my-pet-details/my-pet-details';
 import { LoginPage } from '../../AccountModule/login/login';
+import { HomePage } from '../../MainModule/home/home';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -26,13 +28,17 @@ export class MyPetPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public platform: Platform,
+    public network: NetworkProvider,
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
     public LoginProvider: LoginProvider,
     public translate: TranslateService,
     public mypetProvider: MyPetProvider,
     public languageProvider: LanguageProvider, ) {
-
+    this.platform.registerBackButtonAction(() => {
+      this.navCtrl.setRoot(HomePage);
+    });
   }
 
   ionViewWillEnter() {
@@ -43,7 +49,11 @@ export class MyPetPage {
     else {
       this.language_id = this.languageProvider.getLanguageId();
       this.setText();
-      this.getPets();
+      if (this.network.checkStatus() == true) {
+        this.getPets();
+      } else {
+        this.network.displayNetworkUpdate();
+      }
     }
   }
 
@@ -54,7 +64,6 @@ export class MyPetPage {
     this.translate.get('mypet').subscribe((text: string) => {
       this.title = text;
     });
-
     this.translate.get('lvl').subscribe((text: string) => {
       this.level = text;
     });

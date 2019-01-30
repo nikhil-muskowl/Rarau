@@ -75,6 +75,7 @@
   "saved_story": "Saved Story",
   "filter": "Filter",
   "cancel": "CANCEL",
+  "reload": "Reload",
   "ok": "OK",
   "done": "DONE",
   "story": "Story",
@@ -159,5 +160,8 @@
   "reg_mail": "Enter Registered Email",
   "my_location": "My Current Location",
   "notification": "Notification",
-  "enter_story_title": "Enter Story Title"
+  "enter_story_title": "Enter Story Title",
+  "network_error": "Network Error",
+  "check_network": "Please check your Network Connection",
+  "report_submit": "Report Submitted."
 }

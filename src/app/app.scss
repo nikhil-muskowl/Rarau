@@ -49,6 +49,7 @@ p {
     background-position: initial initial;
     background-repeat: initial initial;
 } //Add class="no-scroll" on <ion-content> to disable scrolling
+
 .no-scroll .scroll-content {
     overflow: hidden;
 } //Center Class to align content to center.
@@ -56,6 +57,7 @@ p {
     text-align: center;
 } //Set header buttons and title to white
 ion-header {
+    // z-index: 0 !important;
     button {
         color: #fff !important;
     }
@@ -393,7 +395,10 @@ ion-header ion-title .toolbar-title {
     font-size: 6vw;
 }
 
-.toolbar-title-md {
+.toolbar-title-md{
+    padding: 0 0 !important;
+}
+.toolbar-ios ion-title{
     padding: 0 0 !important;
 }
 

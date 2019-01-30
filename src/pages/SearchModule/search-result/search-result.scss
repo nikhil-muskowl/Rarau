@@ -1,7 +1,10 @@
 page-search-result {
     .back-btn {
         background: transparent !important;
-        margin-top: 10px;
+        margin-top: 18px !important;
+    }
+    .toolbar-ios ion-title{
+        padding: 0 0 !important;
     }
     ion-item {
         h2 {
@@ -29,9 +32,5 @@ page-search-result {
             border-radius: 20px;
             margin-left: 10%;
         }
-    }
-
-    .back-btn {
-        margin-top: 18px !important;
     }
 }

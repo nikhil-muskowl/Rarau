@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { ReportPage } from '../../Popover/report/report';
 import { LoginPage } from '../../AccountModule/login/login';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -54,6 +55,7 @@ export class SingleStoryPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
+    public network: NetworkProvider,
     public alertProvider: AlertProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
@@ -73,7 +75,9 @@ export class SingleStoryPage {
     this.story_id = this.navParams.get('story_id');
     console.log('story_id : ' + this.story_id);
     this.isLogin();
-    this.getStories();
+    if (this.network.checkStatus() == true) {
+      this.getStories();
+    }
   }
 
   setText() {
@@ -213,7 +217,7 @@ export class SingleStoryPage {
 
       let loading = this.loadingCtrl.create({
         spinner: 'hide',
-        content: `<img src="http://social-app.muskowl.com/assets/images/ranking/like.png" height="400">`,
+        content: `<img src="assets/imgs/fire.png" height="400">`,
         cssClass: 'my-loading-fire',
         duration: 1000
       });
@@ -237,7 +241,8 @@ export class SingleStoryPage {
 
       let loading = this.loadingCtrl.create({
         spinner: 'hide',
-        content: `<img src="http://social-app.muskowl.com/assets/images/ranking/dislike.png" height="400">`,
+        // content: `<img src="http://social-app.muskowl.com/assets/images/ranking/dislike.png" height="400">`,
+        content: `<img src="assets/imgs/water.png" height="400">`,
         cssClass: 'my-loading-water',
         duration: 1000
       });
@@ -253,106 +258,105 @@ export class SingleStoryPage {
   }
 
   public rankStory(rank: number) {
-    // this.loadingProvider.present();
-    var likes = 0;
-    var dislikes = 0;
+    if (this.network.checkStatus() == true) {
+      var likes = 0;
+      var dislikes = 0;
 
-    if (rank == 1) {
-      likes = 1;
-    } else {
-      dislikes = 0;
-    }
+      if (rank == 1) {
+        likes = 1;
+      } else {
+        dislikes = 0;
+      }
 
-    var data = {
-      'user_id': this.user_id,
-      'story_id': this.story_id,
-      'likes': likes,
-      'dislikes': dislikes,
-    };
+      var data = {
+        'user_id': this.user_id,
+        'story_id': this.story_id,
+        'likes': likes,
+        'dislikes': dislikes,
+      };
 
-    this.storyService.rankStory(data).subscribe(
-      response => {
-        this.responseData = response;
-        if (this.responseData.status) {
-          if (rank == 1) {
-            this.totalLikes++;
-            this.totalFlames++;
+      this.storyService.rankStory(data).subscribe(
+        response => {
+          this.responseData = response;
+          if (this.responseData.status) {
+            if (rank == 1) {
+              this.totalLikes++;
+              this.totalFlames++;
+
+            } else {
+              this.totalDislikes++;
+              this.totalFlames--;
+            }
+            console.log("this.totalLikes : " + this.totalLikes);
+            console.log("this.totalDislikes : " + this.totalDislikes);
 
           } else {
-            this.totalDislikes++;
-            this.totalFlames--;
+            this.responseData.result.forEach(element => {
+
+              if (element.id == 'story_id') {
+
+                // let toast = this.toastCtrl.create({
+                //   message: element.text,
+                //   duration: 3000,
+                //   position: 'bottom'
+                // });
+
+                // toast.present();
+              }
+
+            });
           }
-          console.log("this.totalLikes : " + this.totalLikes);
-          console.log("this.totalDislikes : " + this.totalDislikes);
-
-        } else {
-          this.responseData.result.forEach(element => {
-
-            if (element.id == 'story_id') {
-
-              // let toast = this.toastCtrl.create({
-              //   message: element.text,
-              //   duration: 3000,
-              //   position: 'bottom'
-              // });
-
-              // toast.present();
-            }
-
-          });
+        },
+        err => {
+          console.error(err);
         }
-        // this.loadingProvider.dismiss();
-      },
-      err => {
-        console.error(err);
-        // this.loadingProvider.dismiss();
-      }
-    );
+      );
+    }
 
   }
 
   saveStory() {
-
     this.isLogin();
 
     if (this.user_id) {
+      if (this.network.checkStatus() == true) {
+        this.loadingProvider.present();
+        console.log('clicked to save story');
+        var data = {
+          'user_id': this.user_id,
+          'story_id': this.story_id,
+        };
+        console.log('this.user_id' + this.user_id);
 
-      this.loadingProvider.present();
-      console.log('clicked to save story');
-      var data = {
-        'user_id': this.user_id,
-        'story_id': this.story_id,
-      };
-      console.log('this.user_id' + this.user_id);
+        this.storyService.saveStory(data).subscribe(
+          response => {
 
-      this.storyService.saveStory(data).subscribe(
-        response => {
-
-          this.responseData = response;
-          this.status = this.responseData.status;
-          if (!this.status) {
-            this.alertProvider.title = this.already_saved;
-            if (this.responseData.result) {
-              this.responseData.result.forEach(element => {
-                if (element.id == 'story_id') {
-                  this.alertProvider.message = element.text;
-                }
-              });
+            this.responseData = response;
+            this.status = this.responseData.status;
+            if (!this.status) {
+              this.alertProvider.title = this.already_saved;
+              if (this.responseData.result) {
+                this.responseData.result.forEach(element => {
+                  if (element.id == 'story_id') {
+                    this.alertProvider.message = element.text;
+                  }
+                });
+              }
             }
-          }
-          else {
-            this.alertProvider.title = this.saved;
-            this.alertProvider.message = this.story_saved;
-          }
-          this.loadingProvider.dismiss();
+            else {
+              this.alertProvider.title = this.saved;
+              this.alertProvider.message = this.story_saved;
+            }
+            this.loadingProvider.dismiss();
 
-          this.alertProvider.showAlert();
-        },
-        err => {
-          console.error(err);
-          this.loadingProvider.dismiss();
-        }
-      );
+            this.alertProvider.showAlert();
+          },
+          err => {
+            console.error(err);
+            this.loadingProvider.dismiss();
+          }
+        );
+      }
     } else {
       this.loginAlert();
     }

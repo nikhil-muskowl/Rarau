@@ -5,6 +5,7 @@ import { LoadingProvider } from '../../providers/loading/loading';
 import { StoryServiceProvider } from '../../providers/story-service/story-service';
 import { LoginProvider } from '../../providers/login/login';
 import { SingleStoryPage } from '../../pages/story/single-story/single-story';
+import { NetworkProvider } from '../../providers/network/network';
 
 @Component({
   selector: 'story',
@@ -30,6 +31,7 @@ export class StoryComponent {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public network: NetworkProvider,
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
     public storyProvider: StoryServiceProvider,
@@ -41,7 +43,9 @@ export class StoryComponent {
   ngOnChanges() {
     console.log(this.user_id);
     // this.isLogin();
-    this.getStories();
+    if (this.network.checkStatus() == true) {
+      this.getStories();
+    }
   }
 
   isLogin() {

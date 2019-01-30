@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { LoginProvider } from '../../../providers/login/login';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
@@ -9,6 +9,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { ReportPage } from '../../Popover/report/report';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -61,6 +62,8 @@ export class ShowStoryPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
+    public platform: Platform,
+    public network: NetworkProvider,
     public storyService: StoryServiceProvider,
     public loadingProvider: LoadingProvider,
     private formBuilder: FormBuilder,
@@ -68,6 +71,10 @@ export class ShowStoryPage {
     public LoginProvider: LoginProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
+
+    this.platform.registerBackButtonAction(() => {
+      this.goBack();
+    });
 
   }
 
@@ -78,9 +85,11 @@ export class ShowStoryPage {
 
     this.createForm();
     this.story_id = this.navParams.get('story_id');
-    this.getStories();
-    this.getComments();
+    if (this.network.checkStatus() == true) {
 
+      this.getStories();
+      this.getComments();
+    }
     if (this.user_id != undefined) {
       this.isComment = true;
     }

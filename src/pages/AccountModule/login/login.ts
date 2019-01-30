@@ -15,6 +15,7 @@ import { LanguageProvider } from '../../../providers/language/language';
 import { TabsService } from "../../util/tabservice";
 import { AlertModalPage } from '../alert-modal/alert-modal';
 import { NotiProvider } from '../../../providers/noti/noti';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -62,6 +63,7 @@ export class LoginPage {
     public loadingProvider: LoadingProvider,
     private tabService: TabsService,
     private platform: Platform,
+    public network: NetworkProvider,
     public notiProvider: NotiProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider,
@@ -77,7 +79,7 @@ export class LoginPage {
     });
 
     this.token = this.notiProvider.getToken();
-    console.log('Pushy device token : ' + this.token);
+    console.log('andorid device token : ' + this.token);
     if (this.platform.is('ios')) {
       this.type = 'ios';
     }
@@ -166,52 +168,56 @@ export class LoginPage {
     this.formData = this.loginForm.valid;
 
     if (this.loginForm.valid) {
+      if (this.network.checkStatus() == true) {
+        this.loadingProvider.present();
+        this.loginProvider.apiLogin(this.loginForm.value).subscribe(
+          response => {
 
-      this.loadingProvider.present();
-      this.loginProvider.apiLogin(this.loginForm.value).subscribe(
-        response => {
+            this.responseData = response;
+            console.log(response);
 
-          this.responseData = response;
-          console.log(response);
+            if (this.responseData.status == true && this.responseData.message != '') {
+              /* this.success_msg = this.responseData.message;
+               this.alertProvider.title = this.success;
+               this.alertProvider.message = this.success_msg;
+               this.alertProvider.showAlert();
+               this.loginForm.reset();
+               this.submitAttempt = false;*/
+              this.loginProvider.setData(this.responseData.result);
 
-          if (this.responseData.status == true && this.responseData.message != '') {
-            /* this.success_msg = this.responseData.message;
-             this.alertProvider.title = this.success;
-             this.alertProvider.message = this.success_msg;
-             this.alertProvider.showAlert();
-             this.loginForm.reset();
-             this.submitAttempt = false;*/
-            this.loginProvider.setData(this.responseData.result);
+              //register device to FCM
+              let data = {
+                user_id: this.responseData.result.id,
+                type: this.type,
+                code: this.token,
+                provider: 'pushy'
+              }
+              this.notiProvider.apiRegisterDevice(data).subscribe(
+                notiResponse => {
 
-            //register device to FCM
-            let data = {
-              user_id: this.responseData.result.id,
-              type: this.type,
-              code: this.token,
-              provider: 'pushy'
+                  console.log("Noti response" + JSON.stringify(notiResponse));
+                });
+
+              //open modal
+              this.openModal();
+
+              // this.navCtrl.setRoot(ProfilePage);//on modal dismiss
             }
-            this.notiProvider.apiRegisterDevice(data).subscribe(
-              notiResponse => {
-
-                console.log("Noti response" + JSON.stringify(notiResponse));
-              });
-
-            //open modal
-            this.openModal();
-
-            // this.navCtrl.setRoot(ProfilePage);//on modal dismiss
+            else if (this.responseData.status == false) {
+              this.alertProvider.title = this.failed;
+              this.alertProvider.message = this.email_password_incorrect;
+              this.alertProvider.showAlert();
+            }
+          },
+          err => console.error(err),
+          () => {
+            this.loadingProvider.dismiss();
           }
-          else if (this.responseData.status == false) {
-            this.alertProvider.title = this.failed;
-            this.alertProvider.message = this.email_password_incorrect;
-            this.alertProvider.showAlert();
-          }
-        },
-        err => console.error(err),
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
+        );
+      }
+      else {
+        this.network.displayNetworkUpdate();
+      }
     }
   }
 

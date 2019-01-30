@@ -7,6 +7,7 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -31,6 +32,7 @@ export class UpdatePasswordPage {
     public loginProvider: LoginProvider,
     public alertProvider: AlertProvider,
     public platform: Platform,
+    public network: NetworkProvider,
     public formBuilder: FormBuilder,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
@@ -44,7 +46,6 @@ export class UpdatePasswordPage {
       password: ['', Validators.required],
       passconf: ['', Validators.required]
     });
-
   }
 
   goBack() {
@@ -72,38 +73,39 @@ export class UpdatePasswordPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UpdatePasswordPage');
-  }
-
   updatePass() {
-    this.submitAttempt = true;
-    this.formData = this.upPassForm.valid;
+    if (this.network.checkStatus() == true) {
+      this.submitAttempt = true;
+      this.formData = this.upPassForm.valid;
 
-    if (this.upPassForm.valid) {
-      this.loadingProvider.present();
-      this.loginProvider.apiUpdatePassword(this.upPassForm.value).subscribe(
-        response => {
-          this.responseData = response;
-          console.log(response);
-          this.submitAttempt = true;
+      if (this.upPassForm.valid) {
+        this.loadingProvider.present();
+        this.loginProvider.apiUpdatePassword(this.upPassForm.value).subscribe(
+          response => {
+            this.responseData = response;
+            console.log(response);
+            this.submitAttempt = true;
 
-          if (this.responseData.status == true) {
-            this.message = this.responseData.message;
-            this.alertProvider.title = this.sucess;
-            this.alertProvider.message = this.message;
-            this.alertProvider.showAlert();
-            this.upPassForm.reset();
-            this.submitAttempt = false;
-            this.navCtrl.setRoot(ProfilePage);
+            if (this.responseData.status == true) {
+              this.message = this.responseData.message;
+              this.alertProvider.title = this.sucess;
+              this.alertProvider.message = this.message;
+              this.alertProvider.showAlert();
+              this.upPassForm.reset();
+              this.submitAttempt = false;
+              this.navCtrl.setRoot(ProfilePage);
+            }
+
+          },
+          err => console.error(err),
+          () => {
+            this.loadingProvider.dismiss();
           }
-
-        },
-        err => console.error(err),
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
+        );
+      }
+    }
+    else {
+      this.network.displayNetworkUpdate();
     }
   }
 }

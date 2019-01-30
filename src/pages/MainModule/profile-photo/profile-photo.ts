@@ -11,6 +11,7 @@ import { LoginProvider } from '../../../providers/login/login';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -40,6 +41,7 @@ export class ProfilePhotoPage {
     public navParams: NavParams,
     public zone: NgZone,
     public platform: Platform,
+    public network: NetworkProvider,
     private tabService: TabsService,
     public alertProvider: AlertProvider,
     public camera: Camera,
@@ -97,17 +99,13 @@ export class ProfilePhotoPage {
     console.log('ionViewDidLoad ProfilePhotoPage' + this.user_id);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePhotoPage');
-  }
-
   ionViewWillEnter() {
     this.tabService.hide();
   }
 
   goBack() {
     this.navCtrl.setRoot(ProfilePage);
-    this.tabService.hide();
+    this.tabService.show();
   }
 
   save() {
@@ -120,37 +118,41 @@ export class ProfilePhotoPage {
       this.alertProvider.showAlert();
     }
     else {
+      if (this.network.checkStatus() == true) {
+        this.loadingProvider.present();
 
-      this.loadingProvider.present();
+        this.profileProvider.apiuploadProfilePic(this.user_id, this.imgSend).subscribe(
+          response => {
+            this.responseData = response;
+            this.status = this.responseData.status;
+            if (this.status) {
+              //for synchronize saving
+              this.zone.run(() => {
+                //to save image into gallery
+                this.cameraUtils.saveToGallery(this.imgSend);
 
-      this.profileProvider.apiuploadProfilePic(this.user_id, this.imgSend).subscribe(
-        response => {
-          this.responseData = response;
-          this.status = this.responseData.status;
-          if (this.status) {
-            //for synchronize saving
-            this.zone.run(() => {
-              //to save image into gallery
-              this.cameraUtils.saveToGallery(this.imgSend);
-
-              console.log("inside upload");
-              this.result = this.responseData.result;
-              this.alertProvider.title = this.success;
-              this.alertProvider.message = this.image_uploaded;
-              this.alertProvider.showAlert();
-              this.tabService.show();
-              this.navCtrl.setRoot(ProfilePage);
-            });
+                console.log("inside upload");
+                this.result = this.responseData.result;
+                this.alertProvider.title = this.success;
+                this.alertProvider.message = this.image_uploaded;
+                this.alertProvider.showAlert();
+                this.tabService.show();
+                this.navCtrl.setRoot(ProfilePage);
+              });
+            }
+          },
+          err => {
+            console.error(err);
+            this.loadingProvider.dismiss();
+          },
+          () => {
+            this.loadingProvider.dismiss();
           }
-        },
-        err => {
-          console.error(err);
-          this.loadingProvider.dismiss();
-        },
-        () => {
-          this.loadingProvider.dismiss();
-        }
-      );
+        );
+      }
+      else {
+        this.network.displayNetworkUpdate();
+      }
     }
   }
 

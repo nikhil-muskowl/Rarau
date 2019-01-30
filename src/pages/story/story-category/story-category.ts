@@ -15,6 +15,7 @@ import { LanguageProvider } from '../../../providers/language/language';
 import { CameraUtilsProvider } from '../../../providers/camera-utils/camera-utils';
 import { EventModalPage } from '../../Events/event-modal/event-modal';
 import { StoryModalPage } from '../story-modal/story-modal';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -68,6 +69,7 @@ export class StoryCategoryPage {
     public navParams: NavParams,
     public sanitizer: DomSanitizer,
     public platform: Platform,
+    public network: NetworkProvider,
     public zone: NgZone,
     private modal: ModalController,
     public alertProvider: AlertProvider,
@@ -226,7 +228,6 @@ export class StoryCategoryPage {
       this.model[index].isImage = true;
     }
 
-
     this.bindArray();
 
     console.log(category);
@@ -297,69 +298,73 @@ export class StoryCategoryPage {
       if (this.catModal.length > 0) {
         //comment for checking that Tags are empty
         // if (this.tags.length > 0) {
-        this.loadingProvider.present();
-        this.images.push({ image: this.image });
+        if (this.network.checkStatus() == true) {
+          this.loadingProvider.present();
+          this.images.push({ image: this.image });
 
-        if (this.receipt_private == undefined) {
-          this.receipt_private = 0;
-        }
-
-        this.paramData = {
-          'tags': this.tags,
-          'images': this.images,
-          'user_id': this.user_id,
-          'catId': this.catModal,
-          'locName': this.locName,
-          'latitude': this.latitude,
-          'longitude': this.longitude,
-          'receipt_private': this.receipt_private,
-          'receipt': this.receiptImage,
-          'language_id': this.language_id,
-          'event_id': this.Event_id,
-        };
-
-        console.log('Param data post : ' + JSON.stringify(this.paramData));
-
-        this.storyService.postStory(this.paramData).subscribe(
-          response => {
-            this.responseData = response;
-            this.status = this.responseData.status;
-            this.message = this.responseData.message;
-
-            if (this.responseData.status) {
-
-              //for synchronize saving
-              this.zone.run(() => {
-                for (let i = 0; i < this.images.length; i++) {
-                  //to save image into gallery
-                  this.cameraUtils.saveToGallery(this.images[i].image);
-                }
-                if (this.receiptImage != undefined || this.receiptImage != '') {
-                  //to save image into gallery
-                  this.cameraUtils.saveToGallery(this.receiptImage);
-                }
-
-                // this.alertProvider.title = this.success;
-                // this.alertProvider.message = this.message;
-                // this.alertProvider.showAlert();
-
-                // this.tabService.show();
-                // this.navCtrl.setRoot(HomePage);
-
-                this.loadingProvider.dismiss();
-
-                //Remove alert and call modal 17/12/2018
-                this.openModal(this.success, this.message);
-
-              });
-            }
-
-          },
-          err => console.error(err),
-          () => {
-            this.loadingProvider.dismiss();
+          if (this.receipt_private == undefined) {
+            this.receipt_private = 0;
           }
-        );
+
+          this.paramData = {
+            'tags': this.tags,
+            'images': this.images,
+            'user_id': this.user_id,
+            'catId': this.catModal,
+            'locName': this.locName,
+            'latitude': this.latitude,
+            'longitude': this.longitude,
+            'receipt_private': this.receipt_private,
+            'receipt': this.receiptImage,
+            'language_id': this.language_id,
+            'event_id': this.Event_id,
+          };
+
+          console.log('Param data post : ' + JSON.stringify(this.paramData));
+
+          this.storyService.postStory(this.paramData).subscribe(
+            response => {
+              this.responseData = response;
+              this.status = this.responseData.status;
+              this.message = this.responseData.message;
+
+              if (this.responseData.status) {
+
+                //for synchronize saving
+                this.zone.run(() => {
+                  for (let i = 0; i < this.images.length; i++) {
+                    //to save image into gallery
+                    this.cameraUtils.saveToGallery(this.images[i].image);
+                  }
+                  if (this.receiptImage != undefined || this.receiptImage != '') {
+                    //to save image into gallery
+                    this.cameraUtils.saveToGallery(this.receiptImage);
+                  }
+
+                  // this.alertProvider.title = this.success;
+                  // this.alertProvider.message = this.message;
+                  // this.alertProvider.showAlert();
+
+                  // this.tabService.show();
+                  // this.navCtrl.setRoot(HomePage);
+
+                  this.loadingProvider.dismiss();
+
+                  //Remove alert and call modal 17/12/2018
+                  this.openModal(this.success, this.message);
+
+                });
+              }
+
+            },
+            err => console.error(err),
+            () => {
+              this.loadingProvider.dismiss();
+            }
+          );
+        } else {
+          this.network.displayNetworkUpdate();
+        }
         // }
         // else {
         //   this.alertProvider.title = this.error;

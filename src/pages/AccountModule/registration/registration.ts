@@ -18,6 +18,7 @@ import { ContactValidator } from '../../../validators/contact';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { NotiProvider } from '../../../providers/noti/noti';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -48,6 +49,7 @@ export class RegistrationPage {
   private image;
   private text_message;
   public date: String;
+  public today;
   // errors
   private error_name;
   private error_email;
@@ -85,6 +87,7 @@ export class RegistrationPage {
     public loadingProvider: LoadingProvider,
     private tabService: TabsService,
     public platform: Platform,
+    public network: NetworkProvider,
     public notiProvider: NotiProvider,
     public translate: TranslateService,
     public languageProvider: LanguageProvider, ) {
@@ -95,6 +98,7 @@ export class RegistrationPage {
       this.goBack();
     });
 
+    this.today = new Date().toISOString().split('T')[0];
     this.date = new Date().toISOString().split('T')[0];
     this.createForm();
 
@@ -235,11 +239,8 @@ export class RegistrationPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegistrationPage');
-  }
-
   save() {
+
     this.submitAttempt = true;
     console.log(this.registerForm.valid);
 
@@ -248,77 +249,83 @@ export class RegistrationPage {
 
       if (this.imagePath != undefined) {
         if (this.registerForm.value.password == this.registerForm.value.passconf) {
-          this.loadingProvider.present();
 
-          this.formData = this.registerForm.valid;
+          if (this.network.checkStatus() == true) {
+            this.loadingProvider.present();
 
-          this.loginProvider.apiRegister(this.registerForm.value, this.gender_id, this.date,
-            this.imagePath).subscribe(
-              response => {
+            this.formData = this.registerForm.valid;
 
-                this.responseData = response;
+            this.loginProvider.apiRegister(this.registerForm.value, this.gender_id, this.date,
+              this.imagePath).subscribe(
+                response => {
 
-                this.submitAttempt = true;
+                  this.responseData = response;
 
-                if (this.responseData.status) {
-                  this.result = this.responseData.result;
-                  this.id = this.result.id;
-                  this.registerForm.reset();
-                  this.submitAttempt = false;
-                  this.tabService.show();
-                  this.loginProvider.setData(this.responseData.result);
+                  this.submitAttempt = true;
 
-                  //register device to FCM
-                  let data = {
-                    user_id: this.responseData.result.id,
-                    type: this.type,
-                    code: this.token,
-                    provider: 'pushy'
+                  if (this.responseData.status) {
+                    this.result = this.responseData.result;
+                    this.id = this.result.id;
+                    this.registerForm.reset();
+                    this.submitAttempt = false;
+                    this.tabService.show();
+                    this.loginProvider.setData(this.responseData.result);
+
+                    //register device to FCM
+                    let data = {
+                      user_id: this.responseData.result.id,
+                      type: this.type,
+                      code: this.token,
+                      provider: 'pushy'
+                    }
+                    this.notiProvider.apiRegisterDevice(data).subscribe(
+                      notiResponse => {
+
+                        console.log("Noti response" + JSON.stringify(notiResponse));
+                      });
+
+                    this.navCtrl.setRoot(ProfilePage);
                   }
-                  this.notiProvider.apiRegisterDevice(data).subscribe(
-                    notiResponse => {
 
-                      console.log("Noti response" + JSON.stringify(notiResponse));
-                    });
+                  if (!this.responseData.status) {
+                    this.result = this.responseData.result;
+                    this.alertProvider.title = this.error;
+                    this.alertProvider.message = this.result[0].text;
+                    this.alertProvider.showAlert();
+                  }
 
-                  this.navCtrl.setRoot(ProfilePage);
+                  if (this.responseData.error_firstname != '') {
+                    this.registerForm.controls['name'].setErrors({ 'incorrect': true });
+                    this.error_name = this.responseData.error_firstname;
+                  }
+
+                  if (this.responseData.error_email != '') {
+                    this.registerForm.controls['email'].setErrors({ 'incorrect': true });
+                    this.error_email = this.responseData.error_email;
+                  }
+
+                  if (this.responseData.error_password != '') {
+                    this.registerForm.controls['password'].setErrors({ 'incorrect': true });
+                    this.error_password = this.responseData.error_password;
+                  }
+
+                  if (this.responseData.error_confirm != '') {
+                    this.registerForm.controls['passconf'].setErrors({ 'incorrect': true });
+                    this.error_confirm = this.responseData.error_confirm;
+                  }
+                },
+                err => {
+                  console.error(err);
+                  this.loadingProvider.dismiss();
+                },
+                () => {
+                  this.loadingProvider.dismiss();
                 }
-
-                if (!this.responseData.status) {
-                  this.result = this.responseData.result;
-                  this.alertProvider.title = this.error;
-                  this.alertProvider.message = this.result[0].text;
-                  this.alertProvider.showAlert();
-                }
-
-                if (this.responseData.error_firstname != '') {
-                  this.registerForm.controls['name'].setErrors({ 'incorrect': true });
-                  this.error_name = this.responseData.error_firstname;
-                }
-
-                if (this.responseData.error_email != '') {
-                  this.registerForm.controls['email'].setErrors({ 'incorrect': true });
-                  this.error_email = this.responseData.error_email;
-                }
-
-                if (this.responseData.error_password != '') {
-                  this.registerForm.controls['password'].setErrors({ 'incorrect': true });
-                  this.error_password = this.responseData.error_password;
-                }
-
-                if (this.responseData.error_confirm != '') {
-                  this.registerForm.controls['passconf'].setErrors({ 'incorrect': true });
-                  this.error_confirm = this.responseData.error_confirm;
-                }
-              },
-              err => {
-                console.error(err);
-                this.loadingProvider.dismiss();
-              },
-              () => {
-                this.loadingProvider.dismiss();
-              }
-            );
+              );
+          }
+          else {
+            this.network.displayNetworkUpdate();
+          }
         }
         else {
           this.alertProvider.title = this.error;
@@ -364,9 +371,7 @@ export class RegistrationPage {
       this.male_color = '#fff';
       this.gender_id = 0;
     }
-
     console.log('Gender Id : ' + this.gender_id);
-
   }
 
   public femaleimage = 'assets/icon/female_white.png';
@@ -384,8 +389,6 @@ export class RegistrationPage {
       this.female_color = '#fff';
       this.gender_id = 0;
     }
-
-
     console.log('Gender Id : ' + this.gender_id);
   }
 

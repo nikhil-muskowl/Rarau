@@ -8,6 +8,7 @@ import { StoryServiceProvider } from '../../providers/story-service/story-servic
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../providers/language/language';
 import { LoginProvider } from '../../providers/login/login';
+import { NetworkProvider } from '../../providers/network/network';
 
 @Component({
   selector: 'ranking',
@@ -36,6 +37,7 @@ export class RankingComponent {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public network: NetworkProvider,
     public loadingProvider: LoadingProvider,
     public storiesProvider: StoryServiceProvider,
     public alertProvider: AlertProvider,
@@ -44,11 +46,13 @@ export class RankingComponent {
     public languageProvider: LanguageProvider, ) {
 
     this.setText();
-    this.getTypes();
     this.user_id = this.LoginProvider.isLogin();
     console.log(this.story_type_id);
     this.language_id = this.languageProvider.getLanguageId();
 
+    if (this.network.checkStatus() == true) {
+      this.getTypes();
+    }
   }
 
   setText() {

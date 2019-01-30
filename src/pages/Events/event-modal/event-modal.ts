@@ -5,6 +5,7 @@ import { AlertProvider } from '../../../providers/alert/alert';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { EventProvider } from '../../../providers/event/event';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -27,6 +28,7 @@ export class EventModalPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertProvider: AlertProvider,
+    public network: NetworkProvider,
     private view: ViewController,
     public loadingProvider: LoadingProvider,
     public translate: TranslateService,
@@ -35,7 +37,12 @@ export class EventModalPage {
   ) {
 
     this.setText();
-    this.getEvents();
+    if (this.network.checkStatus() == true) {
+      this.getEvents();
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   setText() {

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { LoadingProvider } from '../../../providers/loading/loading';
 import { AlertProvider } from '../../../providers/alert/alert';
 import { BaiduProvider } from '../../../providers/baidu/baidu';
@@ -10,7 +10,8 @@ import { SingleStoryPage } from '../../story/single-story/single-story';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
-import { ThrowStmt } from '@angular/compiler';
+import { HomePage } from '../home/home';
+import { NetworkProvider } from '../../../providers/network/network';
 
 @IonicPage()
 @Component({
@@ -42,7 +43,7 @@ export class RankingPage {
   public countries;
   public location: any;
 
- public isInfinite = true;
+
   public length = 5;
   public start = 0;
 
@@ -55,6 +56,8 @@ export class RankingPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public platform: Platform,
+    public network: NetworkProvider,
     public loadingProvider: LoadingProvider,
     public baiduProvider: BaiduProvider,
     public storiesProvider: StoryServiceProvider,
@@ -64,6 +67,10 @@ export class RankingPage {
     public languageProvider: LanguageProvider, ) {
 
     this.isSearch = false;
+
+    this.platform.registerBackButtonAction(() => {
+      this.navCtrl.setRoot(HomePage);
+    });
   }
 
   ionViewWillEnter() {
@@ -71,8 +78,8 @@ export class RankingPage {
     this.setText();
     this.getTypes();
     this.getCountry();
-    this.rankItems = [];
     this.location = undefined;
+    this.rankItems = [];
     this.language_id = this.languageProvider.getLanguageId();
     console.log(this.story_type_id);
   }
@@ -140,28 +147,32 @@ export class RankingPage {
 
   public getList() {
     this.language_id = this.languageProvider.getLanguageId();
-    this.loadingProvider.present();
-    this.filterData = {
-      story_type_id: this.story_type_id,
-      length: this.length,
-      start: this.start,
-      language_id: this.language_id,
-      location: this.location,
-    };
-    this.storiesProvider.getRankedStory(this.filterData).subscribe(
-      response => {
-        this.responseData = response;
-        this.items = this.responseData.data;
-        this.recordsTotal = this.responseData.recordsTotal;
-        this.bindUpdata();
-        this.loadingProvider.dismiss();
-      },
-      err => {
-        console.error(err);
-        this.loadingProvider.dismiss();
-      }
-    );
-    return event;
+    if (this.network.checkStatus() == true) {
+      this.loadingProvider.present();
+      this.filterData = {
+        story_type_id: this.story_type_id,
+        length: this.length,
+        start: this.start,
+        language_id: this.language_id,
+        location: this.location,
+      };
+      this.storiesProvider.getRankedStory(this.filterData).subscribe(
+        response => {
+          this.responseData = response;
+          this.items = this.responseData.data;
+          this.recordsTotal = this.responseData.recordsTotal;
+          this.bindUpdata();
+          this.loadingProvider.dismiss();
+        },
+        err => {
+          console.error(err);
+          this.loadingProvider.dismiss();
+        }
+      );
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   bindUpdata() {
@@ -200,16 +211,11 @@ export class RankingPage {
 
   onScrollDown(infiniteScroll) {
 
-    console.log("this.start : " + this.start);
-    console.log("this.recordsTotal : " + this.recordsTotal);
+    console.log(this.start);
     this.start += this.length;
     if (this.start <= this.recordsTotal) {
       // this.start += this.length;
       this.getList();
-      this.isInfinite = true;
-    }
-    else {
-      this.isInfinite = false;
     }
     infiniteScroll.complete();
   }
@@ -220,23 +226,27 @@ export class RankingPage {
   }
 
   public getTypes() {
-    this.loadingProvider.present();
-    this.storiesProvider.getCategory().subscribe(
-      response => {
-        this.responseData = response;
-        this.types = this.responseData.data;
-        this.story_type_id = this.types[0].id;
+    if (this.network.checkStatus() == true) {
+      this.loadingProvider.present();
+      this.storiesProvider.getCategory().subscribe(
+        response => {
+          this.responseData = response;
+          this.types = this.responseData.data;
+          this.story_type_id = this.types[0].id;
 
-        this.getList();
-        this.loadingProvider.dismiss();
-        console.log(JSON.stringify(this.types[0].id));
-      },
-      err => {
-        console.error(err);
-        this.loadingProvider.dismiss();
-      }
-    );
-    return event;
+          this.getList();
+          this.loadingProvider.dismiss();
+          console.log(JSON.stringify(this.types[0].id));
+        },
+        err => {
+          console.error(err);
+          this.loadingProvider.dismiss();
+        }
+      );
+    }
+    else {
+      this.network.displayNetworkUpdate();
+    }
   }
 
   public itemTapped(data: any) {

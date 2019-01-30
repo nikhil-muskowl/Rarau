@@ -1,20 +1,20 @@
 <ion-header>
-<ion-navbar hideBackButton>
-    <ion-buttons left>
-    <button ion-button (click)="goBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-    </button>
-    </ion-buttons>
-    <ion-title text-center>
-    {{upload_profile_pic}}
-    </ion-title>
-    <ion-buttons right>
+    <ion-navbar hideBackButton>
+        <ion-buttons left>
+            <button ion-button (click)="goBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title text-center>
+            {{upload_profile_pic}}
+        </ion-title>
+        <ion-buttons right>
 
-    <span class="logo">
-        <img src="assets/imgs/login/Group-2.png" class="fire-icon">        
-    </span>
-    </ion-buttons>
-</ion-navbar>
+            <span class="logo">
+                <img src="assets/imgs/login/Group-2.png" class="fire-icon">
+            </span>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 
@@ -31,8 +31,7 @@
         <div class="row">
             <div class="col border-line">
                 <div text-right>
-                    <img style="margin-right: 15px" src="assets/icon/UploadPicture.png" width="85" height="85"
-                        (click)="openGallery()">
+                    <img style="margin-right: 15px" src="assets/icon/UploadPicture.png" width="85" height="85" (click)="openGallery()">
                 </div>
             </div>
             <!-- <div class="divider"></div> -->
@@ -42,7 +41,7 @@
                 </div>
             </div>
         </div>
-     
+
         <div padding text-center>
             <button class="submit-btn" ion-button (click)="save()">{{upload}}</button>
         </div>

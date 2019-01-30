@@ -1,18 +1,18 @@
 <ion-header>
     <ion-navbar hideBackButton>
         <ion-buttons left>
-        <button ion-button (click)="goBack()">
-            <ion-icon name="arrow-back"></ion-icon>
-        </button>
+            <button ion-button (click)="goBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
         </ion-buttons>
         <ion-title text-center>
-        {{sign_up}}
+            {{sign_up}}
         </ion-title>
         <ion-buttons right>
 
-        <span class="logo">
-            <img src="assets/imgs/login/Group-2.png" class="fire-icon">        
-        </span>
+            <span class="logo">
+                <img src="assets/imgs/login/Group-2.png" class="fire-icon">
+            </span>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -40,7 +40,8 @@
 
             <!-- name -->
             <ion-item>
-                <ion-input placeholder="{{ph_fname}}" formControlName="name" value={{fname}} type="text" [class.invalid]="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)"></ion-input>
+                <ion-input placeholder="{{ph_fname}}" formControlName="name" value={{fname}} type="text"
+                    [class.invalid]="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>
                 <p class="invalid-message" *ngIf="!registerForm.controls.name.valid  && (registerForm.controls.name.dirty || submitAttempt)">{{error_name}}</p>
@@ -84,19 +85,19 @@
                 <ion-row class="date-row">
                     <ion-col col-4>
                         <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
-                            formControlName="date" displayFormat="DD">
+                            formControlName="date" displayFormat="DD" [max]="today">
                         </ion-datetime>
                     </ion-col>
 
                     <ion-col col-4>
                         <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
-                            formControlName="date" displayFormat="MM">
+                            formControlName="date" displayFormat="MM" [max]="today">
                         </ion-datetime>
                     </ion-col>
 
                     <ion-col col-4>
                         <ion-datetime placeholder='YYYY &nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
-                            formControlName="date" displayFormat="YYYY">
+                            formControlName="date" displayFormat="YYYY" [max]="today">
                         </ion-datetime>
                     </ion-col>
                 </ion-row>
