@@ -48,11 +48,14 @@
 
   </div>
 
-  <div class="map"style="height: 60%;">
-          
-    <button style="background-color: #f3f2f2 !important;" ion-button icon-only class="{{myLocBtn}}" (click)="getCurrenLocation()">
+  <div style="background-color: #f3f2f2 !important;">
+    <button style="background-color: #f3f2f2 !important;" ion-button icon-only class="myLocBtn" (click)="getCurrenLocation()">
       <ion-icon ios="ios-locate" md="md-locate"></ion-icon>
     </button>
+  </div>
+
+  <div class="map" style="height: 60%;">
+
     <baidu-map [options]="options" (onMapLoaded)="loadMap($event)" (clicked)="clickmap($event)">
       <marker *ngFor="let marker of markers" [point]="marker.point" [options]="marker.options" (clicked)="showWindow($event)"></marker>
       <control type="navigation" [options]="navOptions"></control>

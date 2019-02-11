@@ -110,7 +110,10 @@ export class HomePage {
     this.user_id = this.LoginProvider.isLogin();
     this.language_id = this.languageProvider.getLanguageId();
 
-    //uncommnet below for HK testing 
+    //css for loc button
+    this.isMycurrLoc = 0;
+    this.myLocBtn = 'myLocBtn';
+
     this.latitude = this.locationTrackerProvider.getLatitude();
     this.longitude = this.locationTrackerProvider.getLongitude();
 
@@ -242,19 +245,25 @@ export class HomePage {
   getCurrenLocation() {
     this.locationTrackerProvider.setLocation();
 
-    if (this.isMycurrLoc == 0) {
-      this.myLocBtn = 'myLocBtnclicked';
-      this.isMycurrLoc = 1;
-      this.bindMap();
-    }
-    else {
-      this.myLocBtn = 'myLocBtn';
-      this.isMycurrLoc = 0;
-      this.searchCat = undefined;
-      this.searchUse = undefined;
-      this.serLatitude = undefined;
-      this.serLongitude = undefined;
-    }
+    // if (this.isMycurrLoc == 0) {
+    //   this.myLocBtn = 'myLocBtnclicked';
+    //   this.isMycurrLoc = 1;
+    //   this.bindMap();
+    // }
+    // else {
+    //   this.myLocBtn = 'myLocBtn';
+    //   this.isMycurrLoc = 0;
+    //   this.searchCat = undefined;
+    //   this.searchUse = undefined;
+    //   this.serLatitude = undefined;
+    //   this.serLongitude = undefined;
+    // }
+
+    this.searchCat = undefined;
+    this.searchUse = undefined;
+    this.serLatitude = undefined;
+    this.serLongitude = undefined;
+    this.bindMap();
   }
 
   public bindMap() {
@@ -501,6 +510,4 @@ export class HomePage {
     this.showStories = false;
     this.navCtrl.push(StoryListPage, this.paramData);
   }
-
-
 }
