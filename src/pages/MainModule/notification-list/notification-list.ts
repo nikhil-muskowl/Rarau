@@ -42,12 +42,12 @@ export class NotificationListPage {
 
     this.getList();
 
-
     this.platform.registerBackButtonAction(() => {
       this.goBack();
     });
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
 
@@ -58,10 +58,12 @@ export class NotificationListPage {
     });
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //get notification list data from server
   getList() {
     this.user_id = this.LoginProvider.isLogin();
     this.language_id = this.languageProvider.getLanguageId();
@@ -91,6 +93,7 @@ export class NotificationListPage {
     }
   }
 
+  //bind list when loading more data
   bindUpdata() {
     for (let i = 0; i < this.items.length; i++) {
       this.notiItems.push({
@@ -111,6 +114,7 @@ export class NotificationListPage {
     }
   }
 
+  //on scroll load more
   onScrollDown(infiniteScroll) {
 
     console.log("this.start : " + this.start);

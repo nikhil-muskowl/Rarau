@@ -48,10 +48,12 @@ export class UpdatePasswordPage {
     });
   }
 
+  //Goto previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -73,6 +75,7 @@ export class UpdatePasswordPage {
     });
   }
 
+  //Send update password to server
   updatePass() {
     if (this.network.checkStatus() == true) {
       this.submitAttempt = true;

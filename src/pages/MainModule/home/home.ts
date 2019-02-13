@@ -93,18 +93,22 @@ export class HomePage {
 
   }
 
+  //on change initialize
   ngOnInit() {
     this.InitMethods();
   }
 
+  //next header category slide
   homeSlidesNext() {
     this.homeSlides.slideNext();
   }
 
+  //previous header category slide
   homeSlidesPrev() {
     this.homeSlides.slidePrev();
   }
 
+  //init methods for reloading
   InitMethods() {
     // Let's navigate from TabsPage to Page1
     this.user_id = this.LoginProvider.isLogin();
@@ -126,6 +130,7 @@ export class HomePage {
     this.getAdvertisement();
   }
 
+  //setting category to header slider
   setCategory() {
 
     this.loadingProvider.present();
@@ -142,12 +147,14 @@ export class HomePage {
     );
   }
 
+  //goto user profile page
   gotoUsers(_id) {
     if (_id) {
       this.navCtrl.push(OthersProfilePage, { id: _id, user_id: this.user_id });
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -166,6 +173,7 @@ export class HomePage {
     });
   }
 
+  //open search modal for searching
   openModal() {
 
     const myModalOptions: ModalOptions = {
@@ -211,6 +219,7 @@ export class HomePage {
     });
   }
 
+  //getting Advertisement data list
   getAdvertisement() {
     this.language_id = this.languageProvider.getLanguageId();
     let param;
@@ -235,6 +244,7 @@ export class HomePage {
       );
   }
 
+  //call on advert slide change
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
     if (currentIndex == this.Advdata.length) {
@@ -242,6 +252,7 @@ export class HomePage {
     }
   }
 
+  //getting current location as well reload map
   getCurrenLocation() {
     this.locationTrackerProvider.setLocation();
 
@@ -266,6 +277,7 @@ export class HomePage {
     this.bindMap();
   }
 
+  //bind map with search result or reload
   public bindMap() {
     this.user_id = this.LoginProvider.isLogin();
     this.markers = [];
@@ -441,20 +453,24 @@ export class HomePage {
 
   }
 
+  //reset story on click map markers
   public resetStories() {
     this.showStories = false;
     this.stories = [];
   }
 
+//close the story list on map markers
   closeList() {
     this.showStories = false;
     console.log("Click on close icon");
   }
 
+  //open event page
   openEvents() {
     this.navCtrl.push(EventListPage);
   }
 
+  //Open window panel for that location stories
   public showWindow({ e, marker, map }: any): void {
 
     this.user_id = this.LoginProvider.isLogin();
@@ -489,6 +505,7 @@ export class HomePage {
     this.loadingProvider.hide();
   }
 
+  //for loading baidu map
   loadMap(map: any) {
     console.log('map instance here', map);
     this.BdMap = map;
@@ -496,16 +513,19 @@ export class HomePage {
     console.log('map center here', JSON.stringify(cntr));
   }
 
+  //on click on marker
   clickMarker(marker: any) {
     console.log(`The clicked marker is: ${marker}`);
   }
 
+  // on click on location and get lat lng
   clickmap(e: any) {
     // this.latitude = e.point.lat;
     // this.longitude = e.point.lng;
     console.log(`Map clicked with coordinate: ${e.point.lng}, ${e.point.lat}`);
   }
 
+  //goto list of stories
   goToList() {
     this.showStories = false;
     this.navCtrl.push(StoryListPage, this.paramData);

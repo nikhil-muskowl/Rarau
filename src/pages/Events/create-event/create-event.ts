@@ -70,6 +70,7 @@ export class CreateEventPage {
     public languageProvider: LanguageProvider, ) {
   }
 
+  //on view or page change (initialize)
   ngOnInit() {
     this.createForm();
 
@@ -96,6 +97,7 @@ export class CreateEventPage {
     this.longitude = this.locationTrackerProvider.getLongitude();
   }
 
+  //create forma nd validations
   createForm() {
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(32), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
@@ -107,11 +109,13 @@ export class CreateEventPage {
     });
   }
 
+  //change on city
   onChangeCity(data: any) {
     console.log('selected city : ' + JSON.stringify(data));
     this.baiduProvider.setCity(data);
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -163,10 +167,12 @@ export class CreateEventPage {
     });
   }
 
+  //Goto Previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //Load cities
   loadCity() {
     this.cities = [];
 
@@ -182,6 +188,7 @@ export class CreateEventPage {
     });
   }
 
+  //Save the event data
   save() {
     this.submitAttempt = true;
     if (this.eventForm.valid) {
@@ -190,6 +197,7 @@ export class CreateEventPage {
     }
   }
 
+  //for getting location on search
   public getLocation() {
 
     this.fileterData = {
@@ -211,6 +219,7 @@ export class CreateEventPage {
     console.log(this.locations);
   }
 
+  //when location item is selected
   public locItemSelected(location: any) {
     console.log(location);
     if (location) {
@@ -224,6 +233,7 @@ export class CreateEventPage {
     this.locations = [];
   }
 
+  //On location search input autocomplete
   public onLocInput(ev: any) {
     console.log('target value : ' + JSON.stringify(ev.target.value));
     if (!this.isEmpty(ev.target.value)) {
@@ -238,10 +248,12 @@ export class CreateEventPage {
     }
   }
 
+  //On clear search input autocomplete
   public onLocCancel(ev: any) {
     this.searchLoc = '';
   }
 
+  //check string is empty or not
   isEmpty(str) {
     return (!str || 0 === str.length);
   }

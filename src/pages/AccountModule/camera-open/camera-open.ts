@@ -63,16 +63,19 @@ export class CameraOpenPage {
     this.gender = this.navParams.get('gender');
   }
 
+  //when leaving this page
   ionViewDidLeave() {
     this.stopCamera();
     this.cameraPreview.hide();
   }
 
+  //before enter in page
   ionViewWillEnter() {
     this.tabService.hide();
     this.startCamera();
   }
 
+  //taking picture from camera
   takePicture() {
 
     const pictureOpts: CameraPreviewPictureOptions = {
@@ -114,6 +117,7 @@ export class CameraOpenPage {
     });
   }
 
+  //start camera
   startCamera() {
 
     this.stopCamera();
@@ -141,6 +145,7 @@ export class CameraOpenPage {
 
   }
 
+  //stop camera
   stopCamera() {
     try {
       this.cameraPreview.stopCamera().catch(e => {
@@ -150,6 +155,7 @@ export class CameraOpenPage {
     }
   }
 
+  //for flash on off
   flash() {
 
     if (this.flashMode == 'off') {
@@ -161,6 +167,7 @@ export class CameraOpenPage {
     this.setFlashMode();
   }
 
+  //setting flash mode
   setFlashMode() {
     this.cameraPreview.setFlashMode(this.flashMode).then(() => {
 
@@ -169,6 +176,7 @@ export class CameraOpenPage {
     });
   }
 
+  //switch camera to front and rear
   switchCamera() {
     this.cameraPreview.switchCamera();
   }

@@ -59,7 +59,6 @@ export class MyPetDetailsPage {
     this.language_id = this.languageProvider.getLanguageId();
     this.setText();
 
-
     if (this.network.checkStatus() == true) {
       this.getDetails();
     }
@@ -68,10 +67,12 @@ export class MyPetDetailsPage {
     }
   }
 
+  //Goto previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -84,6 +85,7 @@ export class MyPetDetailsPage {
     });
   }
 
+  //get details of pet
   getDetails() {
 
     this.mypetProvider.apiPetDetails(this.pet_id).subscribe(response => {
@@ -114,6 +116,7 @@ export class MyPetDetailsPage {
     );
   }
 
+  //on slide change get the pet accessory
   // slideChanged() {
   //   let currentIndex = this.slides.getActiveIndex();
   //   if (currentIndex == this.levels.length) {

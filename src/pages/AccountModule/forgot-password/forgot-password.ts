@@ -46,7 +46,7 @@ export class ForgotPasswordPage {
     public toastProvider: ToastProvider) {
 
     platform.registerBackButtonAction(() => {
-      this.goBack();
+      this.goback();
     });
 
     this.setText();
@@ -57,6 +57,7 @@ export class ForgotPasswordPage {
 
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -97,11 +98,12 @@ export class ForgotPasswordPage {
 
   }
 
+  //go back to previous page
   goback() {
-    console.log("clicked");
     this.navCtrl.pop();
   }
 
+  //send form data for forgot password link
   sendForm() {
     if (this.network.checkStatus() == true) {
       this.submitAttempt = true;
@@ -121,7 +123,6 @@ export class ForgotPasswordPage {
               this.submitAttempt = false;
               this.toastProvider.presentToast(this.check_email);
 
-
             }
             else {
               this.toastProvider.presentToast(this.email_not_found);
@@ -139,12 +140,9 @@ export class ForgotPasswordPage {
     }
   }
 
+  //go back to login page
   backLogin() {
     console.log('Click performed');
     this.navCtrl.setRoot(LoginPage);
-  }
-
-  goBack() {
-    this.navCtrl.pop();
   }
 }

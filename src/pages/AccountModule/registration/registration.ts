@@ -157,6 +157,7 @@ export class RegistrationPage {
 
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -239,6 +240,7 @@ export class RegistrationPage {
 
   }
 
+  //doing registration
   save() {
 
     this.submitAttempt = true;
@@ -341,10 +343,12 @@ export class RegistrationPage {
     }
   }
 
+  //call before entering page view
   ionViewWillEnter() {
     this.tabService.hide();
   }
 
+  //create form and validation
   createForm() {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(32), Validators.pattern('[a-zA-Z0-9_.-]*'), Validators.required])],
@@ -356,6 +360,7 @@ export class RegistrationPage {
     });
   }
 
+  //for change Male gender
   public maleimage = 'assets/icon/male_white.png';
   public male_color;
   manClick() {
@@ -374,6 +379,7 @@ export class RegistrationPage {
     console.log('Gender Id : ' + this.gender_id);
   }
 
+  //for change Female gender
   public femaleimage = 'assets/icon/female_white.png';
   public female_color;
   womanClick() {
@@ -392,34 +398,41 @@ export class RegistrationPage {
     console.log('Gender Id : ' + this.gender_id);
   }
 
+  //on bithday date change 
   ondateChange() {
     console.info("Selected Date:", this.date);
   }
 
+  //Goto Wechat Login page
   goToWechat() {
     this.navCtrl.push(LoginWechatPage);
   }
 
-  updateProfile() {
+  //Goto Upload Profile Photo
+  uploadProfilePic() {
     this.navCtrl.push(UpdateProfilePage, {
       image: this.image, imagePath: this.imagePath, data: this.registerForm.value,
       date: this.date, gender: this.gender_id
     });
   }
 
+  //Goto Previous page
   goBack() {
     this.tabService.show();
     this.navCtrl.setRoot(LoginPage);
   }
 
+  //Goto Terms page
   gototerms() {
     this.navCtrl.push(TermsPage);
   }
 
+  //Goto Why need Birthday page
   gotobirthday() {
     this.navCtrl.push(BirthdayPage);
   }
 
+  //Goto Why need Profile Photo page
   gotoprofile() {
     this.navCtrl.push(WhyProfilePage);
   }

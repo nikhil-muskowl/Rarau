@@ -41,6 +41,7 @@ export class MyPetPage {
     });
   }
 
+  //when view will be enter in page
   ionViewWillEnter() {
     this.user_id = this.LoginProvider.isLogin();
     if (this.user_id == undefined || this.user_id == '') {
@@ -57,6 +58,7 @@ export class MyPetPage {
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -69,6 +71,7 @@ export class MyPetPage {
     });
   }
 
+  //get the user pet if user is logged in
   getPets() {
     this.user_id = this.LoginProvider.isLogin();
     let param;
@@ -93,6 +96,7 @@ export class MyPetPage {
     );
   }
 
+  //goto pet Details page
   getDetails(id) {
 
     this.navCtrl.push(MyPetDetailsPage, {

@@ -64,6 +64,7 @@ export class ProfilePhotoPage {
     this.displayImage = this.image;
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -94,20 +95,24 @@ export class ProfilePhotoPage {
     });
   }
 
+  //check if user is login or not
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
     console.log('ionViewDidLoad ProfilePhotoPage' + this.user_id);
   }
 
+  //when view will be enter in page
   ionViewWillEnter() {
     this.tabService.hide();
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.setRoot(ProfilePage);
     this.tabService.show();
   }
 
+  //save profile photo
   save() {
     //code to save
     this.imgSend = this.displayImage;
@@ -156,10 +161,12 @@ export class ProfilePhotoPage {
     }
   }
 
+  //open camera to click page
   openCamera() {
     this.navCtrl.push(CameraOpenPage, { sendClass: 'profile' });
   }
 
+  //open gallery to select page
   openGallery() {
 
     const options: CameraOptions = {

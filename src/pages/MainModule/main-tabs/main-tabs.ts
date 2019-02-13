@@ -40,14 +40,6 @@ export class MainTabsPage {
     }
   }
 
-
-  // ngOnInit() {
-  //   this.pet();
-  //   this.gallery();
-  //   this.rank();
-  //   this.profile();
-  // }
-
   home() {
     this.tab1Root = HomePage;
   }

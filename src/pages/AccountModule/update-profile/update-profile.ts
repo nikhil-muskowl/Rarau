@@ -82,6 +82,7 @@ export class UpdateProfilePage {
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -113,10 +114,12 @@ export class UpdateProfilePage {
 
   }
 
+  //when view will be enter in page
   ionViewWillEnter() {
     this.tabService.hide();
   }
 
+  //Goto Previous page
   goBack() {
     console.log('click');
     this.navCtrl.push(RegistrationPage, {
@@ -125,8 +128,8 @@ export class UpdateProfilePage {
     });
   }
 
+  //to Upload profile picture
   save() {
-
     //code to save
     console.log('select' + this.imgSend);
     if (this.imgSend == undefined) {
@@ -176,6 +179,7 @@ export class UpdateProfilePage {
     }
   }
 
+  //open camera to take picture
   openCamera() {
     this.navCtrl.push(CameraOpenPage, {
       image: this.imgSend, imagePath: this.result, data: this.data,
@@ -183,8 +187,8 @@ export class UpdateProfilePage {
     });
   }
 
+  //open gallery to select picture
   openGallery() {
-
     const options: CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,

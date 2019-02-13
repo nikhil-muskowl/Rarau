@@ -52,6 +52,7 @@ export class TutorialPage {
       { image: 'assets/rarau_tutorial/2.png' }];
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -74,6 +75,7 @@ export class TutorialPage {
     });
   }
 
+  //tutorial is seen and dont want to see again
   tuteSeen() {
     console.log('click on next btn');
     let currentIndex = this.slides.getActiveIndex();
@@ -85,11 +87,13 @@ export class TutorialPage {
     }
   }
 
+  //skipping the tutorial
   tuteSkip() {
     console.log('click on skip btn');
     this.navCtrl.setRoot(MainTabsPage);
   }
 
+  //if user want to see tutorial again or not
   reloadTutorial() {
     console.log('Check value : ' + this.tutorial_will);
     if (this.tutorial_will) {
@@ -106,6 +110,7 @@ export class TutorialPage {
     }
   }
 
+  //slide change of tutorial
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
     console.log('currentIndex : ' + currentIndex);

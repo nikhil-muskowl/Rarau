@@ -76,6 +76,8 @@ export class SearchPage {
     // console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
   }
 
+
+  //when view will enter in page
   ionViewWillEnter() {
     this.setText();
     this.getCategory();
@@ -87,6 +89,7 @@ export class SearchPage {
     this.longitude = this.locationTrackerProvider.getLongitude();
   }
 
+  //setting text according to language
   setText() {
 
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
@@ -106,6 +109,7 @@ export class SearchPage {
     });
   }
 
+  //get all category from server
   getCategory() {
     this.categories = [];
     this.loadingProvider.present();
@@ -124,6 +128,7 @@ export class SearchPage {
     );
   }
 
+  //close the modal and redirect to calling page with data
   closeModal() {
     const data = {
       // search: this.searchUser
@@ -131,6 +136,7 @@ export class SearchPage {
     this.view.dismiss();
   }
 
+  //global search button click to set data
   globalSearch() {
     console.log('searchUsercat : ' + this.searchCat);
     console.log('searchUse : ' + this.searchUse);
@@ -158,6 +164,7 @@ export class SearchPage {
     }
   }
 
+  //search category for a user
   searchUsercat() {
     console.log('searchUsercat : ' + this.searchCat);
 
@@ -175,6 +182,7 @@ export class SearchPage {
     }
   }
 
+  //search user's story
   searchUserStory() {
     console.log('searchUse : ' + this.searchUse);
 
@@ -193,6 +201,7 @@ export class SearchPage {
     }
   }
 
+  //search by location
   searchLocation() {
     event.stopPropagation();
     console.log('searchLoc : ' + this.searchLoc);
@@ -213,6 +222,7 @@ export class SearchPage {
     }
   }
 
+  //only search user
   searchUsers(event) {
     event.stopPropagation();
     this.searchUser = this.searchForm.value.searchUser;
@@ -231,6 +241,7 @@ export class SearchPage {
     }
   }
 
+  //get locations on autocomplete
   public getLocation() {
 
     this.fileterData = {
@@ -252,6 +263,7 @@ export class SearchPage {
     console.log(this.locations);
   }
 
+  //get users on autocomplete
   public getUsers() {
 
     this.filterData = {
@@ -271,6 +283,7 @@ export class SearchPage {
     console.log(this.locations);
   }
 
+  //on location select
   public locItemSelected(location: any) {
     console.log(location);
     if (location) {
@@ -287,6 +300,7 @@ export class SearchPage {
     this.locations = [];
   }
 
+  //on user select
   public searchItemSelected(searches: any) {
     console.log(searches);
     if (searches) {
@@ -296,16 +310,19 @@ export class SearchPage {
     this.searchData = [];
   }
 
+  //input on user search autocomplete
   public onUserInput(ev: any) {
     this.searchUse = ev.target.value;
     this.searchData = [];
     this.getUsers();
   }
 
+  //cancel on user search
   public onUserCancel(ev: any) {
     this.searchUse = '';
   }
 
+  //input on location search autocomplete
   public onLocInput(ev: any) {
     if (ev.target.value != "" || ev.target.value != undefined) {
       this.searchLoc = ev.target.value;
@@ -314,6 +331,7 @@ export class SearchPage {
     }
   }
 
+  //cancel on user search
   public onLocCancel(ev: any) {
     this.searchLoc = '';
   }

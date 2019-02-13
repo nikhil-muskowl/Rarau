@@ -92,6 +92,7 @@ export class LoginPage {
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -153,17 +154,19 @@ export class LoginPage {
     });
   }
 
+  //when view load
   ionViewDidLoad() {
     this.tabService.show();
     console.log('ionViewDidLoad LoginPage');
   }
 
+  //Go to register page
   goToRegsiter() {
     this.navCtrl.push(RegistrationPage);
   }
 
+  //Checking login credential
   save() {
-
     this.submitAttempt = true;
     this.formData = this.loginForm.valid;
 
@@ -221,6 +224,7 @@ export class LoginPage {
     }
   }
 
+  //login success popup
   openModal() {
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
@@ -248,10 +252,12 @@ export class LoginPage {
     });
   }
 
+  //jump to Forgot page
   forgotPass() {
     this.navCtrl.push(ForgotPasswordPage);
   }
 
+  //jump to Wechat page
   goToWechat() {
     this.navCtrl.push(LoginWechatPage);
   }

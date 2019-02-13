@@ -56,10 +56,7 @@ export class EditProfilePage {
     this.createForm();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditProfilePage');
-  }
-
+  //save profile data
   save() {
     this.submitAttempt = true;
     if (this.editProfileForm.valid) {
@@ -114,6 +111,7 @@ export class EditProfilePage {
     }
   }
 
+  //create and validate form
   createForm() {
     this.editProfileForm = this.formBuilder.group({
       name: [this.name, Validators.compose([Validators.maxLength(32), Validators.pattern('[a-zA-Z ]*'), Validators.required])],

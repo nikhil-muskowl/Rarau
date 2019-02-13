@@ -16,13 +16,14 @@ export class WhyProfilePage {
     public translate: TranslateService,
     public platform: Platform,
     public languageProvider: LanguageProvider, ) {
-      
+
     platform.registerBackButtonAction(() => {
       this.dismiss();
     });
     this.setText();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -30,13 +31,9 @@ export class WhyProfilePage {
     this.translate.get('why_dp').subscribe((text: string) => {
       this.title = text;
     });
-
-
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad WhyProfilePage');
-  }
+  //click on close button
   dismiss() {
     this.navCtrl.pop();
   }

@@ -41,6 +41,7 @@ export class ActivityLogsPage {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -54,15 +55,13 @@ export class ActivityLogsPage {
 
   }
 
+  //when view will enter to page
   ionViewWillEnter() {
     this.setText();
     this.getActivity();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ActivityLogsPage');
-  }
-
+  //get all activities
   getActivity() {
     console.log('user : ' + this.user_id);
     let param = {
@@ -86,10 +85,12 @@ export class ActivityLogsPage {
     );
   }
 
+  //Goto Previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //bind activitiesto list on load more
   binddata() {
     for (let index = 0; index < this.records.length; index++) {
       this.model.push({
@@ -107,8 +108,8 @@ export class ActivityLogsPage {
     }
   }
 
+  //on scroll load more
   onScrollDown(infiniteScroll) {
-
     console.log(this.pageStart);
 
     if (this.pageStart <= this.recordsTotal) {

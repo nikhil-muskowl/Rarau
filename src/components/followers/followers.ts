@@ -41,6 +41,7 @@ export class FollowersComponent {
   ) {
   }
 
+  //call when tab change
   ngOnChanges() {
     this.isLogin();
     console.log(this.user_id);
@@ -49,6 +50,7 @@ export class FollowersComponent {
     }
   }
 
+  //get login details
   isLogin() {
     if (this.LoginProvider.isLogin()) {
       this.current_user_id = this.LoginProvider.isLogin();
@@ -57,6 +59,7 @@ export class FollowersComponent {
     }
   }
 
+  //get Follower data
   getData() {
     this.loadingProvider.present();
     this.filterData = {
@@ -83,6 +86,7 @@ export class FollowersComponent {
     return event;
   }
 
+  //bind data OnScroll
   binddata() {
     for (let index = 0; index < this.data.length; index++) {
       this.model.push({
@@ -95,15 +99,18 @@ export class FollowersComponent {
     }
   }
 
+  //Back to previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //got to followers page
   getFollowerProfile(data: any) {
     console.log('Follower Id : ' + data.user_id);
     this.navCtrl.push(OthersProfilePage, { id: data.user_id });
   }
 
+  //load more on Scroll Down 
   onScrollDown(infiniteScroll) {
     if (this.pageStart <= this.recordsTotal) {
       this.pageStart += this.pageLength;

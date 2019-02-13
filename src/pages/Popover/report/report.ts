@@ -77,11 +77,13 @@ export class ReportPage {
     }
   }
 
+  //on change of component initialize
   ngOnInit() {
     this.complain_by = this.LoginProvider.isLogin();
     this.language_id = this.languageProvider.getLanguageId();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -106,6 +108,7 @@ export class ReportPage {
     });
   }
 
+  //create and validate form fields
   createForm() {
     this.reportForm = this.formBuilder.group({
       title: ['', Validators.compose([Validators.maxLength(32), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
@@ -113,10 +116,12 @@ export class ReportPage {
     });
   }
 
+  //click on close button
   dismiss() {
     this.navCtrl.pop();
   }
 
+  //send comment report to server
   sendCommentReport() {
 
     this.complain_by = this.LoginProvider.isLogin();
@@ -158,6 +163,7 @@ export class ReportPage {
     }
   }
 
+  //send user report to server
   sendUserReport() {
     this.complain_by = this.LoginProvider.isLogin();
 
@@ -197,6 +203,7 @@ export class ReportPage {
     }
   }
 
+  //send story report to server
   sendStoryReport() {
     this.complain_by = this.LoginProvider.isLogin();
 

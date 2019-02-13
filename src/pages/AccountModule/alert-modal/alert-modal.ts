@@ -34,6 +34,7 @@ export class AlertModalPage {
     this.getData();
   }
 
+  //data from pages
   getData() {
     let data = this.navParams.get('data');
     // console.log('modal data :  ' + JSON.stringify(data));
@@ -43,6 +44,7 @@ export class AlertModalPage {
     this.from = data.from;
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -52,6 +54,7 @@ export class AlertModalPage {
     });
   }
 
+  //open a page on modal click
   openPage() {
     const data = {
       close: 1
@@ -59,6 +62,7 @@ export class AlertModalPage {
     this.view.dismiss(data);
   }
 
+  //close modal
   closeModal() {
     const data = {
       close: 0

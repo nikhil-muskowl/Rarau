@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 
-
 @IonicPage()
 @Component({
   selector: 'page-login-wechat',
@@ -36,12 +35,13 @@ export class LoginWechatPage {
     platform.registerBackButtonAction(() => {
       this.goBack();
     });
-    
+
     this.setText();
     this.date = new Date().toISOString().split('T')[0];
     this.createForm();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -70,18 +70,17 @@ export class LoginWechatPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginWechatPage');
-  }
-
+  //to get date on change
   ondateChange() {
     console.info("Selected Date:", this.date);
   }
 
+  //send form to WeChat login
   save() {
 
   }
 
+  //create form and validations
   createForm() {
     this.loginwechatForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
@@ -89,14 +88,17 @@ export class LoginWechatPage {
     });
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //goto terms page
   gototerms() {
     this.navCtrl.push(TermsPage);
   }
 
+  //goto birthday page
   gotobirthday() {
     this.navCtrl.push(BirthdayPage);
   }

@@ -45,6 +45,7 @@ export class EventModalPage {
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -54,6 +55,7 @@ export class EventModalPage {
     });
   }
 
+  //to get all events
   getEvents() {
     console.log("all event");
     this.ParamData = { 'start': this.PageStart, 'length': this.pageLength };
@@ -73,10 +75,12 @@ export class EventModalPage {
       });
   }
 
+  //close modal and redirect to page where it is called
   closeModal() {
     this.view.dismiss();
   }
 
+  //bind the list with new data
   bindUpdata() {
 
     for (let i = 0; i < this.EveData.length; i++) {
@@ -104,6 +108,7 @@ export class EventModalPage {
     }
   }
 
+  //click on item to select
   ItemSelected(eves: any) {
     console.log(eves);
     if (eves) {

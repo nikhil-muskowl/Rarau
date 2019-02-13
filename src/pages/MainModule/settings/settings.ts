@@ -64,6 +64,7 @@ export class SettingsPage {
     this.getLanguages();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -104,6 +105,7 @@ export class SettingsPage {
 
   }
 
+  //get all cities
   loadCity() {
     this.cities = [];
 
@@ -120,10 +122,12 @@ export class SettingsPage {
     });
   }
 
+  //Goto tutorial page
   tutorial() {
     this.navCtrl.setRoot(TutorialPage);
   }
 
+  //get all languages
   public getLanguages() {
     this.loadingProvider.present();
     this.languageProvider.getLanguages().subscribe(response => {
@@ -137,6 +141,7 @@ export class SettingsPage {
     this.loadingProvider.dismiss();
   }
 
+  //on change current language
   onChange(data: any) {
     //language
     console.log('selected language : ' + JSON.stringify(data));
@@ -144,16 +149,19 @@ export class SettingsPage {
     this.setText();
   }
 
+  //change current city
   onChangeCity(data: any) {
     console.log('selected city : ' + JSON.stringify(data));
     this.baiduProvider.setCity(data);
 
   }
 
+  //logout user
   logout() {
     this.openModal();
   }
 
+  //open modal to confirm Logout
   openModal() {
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
@@ -187,6 +195,7 @@ export class SettingsPage {
     });
   }
 
+  //Goto previous page
   goBack() {
     this.navCtrl.setRoot(ProfilePage);
   }

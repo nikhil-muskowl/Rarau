@@ -16,6 +16,7 @@ export class SplashPage {
     public splashScreen: SplashScreen) {
   }
 
+  //loading splash when view will enter
   ionViewDidEnter() {
     console.log('ionViewDidLoad SplashPage');
     this.splashScreen.hide();

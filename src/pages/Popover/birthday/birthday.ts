@@ -21,10 +21,7 @@ export class BirthdayPage {
     this.setText();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BirthdayPage');
-  }
-
+//setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -34,6 +31,7 @@ export class BirthdayPage {
     });
   }
 
+  //on close click
   dismiss() {
     this.navCtrl.pop();
   }

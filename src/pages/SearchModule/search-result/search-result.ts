@@ -64,6 +64,7 @@ export class SearchResultPage {
     this.crearForm();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -85,14 +86,17 @@ export class SearchResultPage {
     });
   }
 
+//when view will be enter in page
   ionViewWillEnter() {
     this.isLogin();
   }
 
+  //check user is logged in or not
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //get search result of user
   getSearch(search) {
     if (this.network.checkStatus() == true) {
       this.loadingProvider.present();
@@ -127,10 +131,12 @@ export class SearchResultPage {
     }
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //bind data on load more
   binddata() {
     for (let index = 0; index < this.data.length; index++) {
       this.model.push({
@@ -142,6 +148,7 @@ export class SearchResultPage {
     }
   }
 
+  //on scroll load more
   onScrollDown(infiniteScroll) {
     this.pageStart += this.pageLength;
 
@@ -151,6 +158,7 @@ export class SearchResultPage {
     infiniteScroll.complete();
   }
 
+  //goto user's profile
   getProfile(data: any) {
     if (data.id == this.user_id) {
       console.log('id Matched');
@@ -161,12 +169,14 @@ export class SearchResultPage {
     }
   }
 
+  //create and validate form
   crearForm() {
     this.searchpageForm = this.formBuilder.group({
       searchText: ['', Validators.required],
     });
   }
 
+  //call search event result
   search(event) {
     event.stopPropagation();
     this.searchValue = this.searchpageForm.value.searchText;

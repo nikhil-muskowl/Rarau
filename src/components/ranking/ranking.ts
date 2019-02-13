@@ -55,6 +55,7 @@ export class RankingComponent {
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -70,6 +71,7 @@ export class RankingComponent {
     });
   }
 
+  //on category change
   public typeChanged(event) {
     this.story_type_id = event.id;
     this.rankItems = [];
@@ -77,6 +79,7 @@ export class RankingComponent {
     this.getList();
   }
 
+  //getting ranking list
   public getList() {
     this.language_id = this.languageProvider.getLanguageId();
     this.loadingProvider.present();
@@ -113,6 +116,7 @@ export class RankingComponent {
     return event;
   }
 
+  //bind data OnScroll
   bindUpdata() {
 
     for (let i = 0; i < this.items.length; i++) {
@@ -147,11 +151,13 @@ export class RankingComponent {
     }
   }
 
+  //for user profile
   public goToProfile(user_id) {
 
     // this.navCtrl.push(OthersProfilePage, { id: user_id });
   }
 
+  //get Ranking categories
   public getTypes() {
 
     this.loadingProvider.present();
@@ -174,10 +180,12 @@ export class RankingComponent {
     return event;
   }
 
+  //On ranking item click 
   public itemTapped(data: any) {
     this.navCtrl.push(SingleStoryPage, { story_id: data.id });
   }
 
+  //load more on Scroll Down 
   onScrollDown(infiniteScroll) {
 
     console.log(this.start);

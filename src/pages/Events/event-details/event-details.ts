@@ -64,6 +64,7 @@ export class EventDetailsPage {
     this._id = this.navParams.get('id');
   }
 
+  //on view or page change (initialize)
   ngOnInit() {
 
     this.platform.registerBackButtonAction(() => {
@@ -79,6 +80,7 @@ export class EventDetailsPage {
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -112,16 +114,19 @@ export class EventDetailsPage {
     });
   }
 
+  //when item is selected
   public itemTapped(data: any) {
     if (this.network.checkStatus() == true) {
       this.navCtrl.push(SingleStoryPage, { story_id: data.id });
     }
   }
 
+  //Goto Previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //Get Details
   getDetails(id) {
     this.eventProvider.apiGetEventDetails(id).subscribe(
       response => {
@@ -144,6 +149,7 @@ export class EventDetailsPage {
       });
   }
 
+  //Get list of events
   public getList(id) {
     this.loadingProvider.present();
     this.filterData = {

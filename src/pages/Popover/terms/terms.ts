@@ -23,10 +23,7 @@ export class TermsPage {
     this.setText();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TermsPage');
-  }
-
+//setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -36,6 +33,7 @@ export class TermsPage {
     });
   }
 
+  //click on close button
   dismiss() {
     this.navCtrl.pop();
   }

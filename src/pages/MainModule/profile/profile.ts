@@ -77,6 +77,7 @@ export class ProfilePage {
 
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
 
@@ -121,6 +122,7 @@ export class ProfilePage {
 
   }
 
+  //when view will entering in page
   ionViewWillEnter() {
     this.setText();
     this.user_id = this.LoginProvider.isLogin();
@@ -136,6 +138,7 @@ export class ProfilePage {
     }
   }
 
+  //checking if user is logged in or not
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
     if (!this.user_id) {
@@ -147,6 +150,7 @@ export class ProfilePage {
     }
   }
 
+  //load profile data if user is logged in
   getProfileData(user_id) {
     console.log('user : ' + this.user_id);
     this.loadingProvider.present();
@@ -168,14 +172,17 @@ export class ProfilePage {
     );
   }
 
+  //goto activity page
   viewActivity() {
     this.navCtrl.push(ActivityLogsPage);
   }
 
+  //goto update password page
   updatePass() {
     this.navCtrl.push(UpdatePasswordPage);
   }
 
+  //goto edit profile page
   editProfile() {
     this.navCtrl.push(EditProfilePage, {
       id: this.user_id,
@@ -184,18 +191,22 @@ export class ProfilePage {
     });
   }
 
+  //goto change profile photo page
   changeProfilePhoto() {
     this.navCtrl.push(ProfilePhotoPage, { id: this.user_id, image: this.userImage });
   }
 
+  //goto saved stories page
   savedStories() {
     this.navCtrl.push(SavedStoriesPage);
   }
 
+  //goto setting page
   goSetting() {
     this.navCtrl.push(SettingsPage);
   }
 
+  //goto notification page
   goNoti() {
     this.navCtrl.push(NotificationListPage);
   }

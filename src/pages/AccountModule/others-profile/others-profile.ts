@@ -80,6 +80,7 @@ export class OthersProfilePage {
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -122,6 +123,7 @@ export class OthersProfilePage {
     });
   }
 
+  //get Profile data
   getProfile(id) {
     console.log('this.user_id : ' + this.user_id);
 
@@ -155,14 +157,17 @@ export class OthersProfilePage {
 
   }
 
+  //goto Previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //checking is user is login or not
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //to report user's story
   reportStory() {
     console.log('Report user');
     this.isLogin();
@@ -186,6 +191,7 @@ export class OthersProfilePage {
     }
   }
 
+  //Follow user
   dofollow() {
     if (this.user_id) {
       if (this.network.checkStatus() == true) {
@@ -226,6 +232,7 @@ export class OthersProfilePage {
     }
   }
 
+  //UnFollow user
   doUnFollow() {
     if (this.user_id) {
       if (this.network.checkStatus() == true) {

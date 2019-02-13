@@ -40,6 +40,7 @@ export class StoryComponent {
     console.log('Hello StoryComponent Component');
   }
 
+  //on tab change
   ngOnChanges() {
     console.log(this.user_id);
     // this.isLogin();
@@ -48,10 +49,12 @@ export class StoryComponent {
     }
   }
 
+  //to check login
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //for getting stories
   getStories() {
     this.filterData = { 'start': this.pageStart, 'length': this.pageLength, 'user_id': this.user_id };
 
@@ -74,6 +77,7 @@ export class StoryComponent {
     );
   }
 
+  //bind data OnScroll
   binddata() {
     for (let index = 0; index < this.data.length; index++) {
       this.model.push({
@@ -90,6 +94,7 @@ export class StoryComponent {
     }
   }
 
+  //go to story details
   gotoStoryDetail(data) {
     this.navCtrl.push(SingleStoryPage, { story_id: data.id });
   }
