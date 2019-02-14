@@ -16,6 +16,7 @@ export class LocationTrackerProvider {
     this.setLocation();
   }
 
+  //set location in storage
   public setLocation() {
     let watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
@@ -25,16 +26,19 @@ export class LocationTrackerProvider {
     });
   }
 
+  //clear of current location data from storage
   public clearLocation() {
     window.localStorage.removeItem('latitude');
     window.localStorage.removeItem('longitude');
   }
 
+  //get Latitude of current location
   public getLatitude() {
     this.latitude = window.localStorage.getItem('latitude');
     return this.latitude;
   }
 
+  //get Longitude of current location
   public getLongitude() {
     this.longitude = window.localStorage.getItem('longitude');
     return this.longitude;

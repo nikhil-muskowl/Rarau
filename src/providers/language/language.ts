@@ -31,6 +31,7 @@ export class LanguageProvider {
     );
   }
 
+  //set language id and code to storage
   public setLanguage(data) {
     try {
       window.localStorage.setItem('language_id', data.id);
@@ -39,6 +40,7 @@ export class LanguageProvider {
     }
   }
 
+  //get language from storage
   public getLanguage() {
     try {
       if (window.localStorage.getItem('language')) {
@@ -52,6 +54,7 @@ export class LanguageProvider {
     }
   }
 
+  //set language to storage
   public setLanguageId(data) {
     try {
       window.localStorage.setItem('language_id', data.id);
@@ -59,6 +62,7 @@ export class LanguageProvider {
     }
   }
 
+  //get language Id from storage
   public getLanguageId() {
     try {
       if (window.localStorage.getItem('language_id')) {

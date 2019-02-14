@@ -8,6 +8,7 @@ export class ToastProvider {
   constructor(public http: HttpClient, public toastCtrl: ToastController) {
   }
 
+  //show toast
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,

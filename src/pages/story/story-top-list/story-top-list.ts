@@ -59,10 +59,12 @@ export class StoryTopListPage {
     this.getStories();
   }
 
+  //check user is logged in
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //get stories from server
   getStories() {
     this.storyService.apiTopStory(this.paramData).subscribe(
       response => {
@@ -75,6 +77,7 @@ export class StoryTopListPage {
     );
   }
 
+  //goto list of stories
   goToList() {
     this.navCtrl.push(StoryListPage, this.paramData);
   }

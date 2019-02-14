@@ -15,6 +15,7 @@ export class PeopleProvider {
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  //get list of user search
   getList() {
     this.URL = ConfigProvider.BASE_URL + 'users/search';
     return this.http.post(this.URL,
@@ -25,10 +26,11 @@ export class PeopleProvider {
     );
   }
 
+  //send follow request
   sendFollow(user_id, follower_id) {
-    
+
     this.URL = ConfigProvider.BASE_URL + 'follow_requests/send';
-    console.log('user_id:'+ user_id);
+    console.log('user_id:' + user_id);
     this.formData.append('user_id', user_id);
     this.formData.append('follower_id', follower_id);
 
@@ -39,5 +41,5 @@ export class PeopleProvider {
       }
     );
   }
-  
+
 }

@@ -83,6 +83,7 @@ export class UploadReceiptPage {
     this.longitude = this.navParams.get('longitude');
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -113,10 +114,12 @@ export class UploadReceiptPage {
     });
   }
 
+  //when view will be enter in page
   ionViewWillEnter() {
     this.tabService.hide();
   }
 
+  //upload reciept on server
   updateReceipt() {
     if (this.receipt_private) {
       this.recipt_show = 1;
@@ -129,6 +132,7 @@ export class UploadReceiptPage {
 
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.push(StoryCategoryPage, {
       receipt: this.result,
@@ -142,6 +146,7 @@ export class UploadReceiptPage {
     });
   }
 
+  //save recipt and back to upload page
   save() {
     //code to save
     console.log('select : ' + this.imgSend);
@@ -165,6 +170,7 @@ export class UploadReceiptPage {
     }
   }
 
+  //open camera to click recipt photo
   openCamera() {
     this.navCtrl.push(CameraOpenPage, {
       receipt: this.result,
@@ -179,6 +185,7 @@ export class UploadReceiptPage {
     });
   }
 
+  //open gallery to upload recipt
   openGallery() {
 
     const options: CameraOptions = {

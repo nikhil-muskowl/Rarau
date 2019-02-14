@@ -86,6 +86,7 @@ export class StoryScreenPage {
     this.getStories();
   }
 
+  //report user's story
   reportStory(id) {
     console.log('Report user');
     let params = {
@@ -96,6 +97,7 @@ export class StoryScreenPage {
     this.navCtrl.push(ReportPage, params);
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -123,22 +125,22 @@ export class StoryScreenPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StoryScreenPage');
-  }
-
+  //check user is logged in
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //show receipt page
   showReceipt(receipt) {
     this.navCtrl.push(ReceiptShowPage, { receipt: receipt });
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //get story from server
   getStories() {
     this.loadingProvider.present();
 
@@ -194,6 +196,7 @@ export class StoryScreenPage {
     );
   }
 
+  //on slide change
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
     if (currentIndex == this.data.length) {
@@ -201,13 +204,14 @@ export class StoryScreenPage {
     }
   }
 
+  //goto comments page
   goToComments(event: any, slide): any {
     console.log('Swipe comment', event);
     console.log('slide data ', JSON.stringify(slide));
 
     this.navCtrl.push(ShowStoryPage, { story_id: slide.id });
-
   }
+
 
   swipeAll(event: any): any {
     console.log('Swipe All', event);
@@ -221,6 +225,7 @@ export class StoryScreenPage {
     console.log('Swipe Right', event);
   }
 
+  //swipe up to like story
   swipeUp(event: any): any {
     console.log('Swipe Up', event);
 
@@ -240,6 +245,7 @@ export class StoryScreenPage {
     loading.present();
   }
 
+  //swipe down to dislike story
   swipeDown(event: any): any {
     console.log('Swipe Down', event);
     this.rankStory(0);
@@ -258,6 +264,7 @@ export class StoryScreenPage {
     loading.present();
   }
 
+  //rank story
   public rankStory(rank: number) {
     // this.loadingProvider.present();
     var likes = 0;
@@ -311,6 +318,7 @@ export class StoryScreenPage {
 
   }
 
+  //save story
   saveStory() {
     this.loadingProvider.present();
     console.log('clicked to save story');

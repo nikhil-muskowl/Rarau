@@ -24,6 +24,7 @@ export class StoryServiceProvider {
     this.feeds = [];
   }
 
+  //api to get all categories
   getCategory() {
     this.formData = new FormData();
     return this.http.post(ConfigProvider.BASE_URL + 'story_module/api/story_types_api',
@@ -34,6 +35,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //api get top story marker of that location
   apiTopStoryMarker(data: any) {
     this.formData = new FormData();
 
@@ -66,6 +68,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //api get top stories list of that location marker
   apiTopStory(data: any) {
 
     this.formData = new FormData();
@@ -100,6 +103,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //post story on server
   postStory(data: any) {
 
     var tags = data.tags;
@@ -127,7 +131,7 @@ export class StoryServiceProvider {
     this.formData.append('images', JSON.stringify(images));
     this.formData.append('user_id', user_id);
     this.formData.append('types', JSON.stringify(catId));
-    if (event_id != undefined || event_id !='')
+    if (event_id != undefined || event_id != '')
       this.formData.append('event_id', event_id);
     else
       this.formData.append('event_id', '0');
@@ -140,6 +144,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //get story of user
   getStory(data) {
 
     this.formData = new FormData();
@@ -153,6 +158,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //get comment of story
   apiGetComments(data) {
 
     this.formData = new FormData();
@@ -166,6 +172,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //get saved stories
   getSavedStories(data) {
 
     this.formData = new FormData();
@@ -179,6 +186,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //get advert
   apiGetAdvertisment(data) {
 
     this.formData = new FormData();
@@ -192,6 +200,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //get story details
   getStoryDetail(data) {
 
     this.formData = new FormData();
@@ -208,6 +217,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //do comment on story
   setComment(data: any) {
     this.formData = new FormData();
 
@@ -225,6 +235,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //rank story
   rankStory(data) {
 
     this.formData = new FormData();
@@ -242,6 +253,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //save other users stories in Saved Story
   saveStory(data) {
 
     this.formData = new FormData();
@@ -257,6 +269,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //get saved stories
   showSavedStory(data) {
 
     this.formData = new FormData();
@@ -271,6 +284,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //get ranked stories of user itself
   getRankedStory(data) {
     this.formData = new FormData();
 
@@ -295,6 +309,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //get profile story ranks
   getProfileStoriesRank(data) {
     this.formData = new FormData();
 
@@ -319,6 +334,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //api comment complain
   apicommentComplain(data) {
     this.formData = new FormData();
 
@@ -337,6 +353,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //api story complain
   apiStoryComplain(data) {
     this.formData = new FormData();
 
@@ -354,6 +371,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //api user complain
   apiUserComplain(data) {
     this.formData = new FormData();
 
@@ -371,6 +389,7 @@ export class StoryServiceProvider {
     );
   }
 
+  //api all locaiton
   apiGetAllLocations(data) {
     this.formData = new FormData();
     this.formData.append('location', data);

@@ -31,6 +31,7 @@ export class LoginProvider {
     this.user_id = this.isLogin();
   }
 
+  //registration API
   apiRegister(data: any, gender, dob, image) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/users_api/register';
@@ -51,6 +52,7 @@ export class LoginProvider {
     );
   }
 
+  //profile photo uplaod API
   apiProfileUpload(images) {
 
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/users_api/uploadprofile';
@@ -63,6 +65,7 @@ export class LoginProvider {
     );
   }
 
+  //update password API
   apiUpdatePassword(data: any) {
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/users_api/updatepassword';
     this.formData.append('password', data.password);
@@ -77,6 +80,7 @@ export class LoginProvider {
     );
   }
 
+  //login API
   apiLogin(data: any) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/users_api/login';
@@ -92,6 +96,7 @@ export class LoginProvider {
     );
   }
 
+  //forgot password API
   apiForgot(data: any) {
     this.formData = new FormData();
 
@@ -107,8 +112,9 @@ export class LoginProvider {
     );
   }
 
+  //set user id from storage
   public setData(data) {
-    console.log('setData when login : '+JSON.stringify(data));
+    console.log('setData when login : ' + JSON.stringify(data));
     this.user_id = data.id;
     try {
       window.localStorage.setItem('userId', data.id);
@@ -117,6 +123,7 @@ export class LoginProvider {
     }
   }
 
+  //clear user id from storage
   public unSetData() {
     this.clear();
     try {
@@ -125,6 +132,7 @@ export class LoginProvider {
     }
   }
 
+  //get user id from storage
   public isLogin() {
     try {
       return window.localStorage.getItem('userId');
@@ -133,6 +141,7 @@ export class LoginProvider {
     }
   }
 
+  //clear variables
   clear() {
     this.user_id = 0;
     this.user_group_id = '0';

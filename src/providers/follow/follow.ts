@@ -13,6 +13,7 @@ export class FollowProvider {
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  //get follower request list
   getList(user_id) {
     this.formData = new FormData();
 
@@ -27,6 +28,7 @@ export class FollowProvider {
     );
   }
 
+  //get follower list
   getFollowersList(data) {
     this.formData = new FormData();
 
@@ -44,6 +46,7 @@ export class FollowProvider {
     );
   }
 
+  //to follow 
   ActionFollow(user_id, curr_user_id) {
 
     this.formData = new FormData();
@@ -61,6 +64,7 @@ export class FollowProvider {
     );
   }
 
+  //to unfollow
   ActionUnFollow(user_id, curr_user_id) {
     this.formData = new FormData();
 

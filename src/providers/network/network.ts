@@ -50,6 +50,7 @@ export class NetworkProvider {
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -68,6 +69,7 @@ export class NetworkProvider {
     });
   }
 
+  //check network connection
   checkNetwork() {
     this.disconnectSubscription = this.network.onDisconnect().subscribe(data => {
       this.connectionState = data.type;
@@ -84,6 +86,7 @@ export class NetworkProvider {
     }, error => console.error(error));
   }
 
+  //display network updates
   displayNetworkUpdate() {
     // this.toastCtrl.presentToast(`You are now ${this.connectionState} via ${this.networkType}`);
 
@@ -105,12 +108,14 @@ export class NetworkProvider {
     this.alert.present();
   }
 
+  //check network status
   checkStatus() {
     // this.disconnectSubscription.unsubscribe();
     // this.connectSubscription.unsubscribe();
     return this.networkStatus;
   }
 
+  //reload page if no network
   reLoad() {
     // this.nav.setRoot(this.nav.getActive().component);
 

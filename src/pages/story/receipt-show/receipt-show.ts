@@ -27,6 +27,7 @@ export class ReceiptShowPage {
     console.log('receipt : ' + this.receipt);
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -37,6 +38,7 @@ export class ReceiptShowPage {
 
   }
 
+  //for dismiss the reciept page
   dismiss() {
     this.navCtrl.pop();
   }

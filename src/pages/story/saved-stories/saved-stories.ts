@@ -49,10 +49,11 @@ export class SavedStoriesPage {
     this.setText();
     this.isLogin();
     if (this.network.checkStatus() == true) {
-    this.getSavedStories();
+      this.getSavedStories();
     }
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -63,17 +64,19 @@ export class SavedStoriesPage {
     this.translate.get('rarau').subscribe((text: string) => {
       this.rarau = text;
     });
-
   }
 
+  //checking logged in user
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //load saved stories of user from server
   getSavedStories() {
 
     this.loadingProvider.present();
@@ -99,6 +102,7 @@ export class SavedStoriesPage {
     );
   }
 
+  //bind server data OnScroll
   binddata() {
     for (let index = 0; index < this.data.length; index++) {
       this.model.push({
@@ -120,6 +124,7 @@ export class SavedStoriesPage {
     }
   }
 
+  //load more on Scroll Down 
   onScrollDown(infiniteScroll) {
     if (this.pageStart <= this.recordsTotal) {
       this.pageStart += this.pageLength;
@@ -129,6 +134,7 @@ export class SavedStoriesPage {
     infiniteScroll.complete();
   }
 
+  //goto story detail page
   gotoStoryDetail(data) {
     this.navCtrl.push(SingleStoryPage, { story_id: data.id });
   }

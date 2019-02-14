@@ -65,17 +65,13 @@ export class LocationPage {
     this.image = this.navParams.get('image');
     console.log('image on location page : ' + this.image);
     this.city_id = this.baiduProvider.getCity();
-    //uncommnet below for HK testing 
+
     this.latitude = this.locationTrackerProvider.getLatitude();
     this.longitude = this.locationTrackerProvider.getLongitude();
 
-    //uncommnet below for India testing 
-    // this.latitude = 39.919981;
-    // this.longitude = 116.414977;
-    // console.log('this.locationTracker.getLatitude : ' + this.locationTracker.getLatitude());
-    // console.log('this.locationTracker.getLongitude : ' + this.locationTracker.getLongitude());
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -103,10 +99,7 @@ export class LocationPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LocationPage');
-  }
-
+  //for getting current location 
   MyLocation() {
     console.log("In my current location");
     if (this.isMycurrLoc == 0) {
@@ -126,10 +119,12 @@ export class LocationPage {
     }
   }
 
+  //goto previous page
   back() {
     this.navCtrl.push(ShowPhotoPage, { photo: this.image });
   }
 
+  //goto next page with data
   Next() {
     if (this.isMycurrLoc == 1) {
       if (this.story_title != '') {
@@ -156,6 +151,7 @@ export class LocationPage {
     }
   }
 
+  //on insert input in location search
   public onInput(ev: any) {
     if (ev.target.value != '' || ev.target.value != undefined) {
       this.search = ev.target.value;
@@ -164,10 +160,12 @@ export class LocationPage {
     }
   }
 
+  //on cancel input in search bar
   public onCancel(ev: any) {
     this.search = '';
   }
 
+  //getting location on input search
   public getLocation() {
 
     this.fileterData = {
@@ -187,6 +185,7 @@ export class LocationPage {
     console.log(this.locations);
   }
 
+  //on location item select from list
   public itemSelected(location: any) {
     console.log(location);
     if (location) {

@@ -29,6 +29,7 @@ export class StoryModalPage {
     this.getData();
   }
 
+  //get previous page data
   getData() {
     let data = this.navParams.get('data');
 
@@ -38,6 +39,7 @@ export class StoryModalPage {
     this.from = data.from;
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -47,6 +49,7 @@ export class StoryModalPage {
     });
   }
 
+  //open page
   openPage() {
     const data = {
       close: 1
@@ -54,6 +57,7 @@ export class StoryModalPage {
     this.view.dismiss();
   }
 
+  //close modal and redirect to previous page
   closeModal() {
     const data = {
       close: 0

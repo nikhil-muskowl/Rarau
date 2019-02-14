@@ -2,7 +2,7 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class BaiduProvider{
+export class BaiduProvider {
   public headers = new HttpHeaders();
   public formData: FormData = new FormData();
   public responseData: any;
@@ -13,6 +13,7 @@ export class BaiduProvider{
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  //get location name from lat long
   location(data: any) {
     // this.URL = 'http://api.map.baidu.com/place/v2/search?query=' + data.query + '&location=39.915,116.404&output=json&ak=j7eig5KpXzk4YsWNwpagmybjL2WRGCZC';
 
@@ -29,10 +30,12 @@ export class BaiduProvider{
     );
   }
 
+  //get list of cities from json
   getCities() {
     return this.http.get('assets/city/baidu_city.json');
   }
 
+  //set city in storage
   public setCity(data) {
     console.log('setCity when setCity : ' + JSON.stringify(data));
     try {
@@ -42,6 +45,7 @@ export class BaiduProvider{
     }
   }
 
+  //clear city storage
   public unSetCity() {
     try {
       window.localStorage.removeItem('City');
@@ -49,6 +53,7 @@ export class BaiduProvider{
     }
   }
 
+  //get city from storage
   public getCity() {
     try {
       return window.localStorage.getItem('City');

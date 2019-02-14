@@ -16,6 +16,7 @@ export class NotiProvider {
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  //for register device token id
   apiRegisterDevice(data) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'notifications_module/api/user_devices_api/register';
@@ -34,6 +35,7 @@ export class NotiProvider {
     );
   }
 
+  //set device token to storage
   public setToken(data) {
     try {
       window.localStorage.setItem('token', data.code);
@@ -41,6 +43,7 @@ export class NotiProvider {
     }
   }
 
+  //get device token from storage
   public getToken() {
     try {
       if (window.localStorage.getItem('token')) {
@@ -54,6 +57,7 @@ export class NotiProvider {
     }
   }
 
+  //get notification list from server
   apiNotiList(data) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'notifications_module/api/user_notifications_api';

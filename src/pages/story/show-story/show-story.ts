@@ -78,6 +78,7 @@ export class ShowStoryPage {
 
   }
 
+  //initializing when page open
   ngOnInit() {
     this.language_id = this.languageProvider.getLanguageId();
     this.user_id = this.LoginProvider.isLogin();
@@ -99,6 +100,7 @@ export class ShowStoryPage {
 
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -135,6 +137,7 @@ export class ShowStoryPage {
     });
   }
 
+  //create form and install updates
   public createForm() {
     this.commentForm = this.formBuilder.group({
       comment: ['', Validators.compose([
@@ -149,10 +152,12 @@ export class ShowStoryPage {
     });
   }
 
+  //goto story page
   goToStory(event: any): any {
     this.navCtrl.pop();
   }
 
+  //comment report page
   reportComment(id) {
     console.log("comment id : " + id);
     let params = {
@@ -160,10 +165,10 @@ export class ShowStoryPage {
       'story_id': this.story_id,
       'type': 3
     };
-
     this.navCtrl.push(ReportPage, params);
   }
 
+  //get stories from server
   getStories() {
     this.loadingProvider.present();
 
@@ -199,6 +204,7 @@ export class ShowStoryPage {
     );
   }
 
+  //get comments from server
   getComments() {
     this.loadingProvider.present();
     this.commData = [];
@@ -221,14 +227,12 @@ export class ShowStoryPage {
     );
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ShowStoryPage');
-  }
-
+//go back to previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //comment on story
   public commentStory() {
     this.user_id = this.LoginProvider.isLogin();
 
@@ -291,5 +295,4 @@ export class ShowStoryPage {
     }
     this.loadingProvider.dismiss();
   }
-
 }

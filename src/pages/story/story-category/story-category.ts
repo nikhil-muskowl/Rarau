@@ -119,6 +119,7 @@ export class StoryCategoryPage {
     this.bindtags();
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -155,6 +156,7 @@ export class StoryCategoryPage {
     });
   }
 
+  //get events from server
   SetEvent() {
     if (this.event_will) {
       //cheecked means user want to set an event
@@ -168,6 +170,7 @@ export class StoryCategoryPage {
     }
   }
 
+  //open event modal page
   OpenEveModal() {
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
@@ -200,6 +203,7 @@ export class StoryCategoryPage {
     });
   }
 
+  //get category from server
   setCategory() {
 
     this.loadingProvider.present();
@@ -219,6 +223,7 @@ export class StoryCategoryPage {
     );
   }
 
+  //on select catgory
   selectCat(category, index) {
 
     if (this.model[index].isImage) {
@@ -256,6 +261,7 @@ export class StoryCategoryPage {
     console.log('this.index_id and index : ' + this.index_id + ' , ' + index);
   }
 
+  //bind array of category
   bindArray() {
     this.catModal = [];
     for (let index = 0; index < this.model.length; index++) {
@@ -268,6 +274,7 @@ export class StoryCategoryPage {
     console.log('selected sel_cat_id items : ' + JSON.stringify(this.sel_cat_id));
   }
 
+  //bind list of selected category
   bindList() {
     for (let index = 0; index < this.categories.length; index++) {
 
@@ -289,10 +296,12 @@ export class StoryCategoryPage {
     }
   }
 
+  //check user is logged in
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //post story on server
   saveStory() {
     if (this.btnGo == 1) {
       if (this.catModal.length > 0) {
@@ -383,6 +392,7 @@ export class StoryCategoryPage {
     }
   }
 
+  //on story success upload
   openModal(title, msg) {
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
@@ -409,10 +419,12 @@ export class StoryCategoryPage {
     });
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.push(LocationPage, { image: this.image });
   }
 
+  //bind the story tags enter by user
   bindtags() {
     for (let index = 0; index < this.tags.length; index++) {
       var tag = this.tags[index];
@@ -423,11 +435,13 @@ export class StoryCategoryPage {
     }
   }
 
+  //on tag input change
   onChange() {
     this.bindtags();
     console.log(this.tags);
   }
 
+  //verify tag or empty
   verifyTag(str: string): boolean {
     return str !== 'ABC' && str.trim() !== '';
   }

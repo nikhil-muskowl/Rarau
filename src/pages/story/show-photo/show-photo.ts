@@ -94,6 +94,7 @@ export class ShowPhotoPage {
     this.filter = this.filters[0]
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -112,6 +113,7 @@ export class ShowPhotoPage {
     });
   }
 
+  //when view will be enter in page
   ionViewWillEnter() {
 
     // this.dataProvider.getCurrentUser().subscribe((user) => {
@@ -120,6 +122,7 @@ export class ShowPhotoPage {
     // });
   }
 
+  //change view when filter apply
   changeView(newView, title) {
 
     this.backupFilter = this.getCurrentFilter();
@@ -142,6 +145,7 @@ export class ShowPhotoPage {
     return item.name;
   }
 
+  //goto previous page
   back() {
 
     if (this.isCustomFilter()) {
@@ -151,6 +155,7 @@ export class ShowPhotoPage {
     }
   }
 
+  //on pressing filter
   press($event) {
 
     let image = (<HTMLImageElement>document.getElementById("imageFilter"))
@@ -163,6 +168,7 @@ export class ShowPhotoPage {
     this.hasEvent = true;
   }
 
+  //go to 
   end() {
     if (this.hasEvent) {
       this.filter = this.tempFlter;
@@ -174,8 +180,8 @@ export class ShowPhotoPage {
     }
   }
 
+  //getting image and take to next page
   next() {
-
     console.log("next");
 
     var c = (<HTMLDivElement>document.getElementById("imageFilter3"));
@@ -212,22 +218,22 @@ export class ShowPhotoPage {
     // var ctx = c.getContext("2d");
   }
 
-
+  //checking for custom filter or not
   isCustomFilter() {
     return this.customFilters.findIndex(item => this.actualView == item.name) > -1;
   }
 
-
+  //checking for custom filters is used or not
   isFilterUsed(filter) {
     return this.filterService.getCustomFilters().findIndex(item => item == filter) > -1
   }
 
-
+  //change from custom and fixed filter
   changeSegment(value) {
     this.actualView = value;
   }
 
-
+  //changing filter
   changeFilter(newFilter) {
     this.filter = newFilter;
     let currentFilter = this.getCurrentFilter();
@@ -235,15 +241,18 @@ export class ShowPhotoPage {
     this.applyFilter(filter);
   }
 
+  //apply filter on image
   applyFilter(filter: string) {
     let image = this.findImage();
     image.style.filter = filter;
   }
 
+  //find image
   findImage(): HTMLImageElement {
     return (<HTMLImageElement>document.getElementById("imageFilter"));
   };
 
+  //getting currently used filter
   getCurrentFilter() {
     let currentFilter = "";
     let image = this.findImage();
@@ -254,7 +263,7 @@ export class ShowPhotoPage {
     return currentFilter;
   }
 
-
+  //cancel all editing
   cancel() {
 
     let editView = 'edit';
@@ -277,6 +286,7 @@ export class ShowPhotoPage {
 
   }
 
+  //on complete editing
   done() {
     let editView = 'edit';
     setTimeout(() => {
@@ -284,10 +294,4 @@ export class ShowPhotoPage {
       this.content.resize();
     }, 1);
   }
-
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ShowPhoto');
-  }
-
 }

@@ -15,6 +15,7 @@ export class ProfileProvider {
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  //api update profile details
   apiUpdateProfile(data: any, id) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/users_api/updatedetail';
@@ -34,6 +35,7 @@ export class ProfileProvider {
     );
   }
 
+  //api get other user's profile details
   apigetProfile(id, user_id) {
     this.formData = new FormData();
 
@@ -49,6 +51,7 @@ export class ProfileProvider {
     );
   }
 
+  //get user's profile details
   apigetMyProfile(id) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/users_api/detail/' + id;
@@ -60,6 +63,7 @@ export class ProfileProvider {
     );
   }
 
+  //api upload profile pic
   apiuploadProfilePic(id, image) {
     this.formData = new FormData();
 
@@ -74,6 +78,7 @@ export class ProfileProvider {
     );
   }
 
+  //api get activities
   apiGetActivities(data) {
     this.formData = new FormData();
 

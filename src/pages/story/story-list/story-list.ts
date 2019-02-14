@@ -68,6 +68,7 @@ export class StoryListPage {
 
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
@@ -81,17 +82,19 @@ export class StoryListPage {
     this.translate.get('lvl').subscribe((text: string) => {
       this.lvl_txt = text;
     });
-
   }
 
+  //goto previous page
   goBack() {
     this.navCtrl.pop();
   }
 
+  //check if user is logged in
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //get stories of that location from server
   getStories() {
     this.isLogin();
     this.loadingProvider.present();
@@ -119,6 +122,7 @@ export class StoryListPage {
     }
   }
 
+  //goto show story page
   showStory(data) {
 
     this.isLogin();
@@ -138,5 +142,4 @@ export class StoryListPage {
       });
     }
   }
-
 }

@@ -19,6 +19,7 @@ export class MyPetProvider {
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  //Pet api of user
   apiMyPetList(data) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'pet_module/api/user_pets_api';
@@ -35,6 +36,7 @@ export class MyPetProvider {
     );
   }
 
+  //pet details api
   apiPetDetails(id) {
     this.URL = ConfigProvider.BASE_URL + 'pet_module/api/user_pets_api/detail/' + id;
 
@@ -45,6 +47,7 @@ export class MyPetProvider {
     );
   }
 
+  //pet upgrade api
   apiPetUpgrade(data) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'pet_module/api/user_pets_api/update_pet';

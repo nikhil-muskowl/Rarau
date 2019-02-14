@@ -13,6 +13,7 @@ export class EventProvider {
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  //get past events from server
   apiGetPastEvents(data: any) {
 
     this.formData = new FormData();
@@ -26,6 +27,7 @@ export class EventProvider {
     );
   }
 
+  //get rankes story of event
   getRankedStory(data) {
     this.formData = new FormData();
 
@@ -46,7 +48,7 @@ export class EventProvider {
     );
   }
 
-
+  //get upcoming events from server
   apiGetUpcomingEvents(data: any) {
 
     this.formData = new FormData();
@@ -60,6 +62,7 @@ export class EventProvider {
     );
   }
 
+  //get event details from server
   apiGetEventDetails(id: any) {
 
     this.formData = new FormData();

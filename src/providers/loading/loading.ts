@@ -13,6 +13,8 @@ export class LoadingProvider {
   constructor(public http: HttpClient, public loadingCtrl: LoadingController) {
   }
 
+
+  //to check loading is present
   present() {
     if (!this.loading) {
       this.loading = this.loadingCtrl.create({
@@ -22,6 +24,7 @@ export class LoadingProvider {
     }
   }
 
+  //dismiss loader
   dismiss() {
     if (this.loading) {
       this.loading.dismiss().catch();

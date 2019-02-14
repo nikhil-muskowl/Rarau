@@ -19,6 +19,7 @@ export class SearchResProvider {
     this.headers.set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  //api search users
   apiSearchRes(data) {
     this.formData = new FormData();
     this.URL = ConfigProvider.BASE_URL + 'user_module/api/users_api';

@@ -12,6 +12,7 @@ export class ConfigProvider {
 
   }
 
+  //set tutorial is seen
   public setisSeen(data) {
     console.log('setData when isSeen : ' + JSON.stringify(data));
     try {
@@ -21,6 +22,7 @@ export class ConfigProvider {
     }
   }
 
+  //cleat tutorial storage
   public unSetData() {
     try {
       window.localStorage.removeItem('isSeen');
@@ -28,6 +30,7 @@ export class ConfigProvider {
     }
   }
 
+  //check tutorial is seen or not
   public isSeen() {
     try {
       return window.localStorage.getItem('isSeen');

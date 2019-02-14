@@ -38,6 +38,7 @@ export class GalleryPage {
     });
   }
 
+  //when view will be enter in page
   ionViewWillEnter() {
 
     this.isLogin();
@@ -51,16 +52,19 @@ export class GalleryPage {
     }
   }
 
+  //check if user is logged in or not
   isLogin() {
     this.user_id = this.LoginProvider.isLogin();
   }
 
+  //goto home page on back click
   back() {
     this.stopCamera();
     this.tabService.show();
     this.navCtrl.setRoot(HomePage);
   }
 
+  //open gallery to select an image
   openGallery() {
     const options: CameraOptions = {
       quality: 50,
@@ -88,6 +92,7 @@ export class GalleryPage {
     });
   }
 
+  //open camera to take a picture
   takePicture() {
 
     const pictureOpts: CameraPreviewPictureOptions = {
@@ -114,14 +119,12 @@ export class GalleryPage {
     });
   }
 
+  //start rear camera
   startCamera() {
 
     this.stopCamera();
 
     this.setFlashMode();
-
-    // start camera
-    console.log(this.platform.width(), this.platform.height());
 
     this.cameraPreview.startCamera({
       x: 0,
@@ -140,15 +143,17 @@ export class GalleryPage {
     })
   }
 
+  //stop camera
   stopCamera() {
     try {
       this.cameraPreview.stopCamera().catch(e => {
-        console.log("camera stop")
+
       });
     } catch (e) {
     }
   }
 
+  //on-off flash
   flash() {
 
     if (this.flashMode == 'off') {
@@ -160,10 +165,12 @@ export class GalleryPage {
     this.setFlashMode();
   }
 
+  //setting flash mode on camera
   setFlashMode() {
     this.cameraPreview.setFlashMode(this.flashMode);
   }
 
+  //switch camera front-rear
   switchCamera() {
     this.cameraPreview.switchCamera();
   }

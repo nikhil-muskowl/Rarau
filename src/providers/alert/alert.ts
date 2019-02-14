@@ -27,6 +27,7 @@ export class AlertProvider {
 
   }
 
+  //setting text according to language
   setText() {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     console.log("getLanguage() : " + this.languageProvider.getLanguage());
@@ -46,6 +47,7 @@ export class AlertProvider {
     });
   }
 
+  //show alert dialog
   showAlert() {
     let alert = this.alertCtrl.create({
       title: this.title,
@@ -56,6 +58,7 @@ export class AlertProvider {
     alert.present();
   }
 
+  //custom alert
   public Alert = {
     confirm: (msg?, title?) => {
       return new Promise((resolve, reject) => {
