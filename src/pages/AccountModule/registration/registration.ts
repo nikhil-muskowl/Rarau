@@ -58,6 +58,7 @@ export class RegistrationPage {
   private pass_not_match;
   //field placeholders
   public ph_fname;
+  public ph_uname;
   public ph_femail;
   public ph_fpassword;
   public ph_fconfpass;
@@ -224,6 +225,9 @@ export class RegistrationPage {
     });
     this.translate.get('fname').subscribe((text: string) => {
       this.ph_fname = text;
+    });
+    this.translate.get('uname').subscribe((text: string) => {
+      this.ph_uname = text;
     });
     this.translate.get('fmail').subscribe((text: string) => {
       this.ph_femail = text;

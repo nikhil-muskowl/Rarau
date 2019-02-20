@@ -163,5 +163,6 @@
   "network_error": "Network Error",
   "check_network": "Please check your Network Connection",
   "reload": "Reload",
-  "report_submit": "Report Submitted."
+  "report_submit": "Report Submitted.",
+  "uname": "User Name"  
 }

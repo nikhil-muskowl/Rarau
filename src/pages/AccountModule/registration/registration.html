@@ -40,7 +40,7 @@
 
             <!-- name -->
             <ion-item>
-                <ion-input placeholder="{{ph_fname}}" formControlName="name" value={{fname}} type="text"
+                <ion-input placeholder="{{ph_uname}}" formControlName="name" value={{fname}} type="text"
                     [class.invalid]="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)"></ion-input>
             </ion-item>
             <div text-center>
@@ -85,13 +85,13 @@
                 <ion-row class="date-row">
                     <ion-col col-4>
                         <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
-                            formControlName="date" displayFormat="DD" [max]="today">
+                            formControlName="date" displayFormat="DD">
                         </ion-datetime>
                     </ion-col>
 
                     <ion-col col-4>
                         <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
-                            formControlName="date" displayFormat="MM" [max]="today">
+                            formControlName="date" displayFormat="MM">
                         </ion-datetime>
                     </ion-col>
 
