@@ -164,5 +164,7 @@
   "check_network": "Please check your Network Connection",
   "reload": "Reload",
   "report_submit": "Report Submitted.",
-  "uname": "User Name"  
+  "uname": "User Name",
+  "event": "Events",
+  "add_story": "Add Story"
 }

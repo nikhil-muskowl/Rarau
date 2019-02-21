@@ -16,6 +16,7 @@ import { LanguageProvider } from '../../../providers/language/language';
 import { Slides } from 'ionic-angular';
 import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
 import { EventListPage } from '../../Events/event-list/event-list';
+import { EventsCategoryPage } from '../../Events/events-category/events-category';
 
 @Component({
   selector: 'page-home',
@@ -459,7 +460,7 @@ export class HomePage {
     this.stories = [];
   }
 
-//close the story list on map markers
+  //close the story list on map markers
   closeList() {
     this.showStories = false;
     console.log("Click on close icon");
@@ -511,6 +512,11 @@ export class HomePage {
     this.BdMap = map;
     var cntr = this.BdMap.getCenter();
     console.log('map center here', JSON.stringify(cntr));
+  }
+
+  //event page
+  gotoEvents() {
+    this.navCtrl.push(EventsCategoryPage);
   }
 
   //on click on marker

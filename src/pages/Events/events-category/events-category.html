@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      {{event}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <img src="">
+
+  <ion-slides slidesPerView="3" #rankSlides (ionSlideDidChange)="slideChanged()">
+    <ion-slide *ngFor="let rank of rankItems; let i = index;">
+      <div>
+        <ion-row>
+          <ion-col text-center>
+            <img class="img-full" src="{{rank.image}}" />
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="onScrollDown($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer>
+  <ion-row text-center>
+    <ion-col col-12>
+      <button ion-button full (click)="AddStory()">{{add_story}}</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -123,6 +123,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { EventProvider } from '../providers/event/event';
 import { CameraUtilsProvider } from '../providers/camera-utils/camera-utils';
 import { NotiProvider } from '../providers/noti/noti';
+import { EventsCategoryPage } from '../pages/Events/events-category/events-category';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/language/', '.json');
@@ -181,6 +182,7 @@ export function createTranslateLoader(http: HttpClient) {
     EventModalPage,
     StoryModalPage,
     NotificationListPage,
+    EventsCategoryPage,
   ],
   imports: [
     HttpClientModule,
@@ -270,6 +272,7 @@ export function createTranslateLoader(http: HttpClient) {
     EventModalPage,
     StoryModalPage,
     NotificationListPage,
+    EventsCategoryPage,
   ],
   providers: [
     StatusBar,
