@@ -161,6 +161,9 @@ export class ProfilePage {
         this.name = this.result.name;
         this.email = this.result.email;
         this.userImage = this.result.image_thumb;
+        if (this.userImage == undefined || this.userImage == '') {
+          this.userImage = 'assets/imgs/forgotPassword/user.png'
+        }
         this.following = this.result.total_following;
         this.followers = this.result.total_followers;
         this.flames = this.result.total_flames;

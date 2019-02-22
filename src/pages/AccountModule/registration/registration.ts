@@ -252,98 +252,98 @@ export class RegistrationPage {
 
     console.log(this.imagePath);
     if (this.registerForm.valid) {
+      //commented on 22/02.2019 on client requirement
+      // if (this.imagePath != undefined) {
+      if (this.registerForm.value.password == this.registerForm.value.passconf) {
 
-      if (this.imagePath != undefined) {
-        if (this.registerForm.value.password == this.registerForm.value.passconf) {
+        if (this.network.checkStatus() == true) {
+          this.loadingProvider.present();
 
-          if (this.network.checkStatus() == true) {
-            this.loadingProvider.present();
+          this.formData = this.registerForm.valid;
 
-            this.formData = this.registerForm.valid;
+          this.loginProvider.apiRegister(this.registerForm.value, this.gender_id, this.date,
+            this.imagePath).subscribe(
+              response => {
 
-            this.loginProvider.apiRegister(this.registerForm.value, this.gender_id, this.date,
-              this.imagePath).subscribe(
-                response => {
+                this.responseData = response;
 
-                  this.responseData = response;
+                this.submitAttempt = true;
 
-                  this.submitAttempt = true;
+                if (this.responseData.status) {
+                  this.result = this.responseData.result;
+                  this.id = this.result.id;
+                  this.registerForm.reset();
+                  this.submitAttempt = false;
+                  this.tabService.show();
+                  this.loginProvider.setData(this.responseData.result);
 
-                  if (this.responseData.status) {
-                    this.result = this.responseData.result;
-                    this.id = this.result.id;
-                    this.registerForm.reset();
-                    this.submitAttempt = false;
-                    this.tabService.show();
-                    this.loginProvider.setData(this.responseData.result);
-
-                    //register device to FCM
-                    let data = {
-                      user_id: this.responseData.result.id,
-                      type: this.type,
-                      code: this.token,
-                      provider: 'pushy'
-                    }
-                    this.notiProvider.apiRegisterDevice(data).subscribe(
-                      notiResponse => {
-
-                        console.log("Noti response" + JSON.stringify(notiResponse));
-                      });
-
-                    this.navCtrl.setRoot(ProfilePage);
+                  //register device to FCM
+                  let data = {
+                    user_id: this.responseData.result.id,
+                    type: this.type,
+                    code: this.token,
+                    provider: 'pushy'
                   }
+                  this.notiProvider.apiRegisterDevice(data).subscribe(
+                    notiResponse => {
 
-                  if (!this.responseData.status) {
-                    this.result = this.responseData.result;
-                    this.alertProvider.title = this.error;
-                    this.alertProvider.message = this.result[0].text;
-                    this.alertProvider.showAlert();
-                  }
+                      console.log("Noti response" + JSON.stringify(notiResponse));
+                    });
 
-                  if (this.responseData.error_firstname != '') {
-                    this.registerForm.controls['name'].setErrors({ 'incorrect': true });
-                    this.error_name = this.responseData.error_firstname;
-                  }
-
-                  if (this.responseData.error_email != '') {
-                    this.registerForm.controls['email'].setErrors({ 'incorrect': true });
-                    this.error_email = this.responseData.error_email;
-                  }
-
-                  if (this.responseData.error_password != '') {
-                    this.registerForm.controls['password'].setErrors({ 'incorrect': true });
-                    this.error_password = this.responseData.error_password;
-                  }
-
-                  if (this.responseData.error_confirm != '') {
-                    this.registerForm.controls['passconf'].setErrors({ 'incorrect': true });
-                    this.error_confirm = this.responseData.error_confirm;
-                  }
-                },
-                err => {
-                  console.error(err);
-                  this.loadingProvider.dismiss();
-                },
-                () => {
-                  this.loadingProvider.dismiss();
+                  this.navCtrl.setRoot(ProfilePage);
                 }
-              );
-          }
-          else {
-            this.network.displayNetworkUpdate();
-          }
+
+                if (!this.responseData.status) {
+                  this.result = this.responseData.result;
+                  this.alertProvider.title = this.error;
+                  this.alertProvider.message = this.result[0].text;
+                  this.alertProvider.showAlert();
+                }
+
+                if (this.responseData.error_firstname != '') {
+                  this.registerForm.controls['name'].setErrors({ 'incorrect': true });
+                  this.error_name = this.responseData.error_firstname;
+                }
+
+                if (this.responseData.error_email != '') {
+                  this.registerForm.controls['email'].setErrors({ 'incorrect': true });
+                  this.error_email = this.responseData.error_email;
+                }
+
+                if (this.responseData.error_password != '') {
+                  this.registerForm.controls['password'].setErrors({ 'incorrect': true });
+                  this.error_password = this.responseData.error_password;
+                }
+
+                if (this.responseData.error_confirm != '') {
+                  this.registerForm.controls['passconf'].setErrors({ 'incorrect': true });
+                  this.error_confirm = this.responseData.error_confirm;
+                }
+              },
+              err => {
+                console.error(err);
+                this.loadingProvider.dismiss();
+              },
+              () => {
+                this.loadingProvider.dismiss();
+              }
+            );
         }
         else {
-          this.alertProvider.title = this.error;
-          this.alertProvider.message = this.pass_not_match;
-          this.alertProvider.showAlert();
+          this.network.displayNetworkUpdate();
         }
       }
       else {
         this.alertProvider.title = this.error;
-        this.alertProvider.message = this.upload_image;
+        this.alertProvider.message = this.pass_not_match;
         this.alertProvider.showAlert();
       }
+      // }
+      // else {
+      //   this.alertProvider.title = this.error;
+      //   this.alertProvider.message = this.upload_image;
+      //   this.alertProvider.showAlert();
+      // }
     }
   }
 
@@ -412,13 +412,14 @@ export class RegistrationPage {
     this.navCtrl.push(LoginWechatPage);
   }
 
+  //commented on 22/02.2019 on client requirement
   //Goto Upload Profile Photo
-  uploadProfilePic() {
-    this.navCtrl.push(UpdateProfilePage, {
-      image: this.image, imagePath: this.imagePath, data: this.registerForm.value,
-      date: this.date, gender: this.gender_id
-    });
-  }
+  // uploadProfilePic() {
+  //   this.navCtrl.push(UpdateProfilePage, {
+  //     image: this.image, imagePath: this.imagePath, data: this.registerForm.value,
+  //     date: this.date, gender: this.gender_id
+  //   });
+  // }
 
   //Goto Previous page
   goBack() {

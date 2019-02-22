@@ -34,6 +34,7 @@ export class StoryCategoryPage {
   public model = [];
   public catModal = [];
   public sel_cat_id = [];
+  public story_type_id;
   public name;
   public email;
   public contact;
@@ -92,6 +93,8 @@ export class StoryCategoryPage {
     this.isLogin();
     //for single receipt image
     this.varRecChk = '';
+
+    this.story_type_id = this.navParams.get('story_type_id');
     this.sel_cat_id = this.navParams.get('sel_cat_id');
     this.image = this.navParams.get('image');
 
@@ -115,7 +118,11 @@ export class StoryCategoryPage {
     console.log('sel_cat_id : ' + this.sel_cat_id);
     // console.log('receiptImage : ' + this.receiptImage);
     // console.log('image : ' + this.image);
-    this.setCategory();
+
+    if (this.story_type_id != undefined || this.story_type_id != '') {
+      this.setCategory();
+    }
+
     this.bindtags();
   }
 

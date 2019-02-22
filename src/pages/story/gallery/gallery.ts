@@ -16,6 +16,7 @@ import { LoginProvider } from '../../../providers/login/login';
 })
 export class GalleryPage {
 
+  story_type_id;
   images;
   srcPhoto = '';
   flashMode = "off";
@@ -33,6 +34,7 @@ export class GalleryPage {
     private tabService: TabsService,
     private imagePicker: ImagePicker, ) {
 
+    this.story_type_id = this.navParams.get('story_type_id');
     this.platform.registerBackButtonAction(() => {
       this.back();
     });
@@ -81,7 +83,7 @@ export class GalleryPage {
         this.galBas = 'data:image/jpeg;base64,' + imageData;
         this.stopCamera();
         this.cameraPreview.hide();
-        this.navCtrl.push(ShowPhotoPage, { photo: this.galBas });
+        this.navCtrl.push(ShowPhotoPage, { photo: this.galBas, story_type_id: this.story_type_id });
       }
       else {
         this.startCamera();
@@ -110,7 +112,7 @@ export class GalleryPage {
       this.srcPhoto = "data:image/jpeg;base64," + imageData;
 
       this.cameraPreview.stopCamera().then(() => {
-        this.navCtrl.push(ShowPhotoPage, { photo: this.srcPhoto });
+        this.navCtrl.push(ShowPhotoPage, { photo: this.srcPhoto, story_type_id: this.story_type_id });
       });
 
       this.cameraPreview.hide().then(() => {

@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content>
-  <img src="">
+  <img class="img-place" src="assets/imgs/story/girl img.png" />
 
   <ion-slides slidesPerView="3" #rankSlides (ionSlideDidChange)="slideChanged()">
     <ion-slide *ngFor="let rank of rankItems; let i = index;">
@@ -28,6 +28,10 @@
       </ion-infinite-scroll>
     </ion-slide>
   </ion-slides>
+
+  <div>
+    <p class="place-desc">Text Description of Place</p>
+  </div>
 </ion-content>
 
 <ion-footer>

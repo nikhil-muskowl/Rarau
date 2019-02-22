@@ -16,8 +16,8 @@
 
 <ion-content>
   <ion-grid class="background" [style.background-image]="'url('+image+')'">
-    
-    <div class="bottom_tag">
+
+    <div *ngIf="story_type_id" class="bottom_tag">
       <ion-scroll class="horizontal" scrollX="true">
         <ion-row nowrap class="headerChip">
           <div *ngFor="let category of model; let i = index;">
@@ -38,8 +38,9 @@
           <ion-toggle color="danger" [(ngModel)]="event_will" (ionChange)="SetEvent()"></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-tags-input [placeholder]="comma_separate" [(ngModel)]="tags" [color]="'danger'" (onChange)="onChange($event)"
-            [verifyMethod]="verifyTag" [separatorStr]="','" [canEnterAdd]="true" [canBackspaceRemove]="true"></ion-tags-input>
+          <ion-tags-input [placeholder]="comma_separate" [(ngModel)]="tags" [color]="'danger'"
+            (onChange)="onChange($event)" [verifyMethod]="verifyTag" [separatorStr]="','" [canEnterAdd]="true"
+            [canBackspaceRemove]="true"></ion-tags-input>
         </ion-item>
       </ion-list>
     </div>

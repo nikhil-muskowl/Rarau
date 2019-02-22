@@ -17,6 +17,7 @@ import { Slides } from 'ionic-angular';
 import { OthersProfilePage } from '../../AccountModule/others-profile/others-profile';
 import { EventListPage } from '../../Events/event-list/event-list';
 import { EventsCategoryPage } from '../../Events/events-category/events-category';
+import { GalleryPage } from '../../story/gallery/gallery';
 
 @Component({
   selector: 'page-home',
@@ -220,6 +221,11 @@ export class HomePage {
     });
   }
 
+  //open story upload page
+  postStory() {
+    this.navCtrl.setRoot(GalleryPage);
+  }
+
   //getting Advertisement data list
   getAdvertisement() {
     this.language_id = this.languageProvider.getLanguageId();
@@ -345,12 +351,14 @@ export class HomePage {
                 icon: {
                   imageUrl: element.marker_thumb,
                   size: {
-                    height: 32,
-                    width: 32
+                    height: 50,
+                    width: 50
                   },
                   imageSize: {
-                    height: 32,
-                    width: 32
+                    // height: 32,
+                    // width: 32
+                    height: 50,
+                    width: 50
                   }
                 }
               },
@@ -399,12 +407,12 @@ export class HomePage {
               icon: {
                 imageUrl: 'assets/imgs/location.png',
                 size: {
-                  height: 32,
-                  width: 32
+                  height: 50,
+                  width: 50
                 },
                 imageSize: {
-                  height: 32,
-                  width: 32
+                  height: 50,
+                  width: 50
                 }
               }
             },
@@ -421,12 +429,12 @@ export class HomePage {
               icon: {
                 imageUrl: 'assets/imgs/location.png',
                 size: {
-                  height: 32,
-                  width: 32
+                  height: 50,
+                  width: 50
                 },
                 imageSize: {
-                  height: 32,
-                  width: 32
+                  height: 50,
+                  width: 50
                 }
               }
             },
@@ -515,8 +523,8 @@ export class HomePage {
   }
 
   //event page
-  gotoEvents() {
-    this.navCtrl.push(EventsCategoryPage);
+  gotoEvents(story_type_id) {
+    this.navCtrl.push(EventsCategoryPage, { story_type_id: story_type_id });
   }
 
   //on click on marker

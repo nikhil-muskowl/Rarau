@@ -13,4 +13,21 @@ page-events-category {
         height: 100% !important; 
         width: 100% !important; 
     }
+    .img-place{
+        height: 150px !important;
+        width: 100%;
+        padding: 10px 10px 10px 10px;
+    }
+    .place-desc{
+        color: #000;
+        font-weight: 500 !important;
+        padding: 10px;
+    }
+    .button-md {
+        color: #fff;
+        background: -webkit-linear-gradient(left, #ec3747, #f45a43);
+        background: -o-linear-gradient(right, #ec3747, #f45a43);
+        background: -moz-linear-gradient(right, #ec3747, #f45a43);
+        background: linear-gradient(to right, #ec3747, #f45a43);
+    }
 }

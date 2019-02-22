@@ -39,7 +39,7 @@ page-home {
             cursor: pointer;
             ion-icon {
                 display: inline-block;
-                font-size: 2.4em;
+                font-size: 2em;
                 color: #ee3f46;
             }
         }
@@ -54,6 +54,9 @@ page-home {
             background-repeat: no-repeat;
             background-size: 27px 44px;
             cursor: pointer;
+        }
+        .col {
+            padding: 0 0 !important;
         }
     }
     .search-bar {
@@ -111,6 +114,7 @@ page-home {
         max-width: 50px !important;
         height: 50px !important;
         max-height: 50px !important;
+        border-radius: 50%;
     }
     .p-image {
         width: 25px !important;
@@ -145,6 +149,13 @@ page-home {
         background: transparent;
         position: relative;
     }
+    .btn-cam-top{
+        background: transparent !important;
+        vertical-align: middle;
+    }
+    .circle{
+        border-radius: 50% !important;
+    }
     .i-serach {
         background: #ee3f46;
         color: #fff;
@@ -177,8 +188,10 @@ page-home {
     }
     /* For header logo */
     .lg-txt-home {
-        display: inline-block;
-        vertical-align: middle;
-        margin-top: -19px;
+        text-align: center !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
+        font-size: 6vw;
+        color: #FFF !important;
     }
 }

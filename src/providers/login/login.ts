@@ -42,7 +42,8 @@ export class LoginProvider {
     this.formData.append('passconf', data.passconf);
     this.formData.append('dob', dob);
     this.formData.append('gender_id', gender);
-    this.formData.append('image', image);
+    //commented on 22/02/2019 on client requirement
+    // this.formData.append('image', image);
 
     return this.http.post(this.URL,
       this.formData,

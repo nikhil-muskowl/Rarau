@@ -1,18 +1,26 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
+    <ion-buttons left>
+      <button class="btn-cam-top" (click)="postStory()">
+        <img src="assets/icon/photo-camera.png" width="40" height="40">
+      </button>
+      <!-- <span class="lg-txt-home"> {{rarau}}</span> -->
+      <p class="lg-txt-home"> {{rarau}}</p>
+    </ion-buttons>
+
+    <!-- <ion-title>
       <div class="hdr-lg-home">
         <span class="lg-img-home"><img src="assets/imgs/login/Group-2.png" class="fire-icon"></span>
         <span class="lg-txt-home"> {{rarau}}</span>
       </div>
-    </ion-title>
+    </ion-title> -->
 
     <ion-buttons end>
       <button class="btn-transparent" (click)="openModal()">
         <img src="assets/icon/search_home.png" width="40" height="40">
       </button>
       <button class="btn-transparent" (click)="openEvents()">
-        <img src="assets/icon/event.png" width="40" height="40">
+        <img src="assets/icon/speaker.png" width="40" height="40">
       </button>
     </ion-buttons>
 
@@ -23,7 +31,7 @@
   <div class="home-slides" style="height: 20%;">
     <ion-slides slidesPerView="3" #homeSlides>
       <ion-slide *ngFor="let category of categories; let i = index;">
-        <div class="category-rank">
+        <!-- <div class="category-rank">
           <ion-row>
             <ion-col text-center>
               <img class="s-image" src="{{category.image}}" width="3" height="3" (click)="gotoEvents()" />
@@ -33,6 +41,22 @@
             <ion-col (click)="gotoUsers(category.user_id)">
               <img class="p-image" src="{{category.user_image}}" width="3" height="3">
               <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
+            </ion-col>
+          </ion-row>
+        </div> -->
+
+        <div class="category-rank">
+          <ion-row>
+            <ion-col text-center>
+              <img class="s-image" src="{{category.user_image}}" width="3" height="3" (click)="gotoEvents(category.id)" />
+              <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <!-- <img class="p-image" src="{{category.user_image}}" width="3" height="3">
+                <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3"> -->
+              <p>{{category.title}}</p>
             </ion-col>
           </ion-row>
         </div>

@@ -11,6 +11,7 @@ import { LanguageProvider } from '../../../providers/language/language';
 import { EventProvider } from '../../../providers/event/event';
 import { NetworkProvider } from '../../../providers/network/network';
 import { StoryServiceProvider } from '../../../providers/story-service/story-service';
+import { GalleryPage } from '../../story/gallery/gallery';
 
 @IonicPage()
 @Component({
@@ -50,7 +51,7 @@ export class EventsCategoryPage {
     public eventProvider: EventProvider,
     public languageProvider: LanguageProvider, ) {
 
-    this.story_type_id = this.navParams.get('story_id');
+    this.story_type_id = this.navParams.get('story_type_id');
 
     this.platform.registerBackButtonAction(() => {
       this.goBack();
@@ -157,6 +158,7 @@ export class EventsCategoryPage {
     infiniteScroll.complete();
   }
 
+  //onsilde change
   slideChanged() {
     let currentIndex = this.rankSlides.getActiveIndex();
     let totals = currentIndex + 2;
@@ -169,5 +171,10 @@ export class EventsCategoryPage {
         this.getList();
       }
     }
+  }
+
+  //goto add story page
+  AddStory() {
+    this.navCtrl.push(GalleryPage, { story_type_id: this.story_type_id });
   }
 }

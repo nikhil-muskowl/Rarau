@@ -37,6 +37,7 @@ export class ShowPhotoPage {
     // {name: "shadows", icon: "ios-star-half-outline"},
   ]
 
+  private story_type_id;
   src;
   user: any;
   story: boolean = false;
@@ -81,13 +82,14 @@ export class ShowPhotoPage {
       this.back();
     });
 
+
     this.setText();
     this.tabService.hide();
 
+    this.story_type_id = this.navParams.get('story_type_id');
     this.src = this.navParams.get('photo');
     let story = this.navParams.get('story');
 
-    console.log('Photo code ' + this.src);
     if (story)
       this.story = story;
     this.filterService.init()
@@ -182,7 +184,6 @@ export class ShowPhotoPage {
 
   //getting image and take to next page
   next() {
-    console.log("next");
 
     var c = (<HTMLDivElement>document.getElementById("imageFilter3"));
     var c2 = (<HTMLCanvasElement>document.getElementById("imageFilter2"));
@@ -192,7 +193,8 @@ export class ShowPhotoPage {
     c2.width = img.naturalWidth;
     c2.height = img.naturalHeight;
 
-    console.log(c);
+    console.log("next");
+    console.error();
 
     var self = this;
     (<any>window).rasterizeHTML.drawHTML(c.innerHTML, c2).then(function success(renderResult) {
@@ -208,7 +210,7 @@ export class ShowPhotoPage {
         self.navCtrl.popToRoot();
 
       } else {
-        self.navCtrl.push(LocationPage, { image: image });
+        self.navCtrl.push(LocationPage, { image: image, story_type_id: this.story_type_id });
       }
 
     }, function error(e) {

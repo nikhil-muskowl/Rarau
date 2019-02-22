@@ -24,7 +24,8 @@
             <div class="col">
                 <div text-center>
                     <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit">
-                        <img src="assets/imgs/login/wechat.png" id="img-wechat" width="40" height="40"><span id="txt-wechat">{{sign_up_wechat}}</span></button>
+                        <img src="assets/imgs/login/wechat.png" id="img-wechat" width="40" height="40"><span
+                            id="txt-wechat">{{sign_up_wechat}}</span></button>
                 </div>
             </div>
         </div>
@@ -41,36 +42,48 @@
             <!-- name -->
             <ion-item>
                 <ion-input placeholder="{{ph_uname}}" formControlName="name" value={{fname}} type="text"
-                    [class.invalid]="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)"></ion-input>
+                    [class.invalid]="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)">
+                </ion-input>
             </ion-item>
             <div text-center>
-                <p class="invalid-message" *ngIf="!registerForm.controls.name.valid  && (registerForm.controls.name.dirty || submitAttempt)">{{error_name}}</p>
+                <p class="invalid-message"
+                    *ngIf="!registerForm.controls.name.valid  && (registerForm.controls.name.dirty || submitAttempt)">
+                    {{error_name}}</p>
             </div>
 
             <!-- email -->
             <ion-item>
                 <ion-input placeholder="{{ph_femail}}" formControlName="email" value={{femail}} type="text"
-                    [class.invalid]="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)"></ion-input>
+                    [class.invalid]="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)">
+                </ion-input>
             </ion-item>
             <div text-center>
-                <p class="invalid-message" *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+                <p class="invalid-message"
+                    *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty || submitAttempt)">
+                    {{error_email}}</p>
             </div>
             <!-- password -->
             <ion-item>
                 <ion-input placeholder="{{ph_fpassword}}" formControlName="password" value={{fpassword}} type="password"
-                    [class.invalid]="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)"></ion-input>
+                    [class.invalid]="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)">
+                </ion-input>
             </ion-item>
             <div text-center>
-                <p class="invalid-message" *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty || submitAttempt)">{{error_password}}</p>
+                <p class="invalid-message"
+                    *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty || submitAttempt)">
+                    {{error_password}}</p>
             </div>
 
             <!-- confirm password -->
             <ion-item>
                 <ion-input placeholder="{{ph_fconfpass}}" formControlName="passconf" value={{fconfpass}} type="password"
-                    [class.invalid]="!registerForm.controls.passconf.valid && (registerForm.controls.passconf.dirty || submitAttempt)"></ion-input>
+                    [class.invalid]="!registerForm.controls.passconf.valid && (registerForm.controls.passconf.dirty || submitAttempt)">
+                </ion-input>
             </ion-item>
             <div text-center>
-                <p class="invalid-message" *ngIf="!registerForm.controls.passconf.valid  && (registerForm.controls.passconf.dirty || submitAttempt)">{{error_password}}</p>
+                <p class="invalid-message"
+                    *ngIf="!registerForm.controls.passconf.valid  && (registerForm.controls.passconf.dirty || submitAttempt)">
+                    {{error_password}}</p>
             </div>
 
             <!-- birthday -->
@@ -84,14 +97,14 @@
             <div class="dob-div">
                 <ion-row class="date-row">
                     <ion-col col-4>
-                        <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
-                            formControlName="date" displayFormat="DD">
+                        <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date"
+                            (ngModelChange)="ondateChange()" formControlName="date" displayFormat="DD">
                         </ion-datetime>
                     </ion-col>
 
                     <ion-col col-4>
-                        <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
-                            formControlName="date" displayFormat="MM">
+                        <ion-datetime placeholder='MM &nbsp;&nbsp;&nbsp;v' [(ngModel)]="date"
+                            (ngModelChange)="ondateChange()" formControlName="date" displayFormat="MM">
                         </ion-datetime>
                     </ion-col>
 
@@ -123,7 +136,9 @@
                     <span (click)="gotoprofile()" class="spn-small">{{why_this}}</span>
                 </p>
             </div>
-            <div text-center>
+            <!-- commented on 22/02.2019 on client requirement -->
+            <!-- to upload profile image -->
+            <!-- <div text-center>
                 <ion-buttons>
                     <button ion-button (click)="uploadProfilePic()" class="upload-btn">
                         <span class="btn-align">{{uploadText}}
@@ -132,7 +147,7 @@
                     </button>
                     <img class="upload-icon" src="{{uploadIcon}}" width="20" height="20">
                 </ion-buttons>
-            </div>
+            </div> -->
         </form>
 
         <div text-center>

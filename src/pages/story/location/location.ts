@@ -29,6 +29,7 @@ export class LocationPage {
   public data: any;
 
   public image;
+  public story_type_id;
   private city_id;
   public error;
   public location_txt;
@@ -62,6 +63,8 @@ export class LocationPage {
     this.myLocBtn = 'myLocBtn';
 
     this.setText();
+
+    this.story_type_id = this.navParams.get('story_type_id');
     this.image = this.navParams.get('image');
     console.log('image on location page : ' + this.image);
     this.city_id = this.baiduProvider.getCity();
@@ -129,7 +132,10 @@ export class LocationPage {
     if (this.isMycurrLoc == 1) {
       if (this.story_title != '') {
         this.locName = this.story_title;
-        this.navCtrl.push(StoryCategoryPage, { image: this.image, locName: this.locName, latitude: this.selLatitude, longitude: this.selLongitude });
+        this.navCtrl.push(StoryCategoryPage, {
+          image: this.image, locName: this.locName, story_type_id: this.story_type_id,
+          latitude: this.selLatitude, longitude: this.selLongitude
+        });
       } else {
         this.alertProvider.title = this.error;
         this.alertProvider.message = this.error_story_title;
