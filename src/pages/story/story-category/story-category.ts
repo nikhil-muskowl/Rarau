@@ -95,6 +95,8 @@ export class StoryCategoryPage {
     this.varRecChk = '';
 
     this.story_type_id = this.navParams.get('story_type_id');
+    console.log('Category page story_type_id : ' + this.story_type_id);
+
     this.sel_cat_id = this.navParams.get('sel_cat_id');
     this.image = this.navParams.get('image');
 
@@ -428,7 +430,7 @@ export class StoryCategoryPage {
 
   //goto previous page
   goBack() {
-    this.navCtrl.push(LocationPage, { image: this.image });
+    this.navCtrl.push(LocationPage, { image: this.image, story_type_id: this.story_type_id });
   }
 
   //bind the story tags enter by user

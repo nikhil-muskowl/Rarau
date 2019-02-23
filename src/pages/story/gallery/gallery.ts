@@ -35,6 +35,7 @@ export class GalleryPage {
     private imagePicker: ImagePicker, ) {
 
     this.story_type_id = this.navParams.get('story_type_id');
+    console.log('gallery page story_type_id : ' + this.story_type_id);
     this.platform.registerBackButtonAction(() => {
       this.back();
     });

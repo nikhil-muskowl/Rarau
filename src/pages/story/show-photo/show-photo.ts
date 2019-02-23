@@ -1,7 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, Platform } from 'ionic-angular';
-import { filter } from "rxjs/operator/filter";
-import { StoryCategoryPage } from '../../story/story-category/story-category'
 import { LocationPage } from '../../story/location/location'
 import { FilterService } from "../../util/filterservice";
 import { LoadingProvider } from '../../../providers/loading/loading';
@@ -89,6 +87,7 @@ export class ShowPhotoPage {
     this.story_type_id = this.navParams.get('story_type_id');
     this.src = this.navParams.get('photo');
     let story = this.navParams.get('story');
+    console.log('Loc page story_type_id : ' + this.story_type_id);
 
     if (story)
       this.story = story;
@@ -187,15 +186,13 @@ export class ShowPhotoPage {
 
     var c = (<HTMLDivElement>document.getElementById("imageFilter3"));
     var c2 = (<HTMLCanvasElement>document.getElementById("imageFilter2"));
-
     let img = this.findImage();
 
     c2.width = img.naturalWidth;
     c2.height = img.naturalHeight;
 
-    console.log("next");
-    console.error();
-
+    var cat_id = this.story_type_id;
+    console.log('var cat_id : ' + cat_id);
     var self = this;
     (<any>window).rasterizeHTML.drawHTML(c.innerHTML, c2).then(function success(renderResult) {
       var image = c2.toDataURL("image/*");
@@ -210,7 +207,8 @@ export class ShowPhotoPage {
         self.navCtrl.popToRoot();
 
       } else {
-        self.navCtrl.push(LocationPage, { image: image, story_type_id: this.story_type_id });
+        console.log('Loc pagesend  story_type_id : ' + cat_id);
+        self.navCtrl.push(LocationPage, { image: image, story_type_id: cat_id });
       }
 
     }, function error(e) {

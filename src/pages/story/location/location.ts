@@ -66,7 +66,9 @@ export class LocationPage {
 
     this.story_type_id = this.navParams.get('story_type_id');
     this.image = this.navParams.get('image');
-    console.log('image on location page : ' + this.image);
+
+    console.log('Loc page story_type_id : ' + this.story_type_id);
+
     this.city_id = this.baiduProvider.getCity();
 
     this.latitude = this.locationTrackerProvider.getLatitude();
@@ -124,7 +126,7 @@ export class LocationPage {
 
   //goto previous page
   back() {
-    this.navCtrl.push(ShowPhotoPage, { photo: this.image });
+    this.navCtrl.push(ShowPhotoPage, { photo: this.image, story_type_id: this.story_type_id });
   }
 
   //goto next page with data
@@ -132,6 +134,8 @@ export class LocationPage {
     if (this.isMycurrLoc == 1) {
       if (this.story_title != '') {
         this.locName = this.story_title;
+        console.log('Loc page param story_type_id : ' + this.story_type_id);
+
         this.navCtrl.push(StoryCategoryPage, {
           image: this.image, locName: this.locName, story_type_id: this.story_type_id,
           latitude: this.selLatitude, longitude: this.selLongitude
@@ -149,10 +153,11 @@ export class LocationPage {
         this.alertProvider.message = this.enter_value_serach;
         this.alertProvider.showAlert();
       } else {
-        console.log('next category');
-        console.log("this.locName : " + this.locName);
-
-        this.navCtrl.push(StoryCategoryPage, { image: this.image, locName: this.locName, latitude: this.selLatitude, longitude: this.selLongitude });
+        console.log('Loc page param story_type_id : ' + this.story_type_id);
+        this.navCtrl.push(StoryCategoryPage, {
+          image: this.image, locName: this.locName, latitude: this.selLatitude,
+          longitude: this.selLongitude, story_type_id: this.story_type_id
+        });
       }
     }
   }

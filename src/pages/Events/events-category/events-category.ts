@@ -86,8 +86,7 @@ export class EventsCategoryPage {
     if (this.network.checkStatus() == true) {
       this.loadingProvider.present();
       this.filterData = {
-        // story_type_id: this.story_type_id,
-        story_type_id: 1,
+        story_type_id: this.story_type_id,
         length: this.length,
         start: this.start,
         language_id: this.language_id,

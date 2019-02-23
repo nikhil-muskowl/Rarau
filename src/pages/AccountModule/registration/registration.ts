@@ -247,12 +247,9 @@ export class RegistrationPage {
   //doing registration
   save() {
 
-    this.submitAttempt = true;
-    console.log(this.registerForm.valid);
-
     console.log(this.imagePath);
     if (this.registerForm.valid) {
-      //commented on 22/02.2019 on client requirement
+      //commented on 22/02.2019 on client requirement not need to make it mandatory
       // if (this.imagePath != undefined) {
       if (this.registerForm.value.password == this.registerForm.value.passconf) {
 
