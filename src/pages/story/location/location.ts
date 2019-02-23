@@ -134,7 +134,6 @@ export class LocationPage {
     if (this.isMycurrLoc == 1) {
       if (this.story_title != '') {
         this.locName = this.story_title;
-        console.log('Loc page param story_type_id : ' + this.story_type_id);
 
         this.navCtrl.push(StoryCategoryPage, {
           image: this.image, locName: this.locName, story_type_id: this.story_type_id,

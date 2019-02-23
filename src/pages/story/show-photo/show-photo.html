@@ -34,7 +34,7 @@
     <ion-slide *ngFor="let filter2 of filters  trackBy: trackByFunction" (click)="changeFilter(filter2)">
       <div class="title-slider" [ngClass]="{'active' : filter2.name == filter.name }">{{filter2.name}}</div>
 
-      <img [src]="src" [class]="filter2.class" />
+      <img [src]="src" class="thumb-img {filter2.class}" />
 
     </ion-slide>
   </ion-slides>
