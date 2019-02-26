@@ -183,16 +183,17 @@ page-home {
     background: transparent !important;
   }
   .adv-img {
-    margin-top: 10px;
-    height: 100px !important;
+    margin-top: 5px;
+    height: 100% !important;
+    width: 100% !important;
   }
   /* For header logo */
   .lg-txt-home {
     text-align: center !important;
     display: inline-block !important;
     vertical-align: middle !important;
-    font-size: 6vw;
-    font-weight: 500;
+    font-size: 6vw !important;
+    font-weight: 500 !important;
     color: #fff !important;
   }
 }

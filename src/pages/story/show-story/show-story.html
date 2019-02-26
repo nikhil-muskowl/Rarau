@@ -1,15 +1,16 @@
 <ion-header>
-    <ion-navbar hideBackButton>
-      <ion-buttons left>
-        <button ion-button (click)="goBack()">
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title text-center>
-        {{title}}
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-title text-center> -->
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content>
   <div class="story-top">
@@ -59,14 +60,14 @@
 
         <ion-item>
           <button ion-button clear item-left class="btn-left">{{say_something}}</button>
-          
+
           <ion-input placeholder="Type here" formControlName="comment" type="text" [class.valid]="!formErrors.comment"
             [class.invalid]="formErrors.comment"></ion-input>
 
           <button ion-button clear item-right class="btn-right" (click)="commentStory()">
             <ion-icon name="ios-send"></ion-icon>
           </button>
-          
+
         </ion-item>
 
         <ion-item *ngIf="formErrors.comment">
@@ -77,24 +78,24 @@
     </ion-list>
   </div>
 
-<div class="story-commnets">
+  <div class="story-commnets">
     <ion-list>
-        <div *ngFor="let comment of commData">
-          <ion-item>
-            <ion-avatar item-start>
-              <img src="{{comment.user_image_thumb}}">
-            </ion-avatar>
-            <h2>{{comment.user_name}}</h2>
-            <p>{{comment.comment}}</p>
-            
-            <ion-note item-end (click)="reportComment(comment.id)">{{report_comment}}</ion-note>
-          </ion-item>
-         
-          <div class="comment-date">
-              <p>{{comment.date}}</p>
-          </div>
+      <div *ngFor="let comment of commData">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{comment.user_image_thumb}}">
+          </ion-avatar>
+          <h2>{{comment.user_name}}</h2>
+          <p>{{comment.comment}}</p>
+
+          <ion-note item-end (click)="reportComment(comment.id)">{{report_comment}}</ion-note>
+        </ion-item>
+
+        <div class="comment-date">
+          <p>{{comment.date}}</p>
         </div>
-      </ion-list>
-</div>
+      </div>
+    </ion-list>
+  </div>
 
 </ion-content>

@@ -13,15 +13,23 @@
     <h1>Edit Profile</h1>
     <form [formGroup]="editProfileForm">
       <ion-item>
-        <ion-input formControlName="name" type="text" [class.invalid]="!editProfileForm.controls.name.valid && (editProfileForm.controls.name.dirty || submitAttempt)"></ion-input>
+        <ion-input formControlName="name" type="text"
+          [class.invalid]="!editProfileForm.controls.name.valid && (editProfileForm.controls.name.dirty || submitAttempt)">
+        </ion-input>
       </ion-item>
-      <p class="invalid-message" *ngIf="!editProfileForm.controls.name.valid  && (editProfileForm.controls.email.dirty || submitAttempt)">{{error_name}}</p>
+      <p class="invalid-message"
+        *ngIf="!editProfileForm.controls.name.valid  && (editProfileForm.controls.email.dirty || submitAttempt)">
+        {{error_name}}</p>
       <br>
 
       <ion-item>
-        <ion-input formControlName="email" type="text" value="{{email}}" [class.invalid]="!editProfileForm.controls.email.valid && (editProfileForm.controls.email.dirty || submitAttempt)"></ion-input>
+        <ion-input formControlName="email" type="text" value="{{email}}"
+          [class.invalid]="!editProfileForm.controls.email.valid && (editProfileForm.controls.email.dirty || submitAttempt)">
+        </ion-input>
       </ion-item>
-      <p class="invalid-message" *ngIf="!editProfileForm.controls.email.valid  && (editProfileForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+      <p class="invalid-message"
+        *ngIf="!editProfileForm.controls.email.valid  && (editProfileForm.controls.email.dirty || submitAttempt)">
+        {{error_email}}</p>
       <br>
     </form>
   </div>

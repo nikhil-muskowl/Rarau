@@ -9,7 +9,8 @@
 <ion-content>
 
   <ion-slides *ngIf="tutImages && tutImages.length" (ionSlideDidChange)="slideChanged()" pager>
-    <ion-slide *ngFor="let tutorial of tutImages" class="background_tute tutorial_chk" [style.background]="'url('+tutorial.image+')'">
+    <ion-slide *ngFor="let tutorial of tutImages" class="background_tute tutorial_chk"
+      [style.background]="'url('+tutorial.image+')'">
       <div *ngIf="tutCheck==1">
         <ion-label class="white-col">{{show_tutorial}}</ion-label>
         <ion-checkbox [(ngModel)]="tutorial_will" (ionChange)="reloadTutorial()"></ion-checkbox>

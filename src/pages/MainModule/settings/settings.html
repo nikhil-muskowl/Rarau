@@ -5,7 +5,8 @@
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>
+    <!-- <ion-title text-center> -->
+    <ion-title>
       {{settings}}
     </ion-title>
   </ion-navbar>
@@ -26,7 +27,8 @@
       </ion-col>
       <ion-col col-6 text-left>
         <ion-select [(ngModel)]="language" okText={{ok_text}} cancelText={{cancel_text}} interface="popover">
-          <ion-option *ngFor="let language of languages" value="{{language.code}}" (ionSelect)="onChange(language)">{{language.name}}</ion-option>
+          <ion-option *ngFor="let language of languages" value="{{language.code}}" (ionSelect)="onChange(language)">
+            {{language.name}}</ion-option>
         </ion-select>
       </ion-col>
     </ion-row>
@@ -37,13 +39,15 @@
       </ion-col>
       <ion-col col-6 text-left>
         <ion-select [(ngModel)]="city" okText={{ok_text}} cancelText={{cancel_text}} interface="popover">
-          <ion-option *ngFor="let city of cities" value="{{city.name}}" (ionSelect)="onChangeCity(city.area_id)">{{city.name}}</ion-option>
+          <ion-option *ngFor="let city of cities" value="{{city.name}}" (ionSelect)="onChangeCity(city.area_id)">
+            {{city.name}}</ion-option>
         </ion-select>
       </ion-col>
     </ion-row>
 
     <div text-center class="btn-logout">
-      <button class="submit-btn" *ngIf="user_id" ion-button type="submit" (click)="tutorial()"><img class="tu-img" src="assets/icon/tut.png">{{tutorial_txt}}</button>
+      <button class="submit-btn" *ngIf="user_id" ion-button type="submit" (click)="tutorial()"><img class="tu-img"
+          src="assets/icon/tut.png">{{tutorial_txt}}</button>
     </div>
 
     <div text-center class="btn-logout">

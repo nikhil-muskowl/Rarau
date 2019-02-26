@@ -5,7 +5,8 @@
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>
+    <!-- <ion-title text-center> -->
+    <ion-title>
       {{story}}
     </ion-title>
   </ion-navbar>
@@ -29,8 +30,8 @@
       </ion-item>
     </div>
 
-    <div class="swipe-area" swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)"
-      (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
+    <div class="swipe-area" swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)"
+      (swiperight)="swipeRight($event)" (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
     </div>
 
     <ion-grid class="story-footer">
@@ -42,7 +43,8 @@
           <button (click)="reportStory()" clear style="background: transparent">
             <img src="assets/icon/report_color.png" height="40" width="40">
           </button>
-          <button *ngIf="receipt_private == 0 || receipt_private == null" (click)="showReceipt()" clear style="background: transparent">
+          <button *ngIf="receipt_private == 0 || receipt_private == null" (click)="showReceipt()" clear
+            style="background: transparent">
             <img src="assets/icon/invoice-icon_color.png" height="40" width="40">
           </button>
         </ion-col>

@@ -1,21 +1,22 @@
 <ion-header>
-    <ion-navbar hideBackButton>
-      <ion-buttons left>
-        <button ion-button (click)="goBack()">
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title text-center>
-        {{story}}
-      </ion-title>
-      <ion-buttons right>
-  
-        <span class="logo">
-          <img src="assets/imgs/login/Group-2.png" class="fire-icon">        
-        </span>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-title text-center> -->
+    <ion-title>
+      {{story}}
+    </ion-title>
+    <!-- <ion-buttons right>
+
+      <span class="logo">
+        <img src="assets/imgs/login/Group-2.png" class="fire-icon">
+      </span>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
 
 <ion-content>
   <ion-slides *ngIf="data && data.length" autoplay="3000" loop="true" speed="500" (ionSlideDidChange)="slideChanged()">
@@ -36,8 +37,8 @@
         <br>
         <hr>
 
-        <div style="height:400px;" swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)"
-          (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
+        <div style="height:400px;" swipeAll (swipe)="swipeAll($event)" (swipeleft)="swipeLeft($event)"
+          (swiperight)="swipeRight($event)" (swipeup)="swipeUp($event)" (swipedown)="swipeDown($event)">
         </div>
 
         <!-- <ion-fab left bottom small>

@@ -3,12 +3,11 @@
         <ion-title text-center>
             {{login}}
         </ion-title>
-        <ion-buttons right>
-
+        <!-- <ion-buttons right>
             <span class="logo">
                 <img src="assets/imgs/login/Group-2.png" class="fire-icon">
             </span>
-        </ion-buttons>
+        </ion-buttons> -->
     </ion-navbar>
 </ion-header>
 
@@ -18,7 +17,8 @@
             <div class="col">
                 <div text-center>
                     <button class="wechat-btn" (click)="goToWechat()" ion-button type="submit">
-                        <img src="assets/imgs/login/wechat.png" id="img-wechat" width="40" height="40"><span id="txt-wechat">{{login_wechat}}</span></button>
+                        <img src="assets/imgs/login/wechat.png" id="img-wechat" width="40" height="40"><span
+                            id="txt-wechat">{{login_wechat}}</span></button>
                 </div>
             </div>
         </div>
@@ -28,17 +28,25 @@
         <div text-center>
             <form [formGroup]="loginForm">
                 <ion-item>
-                    <ion-input placeholder="{{reg_mail}}" formControlName="email" type="text" [class.invalid]="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)"></ion-input>
+                    <ion-input placeholder="{{reg_mail}}" formControlName="email" type="text"
+                        [class.invalid]="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)">
+                    </ion-input>
                 </ion-item>
                 <div text-center>
-                    <p class="invalid-message" *ngIf="!loginForm.controls.email.valid  && (loginForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+                    <p class="invalid-message"
+                        *ngIf="!loginForm.controls.email.valid  && (loginForm.controls.email.dirty || submitAttempt)">
+                        {{error_email}}</p>
                 </div>
 
                 <ion-item text-center id="pass_word">
-                    <ion-input placeholder="{{pass_text}}" formControlName="password" type="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
+                    <ion-input placeholder="{{pass_text}}" formControlName="password" type="password"
+                        [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)">
+                    </ion-input>
                 </ion-item>
                 <div text-center>
-                    <p class="invalid-message" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitAttempt)">{{error_password}}</p>
+                    <p class="invalid-message"
+                        *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitAttempt)">
+                        {{error_password}}</p>
                 </div>
                 <div text-right>
                     <h5 class="frgt-link" (click)="forgotPass()">{{forgot_pass}}</h5>

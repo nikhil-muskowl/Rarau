@@ -36,9 +36,15 @@ export class MyPetPage {
     public translate: TranslateService,
     public mypetProvider: MyPetProvider,
     public languageProvider: LanguageProvider, ) {
+
     this.platform.registerBackButtonAction(() => {
-      this.navCtrl.setRoot(HomePage);
+      this.goback();
     });
+  }
+
+  //go back
+  goback() {
+    this.navCtrl.setRoot(HomePage);
   }
 
   //when view will be enter in page

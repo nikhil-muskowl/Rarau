@@ -1,21 +1,20 @@
 <ion-header>
-    <ion-navbar hideBackButton>
-      <ion-buttons left>
-        <button ion-button (click)="goBack()">
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title text-center>
-        {{sign_up_wechat}}
-      </ion-title>
-      <ion-buttons right>
-  
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      {{sign_up_wechat}}
+    </ion-title>
+    <!-- <ion-buttons right>
         <span class="logo">
           <img src="assets/imgs/login/Group-2.png" class="fire-icon">        
         </span>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+      </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
 
 
 <ion-content>
@@ -31,10 +30,14 @@
       <form [formGroup]="loginwechatForm">
         <!-- email -->
         <ion-item>
-          <ion-input placeholder="Email Address" formControlName="email" type="text" [class.invalid]="!loginwechatForm.controls.email.valid && (loginwechatForm.controls.email.dirty || submitAttempt)"></ion-input>
+          <ion-input placeholder="Email Address" formControlName="email" type="text"
+            [class.invalid]="!loginwechatForm.controls.email.valid && (loginwechatForm.controls.email.dirty || submitAttempt)">
+          </ion-input>
         </ion-item>
         <div text-center>
-          <p class="invalid-message" *ngIf="!loginwechatForm.controls.email.valid  && (loginwechatForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+          <p class="invalid-message"
+            *ngIf="!loginwechatForm.controls.email.valid  && (loginwechatForm.controls.email.dirty || submitAttempt)">
+            {{error_email}}</p>
         </div>
 
         <div text-left class="birth-text">
@@ -46,8 +49,8 @@
         <div>
           <ion-row class="date-row">
             <ion-col col-4>
-              <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date" (ngModelChange)="ondateChange()"
-                formControlName="date" displayFormat="DD">
+              <ion-datetime placeholder='DD &nbsp;&nbsp;&nbsp;&nbsp;v' [(ngModel)]="date"
+                (ngModelChange)="ondateChange()" formControlName="date" displayFormat="DD">
               </ion-datetime>
             </ion-col>
 
