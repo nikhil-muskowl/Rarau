@@ -1,93 +1,93 @@
 page-story-category {
-    ion-slides {
-        margin-top: 10px;
-        height: inherit;
+  ion-slides {
+    margin-top: 10px;
+    height: inherit;
+  }
+  h1 {
+    color: red !important;
+  }
+  .background {
+    background-color: #000;
+    color: #fff;
+    min-height: 100%;
+    width: 100%;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+  ion-chip.chip.chip-md {
+    margin: 4px 4px 4px 4px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #ec3747, #f45a43);
+    background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
+    color: #fff;
+    border: 1px solid transparent;
+  }
+  ion-chip.chip.chip-ios {
+    margin: 4px 4px 4px 4px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #ec3747, #f45a43);
+    background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
+    color: #fff;
+    border: 1px solid transparent;
+  }
+  .publish-btn {
+    .button-inner {
+      border-radius: 15px;
+      background: linear-gradient(to bottom, #ec3747, #f45a43) !important;
+      margin-bottom: 5px;
+      color: #fff !important;
+      padding: 12px;
+      border: 1px solid #ec3747 !important;
     }
-    h1 {
-        color: red !important;
+  }
+  .back-btn {
+    background: transparent !important;
+    color: #fff;
+    margin-top: 0px !important;
+  }
+  ion-header button {
+    color: #fff;
+  }
+  .horizontal {
+    width: auto !important;
+    height: 60px !important;
+    // position: absolute;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+    // bottom: 90px;
+    ion-scroll {
+      // position: absolute !important;
+      // bottom: 43px !important;
+      left: 0px !important;
+      right: 0px !important;
     }
-    .background {
-        background-color: #000;
-        color: #fff;
-        min-height: 100%;
-        width: 100%;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        background-size: cover !important;
+    ion-scroll .scroll-content {
+      background: transparent !important;
     }
-    ion-chip.chip.chip-md {
-        margin: 4px 4px 4px 4px;
-        border-radius: 10px;
-        background: linear-gradient(to right, #ec3747, #f45a43);
-        background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
-        color: #fff;
-        border: 1px solid transparent;
+    .scroll-content {
+      background-color: transparent !important;
     }
-    ion-chip.chip.chip-ios {
-        margin: 4px 4px 4px 4px;
-        border-radius: 10px;
-        background: linear-gradient(to right, #ec3747, #f45a43);
-        background: -webkit-gradient(linear, left top, right top, from(#ec3747), to(#f45a43));
-        color: #fff;
-        border: 1px solid transparent;
+  }
+  .bottom_tag {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    .item-md {
+      background-color: transparent !important;
+      color: #fff !important;
     }
-    .publish-btn {
-        .button-inner {
-            border-radius: 15px;
-            background: linear-gradient(to bottom, #ec3747, #f45a43) !important;
-            margin-bottom: 5px;
-            color: #fff !important;
-            padding: 12px;
-            border: 1px solid #ec3747 !important;
-        }
+    .list-md {
+      margin: 0px 0 0px;
     }
-    .back-btn {
-        background: transparent !important;
-        color: #fff;
-        margin-top: 0px !important;
-    }
-    ion-header button {
-        color: #fff;
-    }
-    .horizontal {
-        width: 100% !important;
-        height: 60px !important;
-        // position: absolute;
-        margin-left: 15px !important;
-        margin-right: 15px !important;
-        // bottom: 90px;
-        ion-scroll {
-            // position: absolute !important;
-            // bottom: 43px !important;
-            left: 0px !important;
-            right: 0px !important;
-        }
-        ion-scroll .scroll-content {
-            background: transparent !important;
-        }
-        .scroll-content {
-            background-color: transparent !important;
-        }
-    }
-    .bottom_tag {
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
-        .item-md {
-            background-color: transparent !important;
-            color: #fff !important;
-        }
-        .list-md {
-            margin: 0px 0 0px;
-        }
-    }
-    .ion-tags-input .iti-input {
-        width: auto !important;
-    }
-    .check-back {
-        background: transparent !important;
-        color: #fff !important;
-        background-color: rgba(0, 0, 0, 0.3) !important;
-    }
+  }
+  .ion-tags-input .iti-input {
+    width: auto !important;
+  }
+  .check-back {
+    background: transparent !important;
+    color: #fff !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+  }
 }

@@ -31,11 +31,20 @@
       <ion-searchbar *ngIf="!isMycurrLoc" [(ngModel)]="search" [showCancelButton]="shouldShowCancel"
         (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
       </ion-searchbar>
-      <ion-list>
-        <button ion-item *ngFor="let location of locations" (click)="itemSelected(location)">
-          {{ location.name }}
-        </button>
-      </ion-list>
+
+      <div *ngIf="locations?.length > 0" style="height: 400px;overflow: scroll;">
+        <!-- <ion-list>
+            <ion-item ion-item *ngFor="let location of locations" (click)="itemSelected(location)">
+              {{location.name}}
+            </ion-item>
+          </ion-list> -->
+        <ion-list>
+          <button ion-item *ngFor="let location of locations" (click)="itemSelected(location)">
+            {{ location.name }}
+          </button>
+        </ion-list>
+      </div>
+
     </div>
   </ion-grid>
 </ion-content>

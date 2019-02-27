@@ -180,7 +180,9 @@ export class LocationPage {
 
     this.fileterData = {
       query: this.search,
-      location: this.city_id
+      location: this.city_id,
+      latitude: this.latitude,
+      longitude: this.longitude,
       // location: `${this.latitude},${this.longitude}`
     };
 

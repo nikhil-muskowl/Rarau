@@ -48,8 +48,11 @@
         <div class="category-rank">
           <ion-row>
             <ion-col text-center>
+              <!-- comment to go on rank page -->
+              <!-- <img class="s-image" src="{{category.user_image}}" width="3" height="3" (click)="gotoEvents(category.id)" /> -->
+
               <img class="s-image" src="{{category.user_image}}" width="3" height="3"
-                (click)="gotoEvents(category.id)" />
+                (click)="gotoRanks(category.id)" />
               <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3">
             </ion-col>
           </ion-row>
@@ -57,7 +60,7 @@
             <ion-col>
               <!-- <img class="p-image" src="{{category.user_image}}" width="3" height="3">
                 <img class="star" src="assets/icon/Front-Icons/Vector-Smart-Object3.png" width="3" height="3"> -->
-              <p>{{category.title}}</p>
+              <p (click)="gotoRanks(category.id)">{{category.title}}</p>
             </ion-col>
           </ion-row>
         </div>

@@ -246,7 +246,9 @@ export class SearchPage {
 
     this.fileterData = {
       query: this.searchLoc,
-      location: this.city_id
+      location: this.city_id,
+      latitude: this.latitude,
+      longitude: this.longitude,
       // location: `${this.latitude},${this.longitude}`
     };
 

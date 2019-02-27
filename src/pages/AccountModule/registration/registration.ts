@@ -246,6 +246,7 @@ export class RegistrationPage {
 
   //doing registration
   save() {
+    this.submitAttempt = false;
 
     console.log(this.imagePath);
     if (this.registerForm.valid) {
@@ -291,6 +292,7 @@ export class RegistrationPage {
                 }
 
                 if (!this.responseData.status) {
+                  this.submitAttempt = false;
                   this.result = this.responseData.result;
                   this.alertProvider.title = this.error;
                   this.alertProvider.message = this.result[0].text;
@@ -298,27 +300,32 @@ export class RegistrationPage {
                 }
 
                 if (this.responseData.error_firstname != '') {
+                  this.submitAttempt = false;
                   this.registerForm.controls['name'].setErrors({ 'incorrect': true });
                   this.error_name = this.responseData.error_firstname;
                 }
 
                 if (this.responseData.error_email != '') {
+                  this.submitAttempt = false;
                   this.registerForm.controls['email'].setErrors({ 'incorrect': true });
                   this.error_email = this.responseData.error_email;
                 }
 
                 if (this.responseData.error_password != '') {
+                  this.submitAttempt = false;
                   this.registerForm.controls['password'].setErrors({ 'incorrect': true });
                   this.error_password = this.responseData.error_password;
                 }
 
                 if (this.responseData.error_confirm != '') {
+                  this.submitAttempt = false;
                   this.registerForm.controls['passconf'].setErrors({ 'incorrect': true });
                   this.error_confirm = this.responseData.error_confirm;
                 }
               },
               err => {
                 console.error(err);
+                this.submitAttempt = false;
                 this.loadingProvider.dismiss();
               },
               () => {

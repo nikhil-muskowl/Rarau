@@ -20,6 +20,8 @@ export class BaiduProvider {
     this.formData = new FormData();
     this.formData.append('query', data.query);
     this.formData.append('location', data.location);
+    this.formData.append('latitude', data.latitude);
+    this.formData.append('longitude', data.longitude);
 
     this.URL = 'http://social-app.muskowl.com/baidu/location';
     return this.http.post(this.URL,

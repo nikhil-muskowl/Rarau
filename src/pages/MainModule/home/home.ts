@@ -18,6 +18,7 @@ import { OthersProfilePage } from '../../AccountModule/others-profile/others-pro
 import { EventListPage } from '../../Events/event-list/event-list';
 import { EventsCategoryPage } from '../../Events/events-category/events-category';
 import { GalleryPage } from '../../story/gallery/gallery';
+import { RankingPage } from '../ranking/ranking';
 
 @Component({
   selector: 'page-home',
@@ -525,6 +526,11 @@ export class HomePage {
   //event page
   gotoEvents(story_type_id) {
     this.navCtrl.push(EventsCategoryPage, { story_type_id: story_type_id });
+  }
+
+  //openRanks
+  gotoRanks(story_type_id) {
+    this.navCtrl.push(RankingPage);
   }
 
   //on click on marker
