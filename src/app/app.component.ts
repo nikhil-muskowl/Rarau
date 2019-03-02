@@ -89,7 +89,7 @@ export class MyApp {
         //Push notification setup
         this.pushSetup();
 
-        //custom splash Comment on 26-02-2019 on PNG splash
+        //custom splash Commented on 26-02-2019 on PNG splash
         // let splash = modalCtrl.create(SplashPage);
         // splash.present();
 

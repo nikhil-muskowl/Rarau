@@ -418,12 +418,12 @@ export class RegistrationPage {
 
   //commented on 22/02.2019 on client requirement
   //Goto Upload Profile Photo
-  // uploadProfilePic() {
-  //   this.navCtrl.push(UpdateProfilePage, {
-  //     image: this.image, imagePath: this.imagePath, data: this.registerForm.value,
-  //     date: this.date, gender: this.gender_id
-  //   });
-  // }
+  uploadProfilePic() {
+    this.navCtrl.push(UpdateProfilePage, {
+      image: this.image, imagePath: this.imagePath, data: this.registerForm.value,
+      date: this.date, gender: this.gender_id
+    });
+  }
 
   //Goto Previous page
   goBack() {
